@@ -1,4 +1,4 @@
-#JiveJournal
+# JiveJournal
 
 I am an active member and leader in my local swing dance community, and am active in scenes across the world. It is a truly wonderful hobby which has changed my life for the better.
 
