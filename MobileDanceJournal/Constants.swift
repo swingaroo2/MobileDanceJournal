@@ -8,6 +8,7 @@
 
 import Foundation
 
+// MARK: Structs
 struct Storyboards {
     static let main = "Main"
 }
@@ -91,6 +92,15 @@ struct InternalErrors {
     static let failedToGetReferenceToDetailVC = "Could not get reference to PracticeNotepadVC"
 }
 
+struct VideoUploadErrors {
+    static let generic = "Video upload failed"
+    static let serviceUnavailable = "Upload service unavailable"
+    static let thumbnailFailedCopy = "Failed to get thumbnail from video"
+    static let lostVideo = "We forgot where we saved your video. Sorry about that."
+    static let noURL = "Photos was a meanie-head and didn't give us your video. We apologize for the inconvenience."
+}
+
+// MARK: Enums
 enum DateFormats: String {
     case shortFormat = "MMMM dd, yyyy"
     case longFormat = "'Started' MMMM dd, yyyy 'at' h:mm a"
@@ -101,10 +111,3 @@ enum Permissions {
     case photos
 }
 
-enum VideoUploadErrors {
-    static let generic = "Video upload failed"
-    static let serviceUnavailable = "Upload service unavailable"
-    static let thumbnailFailedCopy = "Failed to get thumbnail from video"
-    static let lostVideo = "We forgot where we saved your video. Sorry about that."
-    static let noURL = "Photos was a meanie-head and didn't give us your video. We apologize for the inconvenience."
-}

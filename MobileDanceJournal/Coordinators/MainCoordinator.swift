@@ -110,7 +110,6 @@ extension MainCoordinator {
             CoreDataManager.shared.save()
         }
         
-//        videoGalleryVC.videoHelper!.thumbnailCache.setObject(uploader.thumbnailImage, forKey: video.filename as NSString)
         videoGalleryVC.prefetchVideos(for: videoPracticeSession)
         videoGalleryVC.videosTableView.reloadData()
         dismiss(videoGalleryVC, completion: nil)

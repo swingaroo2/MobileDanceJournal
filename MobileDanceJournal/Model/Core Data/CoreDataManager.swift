@@ -33,12 +33,7 @@ public class CoreDataManager : NSObject {
                                                                   cacheName: nil)
         fetchedResultsController.delegate = practiceSessionDelegate
         
-        do {
-            try fetchedResultsController.performFetch()
-        } catch {
-            fatalError("Failed to fetch [PracticeSession]: \(error)")
-        }
-        
+        try? fetchedResultsController.performFetch()
         return fetchedResultsController
     }()
     
@@ -50,12 +45,7 @@ public class CoreDataManager : NSObject {
                                                                   sectionNameKeyPath: nil,
                                                                   cacheName: nil)
         fetchedResultsController.delegate = practiceVideoDelegate
-        
-        do {
-            try fetchedResultsController.performFetch()
-        } catch {
-            fatalError("Failed to fetch [PracticeVideo]: \(error)")
-        }
+        try? fetchedResultsController.performFetch()
         
         return fetchedResultsController
     }()
@@ -179,6 +169,7 @@ extension CoreDataManager {
 }
 
 // MARK: - Insert new managed objects
+// TODO: Consistent naming conventions
 extension CoreDataManager {
     class func insertAndReturnNewPracticeSession(in moc: NSManagedObjectContext = CoreDataManager.shared.persistentContainer.viewContext) -> PracticeSession {
         let newPracticeSession = PracticeSession(context: moc)

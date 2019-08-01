@@ -29,7 +29,7 @@
         <!--PracticeNotepadVC-->
         <scene sceneID="yUG-lL-AsK">
             <objects>
-                <viewController storyboardIdentifier="PracticeNotepadVC" title="PracticeNotepadVC" id="JEX-9P-axG" customClass="PracticeNotepadVC" customModule="MobileDanceJournal" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PracticeNotepadVC" title="PracticeNotepadVC" id="JEX-9P-axG" customClass="PracticeNotepadVC" customModule="JiveJournal" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="svH-Pt-448">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
@@ -148,7 +148,7 @@
         <!--Video GalleryVC-->
         <scene sceneID="oOX-L9-Yfz">
             <objects>
-                <viewController storyboardIdentifier="VideoGalleryVC" id="IDI-oB-psU" customClass="VideoGalleryVC" customModule="MobileDanceJournal" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="VideoGalleryVC" id="IDI-oB-psU" customClass="VideoGalleryVC" customModule="JiveJournal" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="VQT-jk-qIJ">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
@@ -157,7 +157,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="VideoCell" rowHeight="321" id="yoF-zj-hPB" customClass="VideoGalleryTableViewCell" customModule="MobileDanceJournal" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="VideoCell" rowHeight="321" id="yoF-zj-hPB" customClass="VideoGalleryTableViewCell" customModule="JiveJournal" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="414" height="321"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" autoresizesSubviews="NO" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="yoF-zj-hPB" id="Hlp-D3-gNc">
@@ -233,7 +233,7 @@
         <!--Video UploadVC-->
         <scene sceneID="ZZq-0x-c0n">
             <objects>
-                <viewController storyboardIdentifier="VideoUploadVC" definesPresentationContext="YES" providesPresentationContextTransitionStyle="YES" modalTransitionStyle="crossDissolve" modalPresentationStyle="overCurrentContext" id="7gW-rq-RSE" customClass="VideoUploadVC" customModule="MobileDanceJournal" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="VideoUploadVC" definesPresentationContext="YES" providesPresentationContextTransitionStyle="YES" modalTransitionStyle="crossDissolve" modalPresentationStyle="overCurrentContext" id="7gW-rq-RSE" customClass="VideoUploadVC" customModule="JiveJournal" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="1gv-DA-1Ct">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="500"/>
                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
@@ -328,7 +328,7 @@
         <!--Root View Controller-->
         <scene sceneID="Nki-YV-4Qg">
             <objects>
-                <splitViewController storyboardIdentifier="RootViewController" id="H1p-Uh-vWS" customClass="RootViewController" customModule="MobileDanceJournal" customModuleProvider="target" sceneMemberID="viewController">
+                <splitViewController storyboardIdentifier="RootViewController" id="H1p-Uh-vWS" customClass="RootViewController" customModule="JiveJournal" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <connections>
                         <segue destination="RMx-3f-FxP" kind="relationship" relationship="masterViewController" id="BlO-5A-QYV"/>
@@ -342,7 +342,7 @@
         <!--Master-->
         <scene sceneID="smW-Zh-WAh">
             <objects>
-                <tableViewController storyboardIdentifier="PracticeLogVC" title="Master" clearsSelectionOnViewWillAppear="NO" id="7bK-jq-Zjz" customClass="PracticeLogVC" customModule="MobileDanceJournal" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="PracticeLogVC" title="Master" clearsSelectionOnViewWillAppear="NO" id="7bK-jq-Zjz" customClass="PracticeLogVC" customModule="JiveJournal" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelectionDuringEditing="YES" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="r7i-6Z-zg0">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

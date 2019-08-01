@@ -19,14 +19,7 @@ class PracticeLogVC: UITableViewController {
         super.viewDidLoad()
         setUpView()
     }
-    
-    private func selectFirstCell() {
-        let indexPath = IndexPath(row: 0, section: 0)
-        tableView.selectRow(at: indexPath, animated: true, scrollPosition: .top)
-        let practiceSession = CoreDataManager.shared.practiceSessionFRC.object(at: indexPath)
-        coordinator?.showDetails(for: practiceSession)
-    }
-    
+
     private func setUpView() {
         CoreDataManager.shared.practiceSessionDelegate = self
         navigationItem.leftBarButtonItem = editButtonItem
