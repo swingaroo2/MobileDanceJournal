@@ -90,13 +90,19 @@ extension VideoGalleryVC: UITableViewDataSource {
 extension VideoGalleryVC: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let selectedCell = tableView.cellForRow(at: indexPath) as? VideoGalleryTableViewCell else { return }
-        guard let video = selectedCell.video else { return }
         
-        if !tableView.isEditing {
-            coordinator?.play(video: video, from: self)
-        } else {
-            coordinator?.startEditingVideo(galleryVC: self)
+        // Workaround for an Apple bug where setting the cell selection style to None (see storyboard) causes
+        // an inconsistent delay in this code being run.
+        DispatchQueue.main.async {
+            guard let selectedCell = tableView.cellForRow(at: indexPath) as? VideoGalleryTableViewCell else { return }
+            guard let video = selectedCell.video else { return }
+            
+            if !tableView.isEditing {
+                self.coordinator?.play(video: video, from: self)
+            } else {
+                self.videoHelper?.uploadService.set(video: video)
+                self.coordinator?.startEditingVideo(galleryVC: self)
+            }
         }
     }
     
