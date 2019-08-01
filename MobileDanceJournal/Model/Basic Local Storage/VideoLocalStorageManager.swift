@@ -32,10 +32,10 @@ class VideoLocalStorageManager: VideoStorageManager {
         return nil
     }
     
-    static func delete(_ video: PracticeVideo, from practiceSession: PracticeSession) -> NSError? {
+    static func delete(_ video: PracticeVideo, from practiceSession: PracticeSession, _ coreDataManager: CoreDataManager) -> NSError? {
         
         let documentsURL = URLBuilder.getDocumentsFilePathURL(for: video.filename)
-        CoreDataManager.shared.delete(video, from: practiceSession)
+        coreDataManager.delete(video, from: practiceSession)
         
         if FileManager.default.fileExists(atPath: documentsURL.path) {
             do {

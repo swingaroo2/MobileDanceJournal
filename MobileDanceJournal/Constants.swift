@@ -31,7 +31,7 @@ struct CellIdentifiers {
 }
 
 struct ModelConstants {
-    static let dataModel = "DataModel"
+    static let modelName = "DataModel"
 }
 
 struct AlertConstants {    

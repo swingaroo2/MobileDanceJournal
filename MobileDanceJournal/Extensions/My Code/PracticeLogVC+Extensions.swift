@@ -14,7 +14,7 @@
     
     // TODO: Group cells by month and year
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let practiceSessions = CoreDataManager.shared.practiceSessionFRC.fetchedObjects else { return 0 }
+        guard let practiceSessions = coreDataManager.practiceSessionFRC.fetchedObjects else { return 0 }
         self.practiceSessions = practiceSessions
         navigationItem.leftBarButtonItem?.isEnabled = practiceSessions.count > 0
         return practiceSessions.count
@@ -32,9 +32,9 @@
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            let practiceSession = CoreDataManager.shared.practiceSessionFRC.object(at: indexPath)
-            CoreDataManager.shared.delete(practiceSession)
-            CoreDataManager.shared.save()
+            let practiceSession = coreDataManager.practiceSessionFRC.object(at: indexPath)
+            coreDataManager.delete(practiceSession)
+            coreDataManager.save()
             
             let rowToDelete = indexPath.row
             if selectedRow == rowToDelete {
@@ -58,7 +58,7 @@
         
         if !tableView.isEditing {
             selectedRow = indexPath.row
-            let practiceSession = CoreDataManager.shared.practiceSessionFRC.object(at: indexPath)
+            let practiceSession = coreDataManager.practiceSessionFRC.object(at: indexPath)
             let selectedCell = tableView.cellForRow(at: indexPath)
             
             guard let coordinator = self.coordinator else { return }
@@ -118,11 +118,11 @@
  // MARK: IBActions
  extension PracticeLogVC {
     @IBAction func createNewPracticeSession(_ sender: UIBarButtonItem) {
-        let isNewPracticeSessionCurrentlyBeingEdited = CoreDataManager.shared.persistentContainer.viewContext.insertedObjects.count != 0
+        let isNewPracticeSessionCurrentlyBeingEdited = coreDataManager.persistentContainer.viewContext.insertedObjects.count != 0
         
         if !isNewPracticeSessionCurrentlyBeingEdited {
             selectedRow = 0
-            coordinator?.createNewPracticeSession()
+            coordinator?.startEditingNewPracticeSession()
         }
     }
  }

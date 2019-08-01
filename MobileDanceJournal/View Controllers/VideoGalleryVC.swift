@@ -10,6 +10,7 @@ import UIKit
 
 class VideoGalleryVC: UIViewController {
 
+    var coreDataManager: CoreDataManager!
     var videoHelper: VideoHelper?
     var practiceSession: PracticeSession?
     var coordinator: MainCoordinator?
@@ -27,7 +28,7 @@ class VideoGalleryVC: UIViewController {
     
     private func setUpView() {
         navigationItem.title = VCConstants.videos
-        CoreDataManager.shared.practiceVideoDelegate = self
+        coreDataManager.practiceVideoDelegate = self
         let addVideoImage = UIImage(named: CustomImages.addVideo)
         let addVideoButton = UIBarButtonItem.init(image: addVideoImage, landscapeImagePhone: addVideoImage, style: .plain, target: self, action: #selector(addVideoButtonPressed(_:)))
         navigationItem.rightBarButtonItems = [addVideoButton, editButtonItem]

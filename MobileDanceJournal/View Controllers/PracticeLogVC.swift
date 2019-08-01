@@ -10,6 +10,7 @@ import UIKit
 
 class PracticeLogVC: UITableViewController {
     
+    var coreDataManager: CoreDataManager!
     var practiceSessions = [PracticeSession]()
     var selectedRow = -1
     weak var coordinator: MainCoordinator?
@@ -21,7 +22,7 @@ class PracticeLogVC: UITableViewController {
     }
 
     private func setUpView() {
-        CoreDataManager.shared.practiceSessionDelegate = self
+        coreDataManager.practiceSessionDelegate = self
         navigationItem.leftBarButtonItem = editButtonItem
         tableView.tableFooterView = UIView()
     }

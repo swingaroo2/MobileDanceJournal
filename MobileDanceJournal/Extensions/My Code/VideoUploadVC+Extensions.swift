@@ -32,7 +32,7 @@ extension VideoUploadVC {
         let isEditingNewVideo = uploadService.video == nil
         
         if isEditingNewVideo {
-            let newVideo = CoreDataManager.createAndConfigureNewPracticeVideo(title: titleText, filename: filename)
+            let newVideo = coreDataManager.createAndConfigureNewPracticeVideo(title: titleText, filename: filename)
             
             if let error = VideoLocalStorageManager.saveVideo(from: videoURL) {
                 coordinator?.dismiss(self) { [weak self] in

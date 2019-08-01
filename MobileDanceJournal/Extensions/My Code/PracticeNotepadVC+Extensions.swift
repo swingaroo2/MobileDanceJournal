@@ -94,12 +94,12 @@ extension PracticeNotepadVC {
 // MARK: - Core Data
 extension PracticeNotepadVC {
     func save(_ practiceSession: PracticeSession?) {
-        let practiceSessionToSave = (practiceSession == nil) ? CoreDataManager.insertAndReturnNewPracticeSession() : practiceSession!
+        let practiceSessionToSave = (practiceSession == nil) ? coreDataManager.insertAndReturnNewPracticeSession() : practiceSession!
         
         practiceSessionToSave.title = practiceSessionTitleTextView.text
         practiceSessionToSave.date = Date.getDateFromString(practiceSessionDateLabel.text ?? "") ?? Date()
         practiceSessionToSave.notes = practiceSessionContent.text
-        CoreDataManager.shared.save()
+        coreDataManager.save()
     }
 }
 

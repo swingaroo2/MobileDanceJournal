@@ -10,5 +10,5 @@ import Foundation
 
 protocol VideoStorageManager {
     static func saveVideo(from origianlPath: URL) -> NSError?
-    static func delete(_ video: PracticeVideo, from practiceSession: PracticeSession) -> NSError?
+    static func delete(_ video: PracticeVideo, from practiceSession: PracticeSession,_ coreDataManager: CoreDataManager) -> NSError?
 }

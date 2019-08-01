@@ -10,18 +10,14 @@ import Foundation
 import CoreData
 import UIKit
 
-// TODO: Consider a computed property...somewhere...to replace singleton
 public class CoreDataManager : NSObject {
     
-    // TODO: Create separate context to replace viewContext.
     weak var practiceSessionDelegate: NSFetchedResultsControllerDelegate?
     weak var practiceVideoDelegate: NSFetchedResultsControllerDelegate?
+    private let modelName: String
     
-    class var shared : CoreDataManager {
-        struct Singleton {
-            static let instance = CoreDataManager()
-        }
-        return Singleton.instance
+    init(modelName: String) {
+        self.modelName = modelName
     }
     
     lazy var practiceSessionFRC: NSFetchedResultsController<PracticeSession> = {
@@ -51,7 +47,7 @@ public class CoreDataManager : NSObject {
     }()
     
     lazy var persistentContainer: NSPersistentContainer = {
-        let container = NSPersistentContainer(name: ModelConstants.dataModel)
+        let container = NSPersistentContainer(name: ModelConstants.modelName)
         
         if let persistentStoreURL = container.persistentStoreDescriptions.first?.url {
             let description = NSPersistentStoreDescription(url: persistentStoreURL)
@@ -68,7 +64,8 @@ public class CoreDataManager : NSObject {
         return container
     }()
     
-    private func executeSave(_ context: NSManagedObjectContext = CoreDataManager.shared.persistentContainer.viewContext) {
+    private func executeSave() {
+        let context: NSManagedObjectContext = persistentContainer.viewContext
         do {
             try context.save()
             print("Updated Core Data")
@@ -100,7 +97,8 @@ extension CoreDataManager {
         }
     }
     
-    func save(_ context: NSManagedObjectContext = CoreDataManager.shared.persistentContainer.viewContext) {
+    func save() {
+        let context: NSManagedObjectContext = persistentContainer.viewContext
         if context.hasChanges {
             context.perform { [weak self] in
                 guard let self = self else { return }
@@ -111,7 +109,8 @@ extension CoreDataManager {
         }
     }
     
-    func delete(_ managedObject: NSManagedObject, from context: NSManagedObjectContext = CoreDataManager.shared.persistentContainer.viewContext) {
+    func delete(_ managedObject: NSManagedObject) {
+        let context: NSManagedObjectContext = persistentContainer.viewContext
         context.delete(managedObject)
         if context.hasChanges {
             self.executeSave()
@@ -139,7 +138,8 @@ extension CoreDataManager {
 
 // MARK: Handling Relationships
 extension CoreDataManager {
-    func add(_ video: PracticeVideo, to practiceSession: PracticeSession, from context: NSManagedObjectContext = CoreDataManager.shared.persistentContainer.viewContext) {
+    func add(_ video: PracticeVideo, to practiceSession: PracticeSession) {
+        let context: NSManagedObjectContext = persistentContainer.viewContext
         video.practiceSession = practiceSession
         practiceSession.addToVideos(video)
         
@@ -148,7 +148,8 @@ extension CoreDataManager {
         }
     }
     
-    func delete(_ video: PracticeVideo, from practiceSession: PracticeSession, from context: NSManagedObjectContext = CoreDataManager.shared.persistentContainer.viewContext) {
+    func delete(_ video: PracticeVideo, from practiceSession: PracticeSession) {
+        let context: NSManagedObjectContext = persistentContainer.viewContext
         context.delete(video)
         practiceSession.removeFromVideos(video)
         
@@ -157,7 +158,8 @@ extension CoreDataManager {
         }
     }
     
-    func move(_ video: PracticeVideo, from oldPracticeSession: PracticeSession, to newPracticeSession: PracticeSession, in context: NSManagedObjectContext = CoreDataManager.shared.persistentContainer.viewContext) {
+    func move(_ video: PracticeVideo, from oldPracticeSession: PracticeSession, to newPracticeSession: PracticeSession) {
+        let context: NSManagedObjectContext = persistentContainer.viewContext
         video.practiceSession = newPracticeSession
         oldPracticeSession.removeFromVideos(video)
         newPracticeSession.addToVideos(video)
@@ -171,15 +173,17 @@ extension CoreDataManager {
 // MARK: - Insert new managed objects
 // TODO: Consistent naming conventions
 extension CoreDataManager {
-    class func insertAndReturnNewPracticeSession(in moc: NSManagedObjectContext = CoreDataManager.shared.persistentContainer.viewContext) -> PracticeSession {
-        let newPracticeSession = PracticeSession(context: moc)
+    func insertAndReturnNewPracticeSession() -> PracticeSession {
+        let context: NSManagedObjectContext = persistentContainer.viewContext
+        let newPracticeSession = PracticeSession(context: context)
         let dateText = Date.getStringFromDate(Date(), .longFormat)
         newPracticeSession.date = Date.getDateFromString(dateText) ?? Date()
         return newPracticeSession
     }
     
-    class func createAndConfigureNewPracticeVideo(title: String, filename: String, in moc: NSManagedObjectContext = CoreDataManager.shared.persistentContainer.viewContext) -> PracticeVideo {
-        let newVideo = PracticeVideo(context: moc)
+    func createAndConfigureNewPracticeVideo(title: String, filename: String) -> PracticeVideo {
+        let context: NSManagedObjectContext = persistentContainer.viewContext
+        let newVideo = PracticeVideo(context: context)
         let dateText = Date.getStringFromDate(Date(), .longFormat)
         newVideo.uploadDate = Date.getDateFromString(dateText) ?? Date()
         newVideo.filename = filename

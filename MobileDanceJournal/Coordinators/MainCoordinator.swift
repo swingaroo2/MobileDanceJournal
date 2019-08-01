@@ -12,32 +12,35 @@ import UIKit
 
 class MainCoordinator: NSObject, Coordinator {
     var rootVC: RootViewController
+    private var coreDataManager: CoreDataManager
     
-    init(with rootViewController: RootViewController) {
+    init(with rootViewController: RootViewController,_ coreDataManager: CoreDataManager) {
         self.rootVC = rootViewController
+        self.coreDataManager = coreDataManager
     }
 }
 
 extension MainCoordinator {
-    func createNewPracticeSession() {
-        let newPracticeSession = CoreDataManager.insertAndReturnNewPracticeSession()
+    func startEditingNewPracticeSession() {
+        let newPracticeSession = coreDataManager.insertAndReturnNewPracticeSession()
         showDetails(for: newPracticeSession)
     }
     
     func showDetails(for practiceSession: PracticeSession) {
         
         let detailVC = rootVC.isDisplayingBothVCs() ? rootVC.detailVC : PracticeNotepadVC.instantiate()
-        guard let sessionDetailsVC = detailVC else { return }
+        guard let notepadVC = detailVC else { return }
         
-        sessionDetailsVC.coordinator = self
-        sessionDetailsVC.navigationItem.leftBarButtonItem = rootVC.displayModeButtonItem
-        sessionDetailsVC.navigationItem.leftItemsSupplementBackButton = true
-        sessionDetailsVC.practiceSession = practiceSession
-        sessionDetailsVC.loadViewIfNeeded()
-        sessionDetailsVC.showContent()
-        sessionDetailsVC.updateView(with: practiceSession)
+        notepadVC.coordinator = self
+        notepadVC.coreDataManager = coreDataManager
+        notepadVC.navigationItem.leftBarButtonItem = rootVC.displayModeButtonItem
+        notepadVC.navigationItem.leftItemsSupplementBackButton = true
+        notepadVC.practiceSession = practiceSession
+        notepadVC.loadViewIfNeeded()
+        notepadVC.showContent()
+        notepadVC.updateView(with: practiceSession)
         
-        let detailNC = UINavigationController(rootViewController: sessionDetailsVC)
+        let detailNC = UINavigationController(rootViewController: notepadVC)
         rootVC.showDetailViewController(detailNC, sender: self)
     }
     // Special deletion case only applies when splitViewController is not collapsed
@@ -58,29 +61,31 @@ extension MainCoordinator {
     }
     
     func viewVideos(for practiceSession: PracticeSession?) {
-        let videosVC = VideoGalleryVC.instantiate()
+        let videoGalleryVC = VideoGalleryVC.instantiate()
         
         let cache = ThumbnailCache()
         let uploadService = VideoUploadService()
         let videoHelper = VideoHelper(with: cache, and: uploadService)
         
-        videosVC.coordinator = self
-        videosVC.practiceSession = practiceSession
-        videosVC.videoHelper = videoHelper
+        videoGalleryVC.coreDataManager = coreDataManager
+        videoGalleryVC.coordinator = self
+        videoGalleryVC.practiceSession = practiceSession
+        videoGalleryVC.videoHelper = videoHelper
         
         if rootVC.isDisplayingBothVCs() {
             guard let detailNC = rootVC.children.last as? UINavigationController else { return }
-            detailNC.pushViewController(videosVC, animated: true)
+            detailNC.pushViewController(videoGalleryVC, animated: true)
         } else {
             guard let rootNC = rootVC.children.first else { return }
             guard let detailNC = rootNC.children.last as? UINavigationController else { return }
-            detailNC.pushViewController(videosVC, animated: true)
+            detailNC.pushViewController(videoGalleryVC, animated: true)
         }
     }
     
     func startEditingVideo(galleryVC: VideoGalleryVC, videoPicker: UIImagePickerController? = nil) {
         let videoUploadVC = VideoUploadVC.instantiate()
         videoUploadVC.coordinator = self
+        videoUploadVC.coreDataManager = coreDataManager
         videoUploadVC.videoHelper = galleryVC.videoHelper
         videoUploadVC.modalTransitionStyle = .crossDissolve
         videoUploadVC.modalPresentationStyle = .formSheet
@@ -105,9 +110,9 @@ extension MainCoordinator {
         let isEditingNewVideo = uploader.video == nil
         
         if isEditingNewVideo {
-            CoreDataManager.shared.add(video, to: videoPracticeSession)
+            coreDataManager.add(video, to: videoPracticeSession)
         } else {
-            CoreDataManager.shared.save()
+            coreDataManager.save()
         }
         
         videoGalleryVC.prefetchVideos(for: videoPracticeSession)
@@ -149,8 +154,13 @@ extension MainCoordinator: SplitViewCoordinator {
     
     func start() {
         rootVC.coordinator = self
+
         rootVC.masterVC?.coordinator = self
         rootVC.detailVC?.coordinator = self
+
+        rootVC.masterVC?.coreDataManager = coreDataManager
+        rootVC.detailVC?.coreDataManager = coreDataManager
+        
         rootVC.masterNC!.topViewController!.navigationItem.leftBarButtonItem = rootVC.displayModeButtonItem
     }
 }

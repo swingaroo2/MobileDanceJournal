@@ -10,9 +10,6 @@ import UIKit
 
 class PracticeNotepadVC: UIViewController {
 
-    var practiceSession: PracticeSession?
-    weak var coordinator: MainCoordinator?
-    
     // MARK: - IBOutlets
     @IBOutlet weak var noContentLabel: UILabel!
     @IBOutlet weak var scrollView: UIScrollView!
@@ -22,8 +19,13 @@ class PracticeNotepadVC: UIViewController {
     @IBOutlet var cameraButton: UIBarButtonItem!
     @IBOutlet var saveButton: UIBarButtonItem!
     
+    var practiceSession: PracticeSession?
+    weak var coordinator: MainCoordinator?
+    
+    var coreDataManager: CoreDataManager!
     private var keyboardShown = false
     
+    // MARK: Lifecycle functions
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setUpView()
@@ -34,6 +36,8 @@ class PracticeNotepadVC: UIViewController {
         NotificationCenter.default.removeObserver(self)
     }
     
+    
+    // MARK: View Setup
     private func setUpView() {
         configureKeyboardToDismissOnOutsideTap()
         ensureNotesTextViewIsScrolledToTop()

@@ -19,12 +19,12 @@ extension VideoGalleryVC {
     
     func prefetchVideos(for practiceSession: PracticeSession?) {
         guard let practiceSession = self.practiceSession else { return }
-        let fetchedVideos = CoreDataManager.shared.fetchVideos(for: practiceSession)
+        let fetchedVideos = coreDataManager.fetchVideos(for: practiceSession)
         noContentLabel.isHidden = !fetchedVideos.isEmpty
     }
     
     func deleteVideo(in tableView: UITableView, at indexPath: IndexPath) -> NSError? {
-        let videoToDelete = CoreDataManager.shared.practiceVideoFRC.object(at: indexPath)
+        let videoToDelete = coreDataManager.practiceVideoFRC.object(at: indexPath)
         
         guard let practiceSession = self.practiceSession else {
             let noPracticeSessionError = NSError(domain: "VideoGallery", code: 0, userInfo: nil)
@@ -32,7 +32,7 @@ extension VideoGalleryVC {
             return noPracticeSessionError
         }
         
-        if let error = VideoLocalStorageManager.delete(videoToDelete, from: practiceSession) {
+        if let error = VideoLocalStorageManager.delete(videoToDelete, from: practiceSession, coreDataManager) {
             return error
         }
         
@@ -55,7 +55,7 @@ extension VideoGalleryVC: UITableViewDataSource {
         guard let rightBarButtonItems = navigationItem.rightBarButtonItems else { return 0 }
         guard let editButton = rightBarButtonItems.last else { return 0 }
         
-        guard let fetchedObjects = CoreDataManager.shared.practiceVideoFRC.fetchedObjects else {
+        guard let fetchedObjects = coreDataManager.practiceVideoFRC.fetchedObjects else {
             editButton.isEnabled = false
             return 0
         }
@@ -69,7 +69,7 @@ extension VideoGalleryVC: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifiers.videoCell, for: indexPath) as! VideoGalleryTableViewCell
-        let video = CoreDataManager.shared.practiceVideoFRC.object(at: indexPath)
+        let video = coreDataManager.practiceVideoFRC.object(at: indexPath)
         configure(cell, with: video)
         return cell
     }
@@ -154,7 +154,7 @@ extension VideoGalleryVC: UITableViewDelegate {
             guard let video = selectedCell.video else { return }
             self.videoToMove = video
             
-            guard let practiceSessions = CoreDataManager.shared.practiceSessionFRC.fetchedObjects else { return }
+            guard let practiceSessions = self.coreDataManager.practiceSessionFRC.fetchedObjects else { return }
             
             self.practiceSessionPicker = PracticeSessionPickerView(practiceSessions: practiceSessions, delegate: self, dataSource: self)
             self.practiceSessionPicker!.oldPracticeSession = self.practiceSession
@@ -167,7 +167,7 @@ extension VideoGalleryVC: UITableViewDelegate {
         moveAction.backgroundColor = .black
         
         var configArray = [deleteAction, editAction, shareAction, moveAction]
-        if let fetchedPracticeSessions = CoreDataManager.shared.practiceSessionFRC.fetchedObjects {
+        if let fetchedPracticeSessions = coreDataManager.practiceSessionFRC.fetchedObjects {
             let practiceSessionCount = fetchedPracticeSessions.count
             if practiceSessionCount == 1 {
                 configArray = [deleteAction, editAction, shareAction]
@@ -186,7 +186,7 @@ extension VideoGalleryVC: UIPickerViewDataSource {
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        guard let practiceSessions = CoreDataManager.shared.practiceSessionFRC.fetchedObjects else { return 0 }
+        guard let practiceSessions = coreDataManager.practiceSessionFRC.fetchedObjects else { return 0 }
         let numberOfComponents = practiceSessions.count
         return numberOfComponents
     }
@@ -194,7 +194,7 @@ extension VideoGalleryVC: UIPickerViewDataSource {
 
 extension VideoGalleryVC: UIPickerViewDelegate {
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        let practiceSession = CoreDataManager.shared.practiceSessionFRC.object(at: IndexPath(row: row, section: component))
+        let practiceSession = coreDataManager.practiceSessionFRC.object(at: IndexPath(row: row, section: component))
         return practiceSession.title
     }
     
@@ -225,7 +225,7 @@ extension VideoGalleryVC: UIPickerViewDelegate {
         guard let oldPracticeSession = pickerContainer.oldPracticeSession else { return }
         guard let videoToMove = pickerContainer.videoToMove else { return }
         
-        CoreDataManager.shared.move(videoToMove, from: oldPracticeSession, to: selected)
+        coreDataManager.move(videoToMove, from: oldPracticeSession, to: selected)
         videosTableView.reloadData()
         pickerContainer.hide()
     }
