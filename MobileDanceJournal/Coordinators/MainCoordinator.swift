@@ -72,7 +72,8 @@ extension MainCoordinator {
         videoGalleryVC.practiceSession = practiceSession
         videoGalleryVC.videoHelper = videoHelper
         
-        if rootVC.isDisplayingBothVCs() {
+        let splitViewControllerHasTwoRootNavigationControllers = rootVC.children.count == 2
+        if splitViewControllerHasTwoRootNavigationControllers {
             guard let detailNC = rootVC.children.last as? UINavigationController else { return }
             detailNC.pushViewController(videoGalleryVC, animated: true)
         } else {
