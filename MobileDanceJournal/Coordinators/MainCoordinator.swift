@@ -33,6 +33,7 @@ extension MainCoordinator {
         
         notepadVC.coordinator = self
         notepadVC.coreDataManager = coreDataManager
+        notepadVC.textViewManager = NotepadTextViewManager(notepadVC, coreDataManager: coreDataManager)
         notepadVC.navigationItem.leftBarButtonItem = rootVC.displayModeButtonItem
         notepadVC.navigationItem.leftItemsSupplementBackButton = true
         notepadVC.practiceSession = practiceSession
@@ -67,8 +68,9 @@ extension MainCoordinator {
         let uploadService = VideoUploadService()
         let videoHelper = VideoHelper(with: cache, and: uploadService)
         
-        videoGalleryVC.coreDataManager = coreDataManager
         videoGalleryVC.coordinator = self
+        videoGalleryVC.coreDataManager = coreDataManager
+        videoGalleryVC.tableViewManager = VideoGalleryTableManager(videoGalleryVC, coreDataManager: coreDataManager)
         videoGalleryVC.practiceSession = practiceSession
         videoGalleryVC.videoHelper = videoHelper
         
@@ -83,15 +85,15 @@ extension MainCoordinator {
         }
     }
     
-    func startEditingVideo(galleryVC: VideoGalleryVC, videoPicker: UIImagePickerController? = nil) {
+    func startEditingVideo(presentingVC: UIViewController, videoHelper: VideoHelper, videoPicker: UIImagePickerController? = nil) {
         let videoUploadVC = VideoUploadVC.instantiate()
         videoUploadVC.coordinator = self
         videoUploadVC.coreDataManager = coreDataManager
-        videoUploadVC.videoHelper = galleryVC.videoHelper
+        videoUploadVC.videoHelper = videoHelper
         videoUploadVC.modalTransitionStyle = .crossDissolve
         videoUploadVC.modalPresentationStyle = .formSheet
         
-        let presentingVC = videoPicker == nil ? galleryVC : videoPicker
+        let presentingVC = videoPicker == nil ? presentingVC : videoPicker
         presentingVC?.present(videoUploadVC, animated: true, completion: nil)
     }
     
@@ -121,9 +123,10 @@ extension MainCoordinator {
         dismiss(videoGalleryVC, completion: nil)
     }
     
-    func play(video: PracticeVideo, from gallery: VideoGalleryVC) {
+    // TODO: Try to remove view controller parameters from coordinator functions
+    func play(_ video: PracticeVideo, from presentingVC: UIViewController,_ videoHelper: VideoHelper) {
         let videoPath = URLBuilder.getDocumentsFilePathURL(for: video.filename)
-        gallery.videoHelper?.playVideo(at: videoPath, in: gallery) // TODO: Move to coordinator
+        videoHelper.playVideo(at: videoPath, in: presentingVC)
     }
     
     func share(video: PracticeVideo, from presentingVC: UIViewController) {

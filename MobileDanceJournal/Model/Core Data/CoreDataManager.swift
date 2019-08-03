@@ -88,10 +88,7 @@ extension CoreDataManager {
     func save() {
         let context: NSManagedObjectContext = persistentContainer.viewContext
         if context.hasChanges {
-            context.perform { [weak self] in
-                guard let self = self else { return }
-                self.executeSave()
-            }
+            self.executeSave()
         }
     }
     
@@ -151,7 +148,7 @@ extension CoreDataManager {
     func move(_ video: PracticeVideo, from oldPracticeSession: PracticeSession, to newPracticeSession: PracticeSession) {
         video.practiceSession = newPracticeSession
         oldPracticeSession.removeFromVideos(video)
-        newPracticeSession.addToVideos(video)
+//        newPracticeSession.addToVideos(video)
         save()
     }
 }

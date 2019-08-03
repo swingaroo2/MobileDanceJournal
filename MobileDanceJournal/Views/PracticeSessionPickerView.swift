@@ -12,24 +12,22 @@ import UIKit
 class PracticeSessionPickerView: UIView {
     
     let toolbarHeight: CGFloat = 44.0
+    var nestedPickerView: UIPickerView!
+    var pickerManager: PracticeSessionPickerManager!
     
-    var practiceSessions: [PracticeSession]
-    var selected: PracticeSession?
-    var oldPracticeSession: PracticeSession?
-    var videoToMove: PracticeVideo?
-    var picker: UIPickerView
-    
-    init(practiceSessions: [PracticeSession], delegate: UIPickerViewDelegate, dataSource: UIPickerViewDataSource) {
-        self.practiceSessions = practiceSessions
-        self.picker = UIPickerView()
-        super.init(frame: CGRect.zero)
-        self.picker.delegate = delegate
-        self.picker.dataSource = dataSource
+    init(_ tableView: UITableView, _ coreDataManager: CoreDataManager) {
+        super.init(frame: .zero)
+        
+        self.pickerManager = PracticeSessionPickerManager(self, coreDataManager)
+        let pickerSubview = UIPickerView()
+        pickerSubview.dataSource = self.pickerManager
+        pickerSubview.delegate = self.pickerManager
+        self.pickerManager.managedPicker = pickerSubview
+        self.pickerManager.managedTableView = tableView
+        self.nestedPickerView = pickerSubview
     }
     
     required init?(coder aDecoder: NSCoder) {
-        self.practiceSessions = []
-        picker = UIPickerView()
         super.init(coder: aDecoder)
     }
     
@@ -50,7 +48,7 @@ class PracticeSessionPickerView: UIView {
     }
     
     private func configureContainerView(_ parentView: UIView) {
-        let height = picker.getHeight() + toolbarHeight
+        let height = nestedPickerView.getHeight() + toolbarHeight
         frame = CGRect(x: 0, y: parentView.getHeight(), width: parentView.getWidth(), height: height)
         backgroundColor = .black
         parentView.addSubview(self)
@@ -58,16 +56,16 @@ class PracticeSessionPickerView: UIView {
     }
     
     private func addPickerView() {
-        addSubview(picker)
-        picker.setWidth(getWidth())
-        picker.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
+        addSubview(nestedPickerView)
+        nestedPickerView.setWidth(getWidth())
+        nestedPickerView.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
     }
     
     private func addToolbar() {
         let toolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: getWidth(), height: toolbarHeight))
         
-        let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: picker.delegate, action: #selector(VideoGalleryVC.doneButtonPressed))
-        let cancelButton = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancelButtonPressed))
+        let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: pickerManager, action: #selector(PracticeSessionPickerManager.doneButtonPressed))
+        let cancelButton = UIBarButtonItem(barButtonSystemItem: .cancel, target: pickerManager, action: #selector(PracticeSessionPickerManager.cancelButtonPressed))
         let spacer = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
         toolbar.setItems([doneButton, spacer, cancelButton], animated: false)
         toolbar.barStyle = .default
@@ -78,9 +76,4 @@ class PracticeSessionPickerView: UIView {
         addSubview(toolbar)
         toolbar.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
     }
-    
-    @objc private func cancelButtonPressed() {
-        hide()
-    }
-    
 }

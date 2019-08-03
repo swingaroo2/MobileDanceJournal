@@ -50,9 +50,6 @@
                                                 <rect key="frame" x="12" y="-2" width="389" height="47.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="26"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="next"/>
-                                                <connections>
-                                                    <outlet property="delegate" destination="JEX-9P-axG" id="ecg-Ve-Sbk"/>
-                                                </connections>
                                             </textView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="July 1, 2019" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jWJ-sg-mm5" userLabel="practiceSessionDateLabel">
                                                 <rect key="frame" x="18" y="38.5" width="378" height="20.5"/>
@@ -71,9 +68,6 @@
                                                 <rect key="frame" x="18" y="63.5" width="378" height="710.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences" enablesReturnKeyAutomatically="YES"/>
-                                                <connections>
-                                                    <outlet property="delegate" destination="JEX-9P-axG" id="DhM-li-yn2"/>
-                                                </connections>
                                             </textView>
                                         </subviews>
                                         <constraints>
@@ -197,10 +191,6 @@
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
-                                <connections>
-                                    <outlet property="dataSource" destination="IDI-oB-psU" id="ezu-fi-N3Y"/>
-                                    <outlet property="delegate" destination="IDI-oB-psU" id="lks-ym-qmO"/>
-                                </connections>
                             </tableView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap the Add Video button to add content" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Etl-ju-44s" userLabel="noContentLabel">
                                 <rect key="frame" x="42.5" y="437.5" width="329" height="21.5"/>

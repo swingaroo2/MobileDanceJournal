@@ -20,15 +20,16 @@ class PracticeNotepadVC: UIViewController {
     @IBOutlet var saveButton: UIBarButtonItem!
     
     var practiceSession: PracticeSession?
-    weak var coordinator: MainCoordinator?
-    
     var coreDataManager: CoreDataManager!
-    private var keyboardShown = false
+    var textViewManager: NotepadTextViewManager!
+    weak var coordinator: MainCoordinator?
     
     // MARK: Lifecycle functions
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpKeyboardListeners()
+        practiceSessionTitleTextView.delegate = textViewManager
+        practiceSessionContent.delegate = textViewManager
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -49,8 +50,6 @@ class PracticeNotepadVC: UIViewController {
         practiceSessionContent.flashScrollIndicators()
         saveButton.isEnabled = false
         cameraButton.isEnabled = practiceSession != nil
-        
-        // TODO: Keyboard handling. Scroll when typing reaches a new line.
     }
     
     private func ensureNotesTextViewIsScrolledToTop() {

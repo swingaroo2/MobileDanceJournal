@@ -11,14 +11,20 @@ import UIKit
 class VideoGalleryVC: UIViewController {
 
     var coreDataManager: CoreDataManager!
-    var videoHelper: VideoHelper?
-    var practiceSession: PracticeSession?
-    var coordinator: MainCoordinator?
+    var videoHelper: VideoHelper!
+    var practiceSession: PracticeSession!
+    var coordinator: MainCoordinator!
     var videoToMove: PracticeVideo?
     var practiceSessionPicker: PracticeSessionPickerView?
+    var tableViewManager: VideoGalleryTableManager!
     
     @IBOutlet weak var noContentLabel: UILabel!
     @IBOutlet weak var videosTableView: UITableView!
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setUpTableManager()
+    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -26,9 +32,22 @@ class VideoGalleryVC: UIViewController {
         prefetchVideos(for: practiceSession)
     }
     
+    private func setUpTableManager() {
+        videosTableView.delegate = tableViewManager
+        videosTableView.dataSource = tableViewManager
+        coreDataManager.practiceVideoDelegate = tableViewManager
+        
+        tableViewManager.tableView = videosTableView
+        tableViewManager.practiceSession = practiceSession
+        tableViewManager.practiceSessionPicker = practiceSessionPicker
+        tableViewManager.noContentLabel = noContentLabel
+        tableViewManager.videoHelper = videoHelper
+        tableViewManager.coordinator = coordinator
+        tableViewManager.videoToMove = videoToMove
+    }
+    
     private func setUpView() {
         navigationItem.title = VCConstants.videos
-        coreDataManager.practiceVideoDelegate = self
         let addVideoImage = UIImage(named: CustomImages.addVideo)
         let addVideoButton = UIBarButtonItem.init(image: addVideoImage, landscapeImagePhone: addVideoImage, style: .plain, target: self, action: #selector(addVideoButtonPressed(_:)))
         navigationItem.rightBarButtonItems = [addVideoButton, editButtonItem]
