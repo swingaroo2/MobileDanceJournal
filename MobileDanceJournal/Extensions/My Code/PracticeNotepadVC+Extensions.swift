@@ -97,7 +97,6 @@ extension PracticeNotepadVC {
         let practiceSessionToSave = (practiceSession == nil) ? coreDataManager.insertAndReturnNewPracticeSession() : practiceSession!
         
         practiceSessionToSave.title = practiceSessionTitleTextView.text
-        practiceSessionToSave.date = Date.getDateFromString(practiceSessionDateLabel.text ?? "") ?? Date()
         practiceSessionToSave.notes = practiceSessionContent.text
         coreDataManager.save()
     }

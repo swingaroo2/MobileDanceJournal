@@ -49,7 +49,7 @@ class PracticeNotepadVC: UIViewController {
     }
     
     private func ensureNotesTextViewIsScrolledToTop() {
-        // Yes, this is a total hack. This is a placeholder while I establish MVP
+        // Yes, this is a total hack. It has, however, lead to a rather cool animation when opening a practice session. So I'm keeping it.
         DispatchQueue.main.async {
             self.practiceSessionContent.setContentOffset(CGPoint(x: 0.0, y: -self.practiceSessionContent.contentInset.top), animated: true)
         }

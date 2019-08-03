@@ -103,7 +103,8 @@ struct VideoUploadErrors {
 // MARK: Enums
 enum DateFormats: String {
     case shortFormat = "MMMM dd, yyyy"
-    case longFormat = "'Started' MMMM dd, yyyy 'at' h:mm a"
+    case longFormat = "'Started' MMMM dd, yyyy 'at' h:mm:ss.SSSS a"
+    case displayFormat = "'Started' MMMM dd, yyyy 'at' h:mm a"
 }
 
 enum Permissions {

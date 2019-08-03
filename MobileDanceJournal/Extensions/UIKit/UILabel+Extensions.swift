@@ -18,10 +18,11 @@ extension UILabel {
         
         if keyPath.lowercased() == "date" {
             guard let date = rawValue as? Date else { return }
-            let dateText = Date.getStringFromDate(date, .longFormat)
+            let dateText = Date.getStringFromDate(date, .displayFormat)
             text = dateText
         }
         
+        // Legacy, if I ever re-add this to the data model
         if keyPath.lowercased() == "partners" {
             guard let partners = rawValue as? NSArray else { return }
             text = partners.componentsJoined(by: ", ")

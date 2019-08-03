@@ -118,12 +118,8 @@
  // MARK: IBActions
  extension PracticeLogVC {
     @IBAction func createNewPracticeSession(_ sender: UIBarButtonItem) {
-        let isNewPracticeSessionCurrentlyBeingEdited = coreDataManager.persistentContainer.viewContext.insertedObjects.count != 0
-        
-        if !isNewPracticeSessionCurrentlyBeingEdited {
-            selectedRow = 0
-            coordinator?.startEditingNewPracticeSession()
-        }
+        selectedRow = 0
+        coordinator?.startEditingNewPracticeSession()
     }
  }
  

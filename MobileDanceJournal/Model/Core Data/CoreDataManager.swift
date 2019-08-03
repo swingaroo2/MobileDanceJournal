@@ -22,7 +22,8 @@ public class CoreDataManager : NSObject {
     
     lazy var practiceSessionFRC: NSFetchedResultsController<PracticeSession> = {
         let fetchRequest: NSFetchRequest<PracticeSession> = PracticeSession.fetchRequest()
-        fetchRequest.sortDescriptors = [NSSortDescriptor(key: PracticeSessionConstants.date, ascending: false)]
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: PracticeSessionConstants.date, ascending: false),
+                                        NSSortDescriptor(key: PracticeSessionConstants.title, ascending: false)]
         let fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest,
                                                                   managedObjectContext: persistentContainer.viewContext,
                                                                   sectionNameKeyPath: nil,
@@ -63,19 +64,6 @@ public class CoreDataManager : NSObject {
         }
         return container
     }()
-    
-    private func executeSave() {
-        let context: NSManagedObjectContext = persistentContainer.viewContext
-        do {
-            try context.save()
-            print("Updated Core Data")
-        } catch {
-            // TODO: Replace this implementation with code to handle the error appropriately.
-            // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-            let error = error as NSError
-            fatalError("Unresolved error \(error), \(error.userInfo)")
-        }
-    }
 }
 
 // MARK: - Fetch/Save/Delete
@@ -102,9 +90,22 @@ extension CoreDataManager {
         if context.hasChanges {
             context.perform { [weak self] in
                 guard let self = self else { return }
-                if context.hasChanges {
-                    self.executeSave()
-                }
+                self.executeSave()
+            }
+        }
+    }
+    
+    private func executeSave() {
+        let context: NSManagedObjectContext = persistentContainer.viewContext
+        if context.hasChanges {
+            do {
+                try context.save()
+                print("Updated Core Data")
+            } catch {
+                // TODO: Replace this implementation with code to handle the error appropriately.
+                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+                let error = error as NSError
+                fatalError("Unresolved error \(error), \(error.userInfo)")
             }
         }
     }
@@ -112,12 +113,8 @@ extension CoreDataManager {
     func delete(_ managedObject: NSManagedObject) {
         let context: NSManagedObjectContext = persistentContainer.viewContext
         context.delete(managedObject)
-        if context.hasChanges {
-            self.executeSave()
-        }
+        save()
     }
-    
-
     
     func deleteAllRecords(entityName: String) {
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
@@ -139,34 +136,23 @@ extension CoreDataManager {
 // MARK: Handling Relationships
 extension CoreDataManager {
     func add(_ video: PracticeVideo, to practiceSession: PracticeSession) {
-        let context: NSManagedObjectContext = persistentContainer.viewContext
         video.practiceSession = practiceSession
         practiceSession.addToVideos(video)
-        
-        if context.hasChanges {
-            self.executeSave()
-        }
+        save()
     }
     
     func delete(_ video: PracticeVideo, from practiceSession: PracticeSession) {
         let context: NSManagedObjectContext = persistentContainer.viewContext
         context.delete(video)
         practiceSession.removeFromVideos(video)
-        
-        if context.hasChanges {
-            self.executeSave()
-        }
+        save()
     }
     
     func move(_ video: PracticeVideo, from oldPracticeSession: PracticeSession, to newPracticeSession: PracticeSession) {
-        let context: NSManagedObjectContext = persistentContainer.viewContext
         video.practiceSession = newPracticeSession
         oldPracticeSession.removeFromVideos(video)
         newPracticeSession.addToVideos(video)
-        
-        if context.hasChanges {
-            self.executeSave()
-        }
+        save()
     }
 }
 
