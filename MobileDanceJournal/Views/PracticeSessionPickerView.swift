@@ -23,8 +23,8 @@ class PracticeSessionPickerView: UIView {
         self.practiceSessions = practiceSessions
         self.picker = UIPickerView()
         super.init(frame: CGRect.zero)
-        picker.delegate = delegate 
-        picker.dataSource = dataSource
+        self.picker.delegate = delegate
+        self.picker.dataSource = dataSource
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -34,8 +34,8 @@ class PracticeSessionPickerView: UIView {
     }
     
     func show() {
-        let newY = self.getY() - self.getHeight()
-        UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseOut, animations: { self.setY(newY) }, completion: nil)
+        let newY = self.getY() - self.getHeight() + 40
+        UIView.animate(withDuration: 0.6, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.01, options: .curveEaseOut, animations: { self.setY(newY)}, completion: nil)
     }
     
     func hide() {
