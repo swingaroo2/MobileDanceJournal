@@ -35,16 +35,12 @@ class PracticeSessionPickerView: UIView {
     
     func show() {
         let newY = self.getY() - self.getHeight()
-        UIView.animate(withDuration: 0.3) { [unowned self] in
-            self.setY(newY)
-        }
+        UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseOut, animations: { self.setY(newY) }, completion: nil)
     }
     
     func hide() {
         let newY = self.getY() + self.getHeight()
-        UIView.animate(withDuration: 0.3) { [unowned self] in
-            self.setY(newY)
-        }
+        UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseOut, animations: { self.setY(newY) }, completion: nil)
     }
     
     func configureView(in parentView: UIView) {
