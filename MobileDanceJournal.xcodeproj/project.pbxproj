@@ -70,9 +70,6 @@
 		9232ACC6226ED01E004DB260 /* PracticeLogVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9232AC87226D4015004DB260 /* PracticeLogVC.swift */; };
 		9232ACC722713DDC004DB260 /* PracticeNotepadVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9232AC89226D4015004DB260 /* PracticeNotepadVC.swift */; };
 		9232ACC822713DDC004DB260 /* PracticeNotepadVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9232AC89226D4015004DB260 /* PracticeNotepadVC.swift */; };
-		9232ACD122715230004DB260 /* PracticeLogVC+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9232ACD022715230004DB260 /* PracticeLogVC+Extensions.swift */; };
-		9232ACD222715230004DB260 /* PracticeLogVC+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9232ACD022715230004DB260 /* PracticeLogVC+Extensions.swift */; };
-		9232ACD322715230004DB260 /* PracticeLogVC+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9232ACD022715230004DB260 /* PracticeLogVC+Extensions.swift */; };
 		9241F9C222C8375A009C50C1 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9241F9C122C8375A009C50C1 /* Coordinator.swift */; };
 		9241F9C322C8375A009C50C1 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9241F9C122C8375A009C50C1 /* Coordinator.swift */; };
 		9241F9C422C8375A009C50C1 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9241F9C122C8375A009C50C1 /* Coordinator.swift */; };
@@ -200,7 +197,7 @@
 		922E20E52283DC2000295A19 /* VideoGalleryVC+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "VideoGalleryVC+Extensions.swift"; sourceTree = "<group>"; wrapsLines = 0; };
 		9232AC82226D4015004DB260 /* JiveJournal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JiveJournal.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9232AC85226D4015004DB260 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; wrapsLines = 0; };
-		9232AC87226D4015004DB260 /* PracticeLogVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PracticeLogVC.swift; sourceTree = "<group>"; };
+		9232AC87226D4015004DB260 /* PracticeLogVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PracticeLogVC.swift; sourceTree = "<group>"; wrapsLines = 0; };
 		9232AC89226D4015004DB260 /* PracticeNotepadVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PracticeNotepadVC.swift; sourceTree = "<group>"; wrapsLines = 0; };
 		9232AC8C226D4015004DB260 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		9232AC8E226D4016004DB260 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -215,7 +212,6 @@
 		9232ACB7226D4298004DB260 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		9232ACBD226D4390004DB260 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; wrapsLines = 0; };
 		9232ACC1226ECACD004DB260 /* UISplitViewController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UISplitViewController+Extensions.swift"; sourceTree = "<group>"; };
-		9232ACD022715230004DB260 /* PracticeLogVC+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PracticeLogVC+Extensions.swift"; sourceTree = "<group>"; };
 		9241F9C122C8375A009C50C1 /* Coordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		9241F9C522C837C7009C50C1 /* Storyboarded.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Storyboarded.swift; path = "MobileDanceJournal/View Controllers/Storyboarded.swift"; sourceTree = SOURCE_ROOT; };
 		9241F9C922C83885009C50C1 /* AlertHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertHelper.swift; sourceTree = "<group>"; wrapsLines = 0; };
@@ -455,7 +451,6 @@
 			isa = PBXGroup;
 			children = (
 				926BEE1422E0215500BC3DD4 /* VideoUploadVC+Extensions.swift */,
-				9232ACD022715230004DB260 /* PracticeLogVC+Extensions.swift */,
 				92EFF22B22CD9A4400DE9401 /* PracticeNotepadVC+Extensions.swift */,
 				922E20E52283DC2000295A19 /* VideoGalleryVC+Extensions.swift */,
 			);
@@ -722,7 +717,6 @@
 				9241F9CA22C83885009C50C1 /* AlertHelper.swift in Sources */,
 				9232AC8A226D4015004DB260 /* PracticeNotepadVC.swift in Sources */,
 				926BEE2622E5830800BC3DD4 /* ThumbnailCache.swift in Sources */,
-				9232ACD122715230004DB260 /* PracticeLogVC+Extensions.swift in Sources */,
 				920AAD5D22DCFC4B0097643C /* NSObject+Extensions.swift in Sources */,
 				927FA3FE22DD95DA00F58F58 /* VideoUploadService.swift in Sources */,
 				926BEE3422E5930100BC3DD4 /* UIImageView+Extensions.swift in Sources */,
@@ -771,7 +765,6 @@
 				9232ACC722713DDC004DB260 /* PracticeNotepadVC.swift in Sources */,
 				927FA40822DE2F2000F58F58 /* PracticeVideo+CoreDataClass copy.swift in Sources */,
 				922E20E92283DD8F00295A19 /* Constants.swift in Sources */,
-				9232ACD222715230004DB260 /* PracticeLogVC+Extensions.swift in Sources */,
 				922E20E72283DC2000295A19 /* VideoGalleryVC+Extensions.swift in Sources */,
 				9227146A22CBFBC000C6CFAC /* SplitViewCoordinator.swift in Sources */,
 				926BEE2B22E58C5500BC3DD4 /* PracticeVideo+Extensions.swift in Sources */,
@@ -827,7 +820,6 @@
 				9232ACC822713DDC004DB260 /* PracticeNotepadVC.swift in Sources */,
 				927FA40922DE2F2000F58F58 /* PracticeVideo+CoreDataClass copy.swift in Sources */,
 				922E20EA2283DD8F00295A19 /* Constants.swift in Sources */,
-				9232ACD322715230004DB260 /* PracticeLogVC+Extensions.swift in Sources */,
 				922E20E82283DC2000295A19 /* VideoGalleryVC+Extensions.swift in Sources */,
 				9227146B22CBFBC000C6CFAC /* SplitViewCoordinator.swift in Sources */,
 				926BEE2C22E58C5500BC3DD4 /* PracticeVideo+Extensions.swift in Sources */,

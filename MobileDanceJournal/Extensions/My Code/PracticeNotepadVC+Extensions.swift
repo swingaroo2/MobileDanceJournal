@@ -42,6 +42,3 @@ extension PracticeNotepadVC {
         coordinator?.viewVideos(for: practiceSession)
     }
 }
-
-//MARK: - Storyboarded
-extension PracticeNotepadVC: Storyboarded {}

@@ -8,21 +8,29 @@
 
 import UIKit
 
-class PracticeLogVC: UITableViewController {
+class PracticeLogVC: UITableViewController, Storyboarded {
     
+    weak var coordinator: MainCoordinator!
     var coreDataManager: CoreDataManager!
-    var practiceSessions = [PracticeSession]()
-    var selectedRow = -1
-    weak var coordinator: MainCoordinator?
     var detailVC: PracticeNotepadVC?
+    var tableManager: PracticeLogTableManager!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableManager = configureTableManager(tableView, coreDataManager)
         setUpView()
     }
 
+    private func configureTableManager(_ managedTableView: UITableView,_ coreDataManager: CoreDataManager) -> PracticeLogTableManager{
+        let tableManager = PracticeLogTableManager(managedTableView, coreDataManager)
+        tableManager.coordinator = coordinator
+        managedTableView.dataSource = tableManager
+        managedTableView.delegate = tableManager
+        tableManager.managedVC = self
+        return tableManager
+    }
+    
     private func setUpView() {
-        coreDataManager.practiceSessionDelegate = self
         navigationItem.leftBarButtonItem = editButtonItem
         tableView.tableFooterView = UIView()
     }
@@ -32,5 +40,27 @@ class PracticeLogVC: UITableViewController {
             let controllers = split.viewControllers
             detailVC = (controllers[controllers.count-1] as! UINavigationController).topViewController as? PracticeNotepadVC
         }
+    }
+    
+    
+    @IBAction func createNewPracticeSession(_ sender: UIBarButtonItem) {
+        tableManager.selectedRow = 0
+        coordinator?.startEditingNewPracticeSession()
+    }
+
+    override internal func setEditing(_ editing: Bool, animated: Bool) {
+        super.setEditing(editing, animated: animated)
+        
+        guard let _ = splitViewController?.detailVC else {
+            print(InternalErrors.failedToGetReferenceToDetailVC)
+            return
+        }
+    }
+
+    // TODO: Later, this will be replaced with a custom cell
+    func configureCell(_ cell: UITableViewCell, _ indexPath: IndexPath) {
+        let practiceSession = tableManager.practiceSessions[indexPath.row]
+        cell.textLabel!.text = practiceSession.title
+        cell.textLabel?.highlightedTextColor = .darkText
     }
 }

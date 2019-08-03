@@ -8,7 +8,7 @@
 
 import UIKit
 
-class VideoGalleryVC: UIViewController {
+class VideoGalleryVC: UIViewController, Storyboarded {
 
     var coreDataManager: CoreDataManager!
     var videoHelper: VideoHelper!

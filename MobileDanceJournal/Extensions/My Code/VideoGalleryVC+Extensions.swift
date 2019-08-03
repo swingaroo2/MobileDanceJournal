@@ -92,6 +92,3 @@ extension VideoGalleryVC: NSFetchedResultsControllerDelegate {
         videosTableView.endUpdates()
     }
 }
-
-// MARK: - Storyboarded
-extension VideoGalleryVC: Storyboarded {}

@@ -75,5 +75,3 @@ extension VideoUploadVC: UITextFieldDelegate {
         return true
     }
 }
-
-extension VideoUploadVC: Storyboarded {}

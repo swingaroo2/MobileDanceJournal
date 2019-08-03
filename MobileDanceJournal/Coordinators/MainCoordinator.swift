@@ -33,11 +33,11 @@ extension MainCoordinator {
         
         notepadVC.coordinator = self
         notepadVC.coreDataManager = coreDataManager
-        notepadVC.textViewManager = NotepadTextViewManager(notepadVC, coreDataManager: coreDataManager)
+        notepadVC.practiceSession = practiceSession
         notepadVC.navigationItem.leftBarButtonItem = rootVC.displayModeButtonItem
         notepadVC.navigationItem.leftItemsSupplementBackButton = true
-        notepadVC.practiceSession = practiceSession
         notepadVC.loadViewIfNeeded()
+        notepadVC.textViewManager = NotepadTextViewManager(notepadVC, coreDataManager: coreDataManager)
         notepadVC.showContent()
         notepadVC.updateView(with: practiceSession)
         

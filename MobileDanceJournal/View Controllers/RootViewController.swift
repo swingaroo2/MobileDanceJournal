@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class RootViewController: UISplitViewController {
+class RootViewController: UISplitViewController, Storyboarded {
 
     weak var coordinator: Coordinator?
     
@@ -28,5 +28,3 @@ extension RootViewController: UISplitViewControllerDelegate {
         return topAsDetailController.practiceSession == nil
     }
 }
-
-extension RootViewController: Storyboarded {}

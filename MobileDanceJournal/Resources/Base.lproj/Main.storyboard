@@ -49,7 +49,7 @@
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" text="New Practice Session" translatesAutoresizingMaskIntoConstraints="NO" id="UZA-tv-ZRC" userLabel="practiceSessionTitle">
                                                 <rect key="frame" x="12" y="-2" width="389" height="47.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="26"/>
-                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="next"/>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                             </textView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="July 1, 2019" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jWJ-sg-mm5" userLabel="practiceSessionDateLabel">
                                                 <rect key="frame" x="18" y="38.5" width="378" height="20.5"/>

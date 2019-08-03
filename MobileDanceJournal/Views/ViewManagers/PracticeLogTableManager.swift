@@ -7,7 +7,118 @@
 //
 
 import Foundation
+import UIKit
+import CoreData
 
 class PracticeLogTableManager: NSObject {
-    // This one will be fun...
+    
+    private let managedTableView: UITableView
+    private let coreDataManager: CoreDataManager
+    var managedVC: UIViewController!
+    var coordinator: MainCoordinator!
+    var practiceSessions: [PracticeSession]!
+    var selectedRow = -1
+    
+    init(_ managedTableView: UITableView,_ coreDataManager: CoreDataManager) {
+        self.managedTableView = managedTableView
+        self.coreDataManager = coreDataManager
+        super.init()
+        self.coreDataManager.practiceSessionDelegate = self
+    }
+}
+
+extension PracticeLogTableManager: UITableViewDataSource {
+    // TODO: Group cells by month and year
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        guard let practiceSessions = coreDataManager.practiceSessionFRC.fetchedObjects else { return 0 }
+        self.practiceSessions = practiceSessions
+        managedVC.navigationItem.leftBarButtonItem?.isEnabled = practiceSessions.count > 0
+        return practiceSessions.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifiers.genericCell, for: indexPath)
+        configureCell(cell, indexPath)
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            let practiceSession = coreDataManager.practiceSessionFRC.object(at: indexPath)
+            coreDataManager.delete(practiceSession)
+            coreDataManager.save()
+            
+            let rowToDelete = indexPath.row
+            if selectedRow == rowToDelete {
+                coordinator?.clearDetailVC()
+            }
+        }
+    }
+}
+
+extension PracticeLogTableManager: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        if !tableView.isEditing {
+            selectedRow = indexPath.row
+            let practiceSession = coreDataManager.practiceSessionFRC.object(at: indexPath)
+            let selectedCell = tableView.cellForRow(at: indexPath)
+            
+            guard let coordinator = self.coordinator else { return }
+            if !coordinator.rootVC.isDisplayingBothVCs() {
+                selectedCell?.isSelected = false
+            }
+            
+            selectedCell?.textLabel?.highlightedTextColor = .darkText
+            coordinator.showDetails(for: practiceSession)
+        }
+    }
+}
+
+// MARK: - NSFetchedResultsControllerDelegate
+extension PracticeLogTableManager: NSFetchedResultsControllerDelegate {
+    
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+        switch (type) {
+        case .insert:
+            if let indexPath = newIndexPath {
+                managedTableView.insertRows(at: [indexPath], with: .fade)
+            }
+            break;
+        case .delete:
+            if let indexPath = indexPath {
+                managedTableView.deleteRows(at: [indexPath], with: .fade)
+            }
+            break;
+        case .update:
+            if let indexPath = indexPath {
+                managedTableView.reloadRows(at: [indexPath], with: .fade)
+            }
+            break;
+        default:
+            print("\(#function): Unhandled case")
+        }
+    }
+    
+    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        managedTableView.beginUpdates()
+    }
+    
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        managedTableView.endUpdates()
+    }
+}
+
+private extension PracticeLogTableManager {
+    // TODO: Later, this will be replaced with a custom cell
+    private func configureCell(_ cell: UITableViewCell, _ indexPath: IndexPath) {
+        let practiceSession = practiceSessions[indexPath.row]
+        cell.textLabel!.text = practiceSession.title
+        cell.textLabel?.highlightedTextColor = .darkText
+    }
+
 }

@@ -17,6 +17,9 @@ class NotepadTextViewManager: NSObject {
     init(_ notepadVC: PracticeNotepadVC, coreDataManager: CoreDataManager) {
         self.notepadVC = notepadVC
         self.coreDataManager = coreDataManager
+        super.init()
+        self.notepadVC.practiceSessionTitleTextView.delegate = self
+        self.notepadVC.practiceSessionContent.delegate = self
     }
     
 }
@@ -39,6 +42,7 @@ extension NotepadTextViewManager: UITextViewDelegate {
     func textViewDidChange(_ textView: UITextView) {
         handleState(of: notepadVC.saveButton, with: textView)
     }
+    
 }
 
 private extension NotepadTextViewManager {

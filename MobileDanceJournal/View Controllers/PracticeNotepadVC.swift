@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PracticeNotepadVC: UIViewController {
+class PracticeNotepadVC: UIViewController, Storyboarded {
 
     // MARK: - IBOutlets
     @IBOutlet weak var noContentLabel: UILabel!
