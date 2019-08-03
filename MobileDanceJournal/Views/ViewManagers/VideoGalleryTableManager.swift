@@ -49,8 +49,10 @@ extension VideoGalleryTableManager: UITableViewDataSource {
         
         guard let fetchedVideos = fetchedObjects else { return 0 }
         let count = fetchedVideos.count
-        
-        noContentLabel.isHidden = (count > 0)
+
+        UIView.transition(with: noContentLabel, duration: 0.4, options: .transitionCrossDissolve, animations: {
+            self.noContentLabel.isHidden = count > 0
+        })
         
         return count
     }
