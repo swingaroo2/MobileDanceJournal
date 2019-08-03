@@ -8,7 +8,7 @@
 
 import Foundation
 
-// MARK: Structs
+// MARK: String constants
 struct Storyboards {
     static let main = "Main"
 }
@@ -104,7 +104,7 @@ struct VideoUploadErrors {
 enum DateFormats: String {
     case shortFormat = "MMMM dd, yyyy"
     case longFormat = "'Started' MMMM dd, yyyy 'at' h:mm:ss.SSSS a"
-    case displayFormat = "'Started' MMMM dd, yyyy 'at' h:mm a"
+    case displayFormat = "'Started' MMMM dd, yyyy"
 }
 
 enum Permissions {

@@ -47,28 +47,28 @@
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="774"/>
                                         <subviews>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" text="New Practice Session" translatesAutoresizingMaskIntoConstraints="NO" id="UZA-tv-ZRC" userLabel="practiceSessionTitle">
-                                                <rect key="frame" x="12" y="0.0" width="389" height="52"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                                <rect key="frame" x="12" y="-2" width="389" height="47.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="26"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="next"/>
                                                 <connections>
                                                     <outlet property="delegate" destination="JEX-9P-axG" id="ecg-Ve-Sbk"/>
                                                 </connections>
                                             </textView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="July 1, 2019" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jWJ-sg-mm5" userLabel="practiceSessionDateLabel">
-                                                <rect key="frame" x="18" y="52" width="378" height="25.5"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="July 1, 2019" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jWJ-sg-mm5" userLabel="practiceSessionDateLabel">
+                                                <rect key="frame" x="18" y="38.5" width="378" height="20.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VSJ-Ge-fMS" userLabel="divider">
-                                                <rect key="frame" x="18" y="86.5" width="378" height="1"/>
-                                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <rect key="frame" x="0.0" y="63.5" width="414" height="1"/>
+                                                <color key="backgroundColor" white="0.66995754851598166" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="1" id="F1f-jx-QCb"/>
                                                 </constraints>
                                             </view>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" contentInsetAdjustmentBehavior="never" keyboardDismissMode="interactive" text="Record notes on your practice session here" translatesAutoresizingMaskIntoConstraints="NO" id="AcR-Dx-DUE" userLabel="practiceSessionContent">
-                                                <rect key="frame" x="18" y="87.5" width="378" height="678.5"/>
+                                                <rect key="frame" x="18" y="63.5" width="378" height="710.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences" enablesReturnKeyAutomatically="YES"/>
                                                 <connections>
@@ -78,18 +78,18 @@
                                         </subviews>
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="UZA-tv-ZRC" secondAttribute="trailing" constant="13" id="4Ix-x6-6Gq"/>
-                                            <constraint firstAttribute="trailing" secondItem="VSJ-Ge-fMS" secondAttribute="trailing" constant="18" id="8yf-NT-atN"/>
+                                            <constraint firstAttribute="trailing" secondItem="VSJ-Ge-fMS" secondAttribute="trailing" id="8yf-NT-atN"/>
                                             <constraint firstItem="UZA-tv-ZRC" firstAttribute="leading" secondItem="sgZ-6w-Kow" secondAttribute="leading" constant="12" id="CB5-mG-tcS"/>
-                                            <constraint firstAttribute="bottom" secondItem="AcR-Dx-DUE" secondAttribute="bottom" constant="8" id="Cw0-w7-ga0"/>
+                                            <constraint firstAttribute="bottom" secondItem="AcR-Dx-DUE" secondAttribute="bottom" id="Cw0-w7-ga0"/>
                                             <constraint firstAttribute="trailing" secondItem="AcR-Dx-DUE" secondAttribute="trailing" constant="18" id="E56-Se-J02"/>
-                                            <constraint firstItem="jWJ-sg-mm5" firstAttribute="top" secondItem="UZA-tv-ZRC" secondAttribute="bottom" id="EW5-z8-l22"/>
+                                            <constraint firstItem="jWJ-sg-mm5" firstAttribute="top" secondItem="UZA-tv-ZRC" secondAttribute="bottom" constant="-7" id="EW5-z8-l22"/>
                                             <constraint firstItem="AcR-Dx-DUE" firstAttribute="leading" secondItem="sgZ-6w-Kow" secondAttribute="leading" constant="18" id="VrZ-sz-atp"/>
                                             <constraint firstAttribute="trailing" secondItem="jWJ-sg-mm5" secondAttribute="trailing" constant="18" id="YiQ-Cg-pNv"/>
-                                            <constraint firstItem="VSJ-Ge-fMS" firstAttribute="leading" secondItem="sgZ-6w-Kow" secondAttribute="leading" constant="18" id="adM-wT-CVV"/>
+                                            <constraint firstItem="VSJ-Ge-fMS" firstAttribute="leading" secondItem="sgZ-6w-Kow" secondAttribute="leading" id="adM-wT-CVV"/>
                                             <constraint firstItem="jWJ-sg-mm5" firstAttribute="leading" secondItem="sgZ-6w-Kow" secondAttribute="leading" constant="18" id="fc1-oP-Wpi"/>
-                                            <constraint firstItem="AcR-Dx-DUE" firstAttribute="top" secondItem="VSJ-Ge-fMS" secondAttribute="bottom" id="kdR-yc-8Ri"/>
-                                            <constraint firstItem="VSJ-Ge-fMS" firstAttribute="top" secondItem="jWJ-sg-mm5" secondAttribute="bottom" constant="9" id="pn7-tR-Ljz"/>
-                                            <constraint firstItem="UZA-tv-ZRC" firstAttribute="top" secondItem="sgZ-6w-Kow" secondAttribute="top" id="xyD-im-qqn"/>
+                                            <constraint firstItem="AcR-Dx-DUE" firstAttribute="top" secondItem="VSJ-Ge-fMS" secondAttribute="bottom" constant="-1" id="kdR-yc-8Ri"/>
+                                            <constraint firstItem="VSJ-Ge-fMS" firstAttribute="top" secondItem="jWJ-sg-mm5" secondAttribute="bottom" constant="4.5" id="pn7-tR-Ljz"/>
+                                            <constraint firstItem="UZA-tv-ZRC" firstAttribute="top" secondItem="sgZ-6w-Kow" secondAttribute="top" constant="-2" id="xyD-im-qqn"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -143,7 +143,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FJe-Yq-33r" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="707" y="84"/>
+            <point key="canvasLocation" x="704.34782608695662" y="83.705357142857139"/>
         </scene>
         <!--Video GalleryVC-->
         <scene sceneID="oOX-L9-Yfz">

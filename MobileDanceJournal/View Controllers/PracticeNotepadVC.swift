@@ -26,6 +26,11 @@ class PracticeNotepadVC: UIViewController {
     private var keyboardShown = false
     
     // MARK: Lifecycle functions
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setUpKeyboardListeners()
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setUpView()
@@ -71,7 +76,8 @@ class PracticeNotepadVC: UIViewController {
         }
         else {
             let bottomValue = keyboardViewEndFrame.height - view.safeAreaInsets.bottom
-            practiceSessionContent.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: bottomValue, right: 0)
+            let keyboardBuffer = CGFloat(integerLiteral: 20)
+            practiceSessionContent.contentInset.bottom = bottomValue + keyboardBuffer
         }
         
         practiceSessionContent.scrollIndicatorInsets = practiceSessionContent.contentInset
