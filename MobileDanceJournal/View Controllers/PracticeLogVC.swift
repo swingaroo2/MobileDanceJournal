@@ -12,7 +12,6 @@ class PracticeLogVC: UIViewController, Storyboarded {
     
     weak var coordinator: MainCoordinator!
     var coreDataManager: CoreDataManager!
-    var detailVC: PracticeNotepadVC?
     var tableManager: PracticeLogTableManager!
     @IBOutlet weak var tableView: UITableView!
     
@@ -36,14 +35,14 @@ class PracticeLogVC: UIViewController, Storyboarded {
         tableView.tableFooterView = UIView()
     }
     
-    private func setUpDetailVC() {
-        if let split = splitViewController {
-            let controllers = split.viewControllers
-            detailVC = (controllers[controllers.count-1] as! UINavigationController).topViewController as? PracticeNotepadVC
-        }
-    }
-    
-    
+//    private func setUpDetailVC() {
+//        if let split = splitViewController {
+//            let controllers = split.viewControllers
+//            detailVC = (controllers[controllers.count-1] as! UINavigationController).topViewController as? PracticeNotepadVC
+//        }
+//    }
+//
+//
     @IBAction func createNewPracticeSession(_ sender: UIBarButtonItem) {
         tableManager.selectedRow = 0
         coordinator?.startEditingNewPracticeSession()

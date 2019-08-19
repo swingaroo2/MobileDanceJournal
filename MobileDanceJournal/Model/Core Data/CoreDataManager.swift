@@ -14,6 +14,7 @@ public class CoreDataManager : NSObject {
     
     weak var practiceSessionDelegate: NSFetchedResultsControllerDelegate?
     weak var practiceVideoDelegate: NSFetchedResultsControllerDelegate?
+    weak var practiceGroupsDelegate: NSFetchedResultsControllerDelegate?
     private let modelName: String
     
     init(modelName: String) {

@@ -11,14 +11,33 @@ import Foundation
 import UIKit
 
 class MainCoordinator: NSObject, Coordinator {
-    var rootVC: RootViewController
+    var rootVC: SplitViewRootController
+    var childCoordinators: [Coordinator] = [Coordinator]()
+    var navigationController: UINavigationController
     private var coreDataManager: CoreDataManager
     
-    init(with rootViewController: RootViewController,_ coreDataManager: CoreDataManager) {
-        self.rootVC = rootViewController
+    init(_ navController: UINavigationController,_ coreDataManager: CoreDataManager) {
+        self.navigationController = navController
         self.coreDataManager = coreDataManager
+        self.rootVC = SplitViewRootController.instantiate()
+    }
+    
+//    init(with rootViewController: SplitViewRootController,_ coreDataManager: CoreDataManager) {
+//        self.rootVC = rootViewController
+//        self.coreDataManager = coreDataManager
+//    }
+    
+    func start() {
+        print("\(#file).\(#function)")
+        let practiceGroupsVC = PracticeGroupsVC.instantiate()
+        practiceGroupsVC.coordinator = self
+        practiceGroupsVC.coreDataManager = coreDataManager
+        navigationController.pushViewController(practiceGroupsVC, animated: true)
     }
 }
+
+// TODO: Move to child coordinator functions
+// TODO: Try to remove view controller parameters from coordinator functions
 
 extension MainCoordinator {
     func startEditingNewPracticeSession() {
@@ -123,7 +142,6 @@ extension MainCoordinator {
         dismiss(videoGalleryVC, completion: nil)
     }
     
-    // TODO: Try to remove view controller parameters from coordinator functions
     func play(_ video: PracticeVideo, from presentingVC: UIViewController,_ videoHelper: VideoHelper) {
         let videoPath = URLBuilder.getDocumentsFilePathURL(for: video.filename)
         videoHelper.playVideo(at: videoPath, in: presentingVC)
@@ -135,7 +153,6 @@ extension MainCoordinator {
         presentingVC.present(activityVC, animated: true)
     }
     
-    // TODO: Why does iPhone not let me re-upload??
     func cancel(videoUploader: VideoUploadVC) {
         if rootVC.isCollapsed {
             guard let practiceVideosVC = rootVC.detailNC?.children.last as? VideoGalleryVC else {
@@ -154,7 +171,7 @@ extension MainCoordinator {
     }
 }
 
-extension MainCoordinator: SplitViewCoordinator {
+/*extension MainCoordinator: SplitViewCoordinator {
     
     func start() {
         rootVC.coordinator = self
@@ -164,7 +181,7 @@ extension MainCoordinator: SplitViewCoordinator {
 
         rootVC.masterVC?.coreDataManager = coreDataManager
         rootVC.detailVC?.coreDataManager = coreDataManager
-        
+
         rootVC.masterNC!.topViewController!.navigationItem.leftBarButtonItem = rootVC.displayModeButtonItem
     }
-}
+}*/

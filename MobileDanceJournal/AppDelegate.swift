@@ -19,18 +19,18 @@ extension AppDelegate: UIApplicationDelegate {
     
     func application(_ application: UIApplication,
                        didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        let rootVC = RootViewController.instantiate()
+        let rootNC = UINavigationController()
         let coreDataManager = CoreDataManager(modelName: ModelConstants.modelName)
         let _ = coreDataManager.persistentContainer
-        initializeCoordinator(with: rootVC, coreDataManager)
-        window = UIWindow.createNewWindow(with: rootVC)
+        startCoordinator(with: rootNC, coreDataManager)
+        window = UIWindow.createNewWindow(with: rootNC)
         return true
     }
 }
 
 extension AppDelegate {
-    private func initializeCoordinator(with rootVC: RootViewController,_ coreDataManager: CoreDataManager) {
-        coordinator = MainCoordinator(with: rootVC, coreDataManager)
+    private func startCoordinator(with rootNC: UINavigationController,_ coreDataManager: CoreDataManager) {
+        coordinator = MainCoordinator(rootNC, coreDataManager)
         coordinator?.start()
     }
 }

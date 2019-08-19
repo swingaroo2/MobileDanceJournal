@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 protocol SplitViewCoordinator: Coordinator {
-    var rootVC: RootViewController { get }
+    var rootVC: SplitViewRootController { get }
 }
 
 extension SplitViewCoordinator where Self: Coordinator {}
