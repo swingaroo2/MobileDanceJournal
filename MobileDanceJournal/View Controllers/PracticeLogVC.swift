@@ -8,12 +8,13 @@
 
 import UIKit
 
-class PracticeLogVC: UITableViewController, Storyboarded {
+class PracticeLogVC: UIViewController, Storyboarded {
     
     weak var coordinator: MainCoordinator!
     var coreDataManager: CoreDataManager!
     var detailVC: PracticeNotepadVC?
     var tableManager: PracticeLogTableManager!
+    @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
