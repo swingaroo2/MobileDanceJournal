@@ -12,8 +12,8 @@ The usecases of JiveJournal include:
 
 Future feature development includes:
 
-* Server-hosted videos to free up disk space
+* CloudKit integration for video storage
 * Grouping practice sessions under dance events
-* Sharing lesson recaps as practice sessions
+* Sharing practice sessions (e.g. as lesson recaps)
 
 Note: If you pull this repo, it comes with a flag that enables Core Data debug statements in the console. It can be toggled in the Edit Scheme Menu (Cmd + <) under the Arguments tab.
