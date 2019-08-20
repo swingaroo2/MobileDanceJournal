@@ -31,6 +31,7 @@ class PracticeLogVC: UIViewController, Storyboarded {
     }
     
     private func setUpView() {
+        navigationItem.leftItemsSupplementBackButton = true
         navigationItem.leftBarButtonItem = editButtonItem
         tableView.tableFooterView = UIView()
     }

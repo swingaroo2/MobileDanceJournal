@@ -24,37 +24,57 @@ class PracticeGroupsTableManager: NSObject {
         self.coreDataManager = coreDataManager
         super.init()
         self.coreDataManager.practiceGroupsDelegate = self
-        print("\(#file).\(#function)")
     }
 }
 
 extension PracticeGroupsTableManager: UITableViewDataSource {
     // TODO: Group cells by month and year
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print("\(#file).\(#function)")
         return 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        print("\(#file).\(#function)")
         let cell = UITableViewCell(frame: .zero)
         configureCell(cell, indexPath)
         return cell
     }
     
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        print("\(#file).\(#function)")
-        return true
+        guard let selectedCell = tableView.cellForRow(at: indexPath) else { return false }
+        guard let textLabel = selectedCell.textLabel else { return false }
+        
+        let canEdit = textLabel.text != "Uncategorized"
+        
+        return canEdit
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        print("\(#file).\(#function)")
+        
     }
 }
 
 extension PracticeGroupsTableManager: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("\(#file).\(#function)")
+        guard let selectedCell = tableView.cellForRow(at: indexPath) else { return }
+        selectedCell.isSelected = false
+        
+        guard let textLabel = selectedCell.textLabel else { return }
+        if textLabel.text == "Uncategorized" {
+//            let dummyPracticeSessionTitle = "Own Your Voice"
+            coordinator.showPracticeLog()
+            
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+        guard let selectedCell = tableView.cellForRow(at: indexPath) else { return .none }
+        guard let textLabel = selectedCell.textLabel else { return .delete }
+        
+        if textLabel.text == "Uncategorized" {
+            return .none
+        }
+        
+        return .delete
     }
 }
 
@@ -95,7 +115,7 @@ extension PracticeGroupsTableManager: NSFetchedResultsControllerDelegate {
 private extension PracticeGroupsTableManager {
     // TODO: Later, this will be replaced with a custom cell
     private func configureCell(_ cell: UITableViewCell, _ indexPath: IndexPath) {
-        print("\(#file).\(#function)")
+        cell.textLabel?.text = "Uncategorized"
     }
     
 }

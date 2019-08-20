@@ -34,6 +34,13 @@ class MainCoordinator: NSObject, Coordinator {
         practiceGroupsVC.coreDataManager = coreDataManager
         navigationController.pushViewController(practiceGroupsVC, animated: true)
     }
+    
+    func showPracticeLog() {
+        let nextVC = PracticeLogVC.instantiate()
+        nextVC.coordinator = self // Change this to PracticeSessionCoordinator
+        nextVC.coreDataManager = coreDataManager
+        navigationController.pushViewController(nextVC, animated: true)
+    }
 }
 
 // TODO: Move to child coordinator functions
