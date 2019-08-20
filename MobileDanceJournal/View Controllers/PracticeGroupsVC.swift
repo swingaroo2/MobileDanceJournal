@@ -25,7 +25,14 @@ class PracticeGroupsVC: UIViewController, Storyboarded {
     }
     
     private func setUpView() {
+        title = VCConstants.practiceGroupsVCTitle
         tableView.tableFooterView = UIView()
+        
+        navigationItem.rightBarButtonItems = [UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addGroup))]
+    }
+    
+    @objc private func addGroup() {
+        print(#function)
     }
     
     private func configureTableManager(_ managedTableView: UITableView,_ coreDataManager: CoreDataManager) -> PracticeGroupsTableManager{

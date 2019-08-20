@@ -20,7 +20,7 @@ struct SegueIdentifiers {
 
 struct VCConstants {
     static let newPracticeSessionBuilderVCTitle = "New Practice Session"
-    static let editPracticeSessionBuilderVCTitle = "Update Practice Session"
+    static let practiceGroupsVCTitle = "Groups"
     static let chooseVideo = "Choose Video"
     static let videos = "Videos"
 }
@@ -43,6 +43,7 @@ struct AlertConstants {
 struct TextConstants {
     static let noContent = "No Content"
     static let editing = "Editing..."
+    static let uncategorized = "Uncategorized"
 }
 
 struct Actions {

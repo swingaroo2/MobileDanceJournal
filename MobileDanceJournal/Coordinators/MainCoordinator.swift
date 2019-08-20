@@ -22,11 +22,6 @@ class MainCoordinator: NSObject, Coordinator {
         self.rootVC = SplitViewRootController.instantiate()
     }
     
-//    init(with rootViewController: SplitViewRootController,_ coreDataManager: CoreDataManager) {
-//        self.rootVC = rootViewController
-//        self.coreDataManager = coreDataManager
-//    }
-    
     func start() {
         print("\(#file).\(#function)")
         let practiceGroupsVC = PracticeGroupsVC.instantiate()

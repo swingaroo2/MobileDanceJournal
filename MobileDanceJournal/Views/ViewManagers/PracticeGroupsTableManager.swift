@@ -43,7 +43,7 @@ extension PracticeGroupsTableManager: UITableViewDataSource {
         guard let selectedCell = tableView.cellForRow(at: indexPath) else { return false }
         guard let textLabel = selectedCell.textLabel else { return false }
         
-        let canEdit = textLabel.text != "Uncategorized"
+        let canEdit = textLabel.text != TextConstants.uncategorized
         
         return canEdit
     }
@@ -59,8 +59,7 @@ extension PracticeGroupsTableManager: UITableViewDelegate {
         selectedCell.isSelected = false
         
         guard let textLabel = selectedCell.textLabel else { return }
-        if textLabel.text == "Uncategorized" {
-//            let dummyPracticeSessionTitle = "Own Your Voice"
+        if textLabel.text == TextConstants.uncategorized {
             coordinator.showPracticeLog()
             
         }
@@ -70,7 +69,7 @@ extension PracticeGroupsTableManager: UITableViewDelegate {
         guard let selectedCell = tableView.cellForRow(at: indexPath) else { return .none }
         guard let textLabel = selectedCell.textLabel else { return .delete }
         
-        if textLabel.text == "Uncategorized" {
+        if textLabel.text == TextConstants.uncategorized {
             return .none
         }
         
@@ -115,7 +114,7 @@ extension PracticeGroupsTableManager: NSFetchedResultsControllerDelegate {
 private extension PracticeGroupsTableManager {
     // TODO: Later, this will be replaced with a custom cell
     private func configureCell(_ cell: UITableViewCell, _ indexPath: IndexPath) {
-        cell.textLabel?.text = "Uncategorized"
+        cell.textLabel?.text = TextConstants.uncategorized
     }
     
 }
