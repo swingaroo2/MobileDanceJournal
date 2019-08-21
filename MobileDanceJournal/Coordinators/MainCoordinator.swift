@@ -23,7 +23,6 @@ class MainCoordinator: NSObject, Coordinator {
     }
     
     func start() {
-        print("\(#file).\(#function)")
         let practiceGroupsVC = PracticeGroupsVC.instantiate()
         practiceGroupsVC.coordinator = self
         practiceGroupsVC.coreDataManager = coreDataManager
@@ -35,6 +34,13 @@ class MainCoordinator: NSObject, Coordinator {
         nextVC.coordinator = self // Change this to PracticeSessionCoordinator
         nextVC.coreDataManager = coreDataManager
         navigationController.pushViewController(nextVC, animated: true)
+    }
+    
+    func createNewGroup() {
+        let nextVC = NewGroupVC.instantiate()
+        nextVC.coordinator = self
+        nextVC.coreDataManager = coreDataManager
+        navigationController.present(nextVC, animated: true, completion: nil)
     }
 }
 

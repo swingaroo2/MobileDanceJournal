@@ -346,6 +346,114 @@
             </objects>
             <point key="canvasLocation" x="-2146.376811594203" y="-389.0625"/>
         </scene>
+        <!--New GroupVC-->
+        <scene sceneID="bM2-sI-K2K">
+            <objects>
+                <viewController storyboardIdentifier="NewGroupVC" modalTransitionStyle="crossDissolve" modalPresentationStyle="formSheet" id="a6J-Da-jrD" customClass="NewGroupVC" customModule="JiveJournal" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="nZ1-jo-f5W">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="634"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DkE-i8-q8L">
+                                <rect key="frame" x="20" y="44" width="48" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="48" id="M7g-fA-gAF"/>
+                                </constraints>
+                                <state key="normal" title="Cancel"/>
+                                <connections>
+                                    <action selector="buttonPressed:" destination="a6J-Da-jrD" eventType="touchUpInside" id="OiZ-BI-h8e"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DMr-Px-5k4">
+                                <rect key="frame" x="354" y="44" width="34" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="34" id="EEP-BR-BXc"/>
+                                </constraints>
+                                <state key="normal" title="Save"/>
+                                <connections>
+                                    <action selector="buttonPressed:" destination="a6J-Da-jrD" eventType="touchUpInside" id="NzZ-u2-9V9"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" text="New Group" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jTs-kF-RfP">
+                                <rect key="frame" x="163.5" y="48" width="87" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="87" id="sHI-l4-aXJ"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Group name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3k5-pT-cle">
+                                <rect key="frame" x="20" y="105" width="374" height="21"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="e.g. Hot Rhythm Holiday" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="XoY-jD-rA1" userLabel="Group name text field">
+                                <rect key="frame" x="20" y="134" width="375" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsMultipleSelection="YES" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="erM-Gj-DDd">
+                                <rect key="frame" x="20" y="234" width="375" height="351"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" id="3mV-yR-Kbj">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="3mV-yR-Kbj" id="QDa-aZ-ghb">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Give Ungrouped Practice Logs a Home" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ffF-CC-ocP">
+                                <rect key="frame" x="20" y="205" width="307" height="21"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="ffF-CC-ocP" firstAttribute="top" secondItem="XoY-jD-rA1" secondAttribute="bottom" constant="41" id="2NO-kf-R4B"/>
+                            <constraint firstItem="3k5-pT-cle" firstAttribute="leading" secondItem="dzM-5k-iDa" secondAttribute="leading" constant="20" id="35y-hD-Ti0"/>
+                            <constraint firstItem="ffF-CC-ocP" firstAttribute="leading" secondItem="dzM-5k-iDa" secondAttribute="leading" constant="20" id="DNl-kz-NM2"/>
+                            <constraint firstItem="erM-Gj-DDd" firstAttribute="top" secondItem="ffF-CC-ocP" secondAttribute="bottom" constant="8" id="Exy-0Q-rwz"/>
+                            <constraint firstItem="DkE-i8-q8L" firstAttribute="leading" secondItem="dzM-5k-iDa" secondAttribute="leading" constant="20" id="Kye-tt-gc4"/>
+                            <constraint firstItem="XoY-jD-rA1" firstAttribute="top" secondItem="3k5-pT-cle" secondAttribute="bottom" constant="8" id="OVc-nj-NEV"/>
+                            <constraint firstItem="jTs-kF-RfP" firstAttribute="centerX" secondItem="nZ1-jo-f5W" secondAttribute="centerX" id="QXL-tc-vxL"/>
+                            <constraint firstItem="dzM-5k-iDa" firstAttribute="trailing" secondItem="3k5-pT-cle" secondAttribute="trailing" constant="20" id="TcC-9J-sab"/>
+                            <constraint firstItem="dzM-5k-iDa" firstAttribute="trailing" secondItem="erM-Gj-DDd" secondAttribute="trailing" constant="19" id="WDm-6V-uwu"/>
+                            <constraint firstItem="dzM-5k-iDa" firstAttribute="trailing" secondItem="XoY-jD-rA1" secondAttribute="trailing" constant="19" id="ZXy-UU-IpS"/>
+                            <constraint firstItem="XoY-jD-rA1" firstAttribute="leading" secondItem="dzM-5k-iDa" secondAttribute="leading" constant="20" id="cKm-XL-fiu"/>
+                            <constraint firstItem="dzM-5k-iDa" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="ffF-CC-ocP" secondAttribute="trailing" symbolic="YES" id="cZH-hv-cUT"/>
+                            <constraint firstItem="erM-Gj-DDd" firstAttribute="leading" secondItem="dzM-5k-iDa" secondAttribute="leading" constant="20" id="f0G-9c-Xtc"/>
+                            <constraint firstItem="3k5-pT-cle" firstAttribute="top" secondItem="DMr-Px-5k4" secondAttribute="bottom" constant="31" id="kO5-O2-oQg"/>
+                            <constraint firstItem="DMr-Px-5k4" firstAttribute="leading" relation="lessThanOrEqual" secondItem="DkE-i8-q8L" secondAttribute="trailing" constant="286" id="lm8-An-S1N"/>
+                            <constraint firstItem="dzM-5k-iDa" firstAttribute="trailing" secondItem="DMr-Px-5k4" secondAttribute="trailing" constant="26" id="uyz-sw-mTV"/>
+                            <constraint firstItem="3k5-pT-cle" firstAttribute="top" secondItem="jTs-kF-RfP" secondAttribute="bottom" constant="36" id="wFC-FG-bDS"/>
+                            <constraint firstItem="DkE-i8-q8L" firstAttribute="top" secondItem="dzM-5k-iDa" secondAttribute="top" id="yUJ-ME-dk4"/>
+                            <constraint firstItem="dzM-5k-iDa" firstAttribute="bottom" secondItem="erM-Gj-DDd" secondAttribute="bottom" constant="15" id="ye4-Ak-uTu"/>
+                            <constraint firstItem="jTs-kF-RfP" firstAttribute="top" secondItem="dzM-5k-iDa" secondAttribute="top" constant="4" id="zjl-9X-6kD"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="dzM-5k-iDa"/>
+                    </view>
+                    <modalFormSheetSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="414" height="634"/>
+                    <connections>
+                        <outlet property="cancelButton" destination="DkE-i8-q8L" id="7kX-xn-Gv7"/>
+                        <outlet property="groupNameTextField" destination="XoY-jD-rA1" id="EFx-l4-amJ"/>
+                        <outlet property="saveButton" destination="DMr-Px-5k4" id="FcR-BH-k5t"/>
+                        <outlet property="tableView" destination="erM-Gj-DDd" id="YaP-gR-fWH"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tyB-UZ-yjR" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2146.376811594203" y="284.59821428571428"/>
+        </scene>
         <!--Split View Root Controller-->
         <scene sceneID="Nki-YV-4Qg">
             <objects>

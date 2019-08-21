@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 import CoreData
 
+// TODO: TableManager protocol?
 class PracticeGroupsTableManager: NSObject {
     
     private let managedTableView: UITableView

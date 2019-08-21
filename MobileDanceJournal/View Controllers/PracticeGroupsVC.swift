@@ -11,7 +11,6 @@ import UIKit
 
 class PracticeGroupsVC: UIViewController, Storyboarded {
     
-    // TODO: TableManager class (and TableManager protocol, while we're at it?)
     weak var coordinator: MainCoordinator!
     var coreDataManager: CoreDataManager!
     var tableManager: PracticeGroupsTableManager!
@@ -32,7 +31,7 @@ class PracticeGroupsVC: UIViewController, Storyboarded {
     }
     
     @objc private func addGroup() {
-        print(#function)
+        coordinator.createNewGroup()
     }
     
     private func configureTableManager(_ managedTableView: UITableView,_ coreDataManager: CoreDataManager) -> PracticeGroupsTableManager{

@@ -14,3 +14,9 @@ protocol Coordinator: NSObject {
     var navigationController: UINavigationController { get set }
     func start()
 }
+
+extension Coordinator {
+    func dismiss(_ viewController: UIViewController, completion: (() -> Void)?) {
+        viewController.dismiss(animated: true, completion: completion)
+    }
+}

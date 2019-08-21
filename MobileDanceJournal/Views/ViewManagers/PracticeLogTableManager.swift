@@ -23,10 +23,22 @@ class PracticeLogTableManager: NSObject {
         self.managedTableView = managedTableView
         self.coreDataManager = coreDataManager
         super.init()
+        self.managedTableView.delegate = self
+        self.managedTableView.dataSource = self
         self.coreDataManager.practiceSessionDelegate = self
+    }
+    
+    func getSelectedPracticeSessions() -> [PracticeSession] {
+        var selectedPracticeSessions = [PracticeSession]()
+        guard let selectedIndexPaths = managedTableView.indexPathsForSelectedRows else { return selectedPracticeSessions }
+        guard let practiceSessions = self.practiceSessions else { return selectedPracticeSessions }
+        selectedPracticeSessions = selectedIndexPaths.map { practiceSessions[$0.row] }
+        print(selectedPracticeSessions)
+        return selectedPracticeSessions
     }
 }
 
+// MARK: UITableViewDataSource
 extension PracticeLogTableManager: UITableViewDataSource {
     // TODO: Group cells by month and year
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -60,22 +72,40 @@ extension PracticeLogTableManager: UITableViewDataSource {
     }
 }
 
+// MARK: UITableViewDelegate
 extension PracticeLogTableManager: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         if !tableView.isEditing {
             selectedRow = indexPath.row
+            guard let selectedCell = tableView.cellForRow(at: indexPath) else { return }
             let practiceSession = coreDataManager.practiceSessionFRC.object(at: indexPath)
-            let selectedCell = tableView.cellForRow(at: indexPath)
             
             guard let coordinator = self.coordinator else { return }
             if !coordinator.rootVC.isDisplayingBothVCs() {
-                selectedCell?.isSelected = false
+                selectedCell.isSelected = false
             }
             
-            selectedCell?.textLabel?.highlightedTextColor = .darkText
+            selectedCell.textLabel?.highlightedTextColor = .darkText
+            
+            if tableView.allowsMultipleSelection {
+                selectedCell.accessoryType = .checkmark
+            } else {
+                selectedCell.isSelected = false
+            }
+            
             coordinator.showDetails(for: practiceSession)
         }
+    }
+    
+    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        guard let selectedCell = tableView.cellForRow(at: indexPath) else { return }
+        selectedCell.accessoryType = (selectedCell.accessoryType == .checkmark) ? .none : selectedCell.accessoryType
+    }
+    
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+        let editingStyle = tableView.allowsMultipleSelection ? UITableViewCell.EditingStyle.none : .delete
+        return editingStyle
     }
 }
 
