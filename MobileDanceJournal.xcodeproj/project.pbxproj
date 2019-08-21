@@ -10,12 +10,6 @@
 		920AAD4922D92BD60097643C /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 920AAD4722D92BD60097643C /* DataModel.xcdatamodeld */; };
 		920AAD4A22D92BD60097643C /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 920AAD4722D92BD60097643C /* DataModel.xcdatamodeld */; };
 		920AAD4B22D92BD60097643C /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 920AAD4722D92BD60097643C /* DataModel.xcdatamodeld */; };
-		920AAD5622DBBFB10097643C /* PracticeSession+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920AAD4E22DBBFB10097643C /* PracticeSession+CoreDataClass.swift */; };
-		920AAD5722DBBFB10097643C /* PracticeSession+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920AAD4E22DBBFB10097643C /* PracticeSession+CoreDataClass.swift */; };
-		920AAD5822DBBFB10097643C /* PracticeSession+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920AAD4E22DBBFB10097643C /* PracticeSession+CoreDataClass.swift */; };
-		920AAD5922DBBFB10097643C /* PracticeSession+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920AAD4F22DBBFB10097643C /* PracticeSession+CoreDataProperties.swift */; };
-		920AAD5A22DBBFB10097643C /* PracticeSession+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920AAD4F22DBBFB10097643C /* PracticeSession+CoreDataProperties.swift */; };
-		920AAD5B22DBBFB10097643C /* PracticeSession+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920AAD4F22DBBFB10097643C /* PracticeSession+CoreDataProperties.swift */; };
 		920AAD5D22DCFC4B0097643C /* NSObject+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920AAD5C22DCFC4B0097643C /* NSObject+Extensions.swift */; };
 		920AAD5E22DCFC4B0097643C /* NSObject+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920AAD5C22DCFC4B0097643C /* NSObject+Extensions.swift */; };
 		920AAD5F22DCFC4B0097643C /* NSObject+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920AAD5C22DCFC4B0097643C /* NSObject+Extensions.swift */; };
@@ -145,12 +139,6 @@
 		927FA3FE22DD95DA00F58F58 /* VideoUploadService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927FA3FD22DD95DA00F58F58 /* VideoUploadService.swift */; };
 		927FA3FF22DD95DA00F58F58 /* VideoUploadService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927FA3FD22DD95DA00F58F58 /* VideoUploadService.swift */; };
 		927FA40022DD95DA00F58F58 /* VideoUploadService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927FA3FD22DD95DA00F58F58 /* VideoUploadService.swift */; };
-		927FA40422DE2F2000F58F58 /* PracticeVideo+CoreDataProperties copy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927FA40222DE2F2000F58F58 /* PracticeVideo+CoreDataProperties copy.swift */; };
-		927FA40522DE2F2000F58F58 /* PracticeVideo+CoreDataProperties copy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927FA40222DE2F2000F58F58 /* PracticeVideo+CoreDataProperties copy.swift */; };
-		927FA40622DE2F2000F58F58 /* PracticeVideo+CoreDataProperties copy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927FA40222DE2F2000F58F58 /* PracticeVideo+CoreDataProperties copy.swift */; };
-		927FA40722DE2F2000F58F58 /* PracticeVideo+CoreDataClass copy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927FA40322DE2F2000F58F58 /* PracticeVideo+CoreDataClass copy.swift */; };
-		927FA40822DE2F2000F58F58 /* PracticeVideo+CoreDataClass copy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927FA40322DE2F2000F58F58 /* PracticeVideo+CoreDataClass copy.swift */; };
-		927FA40922DE2F2000F58F58 /* PracticeVideo+CoreDataClass copy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927FA40322DE2F2000F58F58 /* PracticeVideo+CoreDataClass copy.swift */; };
 		928D5998230B4B9D0000945E /* Storyboarded.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928D5997230B4B9D0000945E /* Storyboarded.swift */; };
 		928D599A230B4D050000945E /* PracticeGroupsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928D5999230B4D050000945E /* PracticeGroupsVC.swift */; };
 		928D599B230B4D050000945E /* PracticeGroupsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928D5999230B4D050000945E /* PracticeGroupsVC.swift */; };
@@ -163,6 +151,24 @@
 		928D59A4230D02750000945E /* NewGroupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928D59A3230D02750000945E /* NewGroupVC.swift */; };
 		928D59A5230D02750000945E /* NewGroupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928D59A3230D02750000945E /* NewGroupVC.swift */; };
 		928D59A6230D02750000945E /* NewGroupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928D59A3230D02750000945E /* NewGroupVC.swift */; };
+		928D59AC230DCBD00000945E /* PracticeSession+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928D59A8230DCBD00000945E /* PracticeSession+CoreDataProperties.swift */; };
+		928D59AD230DCBD00000945E /* PracticeSession+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928D59A8230DCBD00000945E /* PracticeSession+CoreDataProperties.swift */; };
+		928D59AE230DCBD00000945E /* PracticeSession+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928D59A8230DCBD00000945E /* PracticeSession+CoreDataProperties.swift */; };
+		928D59AF230DCBD00000945E /* PracticeVideo+CoreDataProperties copy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928D59A9230DCBD00000945E /* PracticeVideo+CoreDataProperties copy.swift */; };
+		928D59B0230DCBD00000945E /* PracticeVideo+CoreDataProperties copy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928D59A9230DCBD00000945E /* PracticeVideo+CoreDataProperties copy.swift */; };
+		928D59B1230DCBD00000945E /* PracticeVideo+CoreDataProperties copy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928D59A9230DCBD00000945E /* PracticeVideo+CoreDataProperties copy.swift */; };
+		928D59B2230DCBD00000945E /* PracticeVideo+CoreDataClass copy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928D59AA230DCBD00000945E /* PracticeVideo+CoreDataClass copy.swift */; };
+		928D59B3230DCBD00000945E /* PracticeVideo+CoreDataClass copy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928D59AA230DCBD00000945E /* PracticeVideo+CoreDataClass copy.swift */; };
+		928D59B4230DCBD00000945E /* PracticeVideo+CoreDataClass copy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928D59AA230DCBD00000945E /* PracticeVideo+CoreDataClass copy.swift */; };
+		928D59B5230DCBD00000945E /* PracticeSession+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928D59AB230DCBD00000945E /* PracticeSession+CoreDataClass.swift */; };
+		928D59B6230DCBD00000945E /* PracticeSession+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928D59AB230DCBD00000945E /* PracticeSession+CoreDataClass.swift */; };
+		928D59B7230DCBD00000945E /* PracticeSession+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928D59AB230DCBD00000945E /* PracticeSession+CoreDataClass.swift */; };
+		928D59CA230DD03C0000945E /* Group+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928D59C8230DD03C0000945E /* Group+CoreDataClass.swift */; };
+		928D59CB230DD03C0000945E /* Group+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928D59C8230DD03C0000945E /* Group+CoreDataClass.swift */; };
+		928D59CC230DD03C0000945E /* Group+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928D59C8230DD03C0000945E /* Group+CoreDataClass.swift */; };
+		928D59CD230DD03C0000945E /* Group+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928D59C9230DD03C0000945E /* Group+CoreDataProperties.swift */; };
+		928D59CE230DD03C0000945E /* Group+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928D59C9230DD03C0000945E /* Group+CoreDataProperties.swift */; };
+		928D59CF230DD03C0000945E /* Group+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928D59C9230DD03C0000945E /* Group+CoreDataProperties.swift */; };
 		92EFF22C22CD9A4400DE9401 /* PracticeNotepadVC+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92EFF22B22CD9A4400DE9401 /* PracticeNotepadVC+Extensions.swift */; };
 		92EFF22D22CD9A4800DE9401 /* PracticeNotepadVC+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92EFF22B22CD9A4400DE9401 /* PracticeNotepadVC+Extensions.swift */; };
 		92EFF22E22CD9A4900DE9401 /* PracticeNotepadVC+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92EFF22B22CD9A4400DE9401 /* PracticeNotepadVC+Extensions.swift */; };
@@ -194,8 +200,6 @@
 		35491D983DBBB650B936FA7E /* Pods_MobileDanceJournal.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MobileDanceJournal.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		801DD73F8C3BECE4091A7715 /* Pods_MobileDanceJournalTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MobileDanceJournalTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		920AAD4822D92BD60097643C /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
-		920AAD4E22DBBFB10097643C /* PracticeSession+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PracticeSession+CoreDataClass.swift"; sourceTree = "<group>"; };
-		920AAD4F22DBBFB10097643C /* PracticeSession+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PracticeSession+CoreDataProperties.swift"; sourceTree = "<group>"; wrapsLines = 0; };
 		920AAD5C22DCFC4B0097643C /* NSObject+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSObject+Extensions.swift"; sourceTree = "<group>"; };
 		9214FF96227E139A00387A3B /* Date+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
 		9214FF9A227E3B4100387A3B /* UIViewController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extensions.swift"; sourceTree = "<group>"; };
@@ -250,12 +254,17 @@
 		927FA3F922DD959900F58F58 /* URLBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLBuilder.swift; sourceTree = "<group>"; };
 		927FA3FD22DD95DA00F58F58 /* VideoUploadService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoUploadService.swift; sourceTree = "<group>"; };
 		927FA40122DE2E6200F58F58 /* DataModel 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "DataModel 2.xcdatamodel"; sourceTree = "<group>"; };
-		927FA40222DE2F2000F58F58 /* PracticeVideo+CoreDataProperties copy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PracticeVideo+CoreDataProperties copy.swift"; sourceTree = "<group>"; };
-		927FA40322DE2F2000F58F58 /* PracticeVideo+CoreDataClass copy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PracticeVideo+CoreDataClass copy.swift"; sourceTree = "<group>"; };
 		928D5997230B4B9D0000945E /* Storyboarded.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Storyboarded.swift; sourceTree = "<group>"; };
-		928D5999230B4D050000945E /* PracticeGroupsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PracticeGroupsVC.swift; sourceTree = "<group>"; };
+		928D5999230B4D050000945E /* PracticeGroupsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PracticeGroupsVC.swift; sourceTree = "<group>"; wrapsLines = 0; };
 		928D599F230B54040000945E /* PracticeGroupsTableManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PracticeGroupsTableManager.swift; sourceTree = "<group>"; };
 		928D59A3230D02750000945E /* NewGroupVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewGroupVC.swift; sourceTree = "<group>"; };
+		928D59A7230DC9DE0000945E /* DataModel 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "DataModel 3.xcdatamodel"; sourceTree = "<group>"; };
+		928D59A8230DCBD00000945E /* PracticeSession+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PracticeSession+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		928D59A9230DCBD00000945E /* PracticeVideo+CoreDataProperties copy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PracticeVideo+CoreDataProperties copy.swift"; sourceTree = "<group>"; };
+		928D59AA230DCBD00000945E /* PracticeVideo+CoreDataClass copy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PracticeVideo+CoreDataClass copy.swift"; sourceTree = "<group>"; };
+		928D59AB230DCBD00000945E /* PracticeSession+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PracticeSession+CoreDataClass.swift"; sourceTree = "<group>"; };
+		928D59C8230DD03C0000945E /* Group+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Group+CoreDataClass.swift"; sourceTree = "<group>"; };
+		928D59C9230DD03C0000945E /* Group+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Group+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		92EFF22B22CD9A4400DE9401 /* PracticeNotepadVC+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PracticeNotepadVC+Extensions.swift"; sourceTree = "<group>"; wrapsLines = 0; };
 /* End PBXFileReference section */
 
@@ -308,10 +317,12 @@
 		9228889822D139310006E6EC /* Entities */ = {
 			isa = PBXGroup;
 			children = (
-				920AAD4E22DBBFB10097643C /* PracticeSession+CoreDataClass.swift */,
-				920AAD4F22DBBFB10097643C /* PracticeSession+CoreDataProperties.swift */,
-				927FA40322DE2F2000F58F58 /* PracticeVideo+CoreDataClass copy.swift */,
-				927FA40222DE2F2000F58F58 /* PracticeVideo+CoreDataProperties copy.swift */,
+				928D59C8230DD03C0000945E /* Group+CoreDataClass.swift */,
+				928D59C9230DD03C0000945E /* Group+CoreDataProperties.swift */,
+				928D59AB230DCBD00000945E /* PracticeSession+CoreDataClass.swift */,
+				928D59A8230DCBD00000945E /* PracticeSession+CoreDataProperties.swift */,
+				928D59AA230DCBD00000945E /* PracticeVideo+CoreDataClass copy.swift */,
+				928D59A9230DCBD00000945E /* PracticeVideo+CoreDataProperties copy.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -726,11 +737,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				920AAD4922D92BD60097643C /* DataModel.xcdatamodeld in Sources */,
-				927FA40722DE2F2000F58F58 /* PracticeVideo+CoreDataClass copy.swift in Sources */,
 				926BEE3822E63D5100BC3DD4 /* PracticeSessionPickerView.swift in Sources */,
 				9232ACBE226D4390004DB260 /* CoreDataManager.swift in Sources */,
 				9214FF97227E139A00387A3B /* Date+Extensions.swift in Sources */,
 				9232ACC2226ECACD004DB260 /* UISplitViewController+Extensions.swift in Sources */,
+				928D59CD230DD03C0000945E /* Group+CoreDataProperties.swift in Sources */,
 				9214FF9B227E3B4100387A3B /* UIViewController+Extensions.swift in Sources */,
 				9241FEAF22C3F9AF00342FC9 /* MainCoordinator.swift in Sources */,
 				9227146922CBFBC000C6CFAC /* SplitViewCoordinator.swift in Sources */,
@@ -739,19 +750,22 @@
 				928D59A4230D02750000945E /* NewGroupVC.swift in Sources */,
 				926BEE2622E5830800BC3DD4 /* ThumbnailCache.swift in Sources */,
 				920AAD5D22DCFC4B0097643C /* NSObject+Extensions.swift in Sources */,
+				928D59AC230DCBD00000945E /* PracticeSession+CoreDataProperties.swift in Sources */,
 				927FA3FE22DD95DA00F58F58 /* VideoUploadService.swift in Sources */,
 				926BEE3422E5930100BC3DD4 /* UIImageView+Extensions.swift in Sources */,
 				926BEE1922E1057600BC3DD4 /* VideoStorageManager.swift in Sources */,
 				926B0D9B22F571E800112743 /* VideoGalleryTableManager.swift in Sources */,
+				928D59B5230DCBD00000945E /* PracticeSession+CoreDataClass.swift in Sources */,
 				9227148622CD2D4900C6CFAC /* UITextView+Extensions.swift in Sources */,
 				926BEE2A22E58C5500BC3DD4 /* PracticeVideo+Extensions.swift in Sources */,
 				9232AC88226D4015004DB260 /* PracticeLogVC.swift in Sources */,
 				9232AC86226D4015004DB260 /* AppDelegate.swift in Sources */,
+				928D59B2230DCBD00000945E /* PracticeVideo+CoreDataClass copy.swift in Sources */,
 				9241FEA622C3F27300342FC9 /* VideoHelper.swift in Sources */,
+				928D59CA230DD03C0000945E /* Group+CoreDataClass.swift in Sources */,
 				9241F9CE22C83AF2009C50C1 /* SplitViewRootController.swift in Sources */,
 				922E20E62283DC2000295A19 /* VideoGalleryVC+Extensions.swift in Sources */,
 				926BEE1522E0215500BC3DD4 /* VideoUploadVC+Extensions.swift in Sources */,
-				920AAD5922DBBFB10097643C /* PracticeSession+CoreDataProperties.swift in Sources */,
 				9227148222CD2C0400C6CFAC /* UILabel+Extensions.swift in Sources */,
 				927F66A122CBCA7F0000EF06 /* UIWindow+Extensions.swift in Sources */,
 				928D59A0230B54040000945E /* PracticeGroupsTableManager.swift in Sources */,
@@ -759,10 +773,8 @@
 				927FA3F622DD3C2400F58F58 /* VideoLocalStorageManager.swift in Sources */,
 				9232ACB8226D4298004DB260 /* Constants.swift in Sources */,
 				9227147622CC819000C6CFAC /* UITextField+Extensions.swift in Sources */,
-				920AAD5622DBBFB10097643C /* PracticeSession+CoreDataClass.swift in Sources */,
 				926B0D9F22F58DCF00112743 /* PracticeSessionPickerManager.swift in Sources */,
 				927FA3FA22DD959900F58F58 /* URLBuilder.swift in Sources */,
-				927FA40422DE2F2000F58F58 /* PracticeVideo+CoreDataProperties copy.swift in Sources */,
 				922E20DE228123B600295A19 /* UIView+Extensions.swift in Sources */,
 				926EDD91230B449F003DFDC3 /* RootViewController.swift in Sources */,
 				92EFF22C22CD9A4400DE9401 /* PracticeNotepadVC+Extensions.swift in Sources */,
@@ -776,6 +788,7 @@
 				926BEE3022E58D5300BC3DD4 /* ThumbnailError.swift in Sources */,
 				928D5998230B4B9D0000945E /* Storyboarded.swift in Sources */,
 				928D599A230B4D050000945E /* PracticeGroupsVC.swift in Sources */,
+				928D59AF230DCBD00000945E /* PracticeVideo+CoreDataProperties copy.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -787,15 +800,16 @@
 				926BEE2722E5830800BC3DD4 /* ThumbnailCache.swift in Sources */,
 				926BEE3522E5930100BC3DD4 /* UIImageView+Extensions.swift in Sources */,
 				9232ACC722713DDC004DB260 /* PracticeNotepadVC.swift in Sources */,
-				927FA40822DE2F2000F58F58 /* PracticeVideo+CoreDataClass copy.swift in Sources */,
 				922E20E92283DD8F00295A19 /* Constants.swift in Sources */,
 				922E20E72283DC2000295A19 /* VideoGalleryVC+Extensions.swift in Sources */,
+				928D59AD230DCBD00000945E /* PracticeSession+CoreDataProperties.swift in Sources */,
 				9227146A22CBFBC000C6CFAC /* SplitViewCoordinator.swift in Sources */,
 				926BEE2B22E58C5500BC3DD4 /* PracticeVideo+Extensions.swift in Sources */,
 				926BEE3922E63D5100BC3DD4 /* PracticeSessionPickerView.swift in Sources */,
 				9227148322CD2C0400C6CFAC /* UILabel+Extensions.swift in Sources */,
 				928D59A5230D02750000945E /* NewGroupVC.swift in Sources */,
 				9214FF98227E139A00387A3B /* Date+Extensions.swift in Sources */,
+				928D59B6230DCBD00000945E /* PracticeSession+CoreDataClass.swift in Sources */,
 				9227148722CD2D4900C6CFAC /* UITextView+Extensions.swift in Sources */,
 				9241FEB022C3F9AF00342FC9 /* MainCoordinator.swift in Sources */,
 				926B0D9822F56B4300112743 /* NotepadTextViewManager.swift in Sources */,
@@ -807,12 +821,12 @@
 				92EFF22D22CD9A4800DE9401 /* PracticeNotepadVC+Extensions.swift in Sources */,
 				9241F9CB22C83885009C50C1 /* AlertHelper.swift in Sources */,
 				926BEE1A22E1057600BC3DD4 /* VideoStorageManager.swift in Sources */,
+				928D59CE230DD03C0000945E /* Group+CoreDataProperties.swift in Sources */,
 				9232ACC3226ECACD004DB260 /* UISplitViewController+Extensions.swift in Sources */,
 				9214FF9C227E3B4100387A3B /* UIViewController+Extensions.swift in Sources */,
 				9232ACBF226D4390004DB260 /* CoreDataManager.swift in Sources */,
 				9232ACC5226ED01D004DB260 /* PracticeLogVC.swift in Sources */,
 				928D599D230B4DE80000945E /* Storyboarded.swift in Sources */,
-				920AAD5A22DBBFB10097643C /* PracticeSession+CoreDataProperties.swift in Sources */,
 				9232AC9D226D4016004DB260 /* MobileDanceJournalTests.swift in Sources */,
 				9241FEA722C3F27300342FC9 /* VideoHelper.swift in Sources */,
 				92509E9F22D6E29600A915F5 /* VideoUploadVC.swift in Sources */,
@@ -820,11 +834,10 @@
 				9241F9CF22C83AF2009C50C1 /* SplitViewRootController.swift in Sources */,
 				927FA3F722DD3C2400F58F58 /* VideoLocalStorageManager.swift in Sources */,
 				926B0DA422F58E3500112743 /* PracticeLogTableManager.swift in Sources */,
+				928D59B0230DCBD00000945E /* PracticeVideo+CoreDataProperties copy.swift in Sources */,
 				928D59A1230B54040000945E /* PracticeGroupsTableManager.swift in Sources */,
 				92FBA3DE22718E9C0017910E /* AppDelegate.swift in Sources */,
-				920AAD5722DBBFB10097643C /* PracticeSession+CoreDataClass.swift in Sources */,
 				927FA3FB22DD959900F58F58 /* URLBuilder.swift in Sources */,
-				927FA40522DE2F2000F58F58 /* PracticeVideo+CoreDataProperties copy.swift in Sources */,
 				922E20DF228123B600295A19 /* UIView+Extensions.swift in Sources */,
 				926BEE1622E0263800BC3DD4 /* VideoUploadVC+Extensions.swift in Sources */,
 				926B0DA022F58DCF00112743 /* PracticeSessionPickerManager.swift in Sources */,
@@ -833,7 +846,9 @@
 				922C47B02283F8F600367625 /* VideoGalleryTableViewCell.swift in Sources */,
 				92706C8F22DFC696009BA88C /* UIImage+Extensions.swift in Sources */,
 				9227147722CC819000C6CFAC /* UITextField+Extensions.swift in Sources */,
+				928D59CB230DD03C0000945E /* Group+CoreDataClass.swift in Sources */,
 				922E20E32283BB2B00295A19 /* VideoGalleryVC.swift in Sources */,
+				928D59B3230DCBD00000945E /* PracticeVideo+CoreDataClass copy.swift in Sources */,
 				928D599B230B4D050000945E /* PracticeGroupsVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -846,15 +861,16 @@
 				926BEE2822E5830800BC3DD4 /* ThumbnailCache.swift in Sources */,
 				926BEE3622E5930100BC3DD4 /* UIImageView+Extensions.swift in Sources */,
 				9232ACC822713DDC004DB260 /* PracticeNotepadVC.swift in Sources */,
-				927FA40922DE2F2000F58F58 /* PracticeVideo+CoreDataClass copy.swift in Sources */,
 				922E20EA2283DD8F00295A19 /* Constants.swift in Sources */,
 				922E20E82283DC2000295A19 /* VideoGalleryVC+Extensions.swift in Sources */,
+				928D59AE230DCBD00000945E /* PracticeSession+CoreDataProperties.swift in Sources */,
 				9227146B22CBFBC000C6CFAC /* SplitViewCoordinator.swift in Sources */,
 				926BEE2C22E58C5500BC3DD4 /* PracticeVideo+Extensions.swift in Sources */,
 				926BEE3A22E63D5100BC3DD4 /* PracticeSessionPickerView.swift in Sources */,
 				9227148422CD2C0400C6CFAC /* UILabel+Extensions.swift in Sources */,
 				928D59A6230D02750000945E /* NewGroupVC.swift in Sources */,
 				9214FF99227E139A00387A3B /* Date+Extensions.swift in Sources */,
+				928D59B7230DCBD00000945E /* PracticeSession+CoreDataClass.swift in Sources */,
 				9227148822CD2D4900C6CFAC /* UITextView+Extensions.swift in Sources */,
 				9241FEB122C3F9AF00342FC9 /* MainCoordinator.swift in Sources */,
 				926B0D9922F56B4300112743 /* NotepadTextViewManager.swift in Sources */,
@@ -866,12 +882,12 @@
 				92EFF22E22CD9A4900DE9401 /* PracticeNotepadVC+Extensions.swift in Sources */,
 				9241F9CC22C83885009C50C1 /* AlertHelper.swift in Sources */,
 				926BEE1B22E1057600BC3DD4 /* VideoStorageManager.swift in Sources */,
+				928D59CF230DD03C0000945E /* Group+CoreDataProperties.swift in Sources */,
 				9232ACC4226ECACD004DB260 /* UISplitViewController+Extensions.swift in Sources */,
 				9214FF9D227E3B4100387A3B /* UIViewController+Extensions.swift in Sources */,
 				9232ACC0226D4390004DB260 /* CoreDataManager.swift in Sources */,
 				9232ACC6226ED01E004DB260 /* PracticeLogVC.swift in Sources */,
 				928D599E230B4DE90000945E /* Storyboarded.swift in Sources */,
-				920AAD5B22DBBFB10097643C /* PracticeSession+CoreDataProperties.swift in Sources */,
 				9232ACA8226D4016004DB260 /* MobileDanceJournalUITests.swift in Sources */,
 				9241FEA822C3F27300342FC9 /* VideoHelper.swift in Sources */,
 				92509EA022D6E29600A915F5 /* VideoUploadVC.swift in Sources */,
@@ -879,11 +895,10 @@
 				9241F9D022C83AF2009C50C1 /* SplitViewRootController.swift in Sources */,
 				927FA3F822DD3C2400F58F58 /* VideoLocalStorageManager.swift in Sources */,
 				926B0DA522F58E3500112743 /* PracticeLogTableManager.swift in Sources */,
+				928D59B1230DCBD00000945E /* PracticeVideo+CoreDataProperties copy.swift in Sources */,
 				928D59A2230B54040000945E /* PracticeGroupsTableManager.swift in Sources */,
 				92FBA3DF22718E9D0017910E /* AppDelegate.swift in Sources */,
-				920AAD5822DBBFB10097643C /* PracticeSession+CoreDataClass.swift in Sources */,
 				927FA3FC22DD959900F58F58 /* URLBuilder.swift in Sources */,
-				927FA40622DE2F2000F58F58 /* PracticeVideo+CoreDataProperties copy.swift in Sources */,
 				922E20E0228123B600295A19 /* UIView+Extensions.swift in Sources */,
 				926BEE1722E0263900BC3DD4 /* VideoUploadVC+Extensions.swift in Sources */,
 				926B0DA122F58DCF00112743 /* PracticeSessionPickerManager.swift in Sources */,
@@ -892,7 +907,9 @@
 				922C47B12283F8F600367625 /* VideoGalleryTableViewCell.swift in Sources */,
 				92706C9022DFC696009BA88C /* UIImage+Extensions.swift in Sources */,
 				9227147822CC819000C6CFAC /* UITextField+Extensions.swift in Sources */,
+				928D59CC230DD03C0000945E /* Group+CoreDataClass.swift in Sources */,
 				922E20E42283BB2B00295A19 /* VideoGalleryVC.swift in Sources */,
+				928D59B4230DCBD00000945E /* PracticeVideo+CoreDataClass copy.swift in Sources */,
 				928D599C230B4D050000945E /* PracticeGroupsVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1211,10 +1228,11 @@
 		920AAD4722D92BD60097643C /* DataModel.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				928D59A7230DC9DE0000945E /* DataModel 3.xcdatamodel */,
 				927FA40122DE2E6200F58F58 /* DataModel 2.xcdatamodel */,
 				920AAD4822D92BD60097643C /* DataModel.xcdatamodel */,
 			);
-			currentVersion = 927FA40122DE2E6200F58F58 /* DataModel 2.xcdatamodel */;
+			currentVersion = 928D59A7230DC9DE0000945E /* DataModel 3.xcdatamodel */;
 			path = DataModel.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

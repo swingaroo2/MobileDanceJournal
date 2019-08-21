@@ -21,6 +21,20 @@ public class CoreDataManager : NSObject {
         self.modelName = modelName
     }
     
+    lazy var groupFRC: NSFetchedResultsController<Group> = {
+        let fetchRequest: NSFetchRequest<Group> = Group.fetchRequest()
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: GroupConstants.dateCreated, ascending: false),
+                                        NSSortDescriptor(key: GroupConstants.name, ascending: false)]
+        let fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest,
+                                                                  managedObjectContext: persistentContainer.viewContext,
+                                                                  sectionNameKeyPath: nil,
+                                                                  cacheName: nil)
+        fetchedResultsController.delegate = practiceGroupsDelegate
+        
+        try? fetchedResultsController.performFetch()
+        return fetchedResultsController
+    }()
+    
     lazy var practiceSessionFRC: NSFetchedResultsController<PracticeSession> = {
         let fetchRequest: NSFetchRequest<PracticeSession> = PracticeSession.fetchRequest()
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: PracticeSessionConstants.date, ascending: false),
@@ -69,18 +83,20 @@ public class CoreDataManager : NSObject {
 
 // MARK: - Fetch/Save/Delete
 extension CoreDataManager {
+    func fetchPracticeSessions(in group: Group?) -> [PracticeSession]? {
+        practiceSessionFRC.fetchRequest.predicate = (group != nil) ? NSPredicate(format: Predicates.hasGroup, group!) : nil
+        try? practiceSessionFRC.performFetch()
+        return practiceSessionFRC.fetchedObjects
+    }
+    
     func fetchVideos(for practiceSession: PracticeSession, with filename: String? = nil) -> [PracticeVideo] {
-        var predicate = NSPredicate(format: "practiceSession = %@", practiceSession)
-        
-        if let filename = filename {
-            predicate = NSPredicate(format: "practiceSession = %@ AND filename = %@", practiceSession, filename)
-        }
+        let predicate = (filename == nil) ? NSPredicate(format: Predicates.hasPracticeSession, practiceSession) : NSPredicate(format: Predicates.hasPracticeSessionWithFilename, practiceSession, filename!)
         
         practiceVideoFRC.fetchRequest.predicate = predicate
         
         do {
             try practiceVideoFRC.performFetch()
-            return practiceVideoFRC.fetchedObjects ?? []
+            return practiceVideoFRC.fetchedObjects ?? [PracticeVideo]()
         } catch {
             fatalError("Failed to fetch [PracticeVideo]: \(error)")
         }
@@ -139,6 +155,12 @@ extension CoreDataManager {
         save()
     }
     
+    func add(_ newPracticeSessions: [PracticeSession], to group: Group) {
+        let practiceSessionSet = NSSet(array: newPracticeSessions)
+        group.addToPracticeSessions(practiceSessionSet)
+        save()
+    }
+    
     func delete(_ video: PracticeVideo, from practiceSession: PracticeSession) {
         let context: NSManagedObjectContext = persistentContainer.viewContext
         context.delete(video)
@@ -146,12 +168,26 @@ extension CoreDataManager {
         save()
     }
     
+    func delete(_ practiceSession: PracticeSession, from group: Group) {
+        let context: NSManagedObjectContext = persistentContainer.viewContext
+        context.delete(practiceSession)
+        group.removeFromPracticeSessions(practiceSession)
+        save()
+    }
+    
     func move(_ video: PracticeVideo, from oldPracticeSession: PracticeSession, to newPracticeSession: PracticeSession) {
         video.practiceSession = newPracticeSession
         oldPracticeSession.removeFromVideos(video)
-//        newPracticeSession.addToVideos(video)
         save()
     }
+    
+    func move(_ practiceSessions: [PracticeSession], from oldGroup: Group, to newGroup: Group) {
+        let practiceSessionSet = NSSet(array: practiceSessions)
+        oldGroup.removeFromPracticeSessions(practiceSessionSet)
+        newGroup.addToPracticeSessions(practiceSessionSet)
+        save()
+    }
+    
 }
 
 // MARK: - Insert new managed objects
@@ -173,5 +209,18 @@ extension CoreDataManager {
         newVideo.filename = filename
         newVideo.title = title
         return newVideo
+    }
+    
+    func createAndSaveNewGroup(name: String, practiceSessions: [PracticeSession]?) {
+        let context: NSManagedObjectContext = persistentContainer.viewContext
+        let newGroup = Group(context: context)
+        newGroup.name = name
+        newGroup.dateCreated = Date()
+        
+        if let practiceSessionsToAdd = practiceSessions {
+            add(practiceSessionsToAdd, to: newGroup)
+        }
+        
+        save()
     }
 }

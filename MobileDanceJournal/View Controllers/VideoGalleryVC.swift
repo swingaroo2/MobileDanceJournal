@@ -10,13 +10,13 @@ import UIKit
 
 class VideoGalleryVC: UIViewController, Storyboarded {
 
+    var coordinator: MainCoordinator!
     var coreDataManager: CoreDataManager!
+    var tableViewManager: VideoGalleryTableManager!
     var videoHelper: VideoHelper!
     var practiceSession: PracticeSession!
-    var coordinator: MainCoordinator!
-    var videoToMove: PracticeVideo?
     var practiceSessionPicker: PracticeSessionPickerView?
-    var tableViewManager: VideoGalleryTableManager!
+    var videoToMove: PracticeVideo?
     
     @IBOutlet weak var noContentLabel: UILabel!
     @IBOutlet weak var videosTableView: UITableView!

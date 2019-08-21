@@ -17,8 +17,7 @@ class PracticeGroupsTableManager: NSObject {
     private let coreDataManager: CoreDataManager
     var managedVC: UIViewController!
     var coordinator: MainCoordinator!
-    var practiceSessions: [PracticeSession]!
-    var selectedRow = -1
+    var groups: [Group]!
     
     init(_ managedTableView: UITableView,_ coreDataManager: CoreDataManager) {
         self.managedTableView = managedTableView
@@ -31,12 +30,18 @@ class PracticeGroupsTableManager: NSObject {
 extension PracticeGroupsTableManager: UITableViewDataSource {
     // TODO: Group cells by month and year
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        guard let fetchedGroups = coreDataManager.groupFRC.fetchedObjects else { return 1 }
+        
+        // +1 for Uncategorized cell
+        groups = fetchedGroups
+        return fetchedGroups.count + 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell(frame: .zero)
-        configureCell(cell, indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifiers.genericCell, for: indexPath)
+        let group = (indexPath.row >= groups.count) ? nil : coreDataManager.groupFRC.object(at: indexPath)
+        
+        configureCell(cell, group)
         return cell
     }
     
@@ -50,7 +55,7 @@ extension PracticeGroupsTableManager: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        
+        // TODO: Implement this
     }
 }
 
@@ -61,8 +66,10 @@ extension PracticeGroupsTableManager: UITableViewDelegate {
         
         guard let textLabel = selectedCell.textLabel else { return }
         if textLabel.text == TextConstants.uncategorized {
-            coordinator.showPracticeLog()
-            
+            coordinator.showPracticeLog(group: nil)
+        } else {
+            let selectedGroup = coreDataManager.groupFRC.object(at: indexPath)
+            coordinator.showPracticeLog(group: selectedGroup)
         }
     }
     
@@ -114,8 +121,8 @@ extension PracticeGroupsTableManager: NSFetchedResultsControllerDelegate {
 
 private extension PracticeGroupsTableManager {
     // TODO: Later, this will be replaced with a custom cell
-    private func configureCell(_ cell: UITableViewCell, _ indexPath: IndexPath) {
-        cell.textLabel?.text = TextConstants.uncategorized
+    private func configureCell(_ cell: UITableViewCell,_ group: Group?) {
+        cell.textLabel?.text = (group != nil) ? group!.name : TextConstants.uncategorized
     }
     
 }

@@ -17,6 +17,7 @@ class PracticeLogTableManager: NSObject {
     var managedVC: UIViewController!
     var coordinator: MainCoordinator!
     var practiceSessions: [PracticeSession]!
+    var currentGroup: Group?
     var selectedRow = -1
     
     init(_ managedTableView: UITableView,_ coreDataManager: CoreDataManager) {
@@ -42,7 +43,7 @@ class PracticeLogTableManager: NSObject {
 extension PracticeLogTableManager: UITableViewDataSource {
     // TODO: Group cells by month and year
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let practiceSessions = coreDataManager.practiceSessionFRC.fetchedObjects else { return 0 }
+        guard let practiceSessions = coreDataManager.fetchPracticeSessions(in: currentGroup) else { return 0 }
         self.practiceSessions = practiceSessions
         managedVC.navigationItem.leftBarButtonItem?.isEnabled = practiceSessions.count > 0
         return practiceSessions.count

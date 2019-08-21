@@ -29,10 +29,11 @@ class MainCoordinator: NSObject, Coordinator {
         navigationController.pushViewController(practiceGroupsVC, animated: true)
     }
     
-    func showPracticeLog() {
+    func showPracticeLog(group: Group?) {
         let nextVC = PracticeLogVC.instantiate()
         nextVC.coordinator = self // Change this to PracticeSessionCoordinator
         nextVC.coreDataManager = coreDataManager
+        nextVC.currentGroup = group
         navigationController.pushViewController(nextVC, animated: true)
     }
     

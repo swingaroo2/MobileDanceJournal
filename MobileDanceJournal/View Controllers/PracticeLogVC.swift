@@ -13,6 +13,7 @@ class PracticeLogVC: UIViewController, Storyboarded {
     weak var coordinator: MainCoordinator!
     var coreDataManager: CoreDataManager!
     var tableManager: PracticeLogTableManager!
+    var currentGroup: Group?
     @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
@@ -25,6 +26,7 @@ class PracticeLogVC: UIViewController, Storyboarded {
         let tableManager = PracticeLogTableManager(managedTableView, coreDataManager)
         tableManager.coordinator = coordinator
         tableManager.managedVC = self
+        tableManager.currentGroup = currentGroup
         return tableManager
     }
     
@@ -46,12 +48,5 @@ class PracticeLogVC: UIViewController, Storyboarded {
             print(InternalErrors.failedToGetReferenceToDetailVC)
             return
         }
-    }
-
-    // TODO: Later, this will be replaced with a custom cell
-    func configureCell(_ cell: UITableViewCell, _ indexPath: IndexPath) {
-        let practiceSession = tableManager.practiceSessions[indexPath.row]
-        cell.textLabel!.text = practiceSession.title
-        cell.textLabel?.highlightedTextColor = .darkText
     }
 }

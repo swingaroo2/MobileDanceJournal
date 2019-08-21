@@ -8,6 +8,8 @@
 
 import UIKit
 
+
+// TODO: Add search to table view
 class NewGroupVC: UIViewController, Storyboarded {
     
     weak var coordinator: MainCoordinator!
@@ -21,7 +23,20 @@ class NewGroupVC: UIViewController, Storyboarded {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        setUpView()
         tableManager = configureTableManager(tableView, coreDataManager)
+    }
+    
+    private func setUpView() {
+        groupNameTextField.delegate = self
+        guard let text = groupNameTextField.text else { return }
+        saveButton.isEnabled = !text.isEmpty
+        groupNameTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
+    }
+    
+    @objc private func textFieldDidChange(_ textField: UITextField) {
+        guard let text = textField.text else { return }
+        saveButton.isEnabled = !text.isEmpty
     }
     
     private func configureTableManager(_ managedTableView: UITableView,_ coreDataManager: CoreDataManager) -> PracticeLogTableManager{
@@ -35,20 +50,23 @@ class NewGroupVC: UIViewController, Storyboarded {
     @IBAction func buttonPressed(_ sender: UIButton) {
         switch sender {
             case saveButton:
-                print("Save")
-                
-                // Create new Group
-                
-                
-                // Add any selected practice sessions to new Group
                 let selectedPracticeSessions = tableManager.getSelectedPracticeSessions()
+                coreDataManager.createAndSaveNewGroup(name: groupNameTextField.text!, practiceSessions: selectedPracticeSessions)
                 break
             case cancelButton:
-                coordinator.dismiss(self, completion: nil)
                 break
             default:
                 break
         }
+        
+        coordinator.dismiss(self, completion: nil)
     }
     
+}
+
+extension NewGroupVC: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
 }
