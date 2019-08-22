@@ -55,7 +55,10 @@ extension PracticeGroupsTableManager: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        // TODO: Implement this
+        if editingStyle == .delete {
+            let selectedGroup = coreDataManager.groupFRC.object(at: indexPath)
+            coreDataManager.delete(selectedGroup)
+        }
     }
 }
 
@@ -89,6 +92,7 @@ extension PracticeGroupsTableManager: UITableViewDelegate {
 extension PracticeGroupsTableManager: NSFetchedResultsControllerDelegate {
     
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+        print(#function)
         switch (type) {
         case .insert:
             if let indexPath = newIndexPath {

@@ -13,6 +13,7 @@ import CoreData
 class AppDelegate: UIResponder {
     var window: UIWindow?
     var coordinator: MainCoordinator?
+    var coreDataManager: CoreDataManager?
 }
 
 extension AppDelegate: UIApplicationDelegate {
@@ -23,8 +24,13 @@ extension AppDelegate: UIApplicationDelegate {
         let coreDataManager = CoreDataManager(modelName: ModelConstants.modelName)
         let _ = coreDataManager.persistentContainer
         startCoordinator(with: rootNC, coreDataManager)
+        self.coreDataManager = coreDataManager
         window = UIWindow.createNewWindow(with: rootNC)
         return true
+    }
+    
+    func applicationWillTerminate(_ application: UIApplication) {
+        self.coreDataManager?.save()
     }
 }
 

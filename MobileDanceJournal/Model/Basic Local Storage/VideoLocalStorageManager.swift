@@ -46,7 +46,6 @@ class VideoLocalStorageManager: VideoStorageManager {
             }
         }
         
-        
         return nil
     }
 }

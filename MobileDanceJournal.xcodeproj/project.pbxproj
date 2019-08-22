@@ -256,7 +256,7 @@
 		927FA40122DE2E6200F58F58 /* DataModel 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "DataModel 2.xcdatamodel"; sourceTree = "<group>"; };
 		928D5997230B4B9D0000945E /* Storyboarded.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Storyboarded.swift; sourceTree = "<group>"; };
 		928D5999230B4D050000945E /* PracticeGroupsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PracticeGroupsVC.swift; sourceTree = "<group>"; wrapsLines = 0; };
-		928D599F230B54040000945E /* PracticeGroupsTableManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PracticeGroupsTableManager.swift; sourceTree = "<group>"; };
+		928D599F230B54040000945E /* PracticeGroupsTableManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PracticeGroupsTableManager.swift; sourceTree = "<group>"; wrapsLines = 0; };
 		928D59A3230D02750000945E /* NewGroupVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewGroupVC.swift; sourceTree = "<group>"; };
 		928D59A7230DC9DE0000945E /* DataModel 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "DataModel 3.xcdatamodel"; sourceTree = "<group>"; };
 		928D59A8230DCBD00000945E /* PracticeSession+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PracticeSession+CoreDataProperties.swift"; sourceTree = "<group>"; };
