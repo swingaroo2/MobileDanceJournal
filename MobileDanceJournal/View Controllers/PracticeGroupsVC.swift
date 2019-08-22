@@ -17,8 +17,8 @@ class PracticeGroupsVC: UIViewController, Storyboarded {
 
     @IBOutlet weak var tableView: UITableView!
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+    override func viewDidLoad() {
+        super.viewDidLoad()
         tableManager = configureTableManager(tableView, coreDataManager)
         setUpView()
     }
@@ -26,7 +26,7 @@ class PracticeGroupsVC: UIViewController, Storyboarded {
     private func setUpView() {
         title = VCConstants.practiceGroupsVCTitle
         tableView.tableFooterView = UIView()
-        
+        navigationItem.leftBarButtonItem = editButtonItem
         navigationItem.rightBarButtonItems = [UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addGroup))]
     }
     
@@ -41,5 +41,10 @@ class PracticeGroupsVC: UIViewController, Storyboarded {
         managedTableView.delegate = tableManager
         tableManager.managedVC = self
         return tableManager
+    }
+    
+    override func setEditing(_ editing: Bool, animated: Bool) {
+        super.setEditing(editing, animated: animated)
+        tableView.setEditing(editing, animated: animated)
     }
 }

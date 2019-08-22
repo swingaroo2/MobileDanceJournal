@@ -186,7 +186,6 @@ private extension VideoGalleryTableManager {
             return error
         }
         
-        tableView.deleteRows(at: [indexPath], with: .fade)
         return nil
     }
 }
