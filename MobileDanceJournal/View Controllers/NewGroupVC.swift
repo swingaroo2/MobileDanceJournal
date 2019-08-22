@@ -14,28 +14,29 @@ class NewGroupVC: UIViewController, Storyboarded {
     weak var coordinator: MainCoordinator!
     var coreDataManager: CoreDataManager!
     var tableManager: PracticeLogTableManager!
+    var editingGroup: Group?
     
     @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var cancelButton: UIButton!
     @IBOutlet weak var groupNameTextField: UITextField!
     @IBOutlet weak var tableView: UITableView!
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        setUpView()
+    override func viewDidLoad() {
+        super.viewDidLoad()
         tableManager = configureTableManager(tableView, coreDataManager)
     }
     
-    private func setUpView() {
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setUpView(with: editingGroup)
+    }
+    
+    func setUpView(with group: Group?) {
         groupNameTextField.delegate = self
+        groupNameTextField.text = editingGroup?.name
         guard let text = groupNameTextField.text else { return }
         saveButton.isEnabled = !text.isEmpty
         groupNameTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
-    }
-    
-    @objc private func textFieldDidChange(_ textField: UITextField) {
-        guard let text = textField.text else { return }
-        saveButton.isEnabled = !text.isEmpty
     }
     
     private func configureTableManager(_ managedTableView: UITableView,_ coreDataManager: CoreDataManager) -> PracticeLogTableManager{
@@ -50,7 +51,12 @@ class NewGroupVC: UIViewController, Storyboarded {
         switch sender {
             case saveButton:
                 let selectedPracticeSessions = tableManager.getSelectedPracticeSessions()
-                coreDataManager.createAndSaveNewGroup(name: groupNameTextField.text!, practiceSessions: selectedPracticeSessions)
+                
+                if let group = editingGroup {
+                    coreDataManager.update(group: group, name: groupNameTextField.text!, practiceSessions: selectedPracticeSessions)
+                } else {
+                    coreDataManager.createAndSaveNewGroup(name: groupNameTextField.text!, practiceSessions: selectedPracticeSessions)
+                }
                 break
             case cancelButton:
                 break
@@ -61,6 +67,10 @@ class NewGroupVC: UIViewController, Storyboarded {
         coordinator.dismiss(self, completion: nil)
     }
     
+    @objc private func textFieldDidChange(_ textField: UITextField) {
+        guard let text = textField.text else { return }
+        saveButton.isEnabled = !text.isEmpty
+    }
 }
 
 extension NewGroupVC: UITextFieldDelegate {

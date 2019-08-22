@@ -37,10 +37,11 @@ class MainCoordinator: NSObject, Coordinator {
         navigationController.pushViewController(nextVC, animated: true)
     }
     
-    func createNewGroup() {
+    func startEditing(group: Group?) {
         let nextVC = NewGroupVC.instantiate()
         nextVC.coordinator = self
         nextVC.coreDataManager = coreDataManager
+        nextVC.editingGroup = group
         navigationController.present(nextVC, animated: true, completion: nil)
     }
 }

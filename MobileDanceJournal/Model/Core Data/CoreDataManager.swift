@@ -191,7 +191,7 @@ extension CoreDataManager {
     
 }
 
-// MARK: - Insert new managed objects
+// MARK: - Insert and update new managed objects
 // TODO: Consistent naming conventions
 extension CoreDataManager {
     func insertAndReturnNewPracticeSession() -> PracticeSession {
@@ -220,5 +220,19 @@ extension CoreDataManager {
         } else {
             save()
         }
+    }
+    
+    func update(group: Group, name: String, practiceSessions: [PracticeSession]?) {
+        if name != group.name {
+            group.name = name
+        }
+        
+        if let practiceSessionsToAdd = practiceSessions {
+            if !practiceSessionsToAdd.isEmpty {
+                add(practiceSessionsToAdd, to: group)
+            }
+        }
+        
+        save()
     }
 }

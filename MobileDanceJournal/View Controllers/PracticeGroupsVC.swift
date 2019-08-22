@@ -27,11 +27,11 @@ class PracticeGroupsVC: UIViewController, Storyboarded {
         title = VCConstants.practiceGroupsVCTitle
         tableView.tableFooterView = UIView()
         navigationItem.leftBarButtonItem = editButtonItem
-        navigationItem.rightBarButtonItems = [UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addGroup))]
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addGroup))
     }
     
     @objc private func addGroup() {
-        coordinator.createNewGroup()
+        coordinator.startEditing(group: nil)
     }
     
     private func configureTableManager(_ managedTableView: UITableView,_ coreDataManager: CoreDataManager) -> PracticeGroupsTableManager{

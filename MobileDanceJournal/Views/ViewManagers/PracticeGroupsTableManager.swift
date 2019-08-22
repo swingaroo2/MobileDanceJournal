@@ -64,15 +64,31 @@ extension PracticeGroupsTableManager: UITableViewDataSource {
 
 extension PracticeGroupsTableManager: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
         guard let selectedCell = tableView.cellForRow(at: indexPath) else { return }
         selectedCell.isSelected = false
-        
         guard let textLabel = selectedCell.textLabel else { return }
-        if textLabel.text == TextConstants.uncategorized {
-            coordinator.showPracticeLog(group: nil)
+        
+        if !tableView.isEditing {
+            if textLabel.text == TextConstants.uncategorized {
+                coordinator.showPracticeLog(group: nil)
+                selectedCell.selectionStyle = .gray
+            } else {
+                let selectedGroup = coreDataManager.groupFRC.object(at: indexPath)
+                coordinator.showPracticeLog(group: selectedGroup)
+            }
         } else {
-            let selectedGroup = coreDataManager.groupFRC.object(at: indexPath)
-            coordinator.showPracticeLog(group: selectedGroup)
+            if textLabel.text == TextConstants.uncategorized {
+                selectedCell.selectionStyle = .none
+                return
+            }
+            
+            managedVC.setEditing(false, animated: true)
+            guard let fetchedObjects = coreDataManager.groupFRC.fetchedObjects else { return }
+            if indexPath.row < fetchedObjects.count {
+                let selectedGroup = coreDataManager.groupFRC.object(at: indexPath)
+                coordinator.startEditing(group: selectedGroup)
+            }
         }
     }
     
@@ -125,7 +141,10 @@ extension PracticeGroupsTableManager: NSFetchedResultsControllerDelegate {
 private extension PracticeGroupsTableManager {
     // TODO: Later, this will be replaced with a custom cell
     private func configureCell(_ cell: UITableViewCell,_ group: Group?) {
-        cell.textLabel?.text = (group != nil) ? group!.name : TextConstants.uncategorized
+        if let group = group {
+            cell.textLabel?.text = group.name
+        } else {
+            cell.textLabel?.text = TextConstants.uncategorized
+        }
     }
-    
 }
