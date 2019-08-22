@@ -84,9 +84,10 @@ struct VideoUploadErrors {
 
 // MARK: Core Data
 struct Predicates {
-    static let hasGroup = "group = %@"
-    static let hasPracticeSession = "practiceSession = %@"
-    static let hasPracticeSessionWithFilename = "practiceSession = %@ AND filename = %@"
+    static let hasGroup = "group == %@"
+    static let hasNoGroup = "group == nil"
+    static let hasPracticeSession = "practiceSession == %@"
+    static let hasPracticeSessionWithFilename = "practiceSession == %@ AND filename == %@"
 }
 
 struct ModelConstants {

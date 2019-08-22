@@ -22,7 +22,7 @@ class PracticeLogVC: UIViewController, Storyboarded {
         setUpView()
     }
 
-    private func configureTableManager(_ managedTableView: UITableView,_ coreDataManager: CoreDataManager) -> PracticeLogTableManager{
+    private func configureTableManager(_ managedTableView: UITableView,_ coreDataManager: CoreDataManager) -> PracticeLogTableManager {
         let tableManager = PracticeLogTableManager(managedTableView, coreDataManager)
         tableManager.coordinator = coordinator
         tableManager.managedVC = self
