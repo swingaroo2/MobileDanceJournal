@@ -141,10 +141,6 @@ extension PracticeGroupsTableManager: NSFetchedResultsControllerDelegate {
 private extension PracticeGroupsTableManager {
     // TODO: Later, this will be replaced with a custom cell
     private func configureCell(_ cell: UITableViewCell,_ group: Group?) {
-        if let group = group {
-            cell.textLabel?.text = group.name
-        } else {
-            cell.textLabel?.text = TextConstants.uncategorized
-        }
+        cell.textLabel?.text = (group != nil) ? group!.name : TextConstants.uncategorized
     }
 }
