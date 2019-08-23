@@ -128,6 +128,12 @@
 		92706C9022DFC696009BA88C /* UIImage+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92706C8D22DFC696009BA88C /* UIImage+Extensions.swift */; };
 		92706C9822E01BC7009BA88C /* UIWindow+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927F66A022CBCA7F0000EF06 /* UIWindow+Extensions.swift */; };
 		92706C9922E01BC8009BA88C /* UIWindow+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927F66A022CBCA7F0000EF06 /* UIWindow+Extensions.swift */; };
+		927B6B06230F116700CC1F9F /* PracticeLogCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927B6B05230F116700CC1F9F /* PracticeLogCoordinator.swift */; };
+		927B6B07230F116700CC1F9F /* PracticeLogCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927B6B05230F116700CC1F9F /* PracticeLogCoordinator.swift */; };
+		927B6B08230F116700CC1F9F /* PracticeLogCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927B6B05230F116700CC1F9F /* PracticeLogCoordinator.swift */; };
+		927B6B0A230F20AE00CC1F9F /* VideoGalleryCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927B6B09230F20AE00CC1F9F /* VideoGalleryCoordinator.swift */; };
+		927B6B0B230F20AE00CC1F9F /* VideoGalleryCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927B6B09230F20AE00CC1F9F /* VideoGalleryCoordinator.swift */; };
+		927B6B0C230F20AE00CC1F9F /* VideoGalleryCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927B6B09230F20AE00CC1F9F /* VideoGalleryCoordinator.swift */; };
 		927F669F22CB04150000EF06 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 927F669E22CB04150000EF06 /* Default-568h@2x.png */; };
 		927F66A122CBCA7F0000EF06 /* UIWindow+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927F66A022CBCA7F0000EF06 /* UIWindow+Extensions.swift */; };
 		927FA3F622DD3C2400F58F58 /* VideoLocalStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927FA3F522DD3C2400F58F58 /* VideoLocalStorageManager.swift */; };
@@ -227,8 +233,8 @@
 		9232ACA9226D4016004DB260 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9232ACB7226D4298004DB260 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		9232ACBD226D4390004DB260 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; wrapsLines = 0; };
-		9232ACC1226ECACD004DB260 /* UISplitViewController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UISplitViewController+Extensions.swift"; sourceTree = "<group>"; };
-		9241F9C122C8375A009C50C1 /* Coordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
+		9232ACC1226ECACD004DB260 /* UISplitViewController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UISplitViewController+Extensions.swift"; sourceTree = "<group>"; wrapsLines = 0; };
+		9241F9C122C8375A009C50C1 /* Coordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; wrapsLines = 0; };
 		9241F9C922C83885009C50C1 /* AlertHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertHelper.swift; sourceTree = "<group>"; wrapsLines = 0; };
 		9241F9CD22C83AF2009C50C1 /* SplitViewRootController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitViewRootController.swift; sourceTree = "<group>"; };
 		9241FEA522C3F27300342FC9 /* VideoHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoHelper.swift; sourceTree = "<group>"; };
@@ -248,6 +254,8 @@
 		926BEE3722E63D5100BC3DD4 /* PracticeSessionPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PracticeSessionPickerView.swift; sourceTree = "<group>"; wrapsLines = 0; };
 		926EDD90230B449F003DFDC3 /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
 		92706C8D22DFC696009BA88C /* UIImage+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extensions.swift"; sourceTree = "<group>"; };
+		927B6B05230F116700CC1F9F /* PracticeLogCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PracticeLogCoordinator.swift; sourceTree = "<group>"; wrapsLines = 0; };
+		927B6B09230F20AE00CC1F9F /* VideoGalleryCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoGalleryCoordinator.swift; sourceTree = "<group>"; wrapsLines = 0; };
 		927F669E22CB04150000EF06 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		927F66A022CBCA7F0000EF06 /* UIWindow+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIWindow+Extensions.swift"; sourceTree = "<group>"; };
 		927FA3F522DD3C2400F58F58 /* VideoLocalStorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoLocalStorageManager.swift; sourceTree = "<group>"; };
@@ -310,6 +318,7 @@
 			children = (
 				9241F9C122C8375A009C50C1 /* Coordinator.swift */,
 				9227146822CBFBC000C6CFAC /* SplitViewCoordinator.swift */,
+				927B6B09230F20AE00CC1F9F /* VideoGalleryCoordinator.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -437,6 +446,7 @@
 			children = (
 				9227146C22CBFBD100C6CFAC /* Protocols */,
 				9241FEAE22C3F9AF00342FC9 /* MainCoordinator.swift */,
+				927B6B05230F116700CC1F9F /* PracticeLogCoordinator.swift */,
 			);
 			path = Coordinators;
 			sourceTree = "<group>";
@@ -758,6 +768,8 @@
 				928D59B5230DCBD00000945E /* PracticeSession+CoreDataClass.swift in Sources */,
 				9227148622CD2D4900C6CFAC /* UITextView+Extensions.swift in Sources */,
 				926BEE2A22E58C5500BC3DD4 /* PracticeVideo+Extensions.swift in Sources */,
+				927B6B06230F116700CC1F9F /* PracticeLogCoordinator.swift in Sources */,
+				927B6B0A230F20AE00CC1F9F /* VideoGalleryCoordinator.swift in Sources */,
 				9232AC88226D4015004DB260 /* PracticeLogVC.swift in Sources */,
 				9232AC86226D4015004DB260 /* AppDelegate.swift in Sources */,
 				928D59B2230DCBD00000945E /* PracticeVideo+CoreDataClass copy.swift in Sources */,
@@ -809,6 +821,7 @@
 				9227148322CD2C0400C6CFAC /* UILabel+Extensions.swift in Sources */,
 				928D59A5230D02750000945E /* NewGroupVC.swift in Sources */,
 				9214FF98227E139A00387A3B /* Date+Extensions.swift in Sources */,
+				927B6B07230F116700CC1F9F /* PracticeLogCoordinator.swift in Sources */,
 				928D59B6230DCBD00000945E /* PracticeSession+CoreDataClass.swift in Sources */,
 				9227148722CD2D4900C6CFAC /* UITextView+Extensions.swift in Sources */,
 				9241FEB022C3F9AF00342FC9 /* MainCoordinator.swift in Sources */,
@@ -822,6 +835,7 @@
 				9241F9CB22C83885009C50C1 /* AlertHelper.swift in Sources */,
 				926BEE1A22E1057600BC3DD4 /* VideoStorageManager.swift in Sources */,
 				928D59CE230DD03C0000945E /* Group+CoreDataProperties.swift in Sources */,
+				927B6B0B230F20AE00CC1F9F /* VideoGalleryCoordinator.swift in Sources */,
 				9232ACC3226ECACD004DB260 /* UISplitViewController+Extensions.swift in Sources */,
 				9214FF9C227E3B4100387A3B /* UIViewController+Extensions.swift in Sources */,
 				9232ACBF226D4390004DB260 /* CoreDataManager.swift in Sources */,
@@ -870,6 +884,7 @@
 				9227148422CD2C0400C6CFAC /* UILabel+Extensions.swift in Sources */,
 				928D59A6230D02750000945E /* NewGroupVC.swift in Sources */,
 				9214FF99227E139A00387A3B /* Date+Extensions.swift in Sources */,
+				927B6B08230F116700CC1F9F /* PracticeLogCoordinator.swift in Sources */,
 				928D59B7230DCBD00000945E /* PracticeSession+CoreDataClass.swift in Sources */,
 				9227148822CD2D4900C6CFAC /* UITextView+Extensions.swift in Sources */,
 				9241FEB122C3F9AF00342FC9 /* MainCoordinator.swift in Sources */,
@@ -883,6 +898,7 @@
 				9241F9CC22C83885009C50C1 /* AlertHelper.swift in Sources */,
 				926BEE1B22E1057600BC3DD4 /* VideoStorageManager.swift in Sources */,
 				928D59CF230DD03C0000945E /* Group+CoreDataProperties.swift in Sources */,
+				927B6B0C230F20AE00CC1F9F /* VideoGalleryCoordinator.swift in Sources */,
 				9232ACC4226ECACD004DB260 /* UISplitViewController+Extensions.swift in Sources */,
 				9214FF9D227E3B4100387A3B /* UIViewController+Extensions.swift in Sources */,
 				9232ACC0226D4390004DB260 /* CoreDataManager.swift in Sources */,

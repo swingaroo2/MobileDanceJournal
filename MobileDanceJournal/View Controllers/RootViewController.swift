@@ -12,8 +12,5 @@ import UIKit
 class RootViewController: UIViewController, Storyboarded {
     
     weak var coordinator: Coordinator?
-    
-    
-    
-    
+
 }

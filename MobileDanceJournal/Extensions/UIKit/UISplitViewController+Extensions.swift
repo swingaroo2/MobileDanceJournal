@@ -26,8 +26,8 @@ extension UISplitViewController {
         return childVC as? UINavigationController
     }
     
-    var masterVC: PracticeLogVC? {
-        return masterNC?.topViewController as? PracticeLogVC
+    var masterVC: PracticeGroupsVC? {
+        return masterNC?.topViewController as? PracticeGroupsVC
     }
     
     var detailVC: PracticeNotepadVC? {
@@ -37,12 +37,5 @@ extension UISplitViewController {
         guard let detailVC = childVC.children.first else { return childViewController as? PracticeNotepadVC }
         
         return detailVC as? PracticeNotepadVC
-    }
-}
-
-// MARK: - State-checking
-extension UISplitViewController {
-    func isDisplayingBothVCs() -> Bool {
-        return !isCollapsed && displayMode == .allVisible
     }
 }

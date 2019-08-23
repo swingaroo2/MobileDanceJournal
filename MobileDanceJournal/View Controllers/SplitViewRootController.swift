@@ -11,7 +11,8 @@ import UIKit
 
 class SplitViewRootController: UISplitViewController, Storyboarded {
 
-    weak var coordinator: Coordinator?
+    weak var coordinator: MainCoordinator?
+    var coreDataManager: CoreDataManager!
     
     override func viewDidLoad() {
         self.delegate = self
@@ -22,7 +23,8 @@ class SplitViewRootController: UISplitViewController, Storyboarded {
 extension SplitViewRootController: UISplitViewControllerDelegate {
     func splitViewController(_ splitViewController: UISplitViewController,
                              collapseSecondary secondaryViewController:UIViewController,
-                             onto primaryViewController:UIViewController) -> Bool {
+                             onto primaryViewController:UIViewController) -> Bool
+    {
         guard let secondaryAsNavController = secondaryViewController as? UINavigationController else { return false }
         guard let topAsDetailController = secondaryAsNavController.topViewController as? PracticeNotepadVC else { return false }
         return topAsDetailController.practiceSession == nil

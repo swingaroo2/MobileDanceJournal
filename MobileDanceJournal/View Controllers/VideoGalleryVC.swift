@@ -10,7 +10,7 @@ import UIKit
 
 class VideoGalleryVC: UIViewController, Storyboarded {
 
-    var coordinator: MainCoordinator!
+    var coordinator: VideoGalleryCoordinator!
     var coreDataManager: CoreDataManager!
     var tableViewManager: VideoGalleryTableManager!
     var videoHelper: VideoHelper!

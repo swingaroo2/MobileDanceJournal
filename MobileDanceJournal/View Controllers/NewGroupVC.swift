@@ -39,11 +39,10 @@ class NewGroupVC: UIViewController, Storyboarded {
         groupNameTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
     }
     
-    private func configureTableManager(_ managedTableView: UITableView,_ coreDataManager: CoreDataManager) -> PracticeLogTableManager{
+    private func configureTableManager(_ managedTableView: UITableView,_ coreDataManager: CoreDataManager) -> PracticeLogTableManager {
         tableView.tableFooterView = UIView()
         let tableManager = PracticeLogTableManager(tableView, coreDataManager)
         tableManager.managedVC = self
-        tableManager.coordinator = coordinator
         return tableManager
     }
     

@@ -23,6 +23,8 @@ class PracticeGroupsTableManager: NSObject {
         self.managedTableView = managedTableView
         self.coreDataManager = coreDataManager
         super.init()
+        self.managedTableView.delegate = self
+        self.managedTableView.dataSource = self
         self.coreDataManager.practiceGroupsDelegate = self
     }
 }
@@ -72,14 +74,12 @@ extension PracticeGroupsTableManager: UITableViewDelegate {
         if !tableView.isEditing {
             if textLabel.text == TextConstants.uncategorized {
                 coordinator.showPracticeLog(group: nil)
-                selectedCell.selectionStyle = .gray
             } else {
                 let selectedGroup = coreDataManager.groupFRC.object(at: indexPath)
                 coordinator.showPracticeLog(group: selectedGroup)
             }
         } else {
             if textLabel.text == TextConstants.uncategorized {
-                selectedCell.selectionStyle = .none
                 return
             }
             
@@ -106,8 +106,8 @@ extension PracticeGroupsTableManager: UITableViewDelegate {
 
 // MARK: - NSFetchedResultsControllerDelegate
 extension PracticeGroupsTableManager: NSFetchedResultsControllerDelegate {
-    
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+        print(#function)
         switch (type) {
         case .insert:
             if let indexPath = newIndexPath {

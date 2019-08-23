@@ -20,12 +20,13 @@ extension AppDelegate: UIApplicationDelegate {
     
     func application(_ application: UIApplication,
                        didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        let rootNC = UINavigationController()
+        let rootVC = SplitViewRootController.instantiate()
         let coreDataManager = CoreDataManager(modelName: ModelConstants.modelName)
+        rootVC.coreDataManager = coreDataManager
         let _ = coreDataManager.persistentContainer
-        startCoordinator(with: rootNC, coreDataManager)
+        startCoordinator(with: rootVC, coreDataManager)
         self.coreDataManager = coreDataManager
-        window = UIWindow.createNewWindow(with: rootNC)
+        window = UIWindow.createNewWindow(with: rootVC)
         return true
     }
     
@@ -35,8 +36,8 @@ extension AppDelegate: UIApplicationDelegate {
 }
 
 extension AppDelegate {
-    private func startCoordinator(with rootNC: UINavigationController,_ coreDataManager: CoreDataManager) {
-        coordinator = MainCoordinator(rootNC, coreDataManager)
+    private func startCoordinator(with rootVC: SplitViewRootController,_ coreDataManager: CoreDataManager) {
+        coordinator = MainCoordinator(rootVC, coreDataManager)
         coordinator?.start()
     }
 }

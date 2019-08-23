@@ -37,8 +37,6 @@ class PracticeGroupsVC: UIViewController, Storyboarded {
     private func configureTableManager(_ managedTableView: UITableView,_ coreDataManager: CoreDataManager) -> PracticeGroupsTableManager{
         let tableManager = PracticeGroupsTableManager(managedTableView, coreDataManager)
         tableManager.coordinator = coordinator
-        managedTableView.dataSource = tableManager
-        managedTableView.delegate = tableManager
         tableManager.managedVC = self
         return tableManager
     }

@@ -10,7 +10,7 @@ import UIKit
 
 class PracticeLogVC: UIViewController, Storyboarded {
     
-    weak var coordinator: MainCoordinator!
+    weak var coordinator: PracticeLogCoordinator!
     var coreDataManager: CoreDataManager!
     var tableManager: PracticeLogTableManager!
     var currentGroup: Group?
@@ -34,6 +34,19 @@ class PracticeLogVC: UIViewController, Storyboarded {
         navigationItem.leftItemsSupplementBackButton = true
         navigationItem.leftBarButtonItem = editButtonItem
         tableView.tableFooterView = UIView()
+        setUpNoContentLabel()
+    }
+    
+    private func setUpNoContentLabel() {
+        view.sizeToFit()
+        let noContentLabel = UILabel(frame: .zero)
+        noContentLabel.text = TextConstants.noContent
+        noContentLabel.sizeToFit()
+        noContentLabel.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(noContentLabel)
+        view.sendSubviewToBack(noContentLabel)
+        noContentLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        noContentLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
     }
     
     @IBAction func createNewPracticeSession(_ sender: UIBarButtonItem) {

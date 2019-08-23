@@ -14,7 +14,7 @@ class VideoUploadVC: UIViewController, Storyboarded {
     @IBOutlet weak var titleTextField: UITextField!
     @IBOutlet weak var saveButton: UIBarButtonItem!
     
-    weak var coordinator: MainCoordinator?
+    weak var coordinator: VideoGalleryCoordinator?
     var coreDataManager: CoreDataManager!
     var videoHelper: VideoHelper?
     var videoToUpload: PracticeVideo?

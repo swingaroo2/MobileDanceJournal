@@ -10,9 +10,9 @@ import Foundation
 import UIKit
 
 extension UIWindow {
-    class func createNewWindow(with navController: UINavigationController) -> UIWindow {
+    class func createNewWindow(with rootViewController: UIViewController) -> UIWindow {
         let window = UIWindow(frame: UIScreen.main.bounds)
-        window.rootViewController = navController
+        window.rootViewController = rootViewController
         window.makeKeyAndVisible()
         return window
     }

@@ -15,8 +15,8 @@ class PracticeLogTableManager: NSObject {
     private let managedTableView: UITableView
     private let coreDataManager: CoreDataManager
     var managedVC: UIViewController!
-    var coordinator: MainCoordinator!
     var practiceSessions: [PracticeSession]!
+    var coordinator: PracticeLogCoordinator?
     var currentGroup: Group?
     var selectedRow = -1
     
@@ -79,23 +79,18 @@ extension PracticeLogTableManager: UITableViewDelegate {
         
         if !tableView.isEditing {
             selectedRow = indexPath.row
+            
             guard let selectedCell = tableView.cellForRow(at: indexPath) else { return }
-            let practiceSession = coreDataManager.practiceSessionFRC.object(at: indexPath)
-            
-            guard let coordinator = self.coordinator else { return }
-            if !coordinator.rootVC.isDisplayingBothVCs() {
-                selectedCell.isSelected = false
-            }
-            
+            selectedCell.isSelected = false
             selectedCell.textLabel?.highlightedTextColor = .darkText
             
             if tableView.allowsMultipleSelection {
-                selectedCell.accessoryType = .checkmark
+                selectedCell.accessoryType = (selectedCell.accessoryType == .none) ? .checkmark : .none
             } else {
-                selectedCell.isSelected = false
+                let practiceSession = coreDataManager.practiceSessionFRC.object(at: indexPath)
+                guard let coordinator = self.coordinator else { return }
+                coordinator.showDetails(for: practiceSession)
             }
-            
-            coordinator.showDetails(for: practiceSession)
         }
     }
     

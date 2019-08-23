@@ -19,7 +19,7 @@ class VideoGalleryTableManager: NSObject {
     var practiceSessionPicker: PracticeSessionPickerView!
     var noContentLabel: UILabel!
     var videoHelper: VideoHelper!
-    var coordinator: MainCoordinator!
+    var coordinator: VideoGalleryCoordinator!
     var videoToMove: PracticeVideo?
     
     init(_ managedVC: UIViewController, coreDataManager: CoreDataManager) {

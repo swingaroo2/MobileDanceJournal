@@ -22,7 +22,7 @@ class PracticeNotepadVC: UIViewController, Storyboarded {
     var practiceSession: PracticeSession?
     var coreDataManager: CoreDataManager!
     var textViewManager: NotepadTextViewManager!
-    weak var coordinator: MainCoordinator?
+    weak var coordinator: PracticeLogCoordinator?
     
     // MARK: Lifecycle functions
     override func viewDidLoad() {
