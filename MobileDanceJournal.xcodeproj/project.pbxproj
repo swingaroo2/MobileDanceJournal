@@ -129,6 +129,9 @@
 		926E709A23119A6900A3CCD0 /* ToolbarPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926E709923119A6900A3CCD0 /* ToolbarPickerView.swift */; };
 		926E709B23119A6900A3CCD0 /* ToolbarPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926E709923119A6900A3CCD0 /* ToolbarPickerView.swift */; };
 		926E709C23119A6900A3CCD0 /* ToolbarPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926E709923119A6900A3CCD0 /* ToolbarPickerView.swift */; };
+		926E709F2311F94800A3CCD0 /* PickerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926E709E2311F94800A3CCD0 /* PickerManager.swift */; };
+		926E70A02311F94800A3CCD0 /* PickerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926E709E2311F94800A3CCD0 /* PickerManager.swift */; };
+		926E70A12311F94800A3CCD0 /* PickerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926E709E2311F94800A3CCD0 /* PickerManager.swift */; };
 		926EDD91230B449F003DFDC3 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926EDD90230B449F003DFDC3 /* RootViewController.swift */; };
 		926EDD92230B449F003DFDC3 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926EDD90230B449F003DFDC3 /* RootViewController.swift */; };
 		926EDD93230B449F003DFDC3 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926EDD90230B449F003DFDC3 /* RootViewController.swift */; };
@@ -234,7 +237,7 @@
 		9232ACA3226D4016004DB260 /* MobileDanceJournalUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MobileDanceJournalUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9232ACA7226D4016004DB260 /* MobileDanceJournalUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MobileDanceJournalUITests.swift; sourceTree = "<group>"; };
 		9232ACA9226D4016004DB260 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		9232ACB7226D4298004DB260 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		9232ACB7226D4298004DB260 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; wrapsLines = 0; };
 		9232ACBD226D4390004DB260 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; wrapsLines = 0; };
 		9232ACC1226ECACD004DB260 /* UISplitViewController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UISplitViewController+Extensions.swift"; sourceTree = "<group>"; wrapsLines = 0; };
 		9241F9C122C8375A009C50C1 /* Coordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; wrapsLines = 0; };
@@ -258,6 +261,7 @@
 		926E7090231194FD00A3CCD0 /* PracticeSession+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PracticeSession+CoreDataClass.swift"; sourceTree = "<group>"; };
 		926E7091231194FD00A3CCD0 /* PracticeSession+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PracticeSession+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		926E709923119A6900A3CCD0 /* ToolbarPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolbarPickerView.swift; sourceTree = "<group>"; };
+		926E709E2311F94800A3CCD0 /* PickerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerManager.swift; sourceTree = "<group>"; };
 		926EDD90230B449F003DFDC3 /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
 		92706C8D22DFC696009BA88C /* UIImage+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extensions.swift"; sourceTree = "<group>"; };
 		927B6B05230F116700CC1F9F /* PracticeLogCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PracticeLogCoordinator.swift; sourceTree = "<group>"; wrapsLines = 0; };
@@ -458,12 +462,10 @@
 		926B0D9522F56AD400112743 /* ViewManagers */ = {
 			isa = PBXGroup;
 			children = (
-				926E709823119A4500A3CCD0 /* Protocols */,
 				926B0D9622F56B4300112743 /* NotepadTextViewManager.swift */,
-				928D599F230B54040000945E /* PracticeGroupsTableManager.swift */,
-				926B0DA222F58E3500112743 /* PracticeLogTableManager.swift */,
 				926B0D9E22F58DCF00112743 /* PracticeSessionPickerManager.swift */,
-				926B0D9A22F571E800112743 /* VideoGalleryTableManager.swift */,
+				926E709823119A4500A3CCD0 /* Protocols */,
+				926E70A22311F97500A3CCD0 /* Table Managers */,
 			);
 			path = ViewManagers;
 			sourceTree = "<group>";
@@ -496,9 +498,27 @@
 		926E709823119A4500A3CCD0 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
+				926E709E2311F94800A3CCD0 /* PickerManager.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		926E709D2311F92200A3CCD0 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
 				926E709923119A6900A3CCD0 /* ToolbarPickerView.swift */,
 			);
 			path = Protocols;
+			sourceTree = "<group>";
+		};
+		926E70A22311F97500A3CCD0 /* Table Managers */ = {
+			isa = PBXGroup;
+			children = (
+				928D599F230B54040000945E /* PracticeGroupsTableManager.swift */,
+				926B0DA222F58E3500112743 /* PracticeLogTableManager.swift */,
+				926B0D9A22F571E800112743 /* VideoGalleryTableManager.swift */,
+			);
+			path = "Table Managers";
 			sourceTree = "<group>";
 		};
 		92706C9522E01A55009BA88C /* My Code */ = {
@@ -569,9 +589,10 @@
 		92FBA3F122764AB90017910E /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				926B0D9522F56AD400112743 /* ViewManagers */,
-				922C47AE2283F8F600367625 /* VideoGalleryTableViewCell.swift */,
 				926BEE3722E63D5100BC3DD4 /* PracticeSessionPickerView.swift */,
+				922C47AE2283F8F600367625 /* VideoGalleryTableViewCell.swift */,
+				926E709D2311F92200A3CCD0 /* Protocols */,
+				926B0D9522F56AD400112743 /* ViewManagers */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -773,6 +794,7 @@
 				9241F9CA22C83885009C50C1 /* AlertHelper.swift in Sources */,
 				9232AC8A226D4015004DB260 /* PracticeNotepadVC.swift in Sources */,
 				928D59A4230D02750000945E /* NewGroupVC.swift in Sources */,
+				926E709F2311F94800A3CCD0 /* PickerManager.swift in Sources */,
 				926BEE2622E5830800BC3DD4 /* ThumbnailCache.swift in Sources */,
 				920AAD5D22DCFC4B0097643C /* NSObject+Extensions.swift in Sources */,
 				927FA3FE22DD95DA00F58F58 /* VideoUploadService.swift in Sources */,
@@ -843,6 +865,7 @@
 				926BEE3122E58D5300BC3DD4 /* ThumbnailError.swift in Sources */,
 				926EDD92230B449F003DFDC3 /* RootViewController.swift in Sources */,
 				927FA3FF22DD95DA00F58F58 /* VideoUploadService.swift in Sources */,
+				926E70A02311F94800A3CCD0 /* PickerManager.swift in Sources */,
 				926E709B23119A6900A3CCD0 /* ToolbarPickerView.swift in Sources */,
 				926BEE2322E5820E00BC3DD4 /* Caching.swift in Sources */,
 				92EFF22D22CD9A4800DE9401 /* PracticeNotepadVC+Extensions.swift in Sources */,
@@ -907,6 +930,7 @@
 				926BEE3222E58D5300BC3DD4 /* ThumbnailError.swift in Sources */,
 				926EDD93230B449F003DFDC3 /* RootViewController.swift in Sources */,
 				927FA40022DD95DA00F58F58 /* VideoUploadService.swift in Sources */,
+				926E70A12311F94800A3CCD0 /* PickerManager.swift in Sources */,
 				926E709C23119A6900A3CCD0 /* ToolbarPickerView.swift in Sources */,
 				926BEE2422E5820E00BC3DD4 /* Caching.swift in Sources */,
 				92EFF22E22CD9A4900DE9401 /* PracticeNotepadVC+Extensions.swift in Sources */,

@@ -49,6 +49,7 @@ struct Actions {
     static let edit = "Edit"
     static let share = "Share"
     static let move = "Move"
+    static let done = "Done"
 }
 
 struct PlaceholderText {

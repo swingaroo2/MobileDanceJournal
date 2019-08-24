@@ -125,7 +125,12 @@ extension PracticeLogTableManager: UITableViewDelegate {
 //                return
 //            }
             
-            // GroupPickerView
+            /*
+             THE PLAN
+             - Create GroupPickerView: ToolbarPickerView
+             - Create GroupPickerManager: PickerManager
+             
+             */
             completionHandler(true)
         }
         moveAction.backgroundColor = .black
@@ -139,6 +144,7 @@ extension PracticeLogTableManager: UITableViewDelegate {
         }
         
         let swipeActionsConfig = UISwipeActionsConfiguration(actions: swipeActions)
+        swipeActionsConfig.performsFirstActionWithFullSwipe = false
         return swipeActionsConfig
     }
 }

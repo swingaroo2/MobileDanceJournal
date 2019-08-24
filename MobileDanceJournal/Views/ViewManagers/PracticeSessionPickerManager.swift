@@ -67,15 +67,11 @@ extension PracticeSessionPickerManager: UIPickerViewDataSource {
 
 // MARK: - IBActions
 extension PracticeSessionPickerManager {
-    @objc func doneButtonPressed() {
+    func doneButtonPressed() {
         let selectedPickerRow = managedPickerView.picker.selectedRow(inComponent: 0)
         let destinationPracticeSession = practiceSessions[selectedPickerRow]
         
         coreDataManager.move(videoToMove, from: oldPracticeSession, to: destinationPracticeSession)
-        managedPickerView.hide()
-    }
-    
-    @objc func cancelButtonPressed() {
         managedPickerView.hide()
     }
 }

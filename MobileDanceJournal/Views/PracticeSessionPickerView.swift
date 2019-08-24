@@ -12,16 +12,19 @@ import UIKit
 class PracticeSessionPickerView: UIView, ToolbarPickerView {
     
     var picker: UIPickerView
-    var pickerManager: PickerManager!
-    let toolbarHeight: CGFloat = 44.0
+    var manager: PickerManager!
+    
+    private var doneButton: UIBarButtonItem!
+    private var cancelButton: UIBarButtonItem!
     
     required init(_ videoToMove: PracticeVideo, from oldPracticeLog: PracticeSession, to newPracticeLogs: [PracticeSession],_ coreDataManager: CoreDataManager, managedView: UIView) {
         self.picker = UIPickerView()
         super.init(frame: .zero)
-        self.pickerManager = self.configureManager(videoToMove, oldPracticeLog, newPracticeLogs, coreDataManager)
-        self.picker.dataSource = self.pickerManager
-        self.picker.delegate = self.pickerManager
-        configureView(in: managedView)
+        self.manager = self.configureManager(videoToMove, oldPracticeLog, newPracticeLogs, coreDataManager)
+        self.picker.dataSource = self.manager
+        self.picker.delegate = self.manager
+        let toolbarButtons = configurePickerToolbarButtons()
+        configureView(in: managedView, toolbarButtons)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -29,14 +32,11 @@ class PracticeSessionPickerView: UIView, ToolbarPickerView {
         super.init(coder: aDecoder)
     }
     
-    func show() {
-        let newY = self.getY() - self.getHeight() + 40
-        UIView.animate(withDuration: 0.6, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.01, options: .curveEaseOut, animations: { self.setY(newY)}, completion: nil)
-    }
-    
-    func hide() {
-        let newY = self.getY() + self.getHeight()
-        UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseOut, animations: { self.setY(newY) }, completion: nil)
+    private func configurePickerToolbarButtons() -> [UIBarButtonItem] {
+        doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(actionButtonPressed))
+        cancelButton = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(actionButtonPressed))
+        let spacer = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        return [doneButton, spacer, cancelButton]
     }
     
     private func configureManager(_ videoToMove: PracticeVideo,_ oldPracticeLog: PracticeSession,_ newPracticeLogs: [PracticeSession],_ coreDataManager: CoreDataManager) -> PracticeSessionPickerManager {
@@ -47,39 +47,14 @@ class PracticeSessionPickerView: UIView, ToolbarPickerView {
         return manager
     }
     
-    private func configureView(in parentView: UIView) {
-        configureContainerView(parentView)
-        addPickerView()
-        addToolbar()
-    }
-    
-    private func configureContainerView(_ parentView: UIView) {
-        let height = picker.getHeight() + toolbarHeight
-        frame = CGRect(x: 0, y: parentView.getHeight(), width: parentView.getWidth(), height: height)
-        backgroundColor = .black
-        parentView.addSubview(self)
-        widthAnchor.constraint(equalTo: parentView.widthAnchor).isActive = true
-    }
-    
-    private func addPickerView() {
-        addSubview(picker)
-        picker.setWidth(getWidth())
-        picker.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
-    }
-    
-    private func addToolbar() {
-        let toolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: getWidth(), height: toolbarHeight))
-        
-        let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: pickerManager, action: #selector(PracticeSessionPickerManager.doneButtonPressed))
-        let cancelButton = UIBarButtonItem(barButtonSystemItem: .cancel, target: pickerManager, action: #selector(PracticeSessionPickerManager.cancelButtonPressed))
-        let spacer = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-        toolbar.setItems([doneButton, spacer, cancelButton], animated: false)
-        toolbar.barStyle = .default
-        toolbar.barTintColor = .black
-        toolbar.tintColor = .white
-        toolbar.isTranslucent = true
-        
-        addSubview(toolbar)
-        toolbar.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
+    @objc private func actionButtonPressed(_ sender: UIBarButtonItem) {
+        switch sender {
+        case doneButton:
+            manager.doneButtonPressed()
+        case cancelButton:
+            manager.cancelButtonPressed()
+        default:
+            break
+        }
     }
 }

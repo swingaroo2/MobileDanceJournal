@@ -173,6 +173,7 @@ extension VideoGalleryTableManager: UITableViewDelegate {
         }
         
         let swipeActionsConfig = UISwipeActionsConfiguration(actions: swipeActions)
+        swipeActionsConfig.performsFirstActionWithFullSwipe = false
         return swipeActionsConfig
     }
 }
