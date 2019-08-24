@@ -122,7 +122,12 @@ extension VideoGalleryTableManager: UITableViewDelegate {
         
         let editAction = UIContextualAction(style: .normal, title: Actions.edit) { [unowned self] (action, view, completionHandler) in
             let selectedCell = tableView.cellForRow(at: indexPath) as! VideoGalleryTableViewCell
-            guard let video = selectedCell.video else { return }
+            
+            guard let video = selectedCell.video else {
+                completionHandler(false)
+                return
+            }
+            
             self.videoHelper?.uploadService.set(video: video)
             self.coordinator?.startEditingVideo(presentingVC: self.managedVC, videoHelper: self.videoHelper)
             tableView.reloadRows(at: [indexPath], with: .fade)
@@ -133,7 +138,10 @@ extension VideoGalleryTableManager: UITableViewDelegate {
         
         let shareAction = UIContextualAction(style: .normal, title: Actions.share) { [unowned self] (action, view, completionHandler) in
             let selectedCell = tableView.cellForRow(at: indexPath) as! VideoGalleryTableViewCell
-            guard let video = selectedCell.video else { return }
+            guard let video = selectedCell.video else {
+                completionHandler(false)
+                return
+            }
             self.coordinator?.share(video: video, from: self.managedVC)
             completionHandler(true)
         }
@@ -144,30 +152,28 @@ extension VideoGalleryTableManager: UITableViewDelegate {
             guard let video = selectedCell.video else { return }
             self.videoToMove = video
             
-            guard let practiceSessions = self.coreDataManager.practiceSessionFRC.fetchedObjects else { return }
+            guard let practiceSessions = self.coreDataManager.practiceSessionFRC.fetchedObjects else {
+                completionHandler(false)
+                return
+            }
             
-            self.practiceSessionPicker = PracticeSessionPickerView(tableView, self.coreDataManager)
-            self.practiceSessionPicker.pickerManager.selectedVideoIndexPath = indexPath
-            self.practiceSessionPicker.pickerManager.practiceSessions = practiceSessions
-            self.practiceSessionPicker.pickerManager.oldPracticeSession = self.practiceSession
-            self.practiceSessionPicker.pickerManager.videoToMove = video
-            self.practiceSessionPicker!.configureView(in: self.managedVC.view)
+            self.practiceSessionPicker = PracticeSessionPickerView(video, from: self.practiceSession, to: practiceSessions, self.coreDataManager, managedView: self.managedVC.view)
             self.practiceSessionPicker!.show()
             
             completionHandler(true)
         }
         moveAction.backgroundColor = .black
         
-        var configArray = [deleteAction, editAction, shareAction, moveAction]
-        if let fetchedPracticeSessions = coreDataManager.practiceSessionFRC.fetchedObjects {
-            let practiceSessionCount = fetchedPracticeSessions.count
-            if practiceSessionCount == 1 {
-                configArray = [deleteAction, editAction, shareAction]
+        var swipeActions = [deleteAction, editAction, shareAction, moveAction]
+        
+        if let fetchedPracticeSessions = practiceSession.group.practiceSessions {
+            if fetchedPracticeSessions.count == 1 {
+                swipeActions = [deleteAction, editAction, shareAction]
             }
         }
         
-        let config = UISwipeActionsConfiguration(actions: configArray)
-        return config
+        let swipeActionsConfig = UISwipeActionsConfiguration(actions: swipeActions)
+        return swipeActionsConfig
     }
 }
 

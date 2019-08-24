@@ -9,25 +9,23 @@
 import Foundation
 import UIKit
 
-class PracticeSessionPickerView: UIView {
+class PracticeSessionPickerView: UIView, ToolbarPickerView {
     
+    var picker: UIPickerView
+    var pickerManager: PickerManager!
     let toolbarHeight: CGFloat = 44.0
-    var nestedPickerView: UIPickerView!
-    var pickerManager: PracticeSessionPickerManager!
     
-    init(_ tableView: UITableView, _ coreDataManager: CoreDataManager) {
+    required init(_ videoToMove: PracticeVideo, from oldPracticeLog: PracticeSession, to newPracticeLogs: [PracticeSession],_ coreDataManager: CoreDataManager, managedView: UIView) {
+        self.picker = UIPickerView()
         super.init(frame: .zero)
-        
-        self.pickerManager = PracticeSessionPickerManager(self, coreDataManager)
-        let pickerSubview = UIPickerView()
-        pickerSubview.dataSource = self.pickerManager
-        pickerSubview.delegate = self.pickerManager
-        self.pickerManager.managedPicker = pickerSubview
-        self.pickerManager.managedTableView = tableView
-        self.nestedPickerView = pickerSubview
+        self.pickerManager = self.configureManager(videoToMove, oldPracticeLog, newPracticeLogs, coreDataManager)
+        self.picker.dataSource = self.pickerManager
+        self.picker.delegate = self.pickerManager
+        configureView(in: managedView)
     }
     
     required init?(coder aDecoder: NSCoder) {
+        self.picker = UIPickerView()
         super.init(coder: aDecoder)
     }
     
@@ -41,14 +39,22 @@ class PracticeSessionPickerView: UIView {
         UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseOut, animations: { self.setY(newY) }, completion: nil)
     }
     
-    func configureView(in parentView: UIView) {
+    private func configureManager(_ videoToMove: PracticeVideo,_ oldPracticeLog: PracticeSession,_ newPracticeLogs: [PracticeSession],_ coreDataManager: CoreDataManager) -> PracticeSessionPickerManager {
+        let manager = PracticeSessionPickerManager(self, coreDataManager)
+        manager.oldPracticeSession = oldPracticeLog
+        manager.practiceSessions = newPracticeLogs
+        manager.videoToMove = videoToMove
+        return manager
+    }
+    
+    private func configureView(in parentView: UIView) {
         configureContainerView(parentView)
         addPickerView()
         addToolbar()
     }
     
     private func configureContainerView(_ parentView: UIView) {
-        let height = nestedPickerView.getHeight() + toolbarHeight
+        let height = picker.getHeight() + toolbarHeight
         frame = CGRect(x: 0, y: parentView.getHeight(), width: parentView.getWidth(), height: height)
         backgroundColor = .black
         parentView.addSubview(self)
@@ -56,9 +62,9 @@ class PracticeSessionPickerView: UIView {
     }
     
     private func addPickerView() {
-        addSubview(nestedPickerView)
-        nestedPickerView.setWidth(getWidth())
-        nestedPickerView.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
+        addSubview(picker)
+        picker.setWidth(getWidth())
+        picker.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
     }
     
     private func addToolbar() {

@@ -9,23 +9,18 @@
 import Foundation
 import UIKit
 
-class PracticeSessionPickerManager: NSObject {
+class PracticeSessionPickerManager: NSObject, PickerManager {
     
-    private let coreDataManager: CoreDataManager
-    private let managedView: PracticeSessionPickerView
-    var selectedVideoIndexPath: IndexPath!
-    var managedTableView: UITableView!
-    var managedPicker: UIPickerView!
+    var managedPickerView: ToolbarPickerView
+    var coreDataManager: CoreDataManager
     var practiceSessions: [PracticeSession]!
     var oldPracticeSession: PracticeSession!
     var videoToMove: PracticeVideo!
     
-    init(_ managedView: PracticeSessionPickerView,_ coreDataManager: CoreDataManager) {
-        self.managedView = managedView
+    init(_ managedView: ToolbarPickerView,_ coreDataManager: CoreDataManager) {
+        self.managedPickerView = managedView
         self.coreDataManager = coreDataManager
-        super.init()
     }
-    
 }
 
 // MARK: - Picker delegate
@@ -73,14 +68,14 @@ extension PracticeSessionPickerManager: UIPickerViewDataSource {
 // MARK: - IBActions
 extension PracticeSessionPickerManager {
     @objc func doneButtonPressed() {
-        let selectedPickerRow = managedPicker.selectedRow(inComponent: 0)
+        let selectedPickerRow = managedPickerView.picker.selectedRow(inComponent: 0)
         let destinationPracticeSession = practiceSessions[selectedPickerRow]
         
         coreDataManager.move(videoToMove, from: oldPracticeSession, to: destinationPracticeSession)
-        managedView.hide()
+        managedPickerView.hide()
     }
     
     @objc func cancelButtonPressed() {
-        managedView.hide()
+        managedPickerView.hide()
     }
 }

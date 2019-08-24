@@ -14,6 +14,7 @@ class PracticeLogTableManager: NSObject {
     
     private let managedTableView: UITableView
     private let coreDataManager: CoreDataManager
+    var groupPickerView: PracticeSessionPickerView!
     var managedVC: UIViewController!
     var practiceSessions: [PracticeSession]!
     var coordinator: PracticeLogCoordinator?
@@ -38,6 +39,7 @@ class PracticeLogTableManager: NSObject {
         print(selectedPracticeSessions)
         return selectedPracticeSessions
     }
+    
 }
 
 // MARK: UITableViewDataSource
@@ -108,7 +110,36 @@ extension PracticeLogTableManager: UITableViewDelegate {
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         // Next: Implement picker to move practice sessions between groups
         // Pattern this off video gallery
-        return nil
+        
+        let deleteAction = UIContextualAction(style: .destructive, title: Actions.delete) { [unowned self] (action, view, completionHandler) in
+            let practiceSessionToDelete = self.coreDataManager.practiceSessionFRC.object(at: indexPath)
+            self.coreDataManager.delete(practiceSessionToDelete)
+            completionHandler(true)
+        }
+        
+        let moveAction = UIContextualAction(style: .normal, title: Actions.move) { [unowned self] (action, view, completionHandler) in
+//            let practiceSessionToMove = self.coreDataManager.practiceSessionFRC.object(at: indexPath)
+//
+//            guard let groups = self.coreDataManager.groupFRC.fetchedObjects else {
+//                completionHandler(false)
+//                return
+//            }
+            
+            // GroupPickerView
+            completionHandler(true)
+        }
+        moveAction.backgroundColor = .black
+        
+        var swipeActions = [deleteAction, moveAction]
+        
+        if let fetchedGroups = coreDataManager.groupFRC.fetchedObjects {
+            if fetchedGroups.count == 1 {
+                swipeActions = [deleteAction]
+            }
+        }
+        
+        let swipeActionsConfig = UISwipeActionsConfiguration(actions: swipeActions)
+        return swipeActionsConfig
     }
 }
 
@@ -149,11 +180,11 @@ extension PracticeLogTableManager: NSFetchedResultsControllerDelegate {
 private extension PracticeLogTableManager {
     private func configureCell(_ cell: UITableViewCell, _ indexPath: IndexPath) {
         let practiceSession = practiceSessions[indexPath.row]
-        cell.textLabel!.text = practiceSession.title
+        cell.textLabel?.text = practiceSession.title
         cell.textLabel?.highlightedTextColor = .darkText
         
-        let videoCount = (practiceSession.videos ?? []).count
-        cell.detailTextLabel!.text = videoCount != 1 ? "\(videoCount) Videos" : "\(videoCount) Video"
-        cell.detailTextLabel!.highlightedTextColor = .darkText
+        let videoCount = practiceSession.videos.count
+        cell.detailTextLabel?.text = videoCount != 1 ? "\(videoCount) Videos" : "\(videoCount) Video"
+        cell.detailTextLabel?.highlightedTextColor = .darkText
     }
 }

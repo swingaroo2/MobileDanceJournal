@@ -120,6 +120,15 @@
 		926BEE3822E63D5100BC3DD4 /* PracticeSessionPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926BEE3722E63D5100BC3DD4 /* PracticeSessionPickerView.swift */; };
 		926BEE3922E63D5100BC3DD4 /* PracticeSessionPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926BEE3722E63D5100BC3DD4 /* PracticeSessionPickerView.swift */; };
 		926BEE3A22E63D5100BC3DD4 /* PracticeSessionPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926BEE3722E63D5100BC3DD4 /* PracticeSessionPickerView.swift */; };
+		926E7092231194FD00A3CCD0 /* PracticeSession+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926E7090231194FD00A3CCD0 /* PracticeSession+CoreDataClass.swift */; };
+		926E7093231194FD00A3CCD0 /* PracticeSession+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926E7091231194FD00A3CCD0 /* PracticeSession+CoreDataProperties.swift */; };
+		926E70942311950100A3CCD0 /* PracticeSession+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926E7091231194FD00A3CCD0 /* PracticeSession+CoreDataProperties.swift */; };
+		926E70952311950200A3CCD0 /* PracticeSession+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926E7091231194FD00A3CCD0 /* PracticeSession+CoreDataProperties.swift */; };
+		926E7096231196A000A3CCD0 /* PracticeSession+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926E7090231194FD00A3CCD0 /* PracticeSession+CoreDataClass.swift */; };
+		926E7097231196A000A3CCD0 /* PracticeSession+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926E7090231194FD00A3CCD0 /* PracticeSession+CoreDataClass.swift */; };
+		926E709A23119A6900A3CCD0 /* ToolbarPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926E709923119A6900A3CCD0 /* ToolbarPickerView.swift */; };
+		926E709B23119A6900A3CCD0 /* ToolbarPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926E709923119A6900A3CCD0 /* ToolbarPickerView.swift */; };
+		926E709C23119A6900A3CCD0 /* ToolbarPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926E709923119A6900A3CCD0 /* ToolbarPickerView.swift */; };
 		926EDD91230B449F003DFDC3 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926EDD90230B449F003DFDC3 /* RootViewController.swift */; };
 		926EDD92230B449F003DFDC3 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926EDD90230B449F003DFDC3 /* RootViewController.swift */; };
 		926EDD93230B449F003DFDC3 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926EDD90230B449F003DFDC3 /* RootViewController.swift */; };
@@ -157,18 +166,12 @@
 		928D59A4230D02750000945E /* NewGroupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928D59A3230D02750000945E /* NewGroupVC.swift */; };
 		928D59A5230D02750000945E /* NewGroupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928D59A3230D02750000945E /* NewGroupVC.swift */; };
 		928D59A6230D02750000945E /* NewGroupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928D59A3230D02750000945E /* NewGroupVC.swift */; };
-		928D59AC230DCBD00000945E /* PracticeSession+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928D59A8230DCBD00000945E /* PracticeSession+CoreDataProperties.swift */; };
-		928D59AD230DCBD00000945E /* PracticeSession+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928D59A8230DCBD00000945E /* PracticeSession+CoreDataProperties.swift */; };
-		928D59AE230DCBD00000945E /* PracticeSession+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928D59A8230DCBD00000945E /* PracticeSession+CoreDataProperties.swift */; };
 		928D59AF230DCBD00000945E /* PracticeVideo+CoreDataProperties copy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928D59A9230DCBD00000945E /* PracticeVideo+CoreDataProperties copy.swift */; };
 		928D59B0230DCBD00000945E /* PracticeVideo+CoreDataProperties copy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928D59A9230DCBD00000945E /* PracticeVideo+CoreDataProperties copy.swift */; };
 		928D59B1230DCBD00000945E /* PracticeVideo+CoreDataProperties copy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928D59A9230DCBD00000945E /* PracticeVideo+CoreDataProperties copy.swift */; };
 		928D59B2230DCBD00000945E /* PracticeVideo+CoreDataClass copy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928D59AA230DCBD00000945E /* PracticeVideo+CoreDataClass copy.swift */; };
 		928D59B3230DCBD00000945E /* PracticeVideo+CoreDataClass copy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928D59AA230DCBD00000945E /* PracticeVideo+CoreDataClass copy.swift */; };
 		928D59B4230DCBD00000945E /* PracticeVideo+CoreDataClass copy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928D59AA230DCBD00000945E /* PracticeVideo+CoreDataClass copy.swift */; };
-		928D59B5230DCBD00000945E /* PracticeSession+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928D59AB230DCBD00000945E /* PracticeSession+CoreDataClass.swift */; };
-		928D59B6230DCBD00000945E /* PracticeSession+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928D59AB230DCBD00000945E /* PracticeSession+CoreDataClass.swift */; };
-		928D59B7230DCBD00000945E /* PracticeSession+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928D59AB230DCBD00000945E /* PracticeSession+CoreDataClass.swift */; };
 		928D59CA230DD03C0000945E /* Group+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928D59C8230DD03C0000945E /* Group+CoreDataClass.swift */; };
 		928D59CB230DD03C0000945E /* Group+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928D59C8230DD03C0000945E /* Group+CoreDataClass.swift */; };
 		928D59CC230DD03C0000945E /* Group+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928D59C8230DD03C0000945E /* Group+CoreDataClass.swift */; };
@@ -252,6 +255,9 @@
 		926BEE2F22E58D5300BC3DD4 /* ThumbnailError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThumbnailError.swift; sourceTree = "<group>"; };
 		926BEE3322E5930100BC3DD4 /* UIImageView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extensions.swift"; sourceTree = "<group>"; wrapsLines = 0; };
 		926BEE3722E63D5100BC3DD4 /* PracticeSessionPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PracticeSessionPickerView.swift; sourceTree = "<group>"; wrapsLines = 0; };
+		926E7090231194FD00A3CCD0 /* PracticeSession+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PracticeSession+CoreDataClass.swift"; sourceTree = "<group>"; };
+		926E7091231194FD00A3CCD0 /* PracticeSession+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PracticeSession+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		926E709923119A6900A3CCD0 /* ToolbarPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolbarPickerView.swift; sourceTree = "<group>"; };
 		926EDD90230B449F003DFDC3 /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
 		92706C8D22DFC696009BA88C /* UIImage+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extensions.swift"; sourceTree = "<group>"; };
 		927B6B05230F116700CC1F9F /* PracticeLogCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PracticeLogCoordinator.swift; sourceTree = "<group>"; wrapsLines = 0; };
@@ -267,10 +273,8 @@
 		928D599F230B54040000945E /* PracticeGroupsTableManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PracticeGroupsTableManager.swift; sourceTree = "<group>"; wrapsLines = 0; };
 		928D59A3230D02750000945E /* NewGroupVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewGroupVC.swift; sourceTree = "<group>"; };
 		928D59A7230DC9DE0000945E /* DataModel 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "DataModel 3.xcdatamodel"; sourceTree = "<group>"; };
-		928D59A8230DCBD00000945E /* PracticeSession+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PracticeSession+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		928D59A9230DCBD00000945E /* PracticeVideo+CoreDataProperties copy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PracticeVideo+CoreDataProperties copy.swift"; sourceTree = "<group>"; };
 		928D59AA230DCBD00000945E /* PracticeVideo+CoreDataClass copy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PracticeVideo+CoreDataClass copy.swift"; sourceTree = "<group>"; };
-		928D59AB230DCBD00000945E /* PracticeSession+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PracticeSession+CoreDataClass.swift"; sourceTree = "<group>"; };
 		928D59C8230DD03C0000945E /* Group+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Group+CoreDataClass.swift"; sourceTree = "<group>"; };
 		928D59C9230DD03C0000945E /* Group+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Group+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		92EFF22B22CD9A4400DE9401 /* PracticeNotepadVC+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PracticeNotepadVC+Extensions.swift"; sourceTree = "<group>"; wrapsLines = 0; };
@@ -328,10 +332,10 @@
 			children = (
 				928D59C8230DD03C0000945E /* Group+CoreDataClass.swift */,
 				928D59C9230DD03C0000945E /* Group+CoreDataProperties.swift */,
-				928D59AB230DCBD00000945E /* PracticeSession+CoreDataClass.swift */,
-				928D59A8230DCBD00000945E /* PracticeSession+CoreDataProperties.swift */,
 				928D59AA230DCBD00000945E /* PracticeVideo+CoreDataClass copy.swift */,
 				928D59A9230DCBD00000945E /* PracticeVideo+CoreDataProperties copy.swift */,
+				926E7090231194FD00A3CCD0 /* PracticeSession+CoreDataClass.swift */,
+				926E7091231194FD00A3CCD0 /* PracticeSession+CoreDataProperties.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -454,6 +458,7 @@
 		926B0D9522F56AD400112743 /* ViewManagers */ = {
 			isa = PBXGroup;
 			children = (
+				926E709823119A4500A3CCD0 /* Protocols */,
 				926B0D9622F56B4300112743 /* NotepadTextViewManager.swift */,
 				928D599F230B54040000945E /* PracticeGroupsTableManager.swift */,
 				926B0DA222F58E3500112743 /* PracticeLogTableManager.swift */,
@@ -486,6 +491,14 @@
 				926BEE2F22E58D5300BC3DD4 /* ThumbnailError.swift */,
 			);
 			path = Errors;
+			sourceTree = "<group>";
+		};
+		926E709823119A4500A3CCD0 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				926E709923119A6900A3CCD0 /* ToolbarPickerView.swift */,
+			);
+			path = Protocols;
 			sourceTree = "<group>";
 		};
 		92706C9522E01A55009BA88C /* My Code */ = {
@@ -754,18 +767,18 @@
 				928D59CD230DD03C0000945E /* Group+CoreDataProperties.swift in Sources */,
 				9214FF9B227E3B4100387A3B /* UIViewController+Extensions.swift in Sources */,
 				9241FEAF22C3F9AF00342FC9 /* MainCoordinator.swift in Sources */,
+				926E7093231194FD00A3CCD0 /* PracticeSession+CoreDataProperties.swift in Sources */,
 				9227146922CBFBC000C6CFAC /* SplitViewCoordinator.swift in Sources */,
+				926E7092231194FD00A3CCD0 /* PracticeSession+CoreDataClass.swift in Sources */,
 				9241F9CA22C83885009C50C1 /* AlertHelper.swift in Sources */,
 				9232AC8A226D4015004DB260 /* PracticeNotepadVC.swift in Sources */,
 				928D59A4230D02750000945E /* NewGroupVC.swift in Sources */,
 				926BEE2622E5830800BC3DD4 /* ThumbnailCache.swift in Sources */,
 				920AAD5D22DCFC4B0097643C /* NSObject+Extensions.swift in Sources */,
-				928D59AC230DCBD00000945E /* PracticeSession+CoreDataProperties.swift in Sources */,
 				927FA3FE22DD95DA00F58F58 /* VideoUploadService.swift in Sources */,
 				926BEE3422E5930100BC3DD4 /* UIImageView+Extensions.swift in Sources */,
 				926BEE1922E1057600BC3DD4 /* VideoStorageManager.swift in Sources */,
 				926B0D9B22F571E800112743 /* VideoGalleryTableManager.swift in Sources */,
-				928D59B5230DCBD00000945E /* PracticeSession+CoreDataClass.swift in Sources */,
 				9227148622CD2D4900C6CFAC /* UITextView+Extensions.swift in Sources */,
 				926BEE2A22E58C5500BC3DD4 /* PracticeVideo+Extensions.swift in Sources */,
 				927B6B06230F116700CC1F9F /* PracticeLogCoordinator.swift in Sources */,
@@ -791,6 +804,7 @@
 				926EDD91230B449F003DFDC3 /* RootViewController.swift in Sources */,
 				92EFF22C22CD9A4400DE9401 /* PracticeNotepadVC+Extensions.swift in Sources */,
 				926B0DA322F58E3500112743 /* PracticeLogTableManager.swift in Sources */,
+				926E709A23119A6900A3CCD0 /* ToolbarPickerView.swift in Sources */,
 				926B0D9722F56B4300112743 /* NotepadTextViewManager.swift in Sources */,
 				9241F9C222C8375A009C50C1 /* Coordinator.swift in Sources */,
 				92706C8E22DFC696009BA88C /* UIImage+Extensions.swift in Sources */,
@@ -814,15 +828,14 @@
 				9232ACC722713DDC004DB260 /* PracticeNotepadVC.swift in Sources */,
 				922E20E92283DD8F00295A19 /* Constants.swift in Sources */,
 				922E20E72283DC2000295A19 /* VideoGalleryVC+Extensions.swift in Sources */,
-				928D59AD230DCBD00000945E /* PracticeSession+CoreDataProperties.swift in Sources */,
 				9227146A22CBFBC000C6CFAC /* SplitViewCoordinator.swift in Sources */,
 				926BEE2B22E58C5500BC3DD4 /* PracticeVideo+Extensions.swift in Sources */,
+				926E70942311950100A3CCD0 /* PracticeSession+CoreDataProperties.swift in Sources */,
 				926BEE3922E63D5100BC3DD4 /* PracticeSessionPickerView.swift in Sources */,
 				9227148322CD2C0400C6CFAC /* UILabel+Extensions.swift in Sources */,
 				928D59A5230D02750000945E /* NewGroupVC.swift in Sources */,
 				9214FF98227E139A00387A3B /* Date+Extensions.swift in Sources */,
 				927B6B07230F116700CC1F9F /* PracticeLogCoordinator.swift in Sources */,
-				928D59B6230DCBD00000945E /* PracticeSession+CoreDataClass.swift in Sources */,
 				9227148722CD2D4900C6CFAC /* UITextView+Extensions.swift in Sources */,
 				9241FEB022C3F9AF00342FC9 /* MainCoordinator.swift in Sources */,
 				926B0D9822F56B4300112743 /* NotepadTextViewManager.swift in Sources */,
@@ -830,6 +843,7 @@
 				926BEE3122E58D5300BC3DD4 /* ThumbnailError.swift in Sources */,
 				926EDD92230B449F003DFDC3 /* RootViewController.swift in Sources */,
 				927FA3FF22DD95DA00F58F58 /* VideoUploadService.swift in Sources */,
+				926E709B23119A6900A3CCD0 /* ToolbarPickerView.swift in Sources */,
 				926BEE2322E5820E00BC3DD4 /* Caching.swift in Sources */,
 				92EFF22D22CD9A4800DE9401 /* PracticeNotepadVC+Extensions.swift in Sources */,
 				9241F9CB22C83885009C50C1 /* AlertHelper.swift in Sources */,
@@ -850,6 +864,7 @@
 				926B0DA422F58E3500112743 /* PracticeLogTableManager.swift in Sources */,
 				928D59B0230DCBD00000945E /* PracticeVideo+CoreDataProperties copy.swift in Sources */,
 				928D59A1230B54040000945E /* PracticeGroupsTableManager.swift in Sources */,
+				926E7096231196A000A3CCD0 /* PracticeSession+CoreDataClass.swift in Sources */,
 				92FBA3DE22718E9C0017910E /* AppDelegate.swift in Sources */,
 				927FA3FB22DD959900F58F58 /* URLBuilder.swift in Sources */,
 				922E20DF228123B600295A19 /* UIView+Extensions.swift in Sources */,
@@ -877,15 +892,14 @@
 				9232ACC822713DDC004DB260 /* PracticeNotepadVC.swift in Sources */,
 				922E20EA2283DD8F00295A19 /* Constants.swift in Sources */,
 				922E20E82283DC2000295A19 /* VideoGalleryVC+Extensions.swift in Sources */,
-				928D59AE230DCBD00000945E /* PracticeSession+CoreDataProperties.swift in Sources */,
 				9227146B22CBFBC000C6CFAC /* SplitViewCoordinator.swift in Sources */,
 				926BEE2C22E58C5500BC3DD4 /* PracticeVideo+Extensions.swift in Sources */,
+				926E70952311950200A3CCD0 /* PracticeSession+CoreDataProperties.swift in Sources */,
 				926BEE3A22E63D5100BC3DD4 /* PracticeSessionPickerView.swift in Sources */,
 				9227148422CD2C0400C6CFAC /* UILabel+Extensions.swift in Sources */,
 				928D59A6230D02750000945E /* NewGroupVC.swift in Sources */,
 				9214FF99227E139A00387A3B /* Date+Extensions.swift in Sources */,
 				927B6B08230F116700CC1F9F /* PracticeLogCoordinator.swift in Sources */,
-				928D59B7230DCBD00000945E /* PracticeSession+CoreDataClass.swift in Sources */,
 				9227148822CD2D4900C6CFAC /* UITextView+Extensions.swift in Sources */,
 				9241FEB122C3F9AF00342FC9 /* MainCoordinator.swift in Sources */,
 				926B0D9922F56B4300112743 /* NotepadTextViewManager.swift in Sources */,
@@ -893,6 +907,7 @@
 				926BEE3222E58D5300BC3DD4 /* ThumbnailError.swift in Sources */,
 				926EDD93230B449F003DFDC3 /* RootViewController.swift in Sources */,
 				927FA40022DD95DA00F58F58 /* VideoUploadService.swift in Sources */,
+				926E709C23119A6900A3CCD0 /* ToolbarPickerView.swift in Sources */,
 				926BEE2422E5820E00BC3DD4 /* Caching.swift in Sources */,
 				92EFF22E22CD9A4900DE9401 /* PracticeNotepadVC+Extensions.swift in Sources */,
 				9241F9CC22C83885009C50C1 /* AlertHelper.swift in Sources */,
@@ -913,6 +928,7 @@
 				926B0DA522F58E3500112743 /* PracticeLogTableManager.swift in Sources */,
 				928D59B1230DCBD00000945E /* PracticeVideo+CoreDataProperties copy.swift in Sources */,
 				928D59A2230B54040000945E /* PracticeGroupsTableManager.swift in Sources */,
+				926E7097231196A000A3CCD0 /* PracticeSession+CoreDataClass.swift in Sources */,
 				92FBA3DF22718E9D0017910E /* AppDelegate.swift in Sources */,
 				927FA3FC22DD959900F58F58 /* URLBuilder.swift in Sources */,
 				922E20E0228123B600295A19 /* UIView+Extensions.swift in Sources */,
