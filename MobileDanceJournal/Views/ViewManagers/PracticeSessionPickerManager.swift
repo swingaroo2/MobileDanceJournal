@@ -77,7 +77,6 @@ extension PracticeSessionPickerManager {
         let destinationPracticeSession = practiceSessions[selectedPickerRow]
         
         coreDataManager.move(videoToMove, from: oldPracticeSession, to: destinationPracticeSession)
-//        managedTableView.deleteRows(at: [selectedVideoIndexPath], with: .fade)
         managedView.hide()
     }
     

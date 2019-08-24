@@ -59,36 +59,3 @@ extension VideoGalleryVC: UINavigationControllerDelegate {
         print("\(#function)")
     }
 }
-
-// MARK: - NSFetchedResultsControllerDelegate
-extension VideoGalleryVC: NSFetchedResultsControllerDelegate {
-    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
-        switch (type) {
-        case .insert:
-            if let indexPath = newIndexPath {
-                videosTableView.insertRows(at: [indexPath], with: .fade)
-            }
-            break;
-        case .delete:
-            if let indexPath = indexPath {
-                videosTableView.deleteRows(at: [indexPath], with: .fade)
-            }
-            break;
-        case .update:
-            if let indexPath = indexPath {
-                videosTableView.reloadRows(at: [indexPath], with: .fade)
-            }
-            break;
-        default:
-            print("\(#function): Unhandled case")
-        }
-    }
-    
-    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        videosTableView.beginUpdates()
-    }
-    
-    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        videosTableView.endUpdates()
-    }
-}
