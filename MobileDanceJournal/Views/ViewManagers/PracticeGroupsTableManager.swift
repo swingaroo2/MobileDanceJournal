@@ -142,5 +142,15 @@ private extension PracticeGroupsTableManager {
     // TODO: Later, this will be replaced with a custom cell
     private func configureCell(_ cell: UITableViewCell,_ group: Group?) {
         cell.textLabel?.text = (group != nil) ? group!.name : TextConstants.uncategorized
+        
+        guard let group = group else {
+            cell.detailTextLabel!.text = "0 Practice Logs"
+            cell.detailTextLabel!.highlightedTextColor = .darkText
+            return
+        }
+        
+        let practiceLogCount = (group.practiceSessions ?? []).count
+        cell.detailTextLabel!.text = practiceLogCount != 1 ? "\(practiceLogCount) Practice Logs" : "\(practiceLogCount) Practice Log"
+        cell.detailTextLabel!.highlightedTextColor = .darkText
     }
 }
