@@ -43,7 +43,6 @@ public class CoreDataManager : NSObject {
                                                                   managedObjectContext: persistentContainer.viewContext,
                                                                   sectionNameKeyPath: nil,
                                                                   cacheName: nil)
-        fetchedResultsController.delegate = practiceGroupsDelegate
         
         try? fetchedResultsController.performFetch()
         return fetchedResultsController
@@ -57,7 +56,6 @@ public class CoreDataManager : NSObject {
                                                                   managedObjectContext: persistentContainer.viewContext,
                                                                   sectionNameKeyPath: nil,
                                                                   cacheName: nil)
-        fetchedResultsController.delegate = practiceSessionDelegate
         
         try? fetchedResultsController.performFetch()
         return fetchedResultsController
@@ -70,7 +68,6 @@ public class CoreDataManager : NSObject {
                                                                   managedObjectContext: persistentContainer.viewContext,
                                                                   sectionNameKeyPath: nil,
                                                                   cacheName: nil)
-        fetchedResultsController.delegate = practiceVideoDelegate
         try? fetchedResultsController.performFetch()
         
         return fetchedResultsController

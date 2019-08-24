@@ -119,7 +119,8 @@ struct PracticeVideoConstants {
 // MARK: Enums
 enum DateFormats: String {
     case longFormat = "'Started' MMMM dd, yyyy 'at' h:mm:ss.SSSS a"
-    case displayFormat = "'Started' MMMM dd, yyyy"
+    case notepadDisplayFormat = "'Started' MMMM dd, yyyy"
+    case practiceLogDisplayFormat = "M/dd/yyyy"
 }
 
 enum Permissions {

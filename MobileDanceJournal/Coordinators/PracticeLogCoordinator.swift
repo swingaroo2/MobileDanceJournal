@@ -79,27 +79,9 @@ extension PracticeLogCoordinator {
         detailVC.hideContent()
     }
     
-    func viewVideos(for practiceSession: PracticeSession?) {
-        let videoGalleryVC = VideoGalleryVC.instantiate()
-        
-        let cache = ThumbnailCache()
-        let uploadService = VideoUploadService()
-        let videoHelper = VideoHelper(with: cache, and: uploadService)
-        
-        //        videoGalleryVC.coordinator = self
-        videoGalleryVC.coreDataManager = coreDataManager
-        videoGalleryVC.tableViewManager = VideoGalleryTableManager(videoGalleryVC, coreDataManager: coreDataManager)
-        videoGalleryVC.practiceSession = practiceSession
-        videoGalleryVC.videoHelper = videoHelper
-        
-        let splitViewControllerHasTwoRootNavigationControllers = rootVC.children.count == 2
-        if splitViewControllerHasTwoRootNavigationControllers {
-            guard let detailNC = rootVC.children.last as? UINavigationController else { return }
-            detailNC.pushViewController(videoGalleryVC, animated: true)
-        } else {
-            guard let rootNC = rootVC.children.first else { return }
-            guard let detailNC = rootNC.children.last as? UINavigationController else { return }
-            detailNC.pushViewController(videoGalleryVC, animated: true)
-        }
+    func viewVideos(for practiceSession: PracticeSession) {
+        let child = VideoGalleryCoordinator(rootVC, coreDataManager, currentGroup, practiceSession)
+        childCoordinators.append(child)
+        child.start()
     }
 }

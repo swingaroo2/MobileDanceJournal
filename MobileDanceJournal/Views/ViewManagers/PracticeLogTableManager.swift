@@ -19,6 +19,7 @@ class PracticeLogTableManager: NSObject {
     var coordinator: PracticeLogCoordinator?
     var currentGroup: Group?
     var selectedRow = -1
+    var noContentLabel: UILabel!
     
     init(_ managedTableView: UITableView,_ coreDataManager: CoreDataManager) {
         self.managedTableView = managedTableView
@@ -140,11 +141,11 @@ extension PracticeLogTableManager: NSFetchedResultsControllerDelegate {
 }
 
 private extension PracticeLogTableManager {
-    // TODO: Later, this will be replaced with a custom cell
     private func configureCell(_ cell: UITableViewCell, _ indexPath: IndexPath) {
         let practiceSession = practiceSessions[indexPath.row]
         cell.textLabel!.text = practiceSession.title
         cell.textLabel?.highlightedTextColor = .darkText
+        cell.detailTextLabel!.text = Date.getStringFromDate(practiceSession.date, .practiceLogDisplayFormat)
+        cell.detailTextLabel!.highlightedTextColor = .darkText
     }
-
 }

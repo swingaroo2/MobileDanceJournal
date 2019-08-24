@@ -23,6 +23,7 @@ class PracticeGroupsTableManager: NSObject {
         self.managedTableView = managedTableView
         self.coreDataManager = coreDataManager
         super.init()
+        self.managedTableView.tableFooterView = UIView()
         self.managedTableView.delegate = self
         self.managedTableView.dataSource = self
         self.coreDataManager.practiceGroupsDelegate = self
@@ -107,7 +108,6 @@ extension PracticeGroupsTableManager: UITableViewDelegate {
 // MARK: - NSFetchedResultsControllerDelegate
 extension PracticeGroupsTableManager: NSFetchedResultsControllerDelegate {
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
-        print(#function)
         switch (type) {
         case .insert:
             if let indexPath = newIndexPath {

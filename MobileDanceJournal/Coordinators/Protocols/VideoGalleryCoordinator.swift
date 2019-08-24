@@ -10,20 +10,43 @@ import Foundation
 import UIKit
 
 class VideoGalleryCoordinator: NSObject, Coordinator {
+    private let practiceSession: PracticeSession
+    private let coreDataManager: CoreDataManager
+
     var rootVC: SplitViewRootController
     var childCoordinators = [Coordinator]()
-    var navigationController: UINavigationController
+    var navigationController = UINavigationController()
     var currentGroup: Group?
-    private let coreDataManager: CoreDataManager
     
-    init(_ navController: UINavigationController,_ coreDataManager: CoreDataManager,_ currentGroup: Group?) {
-        self.navigationController = navController
+    init(_ rootViewController: SplitViewRootController,_ coreDataManager: CoreDataManager,_ group: Group?,_ practiceSession: PracticeSession) {
+        self.rootVC = rootViewController
         self.coreDataManager = coreDataManager
-        self.currentGroup = currentGroup
-        self.rootVC = SplitViewRootController.instantiate()
+        self.currentGroup = group
+        self.practiceSession = practiceSession
     }
     
-    func start() {}
+    func start() {
+        let videoGalleryVC = VideoGalleryVC.instantiate()
+        
+        let cache = ThumbnailCache()
+        let uploadService = VideoUploadService()
+        let videoHelper = VideoHelper(with: cache, and: uploadService)
+        
+        videoGalleryVC.coordinator = self
+        videoGalleryVC.coreDataManager = coreDataManager
+        videoGalleryVC.practiceSession = practiceSession
+        videoGalleryVC.videoHelper = videoHelper
+        
+        let splitViewControllerHasTwoRootNavigationControllers = rootVC.children.count == 2
+        if splitViewControllerHasTwoRootNavigationControllers {
+            guard let detailNC = rootVC.children.last as? UINavigationController else { return }
+            detailNC.pushViewController(videoGalleryVC, animated: true)
+        } else {
+            guard let rootNC = rootVC.children.first else { return }
+            guard let detailNC = rootNC.children.last as? UINavigationController else { return }
+            detailNC.pushViewController(videoGalleryVC, animated: true)
+        }
+    }
 }
 
 extension VideoGalleryCoordinator {

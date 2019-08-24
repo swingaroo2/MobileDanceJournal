@@ -12,7 +12,7 @@ class VideoGalleryVC: UIViewController, Storyboarded {
 
     var coordinator: VideoGalleryCoordinator!
     var coreDataManager: CoreDataManager!
-    var tableViewManager: VideoGalleryTableManager!
+    var tableManager: VideoGalleryTableManager!
     var videoHelper: VideoHelper!
     var practiceSession: PracticeSession!
     var practiceSessionPicker: PracticeSessionPickerView?
@@ -23,7 +23,7 @@ class VideoGalleryVC: UIViewController, Storyboarded {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setUpTableManager()
+         tableManager = setUpTableManager()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -32,18 +32,16 @@ class VideoGalleryVC: UIViewController, Storyboarded {
         prefetchVideos(for: practiceSession)
     }
     
-    private func setUpTableManager() {
-        videosTableView.delegate = tableViewManager
-        videosTableView.dataSource = tableViewManager
-        coreDataManager.practiceVideoDelegate = tableViewManager
-        
-        tableViewManager.tableView = videosTableView
-        tableViewManager.practiceSession = practiceSession
-        tableViewManager.practiceSessionPicker = practiceSessionPicker
-        tableViewManager.noContentLabel = noContentLabel
-        tableViewManager.videoHelper = videoHelper
-        tableViewManager.coordinator = coordinator
-        tableViewManager.videoToMove = videoToMove
+    private func setUpTableManager() -> VideoGalleryTableManager {
+        let tableManager = VideoGalleryTableManager(videosTableView, coreDataManager: coreDataManager)
+        tableManager.managedVC = self
+        tableManager.practiceSession = practiceSession
+        tableManager.practiceSessionPicker = practiceSessionPicker
+        tableManager.noContentLabel = noContentLabel
+        tableManager.videoHelper = videoHelper
+        tableManager.coordinator = coordinator
+        tableManager.videoToMove = videoToMove
+        return tableManager
     }
     
     private func setUpView() {
@@ -51,7 +49,6 @@ class VideoGalleryVC: UIViewController, Storyboarded {
         let addVideoImage = UIImage(named: CustomImages.addVideo)
         let addVideoButton = UIBarButtonItem.init(image: addVideoImage, landscapeImagePhone: addVideoImage, style: .plain, target: self, action: #selector(addVideoButtonPressed(_:)))
         navigationItem.rightBarButtonItems = [addVideoButton, editButtonItem]
-        videosTableView.tableFooterView = UIView()
     }
     
 }

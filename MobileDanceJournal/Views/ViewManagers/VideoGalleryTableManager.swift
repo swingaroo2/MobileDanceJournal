@@ -13,8 +13,8 @@ import CoreData
 class VideoGalleryTableManager: NSObject {
     
     private let coreDataManager: CoreDataManager!
-    private let managedVC: UIViewController
-    var tableView: UITableView!
+    private let managedTableView: UITableView!
+    var managedVC: UIViewController!
     var practiceSession: PracticeSession!
     var practiceSessionPicker: PracticeSessionPickerView!
     var noContentLabel: UILabel!
@@ -22,9 +22,14 @@ class VideoGalleryTableManager: NSObject {
     var coordinator: VideoGalleryCoordinator!
     var videoToMove: PracticeVideo?
     
-    init(_ managedVC: UIViewController, coreDataManager: CoreDataManager) {
-        self.managedVC = managedVC
+    init(_ managedTableView: UITableView, coreDataManager: CoreDataManager) {
+        self.managedTableView = managedTableView
         self.coreDataManager = coreDataManager
+        super.init()
+        self.managedTableView.tableFooterView = UIView()
+        self.managedTableView.delegate = self
+        self.managedTableView.dataSource = self
+        self.coreDataManager.practiceVideoDelegate = self
     }
 }
 
@@ -32,23 +37,17 @@ class VideoGalleryTableManager: NSObject {
 extension VideoGalleryTableManager: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let fetchedObjects = coreDataManager.practiceVideoFRC.fetchedObjects
+        let fetchedObjects = coreDataManager.fetchVideos(for: practiceSession)
         
         if let rightBarButtonItems = managedVC.navigationItem.rightBarButtonItems {
             rightBarButtonItems.forEach { button in
                 if button.title == Actions.edit {
-                    if let fetchedVideos = fetchedObjects {
-                        button.isEnabled = fetchedVideos.count > 0
-                    } else {
-                        button.isEnabled = false
-                    }
+                   button.isEnabled = fetchedObjects.count > 0
                 }
             }
-            
         }
         
-        guard let fetchedVideos = fetchedObjects else { return 0 }
-        let count = fetchedVideos.count
+        let count = fetchedObjects.count
 
         UIView.transition(with: noContentLabel, duration: 0.4, options: .transitionCrossDissolve, animations: {
             self.noContentLabel.isHidden = count > 0
@@ -196,17 +195,17 @@ extension VideoGalleryTableManager: NSFetchedResultsControllerDelegate {
         switch (type) {
         case .insert:
             if let indexPath = newIndexPath {
-                tableView.insertRows(at: [indexPath], with: .fade)
+                managedTableView.insertRows(at: [indexPath], with: .fade)
             }
             break;
         case .delete:
             if let indexPath = indexPath {
-                tableView.deleteRows(at: [indexPath], with: .fade)
+                managedTableView.deleteRows(at: [indexPath], with: .fade)
             }
             break;
         case .update:
             if let indexPath = indexPath {
-                tableView.reloadRows(at: [indexPath], with: .fade)
+                managedTableView.reloadRows(at: [indexPath], with: .fade)
             }
             break;
         default:
@@ -215,10 +214,10 @@ extension VideoGalleryTableManager: NSFetchedResultsControllerDelegate {
     }
     
     func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        tableView.beginUpdates()
+        managedTableView.beginUpdates()
     }
     
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        tableView.endUpdates()
+        managedTableView.endUpdates()
     }
 }

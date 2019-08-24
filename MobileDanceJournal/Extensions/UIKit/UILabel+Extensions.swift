@@ -18,7 +18,7 @@ extension UILabel {
         
         if keyPath.lowercased() == "date" {
             guard let date = rawValue as? Date else { return }
-            let dateText = Date.getStringFromDate(date, .displayFormat)
+            let dateText = Date.getStringFromDate(date, .notepadDisplayFormat)
             text = dateText
         }
         
