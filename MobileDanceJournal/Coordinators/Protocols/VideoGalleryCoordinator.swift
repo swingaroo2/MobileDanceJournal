@@ -52,7 +52,7 @@ class VideoGalleryCoordinator: NSObject, Coordinator {
 extension VideoGalleryCoordinator {
     func startEditingVideo(presentingVC: UIViewController, videoHelper: VideoHelper, videoPicker: UIImagePickerController? = nil) {
         let videoUploadVC = VideoUploadVC.instantiate()
-        //        videoUploadVC.coordinator = self
+        videoUploadVC.coordinator = self
         videoUploadVC.coreDataManager = coreDataManager
         videoUploadVC.videoHelper = videoHelper
         videoUploadVC.modalTransitionStyle = .crossDissolve

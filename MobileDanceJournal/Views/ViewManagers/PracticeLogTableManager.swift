@@ -145,7 +145,9 @@ private extension PracticeLogTableManager {
         let practiceSession = practiceSessions[indexPath.row]
         cell.textLabel!.text = practiceSession.title
         cell.textLabel?.highlightedTextColor = .darkText
-        cell.detailTextLabel!.text = Date.getStringFromDate(practiceSession.date, .practiceLogDisplayFormat)
+        
+        let videoCount = (practiceSession.videos ?? []).count
+        cell.detailTextLabel!.text = videoCount != 1 ? "\(videoCount) Videos" : "\(videoCount) Video"
         cell.detailTextLabel!.highlightedTextColor = .darkText
     }
 }
