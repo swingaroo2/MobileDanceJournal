@@ -132,6 +132,12 @@
 		926E709F2311F94800A3CCD0 /* PickerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926E709E2311F94800A3CCD0 /* PickerManager.swift */; };
 		926E70A02311F94800A3CCD0 /* PickerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926E709E2311F94800A3CCD0 /* PickerManager.swift */; };
 		926E70A12311F94800A3CCD0 /* PickerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926E709E2311F94800A3CCD0 /* PickerManager.swift */; };
+		926E70A42311FB2300A3CCD0 /* GroupPickerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926E70A32311FB2300A3CCD0 /* GroupPickerManager.swift */; };
+		926E70A52311FB2300A3CCD0 /* GroupPickerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926E70A32311FB2300A3CCD0 /* GroupPickerManager.swift */; };
+		926E70A62311FB2300A3CCD0 /* GroupPickerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926E70A32311FB2300A3CCD0 /* GroupPickerManager.swift */; };
+		926E70A82311FD6E00A3CCD0 /* GroupPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926E70A72311FD6E00A3CCD0 /* GroupPickerView.swift */; };
+		926E70A92311FD6E00A3CCD0 /* GroupPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926E70A72311FD6E00A3CCD0 /* GroupPickerView.swift */; };
+		926E70AA2311FD6E00A3CCD0 /* GroupPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926E70A72311FD6E00A3CCD0 /* GroupPickerView.swift */; };
 		926EDD91230B449F003DFDC3 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926EDD90230B449F003DFDC3 /* RootViewController.swift */; };
 		926EDD92230B449F003DFDC3 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926EDD90230B449F003DFDC3 /* RootViewController.swift */; };
 		926EDD93230B449F003DFDC3 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926EDD90230B449F003DFDC3 /* RootViewController.swift */; };
@@ -262,6 +268,8 @@
 		926E7091231194FD00A3CCD0 /* PracticeSession+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PracticeSession+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		926E709923119A6900A3CCD0 /* ToolbarPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolbarPickerView.swift; sourceTree = "<group>"; };
 		926E709E2311F94800A3CCD0 /* PickerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerManager.swift; sourceTree = "<group>"; };
+		926E70A32311FB2300A3CCD0 /* GroupPickerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupPickerManager.swift; sourceTree = "<group>"; };
+		926E70A72311FD6E00A3CCD0 /* GroupPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupPickerView.swift; sourceTree = "<group>"; };
 		926EDD90230B449F003DFDC3 /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
 		92706C8D22DFC696009BA88C /* UIImage+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extensions.swift"; sourceTree = "<group>"; };
 		927B6B05230F116700CC1F9F /* PracticeLogCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PracticeLogCoordinator.swift; sourceTree = "<group>"; wrapsLines = 0; };
@@ -462,6 +470,7 @@
 		926B0D9522F56AD400112743 /* ViewManagers */ = {
 			isa = PBXGroup;
 			children = (
+				926E70A32311FB2300A3CCD0 /* GroupPickerManager.swift */,
 				926B0D9622F56B4300112743 /* NotepadTextViewManager.swift */,
 				926B0D9E22F58DCF00112743 /* PracticeSessionPickerManager.swift */,
 				926E709823119A4500A3CCD0 /* Protocols */,
@@ -589,6 +598,7 @@
 		92FBA3F122764AB90017910E /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				926E70A72311FD6E00A3CCD0 /* GroupPickerView.swift */,
 				926BEE3722E63D5100BC3DD4 /* PracticeSessionPickerView.swift */,
 				922C47AE2283F8F600367625 /* VideoGalleryTableViewCell.swift */,
 				926E709D2311F92200A3CCD0 /* Protocols */,
@@ -805,6 +815,7 @@
 				926BEE2A22E58C5500BC3DD4 /* PracticeVideo+Extensions.swift in Sources */,
 				927B6B06230F116700CC1F9F /* PracticeLogCoordinator.swift in Sources */,
 				927B6B0A230F20AE00CC1F9F /* VideoGalleryCoordinator.swift in Sources */,
+				926E70A82311FD6E00A3CCD0 /* GroupPickerView.swift in Sources */,
 				9232AC88226D4015004DB260 /* PracticeLogVC.swift in Sources */,
 				9232AC86226D4015004DB260 /* AppDelegate.swift in Sources */,
 				928D59B2230DCBD00000945E /* PracticeVideo+CoreDataClass copy.swift in Sources */,
@@ -819,6 +830,7 @@
 				92509E9E22D6E29600A915F5 /* VideoUploadVC.swift in Sources */,
 				927FA3F622DD3C2400F58F58 /* VideoLocalStorageManager.swift in Sources */,
 				9232ACB8226D4298004DB260 /* Constants.swift in Sources */,
+				926E70A42311FB2300A3CCD0 /* GroupPickerManager.swift in Sources */,
 				9227147622CC819000C6CFAC /* UITextField+Extensions.swift in Sources */,
 				926B0D9F22F58DCF00112743 /* PracticeSessionPickerManager.swift in Sources */,
 				927FA3FA22DD959900F58F58 /* URLBuilder.swift in Sources */,
@@ -850,6 +862,7 @@
 				9232ACC722713DDC004DB260 /* PracticeNotepadVC.swift in Sources */,
 				922E20E92283DD8F00295A19 /* Constants.swift in Sources */,
 				922E20E72283DC2000295A19 /* VideoGalleryVC+Extensions.swift in Sources */,
+				926E70A92311FD6E00A3CCD0 /* GroupPickerView.swift in Sources */,
 				9227146A22CBFBC000C6CFAC /* SplitViewCoordinator.swift in Sources */,
 				926BEE2B22E58C5500BC3DD4 /* PracticeVideo+Extensions.swift in Sources */,
 				926E70942311950100A3CCD0 /* PracticeSession+CoreDataProperties.swift in Sources */,
@@ -891,6 +904,7 @@
 				92FBA3DE22718E9C0017910E /* AppDelegate.swift in Sources */,
 				927FA3FB22DD959900F58F58 /* URLBuilder.swift in Sources */,
 				922E20DF228123B600295A19 /* UIView+Extensions.swift in Sources */,
+				926E70A52311FB2300A3CCD0 /* GroupPickerManager.swift in Sources */,
 				926BEE1622E0263800BC3DD4 /* VideoUploadVC+Extensions.swift in Sources */,
 				926B0DA022F58DCF00112743 /* PracticeSessionPickerManager.swift in Sources */,
 				92706C9822E01BC7009BA88C /* UIWindow+Extensions.swift in Sources */,
@@ -915,6 +929,7 @@
 				9232ACC822713DDC004DB260 /* PracticeNotepadVC.swift in Sources */,
 				922E20EA2283DD8F00295A19 /* Constants.swift in Sources */,
 				922E20E82283DC2000295A19 /* VideoGalleryVC+Extensions.swift in Sources */,
+				926E70AA2311FD6E00A3CCD0 /* GroupPickerView.swift in Sources */,
 				9227146B22CBFBC000C6CFAC /* SplitViewCoordinator.swift in Sources */,
 				926BEE2C22E58C5500BC3DD4 /* PracticeVideo+Extensions.swift in Sources */,
 				926E70952311950200A3CCD0 /* PracticeSession+CoreDataProperties.swift in Sources */,
@@ -956,6 +971,7 @@
 				92FBA3DF22718E9D0017910E /* AppDelegate.swift in Sources */,
 				927FA3FC22DD959900F58F58 /* URLBuilder.swift in Sources */,
 				922E20E0228123B600295A19 /* UIView+Extensions.swift in Sources */,
+				926E70A62311FB2300A3CCD0 /* GroupPickerManager.swift in Sources */,
 				926BEE1722E0263900BC3DD4 /* VideoUploadVC+Extensions.swift in Sources */,
 				926B0DA122F58DCF00112743 /* PracticeSessionPickerManager.swift in Sources */,
 				92706C9922E01BC8009BA88C /* UIWindow+Extensions.swift in Sources */,

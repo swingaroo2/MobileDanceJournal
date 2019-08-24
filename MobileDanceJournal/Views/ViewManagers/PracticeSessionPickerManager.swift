@@ -11,14 +11,14 @@ import UIKit
 
 class PracticeSessionPickerManager: NSObject, PickerManager {
     
-    var managedPickerView: ToolbarPickerView
+    var managedView: ToolbarPickerView
     var coreDataManager: CoreDataManager
     var practiceSessions: [PracticeSession]!
     var oldPracticeSession: PracticeSession!
     var videoToMove: PracticeVideo!
     
-    init(_ managedView: ToolbarPickerView,_ coreDataManager: CoreDataManager) {
-        self.managedPickerView = managedView
+    required init(_ managedView: ToolbarPickerView,_ coreDataManager: CoreDataManager) {
+        self.managedView = managedView
         self.coreDataManager = coreDataManager
     }
 }
@@ -26,7 +26,7 @@ class PracticeSessionPickerManager: NSObject, PickerManager {
 // MARK: - Picker delegate
 extension PracticeSessionPickerManager: UIPickerViewDelegate {
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        let practiceSession = coreDataManager.practiceSessionFRC.object(at: IndexPath(row: row, section: component))
+        let practiceSession = practiceSessions[row]
         return practiceSession.title
     }
     
@@ -59,19 +59,17 @@ extension PracticeSessionPickerManager: UIPickerViewDataSource {
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        guard let practiceSessions = coreDataManager.practiceSessionFRC.fetchedObjects else { return 0 }
-        let numberOfComponents = practiceSessions.count
-        return numberOfComponents
+        return practiceSessions.count
     }
 }
 
 // MARK: - IBActions
 extension PracticeSessionPickerManager {
     func doneButtonPressed() {
-        let selectedPickerRow = managedPickerView.picker.selectedRow(inComponent: 0)
+        let selectedPickerRow = managedView.picker.selectedRow(inComponent: 0)
         let destinationPracticeSession = practiceSessions[selectedPickerRow]
         
         coreDataManager.move(videoToMove, from: oldPracticeSession, to: destinationPracticeSession)
-        managedPickerView.hide()
+        managedView.hide()
     }
 }

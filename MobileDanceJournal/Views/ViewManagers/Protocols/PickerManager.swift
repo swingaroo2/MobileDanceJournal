@@ -10,14 +10,16 @@ import Foundation
 import UIKit
 
 protocol PickerManager: UIPickerViewDelegate, UIPickerViewDataSource {
-    var managedPickerView: ToolbarPickerView { get }
+    var managedView: ToolbarPickerView { get }
     var coreDataManager: CoreDataManager { get }
+    
+    init(_ managedView: ToolbarPickerView,_ coreDataManager: CoreDataManager)
     
     func doneButtonPressed()
 }
 
 extension PickerManager {
     func cancelButtonPressed() {
-        managedPickerView.hide()
+        managedView.hide()
     }
 }

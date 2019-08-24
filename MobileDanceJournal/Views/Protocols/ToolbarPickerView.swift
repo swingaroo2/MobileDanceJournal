@@ -12,8 +12,6 @@ import UIKit
 protocol ToolbarPickerView: UIView {
     var picker: UIPickerView { get set }
     var manager: PickerManager! { get set }
-    
-    init(_ videoToMove: PracticeVideo, from oldPracticeLog: PracticeSession, to newPracticeLogs: [PracticeSession], _ coreDataManager: CoreDataManager, managedView: UIView)
 }
 
 extension ToolbarPickerView {
