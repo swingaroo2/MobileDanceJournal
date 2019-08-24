@@ -104,6 +104,12 @@ extension PracticeLogTableManager: UITableViewDelegate {
         let editingStyle = tableView.allowsMultipleSelection ? UITableViewCell.EditingStyle.none : .delete
         return editingStyle
     }
+    
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        // Next: Implement picker to move practice sessions between groups
+        // Pattern this off video gallery
+        return nil
+    }
 }
 
 // MARK: - NSFetchedResultsControllerDelegate

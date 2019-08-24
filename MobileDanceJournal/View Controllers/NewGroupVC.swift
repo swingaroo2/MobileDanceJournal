@@ -40,6 +40,7 @@ class NewGroupVC: UIViewController, Storyboarded {
     }
     
     private func configureTableManager(_ managedTableView: UITableView,_ coreDataManager: CoreDataManager) -> PracticeLogTableManager {
+        managedTableView.tableFooterView = UIView()
         let tableManager = PracticeLogTableManager(tableView, coreDataManager)
         tableManager.managedVC = self
         return tableManager
