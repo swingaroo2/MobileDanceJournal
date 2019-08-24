@@ -88,6 +88,7 @@ public class CoreDataManager : NSObject {
 
 // MARK: - Fetch/Save/Delete
 extension CoreDataManager {
+    
     func fetchPracticeSessions(in group: Group?) -> [PracticeSession]? {
         
         practiceSessionFRC.fetchRequest.predicate = (group != nil) ? NSPredicate(format: Predicates.hasGroup, group!) : NSPredicate(format: Predicates.hasNoGroup)

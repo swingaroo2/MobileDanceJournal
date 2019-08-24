@@ -241,7 +241,7 @@
 		9241FEAE22C3F9AF00342FC9 /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; wrapsLines = 0; };
 		92509E9D22D6E29600A915F5 /* VideoUploadVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoUploadVC.swift; sourceTree = "<group>"; usesTabs = 0; wrapsLines = 0; };
 		926B0D9622F56B4300112743 /* NotepadTextViewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotepadTextViewManager.swift; sourceTree = "<group>"; };
-		926B0D9A22F571E800112743 /* VideoGalleryTableManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoGalleryTableManager.swift; sourceTree = "<group>"; };
+		926B0D9A22F571E800112743 /* VideoGalleryTableManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoGalleryTableManager.swift; sourceTree = "<group>"; wrapsLines = 0; };
 		926B0D9E22F58DCF00112743 /* PracticeSessionPickerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PracticeSessionPickerManager.swift; sourceTree = "<group>"; wrapsLines = 0; };
 		926B0DA222F58E3500112743 /* PracticeLogTableManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PracticeLogTableManager.swift; sourceTree = "<group>"; wrapsLines = 0; };
 		926BEE1422E0215500BC3DD4 /* VideoUploadVC+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "VideoUploadVC+Extensions.swift"; sourceTree = "<group>"; };
