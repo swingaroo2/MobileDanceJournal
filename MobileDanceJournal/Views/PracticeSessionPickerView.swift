@@ -44,7 +44,7 @@ private extension PracticeSessionPickerView {
         let manager = PracticeSessionPickerManager(self, coreDataManager)
         manager.videoToMove = videoToMove
         manager.oldPracticeSession = oldPracticeLog
-        manager.practiceSessions = newPracticeLogs.filter { $0 != oldPracticeLog }
+        manager.practiceSessions = newPracticeLogs.filter { $0 !== oldPracticeLog }
         return manager
     }
 }

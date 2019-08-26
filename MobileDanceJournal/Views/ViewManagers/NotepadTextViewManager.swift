@@ -73,6 +73,11 @@ private extension NotepadTextViewManager {
         
         practiceSessionToSave.title = notepadVC.practiceSessionTitleTextView.text
         practiceSessionToSave.notes = notepadVC.practiceSessionContent.text
-        coreDataManager.save()
+        
+        if let groupToUpdate = notepadVC.coordinator.currentGroup {
+            coreDataManager.add([practiceSessionToSave], to: groupToUpdate)
+        } else {
+            coreDataManager.save()
+        }
     }
 }

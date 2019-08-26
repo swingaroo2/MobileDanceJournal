@@ -22,8 +22,15 @@ class PracticeLogVC: UIViewController, Storyboarded {
         setUpView()
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        print("=============================")
+    }
+    
     private func configureTableManager(_ managedTableView: UITableView,_ coreDataManager: CoreDataManager) -> PracticeLogTableManager {
-        let tableManager = PracticeLogTableManager(managedTableView, coreDataManager)
+        let practiceLogCount = coreDataManager.fetchPracticeSessions(in: currentGroup)?.count ?? 0
+        
+        let tableManager = PracticeLogTableManager(managedTableView, coreDataManager, practiceLogCount)
         tableManager.coordinator = coordinator
         tableManager.managedVC = self
         tableManager.currentGroup = currentGroup

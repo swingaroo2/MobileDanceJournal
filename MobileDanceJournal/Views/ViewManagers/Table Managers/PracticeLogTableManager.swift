@@ -20,11 +20,21 @@ class PracticeLogTableManager: NSObject {
     var coordinator: PracticeLogCoordinator?
     var currentGroup: Group?
     var selectedRow = -1
-    var noContentLabel: UILabel!
+    var originalPracticeLogCount = 0
     
     init(_ managedTableView: UITableView,_ coreDataManager: CoreDataManager) {
         self.managedTableView = managedTableView
         self.coreDataManager = coreDataManager
+        super.init()
+        self.managedTableView.delegate = self
+        self.managedTableView.dataSource = self
+        self.coreDataManager.practiceSessionDelegate = self
+    }
+    
+    init(_ managedTableView: UITableView,_ coreDataManager: CoreDataManager,_ originalPracticeLogCount: Int) {
+        self.managedTableView = managedTableView
+        self.coreDataManager = coreDataManager
+        self.originalPracticeLogCount = originalPracticeLogCount
         super.init()
         self.managedTableView.delegate = self
         self.managedTableView.dataSource = self
@@ -49,6 +59,7 @@ extension PracticeLogTableManager: UITableViewDataSource {
         guard let practiceSessions = coreDataManager.fetchPracticeSessions(in: currentGroup) else { return 0 }
         self.practiceSessions = practiceSessions
         managedVC.navigationItem.leftBarButtonItem?.isEnabled = practiceSessions.count > 0
+        print("\(practiceSessions.count) Practice Session(s)")
         return practiceSessions.count
     }
     
@@ -114,23 +125,27 @@ extension PracticeLogTableManager: UITableViewDelegate {
         let deleteAction = UIContextualAction(style: .destructive, title: Actions.delete) { [unowned self] (action, view, completionHandler) in
             let practiceSessionToDelete = self.coreDataManager.practiceSessionFRC.object(at: indexPath)
             self.coreDataManager.delete(practiceSessionToDelete)
+            
+            guard self.currentGroup != nil else {
+                completionHandler(true)
+                return
+            }
+            self.managedTableView.deleteRows(at: [indexPath], with: .fade)
+            self.originalPracticeLogCount -= 1
+            
             completionHandler(true)
         }
         
         let moveAction = UIContextualAction(style: .normal, title: Actions.move) { [unowned self] (action, view, completionHandler) in
-//            let practiceSessionToMove = self.coreDataManager.practiceSessionFRC.object(at: indexPath)
-//
-//            guard let groups = self.coreDataManager.groupFRC.fetchedObjects else {
-//                completionHandler(false)
-//                return
-//            }
+            let practiceLogToMove = self.coreDataManager.practiceSessionFRC.object(at: indexPath)
+
+            guard let groups = self.coreDataManager.groupFRC.fetchedObjects else {
+                completionHandler(false)
+                return
+            }
             
-            /*
-             THE PLAN
-             - Create GroupPickerView: ToolbarPickerView
-             - Create GroupPickerManager: PickerManager
-             
-             */
+            let groupPickerView = GroupPickerView(practiceLogToMove, practiceLogToMove.group, groups, self.coreDataManager, managedView: self.managedVC.view)
+            groupPickerView.show()
             completionHandler(true)
         }
         moveAction.backgroundColor = .black
@@ -157,20 +172,32 @@ extension PracticeLogTableManager: NSFetchedResultsControllerDelegate {
         case .insert:
             if let indexPath = newIndexPath {
                 managedTableView.insertRows(at: [indexPath], with: .fade)
+                originalPracticeLogCount += 1
+                print("INSERT: \(anObject as! PracticeSession)")
             }
             break;
         case .delete:
             if let indexPath = indexPath {
                 managedTableView.deleteRows(at: [indexPath], with: .fade)
+                originalPracticeLogCount -= 1
+                print("DELETE: \(anObject as! PracticeSession)")
             }
             break;
         case .update:
-            if let indexPath = indexPath {
-                managedTableView.reloadRows(at: [indexPath], with: .fade)
+            print("UPDATE: \(anObject as! PracticeSession)")
+            managedTableView.reloadData()
+            if let indexPath = indexPath, let newIndexPath = newIndexPath {
+                let newCount = coreDataManager.fetchPracticeSessions(in: currentGroup)?.count ?? 0
+                if originalPracticeLogCount < newCount {
+                    managedTableView.insertRows(at: [newIndexPath], with: .fade)
+                    originalPracticeLogCount += 1
+                } else {
+                    managedTableView.reloadRows(at: [indexPath], with: .fade)
+                }
             }
             break;
         default:
-            print("\(#function): Unhandled case")
+            print("\(#file).\(#function): Unhandled type \(type)")
         }
     }
     
@@ -179,12 +206,14 @@ extension PracticeLogTableManager: NSFetchedResultsControllerDelegate {
     }
     
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        managedTableView.endUpdates()
+         managedTableView.endUpdates()
     }
 }
 
 private extension PracticeLogTableManager {
     private func configureCell(_ cell: UITableViewCell, _ indexPath: IndexPath) {
+        guard let practiceSessions = coreDataManager.fetchPracticeSessions(in: currentGroup) else { return }
+        
         let practiceSession = practiceSessions[indexPath.row]
         cell.textLabel?.text = practiceSession.title
         cell.textLabel?.highlightedTextColor = .darkText

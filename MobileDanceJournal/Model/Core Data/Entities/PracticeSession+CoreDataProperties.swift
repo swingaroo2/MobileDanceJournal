@@ -20,7 +20,7 @@ extension PracticeSession {
     @NSManaged public var date: Date
     @NSManaged public var notes: String
     @NSManaged public var title: String
-    @NSManaged public var group: Group
+    @NSManaged public var group: Group?
     @NSManaged public var videos: NSSet
 
 }

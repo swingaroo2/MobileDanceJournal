@@ -112,6 +112,7 @@ extension CoreDataManager {
     
     func save() {
         if persistentContainer.viewContext.hasChanges {
+            print("[CoreDataManager] \(#function)")
             self.executeSave()
         } else {
             print("[CoreDataManager] No changes in viewContext")
@@ -176,16 +177,18 @@ extension CoreDataManager {
         save()
     }
     
-    func move(_ video: PracticeVideo, from oldPracticeSession: PracticeSession, to newPracticeSession: PracticeSession) {
-        video.practiceSession = newPracticeSession
-        oldPracticeSession.removeFromVideos(video)
+    func move(_ videos: [PracticeVideo], from oldPracticeSession: PracticeSession, to newPracticeSession: PracticeSession) {
+        let videoSet = NSSet(array: videos)
+        oldPracticeSession.removeFromVideos(videoSet)
+        newPracticeSession.addToVideos(videoSet)
         save()
     }
     
-    func move(_ practiceSessions: [PracticeSession], from oldGroup: Group, to newGroup: Group) {
-        let practiceSessionSet = NSSet(array: practiceSessions)
-        oldGroup.removeFromPracticeSessions(practiceSessionSet)
-        newGroup.addToPracticeSessions(practiceSessionSet)
+    func move(_ practiceSessions: [PracticeSession], from oldGroup: Group?, to newGroup: Group?) {
+        let _ = practiceSessions.map { $0.group = newGroup }
+//        let practiceSessionSet = NSSet(array: practiceSessions)
+//        oldGroup?.removeFromPracticeSessions(practiceSessionSet)
+//        newGroup?.addToPracticeSessions(practiceSessionSet)
         save()
     }
     

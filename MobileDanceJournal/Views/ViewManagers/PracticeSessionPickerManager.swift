@@ -23,7 +23,7 @@ class PracticeSessionPickerManager: NSObject, PickerManager {
     }
 }
 
-// MARK: - Picker delegate
+// MARK: UIPickerViewDelegate
 extension PracticeSessionPickerManager: UIPickerViewDelegate {
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         let practiceSession = practiceSessions[row]
@@ -51,7 +51,7 @@ extension PracticeSessionPickerManager: UIPickerViewDelegate {
     }
 }
 
-// MARK: - Picker data source
+// MARK: UIPickerViewDataSource
 extension PracticeSessionPickerManager: UIPickerViewDataSource {
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -66,10 +66,10 @@ extension PracticeSessionPickerManager: UIPickerViewDataSource {
 // MARK: - IBActions
 extension PracticeSessionPickerManager {
     func doneButtonPressed() {
-        let selectedPickerRow = managedView.picker.selectedRow(inComponent: 0)
-        let destinationPracticeSession = practiceSessions[selectedPickerRow]
+        let selectedRow = managedView.picker.selectedRow(inComponent: 0)
+        let destinationPracticeSession = practiceSessions[selectedRow]
         
-        coreDataManager.move(videoToMove, from: oldPracticeSession, to: destinationPracticeSession)
+        coreDataManager.move([videoToMove], from: oldPracticeSession, to: destinationPracticeSession)
         managedView.hide()
     }
 }

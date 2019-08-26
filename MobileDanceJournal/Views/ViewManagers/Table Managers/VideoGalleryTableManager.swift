@@ -158,7 +158,7 @@ extension VideoGalleryTableManager: UITableViewDelegate {
             }
             
             self.practiceSessionPicker = PracticeSessionPickerView(video, from: self.practiceSession, to: practiceSessions, self.coreDataManager, managedView: self.managedVC.view)
-            self.practiceSessionPicker!.show()
+            self.practiceSessionPicker.show()
             
             completionHandler(true)
         }
@@ -166,7 +166,7 @@ extension VideoGalleryTableManager: UITableViewDelegate {
         
         var swipeActions = [deleteAction, editAction, shareAction, moveAction]
         
-        if let fetchedPracticeSessions = practiceSession.group.practiceSessions {
+        if let fetchedPracticeSessions = practiceSession.group?.practiceSessions {
             if fetchedPracticeSessions.count == 1 {
                 swipeActions = [deleteAction, editAction, shareAction]
             }

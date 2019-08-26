@@ -12,7 +12,7 @@ import UIKit
 class PracticeLogCoordinator: Coordinator {
     private let rootVC: SplitViewRootController
     private let coreDataManager: CoreDataManager
-    private let currentGroup: Group?
+    let currentGroup: Group?
     
     var childCoordinators = [Coordinator]()
     var navigationController = UINavigationController()
@@ -40,6 +40,7 @@ class PracticeLogCoordinator: Coordinator {
 extension PracticeLogCoordinator {
     func startEditingNewPracticeSession() {
         let newPracticeSession = coreDataManager.insertAndReturnNewPracticeSession()
+        newPracticeSession.group = currentGroup
         showDetails(for: newPracticeSession)
     }
     
