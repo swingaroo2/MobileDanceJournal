@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 class PracticeLogCoordinator: Coordinator {
-    private let rootVC: SplitViewRootController
+    let rootVC: SplitViewRootController
     private let coreDataManager: CoreDataManager
     let currentGroup: Group?
     

@@ -269,7 +269,7 @@
 		926E709923119A6900A3CCD0 /* ToolbarPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolbarPickerView.swift; sourceTree = "<group>"; };
 		926E709E2311F94800A3CCD0 /* PickerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerManager.swift; sourceTree = "<group>"; };
 		926E70A32311FB2300A3CCD0 /* GroupPickerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupPickerManager.swift; sourceTree = "<group>"; };
-		926E70A72311FD6E00A3CCD0 /* GroupPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupPickerView.swift; sourceTree = "<group>"; };
+		926E70A72311FD6E00A3CCD0 /* GroupPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupPickerView.swift; sourceTree = "<group>"; wrapsLines = 0; };
 		926EDD90230B449F003DFDC3 /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
 		92706C8D22DFC696009BA88C /* UIImage+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extensions.swift"; sourceTree = "<group>"; };
 		927B6B05230F116700CC1F9F /* PracticeLogCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PracticeLogCoordinator.swift; sourceTree = "<group>"; wrapsLines = 0; };

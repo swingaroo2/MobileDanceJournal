@@ -13,8 +13,6 @@ protocol PickerManager: UIPickerViewDelegate, UIPickerViewDataSource {
     var managedView: ToolbarPickerView { get }
     var coreDataManager: CoreDataManager { get }
     
-    init(_ managedView: ToolbarPickerView,_ coreDataManager: CoreDataManager)
-    
     func doneButtonPressed()
 }
 

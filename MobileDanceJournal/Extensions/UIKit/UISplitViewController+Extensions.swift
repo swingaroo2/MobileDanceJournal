@@ -26,8 +26,8 @@ extension UISplitViewController {
         return childVC as? UINavigationController
     }
     
-    var masterVC: PracticeGroupsVC? {
-        return masterNC?.topViewController as? PracticeGroupsVC
+    var masterVC: UIViewController? {
+        return masterNC?.topViewController
     }
     
     var detailVC: PracticeNotepadVC? {

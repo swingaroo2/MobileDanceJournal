@@ -112,17 +112,17 @@ extension PracticeGroupsTableManager: NSFetchedResultsControllerDelegate {
         case .insert:
             if let indexPath = newIndexPath {
                 managedTableView.insertRows(at: [indexPath], with: .fade)
-                print("INSERT: \(anObject as! Group)")
+                print("INSERT: \(anObject)")
             }
         case .delete:
             if let indexPath = indexPath {
                 managedTableView.deleteRows(at: [indexPath], with: .fade)
-                print("DELETE: \(anObject as! Group)")
+                print("DELETE: \(anObject)")
             }
         case .update:
             if let indexPath = indexPath {
                 managedTableView.reloadRows(at: [indexPath], with: .fade)
-                print("UPDATE: \(anObject as! Group)")
+                print("UPDATE: \(anObject)")
             }
         default:
             print("\(#file).\(#function): Unhandled type: \(type)")

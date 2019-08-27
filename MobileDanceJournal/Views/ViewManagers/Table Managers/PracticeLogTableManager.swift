@@ -17,7 +17,7 @@ class PracticeLogTableManager: NSObject {
     var groupPickerView: PracticeSessionPickerView!
     var managedVC: UIViewController!
     var practiceSessions: [PracticeSession]!
-    var coordinator: PracticeLogCoordinator?
+    var coordinator: PracticeLogCoordinator!
     var currentGroup: Group?
     var selectedRow = -1
     var originalPracticeLogCount = 0
@@ -54,7 +54,7 @@ class PracticeLogTableManager: NSObject {
 
 // MARK: UITableViewDataSource
 extension PracticeLogTableManager: UITableViewDataSource {
-    // TODO: Group cells by month and year
+    // TODO: Group cells by year
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard let practiceSessions = coreDataManager.fetchPracticeSessions(in: currentGroup) else { return 0 }
         self.practiceSessions = practiceSessions
@@ -119,8 +119,6 @@ extension PracticeLogTableManager: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        // Next: Implement picker to move practice sessions between groups
-        // Pattern this off video gallery
         
         let deleteAction = UIContextualAction(style: .destructive, title: Actions.delete) { [unowned self] (action, view, completionHandler) in
             let practiceSessionToDelete = self.coreDataManager.practiceSessionFRC.object(at: indexPath)
@@ -144,7 +142,7 @@ extension PracticeLogTableManager: UITableViewDelegate {
                 return
             }
             
-            let groupPickerView = GroupPickerView(practiceLogToMove, practiceLogToMove.group, groups, self.coreDataManager, managedView: self.managedVC.view)
+            let groupPickerView = GroupPickerView(practiceLogToMove, practiceLogToMove.group, groups, self.coreDataManager, managedView: self.managedVC.view, self.coordinator)
             groupPickerView.show()
             completionHandler(true)
         }
@@ -170,30 +168,38 @@ extension PracticeLogTableManager: NSFetchedResultsControllerDelegate {
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
         switch (type) {
         case .insert:
+            print("INSERT: \(anObject)")
             if let indexPath = newIndexPath {
                 managedTableView.insertRows(at: [indexPath], with: .fade)
                 originalPracticeLogCount += 1
-                print("INSERT: \(anObject as! PracticeSession)")
             }
             break;
         case .delete:
+            print("DELETE: \(anObject)")
             if let indexPath = indexPath {
                 managedTableView.deleteRows(at: [indexPath], with: .fade)
                 originalPracticeLogCount -= 1
-                print("DELETE: \(anObject as! PracticeSession)")
             }
             break;
         case .update:
-            print("UPDATE: \(anObject as! PracticeSession)")
-            managedTableView.reloadData()
-            if let indexPath = indexPath, let newIndexPath = newIndexPath {
-                let newCount = coreDataManager.fetchPracticeSessions(in: currentGroup)?.count ?? 0
-                if originalPracticeLogCount < newCount {
-                    managedTableView.insertRows(at: [newIndexPath], with: .fade)
-                    originalPracticeLogCount += 1
+            print("UPDATE: \(anObject)")
+            if let indexPath = indexPath, let cell = managedTableView.cellForRow(at: indexPath) {
+                guard let practiceLogs = coreDataManager.fetchPracticeSessions(in: currentGroup) else { return }
+                if originalPracticeLogCount > practiceLogs.count {
+                    managedTableView.deleteRows(at: [indexPath], with: .fade)
+                    originalPracticeLogCount -= 1
+                } else if originalPracticeLogCount == practiceLogs.count {
+                    configureCell(cell, indexPath)
                 } else {
-                    managedTableView.reloadRows(at: [indexPath], with: .fade)
+                    managedTableView.insertRows(at: [indexPath], with: .fade)
+                    originalPracticeLogCount += 1
                 }
+            }
+        case .move:
+            print("MOVE: \(anObject)")
+            if let indexPath = indexPath, let newIndexPath = newIndexPath {
+                managedTableView.deleteRows(at: [indexPath], with: .fade)
+                managedTableView.insertRows(at: [newIndexPath], with: .fade)
             }
             break;
         default:

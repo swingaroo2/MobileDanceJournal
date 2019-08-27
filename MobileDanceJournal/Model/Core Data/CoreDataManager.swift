@@ -186,9 +186,6 @@ extension CoreDataManager {
     
     func move(_ practiceSessions: [PracticeSession], from oldGroup: Group?, to newGroup: Group?) {
         let _ = practiceSessions.map { $0.group = newGroup }
-//        let practiceSessionSet = NSSet(array: practiceSessions)
-//        oldGroup?.removeFromPracticeSessions(practiceSessionSet)
-//        newGroup?.addToPracticeSessions(practiceSessionSet)
         save()
     }
     
