@@ -76,7 +76,6 @@ extension PracticeLogTableManager: UITableViewDataSource {
         if editingStyle == .delete {
             let practiceSession = coreDataManager.practiceSessionFRC.object(at: indexPath)
             coreDataManager.delete(practiceSession)
-            coreDataManager.save()
             
             let rowToDelete = indexPath.row
             if selectedRow == rowToDelete {

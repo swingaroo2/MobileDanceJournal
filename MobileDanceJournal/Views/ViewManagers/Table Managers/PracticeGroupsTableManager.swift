@@ -27,6 +27,7 @@ class PracticeGroupsTableManager: NSObject {
         self.managedTableView.delegate = self
         self.managedTableView.dataSource = self
         self.coreDataManager.practiceGroupsDelegate = self
+        self.coreDataManager.practiceSessionDelegate = nil
     }
 }
 
@@ -115,7 +116,7 @@ extension PracticeGroupsTableManager: NSFetchedResultsControllerDelegate {
                 managedTableView.insertRows(at: [indexPath], with: .fade)
                 
                 let numberOfRows = managedTableView.numberOfRows(inSection: 0)
-                managedTableView.reloadRows(at: [IndexPath(row: numberOfRows, section: 0)], with: .fade)
+                managedTableView.reloadRows(at: [IndexPath(row: numberOfRows - 1, section: 0)], with: .fade)
             }
         case .delete:
             print("DELETE: \(anObject)")
