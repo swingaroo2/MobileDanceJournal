@@ -113,11 +113,17 @@ extension PracticeGroupsTableManager: NSFetchedResultsControllerDelegate {
             print("INSERT: \(anObject)")
             if let indexPath = newIndexPath {
                 managedTableView.insertRows(at: [indexPath], with: .fade)
+                
+                let numberOfRows = managedTableView.numberOfRows(inSection: 0)
+                managedTableView.reloadRows(at: [IndexPath(row: numberOfRows, section: 0)], with: .fade)
             }
         case .delete:
             print("DELETE: \(anObject)")
             if let indexPath = indexPath {
                 managedTableView.deleteRows(at: [indexPath], with: .fade)
+                
+                let numberOfRows = managedTableView.numberOfRows(inSection: 0)
+                managedTableView.reloadRows(at: [IndexPath(row: numberOfRows - 1, section: 0)], with: .fade)
             }
         case .update:
             print("UPDATE: \(anObject)")
