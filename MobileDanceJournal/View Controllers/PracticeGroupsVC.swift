@@ -23,6 +23,13 @@ class PracticeGroupsVC: UIViewController, Storyboarded {
         setUpView()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        // To keep the Uncategorized cell's practice log count up to date
+        tableView.reloadData()
+    }
+    
     private func setUpView() {
         title = VCConstants.practiceGroupsVCTitle
         tableView.tableFooterView = UIView()

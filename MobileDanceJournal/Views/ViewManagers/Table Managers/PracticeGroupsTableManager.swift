@@ -110,19 +110,19 @@ extension PracticeGroupsTableManager: NSFetchedResultsControllerDelegate {
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
         switch (type) {
         case .insert:
+            print("INSERT: \(anObject)")
             if let indexPath = newIndexPath {
                 managedTableView.insertRows(at: [indexPath], with: .fade)
-                print("INSERT: \(anObject)")
             }
         case .delete:
+            print("DELETE: \(anObject)")
             if let indexPath = indexPath {
                 managedTableView.deleteRows(at: [indexPath], with: .fade)
-                print("DELETE: \(anObject)")
             }
         case .update:
+            print("UPDATE: \(anObject)")
             if let indexPath = indexPath {
                 managedTableView.reloadRows(at: [indexPath], with: .fade)
-                print("UPDATE: \(anObject)")
             }
         default:
             print("\(#file).\(#function): Unhandled type: \(type)")
@@ -140,7 +140,6 @@ extension PracticeGroupsTableManager: NSFetchedResultsControllerDelegate {
 }
 
 private extension PracticeGroupsTableManager {
-    // TODO: Later, this will be replaced with a custom cell
     private func configureCell(_ cell: UITableViewCell,_ group: Group?) {
         cell.textLabel?.text = (group != nil) ? group!.name : TextConstants.uncategorized
         let isConfiguringUncategorizedCell = cell.textLabel?.text == TextConstants.uncategorized

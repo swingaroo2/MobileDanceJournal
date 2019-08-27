@@ -59,7 +59,6 @@ extension PracticeLogTableManager: UITableViewDataSource {
         guard let practiceSessions = coreDataManager.fetchPracticeSessions(in: currentGroup) else { return 0 }
         self.practiceSessions = practiceSessions
         managedVC.navigationItem.leftBarButtonItem?.isEnabled = practiceSessions.count > 0
-        print("\(practiceSessions.count) Practice Session(s)")
         return practiceSessions.count
     }
     
