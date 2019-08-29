@@ -112,12 +112,22 @@ extension VideoGalleryTableManager: UITableViewDelegate {
         // TODO: Add images to each of these
         
         let deleteAction = UIContextualAction(style: .destructive, title: Actions.delete) { [unowned self] (action, view, completionHandler) in
-            var deleteSucceeded = true
-            if let error = self.deleteVideo(in: tableView, at: indexPath) {
-                self.managedVC.presentBasicAlert(title: UserErrors.deleteError, message: error.localizedDescription)
-                deleteSucceeded = false
+            
+            let deleteAlertAction: ((UIAlertAction) -> Void) = { action in
+                var deleteSucceeded = true
+                if let error = self.deleteVideo(in: tableView, at: indexPath) {
+                    self.managedVC.presentBasicAlert(title: UserErrors.deleteError, message: error.localizedDescription)
+                    deleteSucceeded = false
+                }
+                completionHandler(deleteSucceeded)
             }
-            completionHandler(deleteSucceeded)
+            
+            let noAlertAction: ((UIAlertAction) -> Void) = { action in
+                completionHandler(false)
+            }
+            
+            self.managedVC.presentYesNoAlert(message: AlertConstants.confirmDelete, yesAction: deleteAlertAction, noAction: noAlertAction)
+            
         }
         
         let editAction = UIContextualAction(style: .normal, title: Actions.edit) { [unowned self] (action, view, completionHandler) in

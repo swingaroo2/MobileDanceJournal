@@ -119,17 +119,33 @@ extension PracticeLogTableManager: UITableViewDelegate {
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         
         let deleteAction = UIContextualAction(style: .destructive, title: Actions.delete) { [unowned self] (action, view, completionHandler) in
-            let practiceSessionToDelete = self.coreDataManager.practiceSessionFRC.object(at: indexPath)
-            self.coreDataManager.delete(practiceSessionToDelete)
             
-            guard self.currentGroup != nil else {
+            let deleteAlertAction: ((UIAlertAction) -> Void) = { action in
+                let practiceSessionToDelete = self.coreDataManager.practiceSessionFRC.object(at: indexPath)
+                self.coreDataManager.delete(practiceSessionToDelete)
+                
+                guard self.currentGroup != nil else {
+                    completionHandler(true)
+                    return
+                }
+                self.managedTableView.deleteRows(at: [indexPath], with: .fade)
+                self.originalPracticeLogCount -= 1
+
+                // TODO: Verify if this is necessary (for iPad, it might be)
+//                let rowToDelete = indexPath.row
+//                if self.selectedRow == rowToDelete {
+//                    self.coordinator?.clearDetailVC()
+//                }
+                
                 completionHandler(true)
-                return
             }
-            self.managedTableView.deleteRows(at: [indexPath], with: .fade)
-            self.originalPracticeLogCount -= 1
             
-            completionHandler(true)
+            let noAlertAction: ((UIAlertAction) -> Void) = { action in
+                completionHandler(false)
+            }
+            
+            self.managedVC.presentYesNoAlert(message: AlertConstants.confirmDelete, yesAction: deleteAlertAction, noAction: noAlertAction)
+            
         }
         
         let moveAction = UIContextualAction(style: .normal, title: Actions.move) { [unowned self] (action, view, completionHandler) in

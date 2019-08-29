@@ -34,6 +34,7 @@ struct AlertConstants {
     static let recordVideo = "Record video"
     static let uploadFromPhotos = "Import from Photos"
     static let addVideo = "Add Video"
+    static let confirmDelete = "Are you sure you want to delete this?"
 }
 
 struct TextConstants {
@@ -50,6 +51,9 @@ struct Actions {
     static let share = "Share"
     static let move = "Move"
     static let done = "Done"
+    static let yes = "Yes"
+    static let no = "No"
+    static let onSecondThought = "On second thought..."
 }
 
 struct PlaceholderText {

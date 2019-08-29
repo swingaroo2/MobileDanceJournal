@@ -61,7 +61,7 @@ extension PracticeGroupsTableManager: UITableViewDataSource {
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             let selectedGroup = coreDataManager.groupFRC.object(at: indexPath)
-            coreDataManager.delete(selectedGroup)
+            managedVC.presentYesNoAlert(message: AlertConstants.confirmDelete, yesAction: { [unowned self] action in self.coreDataManager.delete(selectedGroup) })
         }
     }
 }
