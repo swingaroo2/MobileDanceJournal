@@ -144,7 +144,7 @@ extension PracticeLogTableManager: UITableViewDelegate {
                 completionHandler(false)
             }
             
-            self.managedVC.presentYesNoAlert(message: AlertConstants.confirmDelete, yesAction: deleteAlertAction, noAction: noAlertAction)
+            self.managedVC.presentYesNoAlert(message: AlertConstants.confirmDelete, isDeleteAlert: true, yesAction: deleteAlertAction, noAction: noAlertAction)
             
         }
         
@@ -197,16 +197,23 @@ extension PracticeLogTableManager: NSFetchedResultsControllerDelegate {
             break;
         case .update:
             print("UPDATE: \(anObject)")
-            if let indexPath = indexPath, let cell = managedTableView.cellForRow(at: indexPath) {
+            if let indexPath = indexPath {
                 guard let practiceLogs = coreDataManager.fetchPracticeSessions(in: currentGroup) else { return }
-                if originalPracticeLogCount > practiceLogs.count {
-                    managedTableView.deleteRows(at: [indexPath], with: .fade)
-                    originalPracticeLogCount -= 1
-                } else if originalPracticeLogCount == practiceLogs.count {
-                    configureCell(cell, indexPath)
+                if let cell = managedTableView.cellForRow(at: indexPath) {
+                    if originalPracticeLogCount > practiceLogs.count {
+                        managedTableView.deleteRows(at: [indexPath], with: .fade)
+                        originalPracticeLogCount -= 1
+                    } else if originalPracticeLogCount == practiceLogs.count {
+                        configureCell(cell, indexPath)
+                    } else {
+                        managedTableView.insertRows(at: [indexPath], with: .fade)
+                        originalPracticeLogCount += 1
+                    }
                 } else {
-                    managedTableView.insertRows(at: [indexPath], with: .fade)
-                    originalPracticeLogCount += 1
+                    if originalPracticeLogCount < practiceLogs.count {
+                        managedTableView.insertRows(at: [indexPath], with: .fade)
+                        originalPracticeLogCount += 1
+                    }
                 }
             }
         case .move:

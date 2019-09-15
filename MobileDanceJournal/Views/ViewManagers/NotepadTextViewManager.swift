@@ -30,7 +30,7 @@ extension NotepadTextViewManager: UITextViewDelegate {
     }
     
     func textViewDidEndEditing(_ textView: UITextView) {
-        if textView.text.isEmpty {
+        if textView.text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
             textView.text = getPlaceholderText(in: textView)
         } else {
             if !notepadVC.practiceSessionTitleTextView.text.isEmpty {
@@ -55,7 +55,7 @@ private extension NotepadTextViewManager {
     
     func handleState(of button: UIBarButtonItem, with textView: UITextView) {
         let isSaveButton = button == notepadVC.saveButton
-        button.isEnabled = (isSaveButton && !textView.text.isEmpty)
+        button.isEnabled = (isSaveButton && !textView.text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
     }
     
     func getPlaceholderText(in textView: UITextView) -> String {

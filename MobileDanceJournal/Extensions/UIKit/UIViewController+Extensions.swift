@@ -31,9 +31,9 @@ extension UIViewController {
         present(alert, animated: true, completion: nil)
     }
     
-    func presentYesNoAlert(title: String? = nil, message: String, yesAction: @escaping (((UIAlertAction) -> Void)), noAction: (((UIAlertAction) -> Void))? = nil) {
+    func presentYesNoAlert(title: String? = nil, message: String, isDeleteAlert: Bool, yesAction: @escaping (((UIAlertAction) -> Void)), noAction: (((UIAlertAction) -> Void))? = nil) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        let yesAction = UIAlertAction(title: Actions.yes, style: .default, handler: yesAction)
+        let yesAction = UIAlertAction(title: Actions.yes, style: (isDeleteAlert ? .destructive : .default), handler: yesAction)
         let noAction = UIAlertAction(title: Actions.onSecondThought, style: .cancel, handler: noAction)
         alert.addAction(noAction)
         alert.addAction(yesAction)

@@ -126,7 +126,7 @@ extension VideoGalleryTableManager: UITableViewDelegate {
                 completionHandler(false)
             }
             
-            self.managedVC.presentYesNoAlert(message: AlertConstants.confirmDelete, yesAction: deleteAlertAction, noAction: noAlertAction)
+            self.managedVC.presentYesNoAlert(message: AlertConstants.confirmDelete, isDeleteAlert: true, yesAction: deleteAlertAction, noAction: noAlertAction)
             
         }
         

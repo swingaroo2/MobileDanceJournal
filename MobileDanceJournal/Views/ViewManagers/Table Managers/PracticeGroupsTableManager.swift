@@ -61,7 +61,7 @@ extension PracticeGroupsTableManager: UITableViewDataSource {
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             let selectedGroup = coreDataManager.groupFRC.object(at: indexPath)
-            managedVC.presentYesNoAlert(message: AlertConstants.confirmDelete, yesAction: { [unowned self] action in self.coreDataManager.delete(selectedGroup) })
+            managedVC.presentYesNoAlert(message: AlertConstants.confirmDelete, isDeleteAlert: true, yesAction: { [unowned self] action in self.coreDataManager.delete(selectedGroup) })
         }
     }
 }
@@ -103,6 +103,29 @@ extension PracticeGroupsTableManager: UITableViewDelegate {
         }
         
         return .delete
+    }
+    
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let deleteAction = UIContextualAction(style: .destructive, title: Actions.delete) { [unowned self] (action, view, completionHandler) in
+            
+            let deleteAlertAction: ((UIAlertAction) -> Void) = { action in
+                let practiceGroupToDelete = self.coreDataManager.groupFRC.object(at: indexPath)
+                print("Deleting group \(practiceGroupToDelete.name) at \(indexPath)")
+                self.coreDataManager.delete(practiceGroupToDelete)
+                completionHandler(true)
+            }
+            
+            let noAlertAction: ((UIAlertAction) -> Void) = { action in
+                completionHandler(false)
+            }
+            
+            self.managedVC.presentYesNoAlert(message: AlertConstants.confirmDelete, isDeleteAlert: true, yesAction: deleteAlertAction, noAction: noAlertAction)
+            
+        }
+        
+        let swipeActionsConfig = UISwipeActionsConfiguration(actions: [deleteAction])
+        swipeActionsConfig.performsFirstActionWithFullSwipe = false
+        return swipeActionsConfig
     }
 }
 
