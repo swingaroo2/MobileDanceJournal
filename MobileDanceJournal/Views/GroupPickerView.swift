@@ -1,25 +1,24 @@
 //
-//  PracticeSessionPickerView.swift
+//  GroupPickerView.swift
 //  MobileDanceJournal
 //
-//  Created by Zach Lockett-Streiff on 7/23/19.
+//  Created by Zach Lockett-Streiff on 8/24/19.
 //  Copyright © 2019 Swingaroo2. All rights reserved.
 //
 
 import Foundation
 import UIKit
 
-class PracticeSessionPickerView: UIView, ToolbarPickerView {
-    
+class GroupPickerView: UIView, ToolbarPickerView {
     var picker: UIPickerView = UIPickerView()
     var manager: PickerManager!
     
     private var doneButton: UIBarButtonItem!
     private var cancelButton: UIBarButtonItem!
     
-    required init(_ videoToMove: PracticeVideo, from oldPracticeLog: PracticeSession, to newPracticeLogs: [PracticeSession],_ coreDataManager: CoreDataManager, managedView: UIView) {
+    required init(_ practiceLogToMove: PracticeSession,_ oldGroup: Group?,_ newGroups: [Group],_ coreDataManager: CoreDataManager, managedView: UIView,_ coordinator: PracticeLogCoordinator) {
         super.init(frame: .zero)
-        self.manager = self.configureManager(videoToMove, oldPracticeLog, newPracticeLogs, coreDataManager)
+        self.manager = self.configureManager(practiceLogToMove, oldGroup, newGroups, coreDataManager, coordinator)
         self.picker.dataSource = self.manager
         self.picker.delegate = self.manager
         let toolbarButtons = configurePickerToolbarButtons()
@@ -32,7 +31,7 @@ class PracticeSessionPickerView: UIView, ToolbarPickerView {
     
 }
 
-private extension PracticeSessionPickerView {
+private extension GroupPickerView {
     func configurePickerToolbarButtons() -> [UIBarButtonItem] {
         doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(actionButtonPressed))
         cancelButton = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(actionButtonPressed))
@@ -40,16 +39,16 @@ private extension PracticeSessionPickerView {
         return [doneButton, spacer, cancelButton]
     }
     
-    func configureManager(_ videoToMove: PracticeVideo,_ oldPracticeLog: PracticeSession,_ newPracticeLogs: [PracticeSession],_ coreDataManager: CoreDataManager) -> PracticeSessionPickerManager {
-        let manager = PracticeSessionPickerManager(self, coreDataManager)
-        manager.videoToMove = videoToMove
-        manager.oldPracticeSession = oldPracticeLog
-        manager.practiceSessions = newPracticeLogs.filter { $0 !== oldPracticeLog }
+    func configureManager(_ practiceLogToMove: PracticeSession,_ oldGroup: Group?,_ newGroups: [Group],_ coreDataManager: CoreDataManager,_ coordinator: PracticeLogCoordinator) -> GroupPickerManager {
+        let manager = GroupPickerManager(self, coreDataManager, coordinator)
+        manager.practiceLogToMove = practiceLogToMove
+        manager.oldGroup = oldGroup
+        manager.newGroups = newGroups.filter { $0 !== oldGroup }
         return manager
     }
 }
 
-private extension PracticeSessionPickerView {
+private extension GroupPickerView {
     @objc func actionButtonPressed(_ sender: UIBarButtonItem) {
         switch sender {
         case doneButton:

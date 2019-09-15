@@ -9,12 +9,12 @@
 import Foundation
 import UIKit
 
-class VideoUploadVC: UIViewController {
+class VideoUploadVC: UIViewController, Storyboarded {
     @IBOutlet weak var thumbnail: UIImageView!
     @IBOutlet weak var titleTextField: UITextField!
     @IBOutlet weak var saveButton: UIBarButtonItem!
     
-    weak var coordinator: MainCoordinator?
+    weak var coordinator: VideoGalleryCoordinator?
     var coreDataManager: CoreDataManager!
     var videoHelper: VideoHelper?
     var videoToUpload: PracticeVideo?
@@ -24,7 +24,6 @@ class VideoUploadVC: UIViewController {
         setUpView()
     }
     
-    // TODO: Consider adding this to Storyboarded protocol
     private func setUpView() {
         configureKeyboardToDismissOnOutsideTap()
         configureThumbnail()

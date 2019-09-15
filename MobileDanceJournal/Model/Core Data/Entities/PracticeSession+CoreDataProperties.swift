@@ -1,8 +1,9 @@
 //
 //  PracticeSession+CoreDataProperties.swift
-//  
+//  MobileDanceJournal
 //
-//  Created by Zach Lockett-Streiff on 7/12/19.
+//  Created by Zach Lockett-Streiff on 8/24/19.
+//  Copyright © 2019 Swingaroo2. All rights reserved.
 //
 //
 
@@ -17,9 +18,10 @@ extension PracticeSession {
     }
 
     @NSManaged public var date: Date
-    @NSManaged public var notes: String?
+    @NSManaged public var notes: String
     @NSManaged public var title: String
-    @NSManaged public var videos: NSSet?
+    @NSManaged public var group: Group?
+    @NSManaged public var videos: NSSet
 
 }
 

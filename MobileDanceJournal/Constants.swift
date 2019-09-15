@@ -20,7 +20,7 @@ struct SegueIdentifiers {
 
 struct VCConstants {
     static let newPracticeSessionBuilderVCTitle = "New Practice Session"
-    static let editPracticeSessionBuilderVCTitle = "Update Practice Session"
+    static let practiceGroupsVCTitle = "Groups"
     static let chooseVideo = "Choose Video"
     static let videos = "Videos"
 }
@@ -30,19 +30,17 @@ struct CellIdentifiers {
     static let videoCell = "VideoCell"
 }
 
-struct ModelConstants {
-    static let modelName = "DataModel"
-}
-
-struct AlertConstants {    
+struct AlertConstants {
     static let recordVideo = "Record video"
     static let uploadFromPhotos = "Import from Photos"
     static let addVideo = "Add Video"
+    static let confirmDelete = "Are you sure you want to delete this?"
 }
 
 struct TextConstants {
     static let noContent = "No Content"
     static let editing = "Editing..."
+    static let uncategorized = "Uncategorized"
 }
 
 struct Actions {
@@ -52,6 +50,10 @@ struct Actions {
     static let edit = "Edit"
     static let share = "Share"
     static let move = "Move"
+    static let done = "Done"
+    static let yes = "Yes"
+    static let no = "No"
+    static let onSecondThought = "On second thought..."
 }
 
 struct PlaceholderText {
@@ -59,27 +61,12 @@ struct PlaceholderText {
     static let tapToEditContent = "Record notes on your practice session here"
 }
 
-struct PracticeSessionConstants {
-    static let managedObject = "PracticeSession"
-    static let title = "title"
-    static let date = "date"
-    static let topic = "topic"
-    static let partners = "partners"
-    static let notes = "notes"
-}
-
-struct PracticeVideoConstants {
-    static let managedObject = "PracticeVideo"
-    static let title = "title"
-    static let uploadDate = "uploadDate"
-    static let url = "url"
-}
-
 struct CustomImages {
     static let addVideo = "add_video"
     static let videoGallery = "video_gallery"
 }
 
+// MARK: Errors
 struct UserErrors {
     static let textFieldContentsInvalid = "Text field contents are not valid."
     static let videoAlreadyExists = "This video has already been uploaded"
@@ -100,11 +87,45 @@ struct VideoUploadErrors {
     static let noURL = "Photos was a meanie-head and didn't give us your video. We apologize for the inconvenience."
 }
 
+// MARK: Core Data
+struct Predicates {
+    static let hasGroup = "group == %@"
+    static let hasNoGroup = "group == nil"
+    static let hasPracticeSession = "practiceSession == %@"
+    static let hasPracticeSessionWithFilename = "practiceSession == %@ AND filename == %@"
+}
+
+struct ModelConstants {
+    static let modelName = "DataModel"
+}
+
+struct GroupConstants {
+    static let managedObject = "Group"
+    static let name = "name"
+    static let dateCreated = "dateCreated"
+}
+
+struct PracticeSessionConstants {
+    static let managedObject = "PracticeSession"
+    static let title = "title"
+    static let date = "date"
+    static let topic = "topic"
+    static let partners = "partners"
+    static let notes = "notes"
+}
+
+struct PracticeVideoConstants {
+    static let managedObject = "PracticeVideo"
+    static let title = "title"
+    static let uploadDate = "uploadDate"
+    static let url = "url"
+}
+
 // MARK: Enums
 enum DateFormats: String {
-    case shortFormat = "MMMM dd, yyyy"
     case longFormat = "'Started' MMMM dd, yyyy 'at' h:mm:ss.SSSS a"
-    case displayFormat = "'Started' MMMM dd, yyyy"
+    case notepadDisplayFormat = "'Started' MMMM dd, yyyy"
+    case practiceLogDisplayFormat = "M/dd/yyyy"
 }
 
 enum Permissions {

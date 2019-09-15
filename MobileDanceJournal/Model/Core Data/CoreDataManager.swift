@@ -12,13 +12,41 @@ import UIKit
 
 public class CoreDataManager : NSObject {
     
-    weak var practiceSessionDelegate: NSFetchedResultsControllerDelegate?
-    weak var practiceVideoDelegate: NSFetchedResultsControllerDelegate?
+    weak var practiceSessionDelegate: NSFetchedResultsControllerDelegate? {
+        willSet {
+            self.practiceSessionFRC.delegate = newValue
+        }
+    }
+    
+    weak var practiceVideoDelegate: NSFetchedResultsControllerDelegate? {
+        willSet {
+            self.practiceVideoFRC.delegate = newValue
+        }
+    }
+    
+    weak var practiceGroupsDelegate: NSFetchedResultsControllerDelegate? {
+        willSet {
+            self.groupFRC.delegate = newValue
+        }
+    }
     private let modelName: String
     
     init(modelName: String) {
         self.modelName = modelName
     }
+    
+    lazy var groupFRC: NSFetchedResultsController<Group> = {
+        let fetchRequest: NSFetchRequest<Group> = Group.fetchRequest()
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: GroupConstants.dateCreated, ascending: false),
+                                        NSSortDescriptor(key: GroupConstants.name, ascending: false)]
+        let fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest,
+                                                                  managedObjectContext: persistentContainer.viewContext,
+                                                                  sectionNameKeyPath: nil,
+                                                                  cacheName: nil)
+        
+        try? fetchedResultsController.performFetch()
+        return fetchedResultsController
+    }()
     
     lazy var practiceSessionFRC: NSFetchedResultsController<PracticeSession> = {
         let fetchRequest: NSFetchRequest<PracticeSession> = PracticeSession.fetchRequest()
@@ -28,7 +56,6 @@ public class CoreDataManager : NSObject {
                                                                   managedObjectContext: persistentContainer.viewContext,
                                                                   sectionNameKeyPath: nil,
                                                                   cacheName: nil)
-        fetchedResultsController.delegate = practiceSessionDelegate
         
         try? fetchedResultsController.performFetch()
         return fetchedResultsController
@@ -41,7 +68,6 @@ public class CoreDataManager : NSObject {
                                                                   managedObjectContext: persistentContainer.viewContext,
                                                                   sectionNameKeyPath: nil,
                                                                   cacheName: nil)
-        fetchedResultsController.delegate = practiceVideoDelegate
         try? fetchedResultsController.performFetch()
         
         return fetchedResultsController
@@ -50,15 +76,9 @@ public class CoreDataManager : NSObject {
     lazy var persistentContainer: NSPersistentContainer = {
         let container = NSPersistentContainer(name: ModelConstants.modelName)
         
-        if let persistentStoreURL = container.persistentStoreDescriptions.first?.url {
-            let description = NSPersistentStoreDescription(url: persistentStoreURL)
-            description.shouldAddStoreAsynchronously = true
-            container.persistentStoreDescriptions = [description]
-        }
-        
         container.loadPersistentStores { (storeDescription, error) in
             if let error = error as NSError? {
-                fatalError("Unresolved error \(error), \(error.userInfo)")
+                fatalError("[CoreDataManager] Unresolved error \(error), \(error.userInfo)")
             }
             container.viewContext.automaticallyMergesChangesFromParent = true
         }
@@ -68,51 +88,50 @@ public class CoreDataManager : NSObject {
 
 // MARK: - Fetch/Save/Delete
 extension CoreDataManager {
-    func fetchVideos(for practiceSession: PracticeSession, with filename: String? = nil) -> [PracticeVideo] {
-        var predicate = NSPredicate(format: "practiceSession = %@", practiceSession)
+    
+    func fetchPracticeSessions(in group: Group?) -> [PracticeSession]? {
         
-        if let filename = filename {
-            predicate = NSPredicate(format: "practiceSession = %@ AND filename = %@", practiceSession, filename)
-        }
+        practiceSessionFRC.fetchRequest.predicate = (group != nil) ? NSPredicate(format: Predicates.hasGroup, group!) : NSPredicate(format: Predicates.hasNoGroup)
+        
+        try? practiceSessionFRC.performFetch()
+        return practiceSessionFRC.fetchedObjects
+    }
+    
+    func fetchVideos(for practiceSession: PracticeSession, with filename: String? = nil) -> [PracticeVideo] {
+        let predicate = (filename == nil) ? NSPredicate(format: Predicates.hasPracticeSession, practiceSession) : NSPredicate(format: Predicates.hasPracticeSessionWithFilename, practiceSession, filename!)
         
         practiceVideoFRC.fetchRequest.predicate = predicate
         
         do {
             try practiceVideoFRC.performFetch()
-            return practiceVideoFRC.fetchedObjects ?? []
+            return practiceVideoFRC.fetchedObjects ?? [PracticeVideo]()
         } catch {
-            fatalError("Failed to fetch [PracticeVideo]: \(error)")
+            fatalError("[CoreDataManager] Failed to fetch [PracticeVideo]: \(error)")
         }
     }
     
     func save() {
-        let context: NSManagedObjectContext = persistentContainer.viewContext
-        if context.hasChanges {
-            context.perform { [weak self] in
-                guard let self = self else { return }
-                self.executeSave()
-            }
+        if persistentContainer.viewContext.hasChanges {
+            print("[CoreDataManager] \(#function)")
+            self.executeSave()
+        } else {
+            print("[CoreDataManager] No changes in viewContext")
         }
     }
     
     private func executeSave() {
-        let context: NSManagedObjectContext = persistentContainer.viewContext
-        if context.hasChanges {
-            do {
-                try context.save()
-                print("Updated Core Data")
-            } catch {
-                // TODO: Replace this implementation with code to handle the error appropriately.
-                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                let error = error as NSError
-                fatalError("Unresolved error \(error), \(error.userInfo)")
-            }
+        do {
+            try persistentContainer.viewContext.save()
+        } catch {
+            // TODO: Replace this implementation with code to handle the error appropriately.
+            // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+            let error = error as NSError
+            fatalError("[CoreDataManager] Failed to save. Error: \(error), \(error.userInfo)")
         }
     }
     
     func delete(_ managedObject: NSManagedObject) {
-        let context: NSManagedObjectContext = persistentContainer.viewContext
-        context.delete(managedObject)
+        persistentContainer.viewContext.delete(managedObject)
         save()
     }
     
@@ -120,15 +139,14 @@ extension CoreDataManager {
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
         fetchRequest.returnsObjectsAsFaults = false
         do {
-            let moc = persistentContainer.viewContext
-            let results = try moc.fetch(fetchRequest)
+            let results = try persistentContainer.viewContext.fetch(fetchRequest)
             for object in results {
                 guard let objectData = object as? NSManagedObject else { continue }
-                moc.delete(objectData)
+                persistentContainer.viewContext.delete(objectData)
                 save()
             }
         } catch let error {
-            print("Failed to delete all data in \(entityName) error :", error)
+            print("[CoreDataManager] Failed to delete all data in \(entityName) error :", error)
         }
     }
 }
@@ -141,39 +159,80 @@ extension CoreDataManager {
         save()
     }
     
+    func add(_ newPracticeSessions: [PracticeSession], to group: Group) {
+        let practiceSessionSet = NSSet(array: newPracticeSessions)
+        group.addToPracticeSessions(practiceSessionSet)
+        save()
+    }
+    
     func delete(_ video: PracticeVideo, from practiceSession: PracticeSession) {
-        let context: NSManagedObjectContext = persistentContainer.viewContext
-        context.delete(video)
+        persistentContainer.viewContext.delete(video)
         practiceSession.removeFromVideos(video)
         save()
     }
     
-    func move(_ video: PracticeVideo, from oldPracticeSession: PracticeSession, to newPracticeSession: PracticeSession) {
-        video.practiceSession = newPracticeSession
-        oldPracticeSession.removeFromVideos(video)
-        newPracticeSession.addToVideos(video)
+    func delete(_ practiceSession: PracticeSession, from group: Group) {
+        persistentContainer.viewContext.delete(practiceSession)
+        group.removeFromPracticeSessions(practiceSession)
         save()
     }
+    
+    func move(_ videos: [PracticeVideo], from oldPracticeSession: PracticeSession, to newPracticeSession: PracticeSession) {
+        let videoSet = NSSet(array: videos)
+        oldPracticeSession.removeFromVideos(videoSet)
+        newPracticeSession.addToVideos(videoSet)
+        save()
+    }
+    
+    func move(_ practiceSessions: [PracticeSession], from oldGroup: Group?, to newGroup: Group?) {
+        let _ = practiceSessions.map { $0.group = newGroup }
+        save()
+    }
+    
 }
 
-// MARK: - Insert new managed objects
+// MARK: - Insert and update new managed objects
 // TODO: Consistent naming conventions
 extension CoreDataManager {
     func insertAndReturnNewPracticeSession() -> PracticeSession {
-        let context: NSManagedObjectContext = persistentContainer.viewContext
-        let newPracticeSession = PracticeSession(context: context)
+        let newPracticeSession = PracticeSession(context: persistentContainer.viewContext)
         let dateText = Date.getStringFromDate(Date(), .longFormat)
         newPracticeSession.date = Date.getDateFromString(dateText) ?? Date()
         return newPracticeSession
     }
     
     func createAndConfigureNewPracticeVideo(title: String, filename: String) -> PracticeVideo {
-        let context: NSManagedObjectContext = persistentContainer.viewContext
-        let newVideo = PracticeVideo(context: context)
+        let newVideo = PracticeVideo(context: persistentContainer.viewContext)
         let dateText = Date.getStringFromDate(Date(), .longFormat)
         newVideo.uploadDate = Date.getDateFromString(dateText) ?? Date()
         newVideo.filename = filename
         newVideo.title = title
         return newVideo
+    }
+    
+    func createAndSaveNewGroup(name: String, practiceSessions: [PracticeSession]?) {
+        let newGroup = Group(context: persistentContainer.viewContext)
+        newGroup.name = name
+        newGroup.dateCreated = Date()
+        
+        if let practiceSessionsToAdd = practiceSessions {
+            add(practiceSessionsToAdd, to: newGroup)
+        } else {
+            save()
+        }
+    }
+    
+    func update(group: Group, name: String, practiceSessions: [PracticeSession]?) {
+        if name != group.name {
+            group.name = name
+        }
+        
+        if let practiceSessionsToAdd = practiceSessions {
+            if !practiceSessionsToAdd.isEmpty {
+                add(practiceSessionsToAdd, to: group)
+            }
+        }
+        
+        save()
     }
 }

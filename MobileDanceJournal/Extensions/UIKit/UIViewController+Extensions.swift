@@ -24,14 +24,19 @@ extension UIViewController {
 
 // MARK: - AlertHelper
 extension UIViewController {
-    func presentBasicAlert(message: String) {
-        presentBasicAlert(title: nil, message: message)
-    }
-    
-    func presentBasicAlert(title: String?, message: String) {
+    func presentBasicAlert(title: String? = nil, message: String) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let okAction = UIAlertAction(title: Actions.ok, style: .cancel, handler: nil)
         alert.addAction(okAction)
+        present(alert, animated: true, completion: nil)
+    }
+    
+    func presentYesNoAlert(title: String? = nil, message: String, isDeleteAlert: Bool, yesAction: @escaping (((UIAlertAction) -> Void)), noAction: (((UIAlertAction) -> Void))? = nil) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let yesAction = UIAlertAction(title: Actions.yes, style: (isDeleteAlert ? .destructive : .default), handler: yesAction)
+        let noAction = UIAlertAction(title: Actions.onSecondThought, style: .cancel, handler: noAction)
+        alert.addAction(noAction)
+        alert.addAction(yesAction)
         present(alert, animated: true, completion: nil)
     }
 }

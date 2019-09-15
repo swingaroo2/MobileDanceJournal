@@ -8,29 +8,51 @@
 
 import UIKit
 
-class PracticeLogVC: UITableViewController {
+class PracticeLogVC: UIViewController, Storyboarded {
     
+    weak var coordinator: PracticeLogCoordinator!
     var coreDataManager: CoreDataManager!
-    var practiceSessions = [PracticeSession]()
-    var selectedRow = -1
-    weak var coordinator: MainCoordinator?
-    var detailVC: PracticeNotepadVC?
+    var tableManager: PracticeLogTableManager!
+    var currentGroup: Group?
+    @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableManager = configureTableManager(tableView, coreDataManager)
         setUpView()
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+    }
+    
+    private func configureTableManager(_ managedTableView: UITableView,_ coreDataManager: CoreDataManager) -> PracticeLogTableManager {
+        let practiceLogCount = coreDataManager.fetchPracticeSessions(in: currentGroup)?.count ?? 0
+        
+        let tableManager = PracticeLogTableManager(managedTableView, coreDataManager, practiceLogCount)
+        tableManager.coordinator = coordinator
+        tableManager.managedVC = self
+        tableManager.currentGroup = currentGroup
+        return tableManager
+    }
+    
     private func setUpView() {
-        coreDataManager.practiceSessionDelegate = self
+        navigationItem.leftItemsSupplementBackButton = true
         navigationItem.leftBarButtonItem = editButtonItem
         tableView.tableFooterView = UIView()
     }
     
-    private func setUpDetailVC() {
-        if let split = splitViewController {
-            let controllers = split.viewControllers
-            detailVC = (controllers[controllers.count-1] as! UINavigationController).topViewController as? PracticeNotepadVC
+    @IBAction func createNewPracticeSession(_ sender: UIBarButtonItem) {
+        tableManager.selectedRow = 0
+        coordinator?.startEditingNewPracticeSession()
+    }
+
+    override internal func setEditing(_ editing: Bool, animated: Bool) {
+        super.setEditing(editing, animated: animated)
+        
+        guard let _ = splitViewController?.detailVC else {
+            print(InternalErrors.failedToGetReferenceToDetailVC)
+            return
         }
     }
 }

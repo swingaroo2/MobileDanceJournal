@@ -8,17 +8,23 @@
 
 import UIKit
 
-class VideoGalleryVC: UIViewController {
+class VideoGalleryVC: UIViewController, Storyboarded {
 
+    var coordinator: VideoGalleryCoordinator!
     var coreDataManager: CoreDataManager!
-    var videoHelper: VideoHelper?
-    var practiceSession: PracticeSession?
-    var coordinator: MainCoordinator?
-    var videoToMove: PracticeVideo?
+    var tableManager: VideoGalleryTableManager!
+    var videoHelper: VideoHelper!
+    var practiceSession: PracticeSession!
     var practiceSessionPicker: PracticeSessionPickerView?
+    var videoToMove: PracticeVideo?
     
     @IBOutlet weak var noContentLabel: UILabel!
     @IBOutlet weak var videosTableView: UITableView!
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+         tableManager = setUpTableManager()
+    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -26,13 +32,23 @@ class VideoGalleryVC: UIViewController {
         prefetchVideos(for: practiceSession)
     }
     
+    private func setUpTableManager() -> VideoGalleryTableManager {
+        let tableManager = VideoGalleryTableManager(videosTableView, coreDataManager: coreDataManager)
+        tableManager.managedVC = self
+        tableManager.practiceSession = practiceSession
+        tableManager.practiceSessionPicker = practiceSessionPicker
+        tableManager.noContentLabel = noContentLabel
+        tableManager.videoHelper = videoHelper
+        tableManager.coordinator = coordinator
+        tableManager.videoToMove = videoToMove
+        return tableManager
+    }
+    
     private func setUpView() {
         navigationItem.title = VCConstants.videos
-        coreDataManager.practiceVideoDelegate = self
         let addVideoImage = UIImage(named: CustomImages.addVideo)
         let addVideoButton = UIBarButtonItem.init(image: addVideoImage, landscapeImagePhone: addVideoImage, style: .plain, target: self, action: #selector(addVideoButtonPressed(_:)))
         navigationItem.rightBarButtonItems = [addVideoButton, editButtonItem]
-        videosTableView.tableFooterView = UIView()
     }
     
 }
