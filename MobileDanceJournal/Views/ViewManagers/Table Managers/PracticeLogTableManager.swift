@@ -16,8 +16,8 @@ class PracticeLogTableManager: NSObject {
     private let coreDataManager: CoreDataManager
     var groupPickerView: PracticeSessionPickerView!
     var managedVC: UIViewController!
-    var practiceSessions: [PracticeSession]!
     var coordinator: PracticeLogCoordinator!
+    var practiceSessions: [PracticeSession]!
     var currentGroup: Group?
     var selectedRow = -1
     var originalPracticeLogCount = 0

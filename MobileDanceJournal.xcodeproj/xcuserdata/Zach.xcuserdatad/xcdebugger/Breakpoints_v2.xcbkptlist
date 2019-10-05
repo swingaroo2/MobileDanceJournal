@@ -1,40 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Bucket
+   uuid = "AD25E401-46DF-4D56-B9B5-4E180D3C8C26"
    type = "1"
    version = "2.0">
    <Breakpoints>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.ExceptionBreakpoint">
          <BreakpointContent
+            uuid = "770AE698-58B6-464A-92D3-6CBA72365929"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            scope = "0"
+            scope = "1"
             stopOnStyle = "0">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.SwiftErrorBreakpoint">
+         BreakpointExtensionID = "Xcode.Breakpoint.SymbolicBreakpoint">
          <BreakpointContent
+            uuid = "7ED6E9A0-213C-482E-AAF0-447A28AB1FE6"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
-            continueAfterRunningActions = "No">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "MobileDanceJournal/Coordinators/Protocols/VideoGalleryCoordinator.swift"
-            timestampString = "588383373.424338"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "103"
-            endingLineNumber = "103"
-            landmarkName = "cancel(videoUploader:)"
-            landmarkType = "7">
+            symbolName = "UITableViewAlertForCellForRowAtIndexPathAccessDuringUpdate"
+            moduleName = "">
+            <Locations>
+               <Location
+                  uuid = "7ED6E9A0-213C-482E-AAF0-447A28AB1FE6 - 2ed3cb1b2b028de9"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "UITableViewAlertForCellForRowAtIndexPathAccessDuringUpdate"
+                  moduleName = "UIKitCore"
+                  usesParentBreakpointCondition = "Yes"
+                  offsetFromSymbolStart = "0">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

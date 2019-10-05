@@ -31,6 +31,7 @@ class PracticeGroupsTableManager: NSObject {
     }
 }
 
+// MARK: - UITableViewDataSource
 extension PracticeGroupsTableManager: UITableViewDataSource {
     // TODO: Group cells by month and year
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -50,10 +51,15 @@ extension PracticeGroupsTableManager: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        guard let selectedCell = tableView.cellForRow(at: indexPath) else { return false }
-        guard let textLabel = selectedCell.textLabel else { return false }
+        guard let fetchedGroups = coreDataManager.groupFRC.fetchedObjects else { return false }
         
-        let canEdit = textLabel.text != TextConstants.uncategorized
+        var canEdit = false
+        
+        if fetchedGroups.count == 0 {
+            canEdit = false
+        } else {
+            canEdit = (indexPath.row < fetchedGroups.count)
+        }
         
         return canEdit
     }
@@ -66,6 +72,7 @@ extension PracticeGroupsTableManager: UITableViewDataSource {
     }
 }
 
+// MARK: - UITableViewDelegate
 extension PracticeGroupsTableManager: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
@@ -169,6 +176,7 @@ extension PracticeGroupsTableManager: NSFetchedResultsControllerDelegate {
     }
 }
 
+// MARK: - Private extensions
 private extension PracticeGroupsTableManager {
     private func configureCell(_ cell: UITableViewCell,_ group: Group?) {
         cell.textLabel?.text = (group != nil) ? group!.name : TextConstants.uncategorized

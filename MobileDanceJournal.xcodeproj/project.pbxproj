@@ -1150,6 +1150,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.swingaroo2.apps.MobileDanceJournal;
 				PRODUCT_NAME = JiveJournal;
+				STRIP_INSTALLED_PRODUCT = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1168,6 +1169,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.swingaroo2.apps.MobileDanceJournal;
 				PRODUCT_NAME = JiveJournal;
+				STRIP_INSTALLED_PRODUCT = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
