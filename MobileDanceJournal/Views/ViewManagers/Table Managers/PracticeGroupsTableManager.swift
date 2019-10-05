@@ -13,8 +13,8 @@ import CoreData
 // TODO: TableManager protocol?
 class PracticeGroupsTableManager: NSObject {
     
-    private let managedTableView: UITableView
     private let coreDataManager: CoreDataManager
+    let managedTableView: UITableView
     var managedVC: UIViewController!
     var coordinator: MainCoordinator!
     var groups: [Group]!

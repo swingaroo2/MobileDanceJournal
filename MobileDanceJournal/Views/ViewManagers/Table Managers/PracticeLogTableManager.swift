@@ -12,8 +12,8 @@ import CoreData
 
 class PracticeLogTableManager: NSObject {
     
-    private let managedTableView: UITableView
     private let coreDataManager: CoreDataManager
+    let managedTableView: UITableView
     var groupPickerView: PracticeSessionPickerView!
     var managedVC: UIViewController!
     var coordinator: PracticeLogCoordinator!

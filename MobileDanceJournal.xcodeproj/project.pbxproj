@@ -64,6 +64,9 @@
 		9232ACC6226ED01E004DB260 /* PracticeLogVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9232AC87226D4015004DB260 /* PracticeLogVC.swift */; };
 		9232ACC722713DDC004DB260 /* PracticeNotepadVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9232AC89226D4015004DB260 /* PracticeNotepadVC.swift */; };
 		9232ACC822713DDC004DB260 /* PracticeNotepadVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9232AC89226D4015004DB260 /* PracticeNotepadVC.swift */; };
+		9239B7EF23491477002AFE38 /* TableManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9239B7EE23491477002AFE38 /* TableManager.swift */; };
+		9239B7F023491477002AFE38 /* TableManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9239B7EE23491477002AFE38 /* TableManager.swift */; };
+		9239B7F123491477002AFE38 /* TableManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9239B7EE23491477002AFE38 /* TableManager.swift */; };
 		9241F9C222C8375A009C50C1 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9241F9C122C8375A009C50C1 /* Coordinator.swift */; };
 		9241F9C322C8375A009C50C1 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9241F9C122C8375A009C50C1 /* Coordinator.swift */; };
 		9241F9C422C8375A009C50C1 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9241F9C122C8375A009C50C1 /* Coordinator.swift */; };
@@ -246,6 +249,7 @@
 		9232ACB7226D4298004DB260 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; wrapsLines = 0; };
 		9232ACBD226D4390004DB260 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; wrapsLines = 0; };
 		9232ACC1226ECACD004DB260 /* UISplitViewController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UISplitViewController+Extensions.swift"; sourceTree = "<group>"; wrapsLines = 0; };
+		9239B7EE23491477002AFE38 /* TableManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableManager.swift; sourceTree = "<group>"; };
 		9241F9C122C8375A009C50C1 /* Coordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; wrapsLines = 0; };
 		9241F9C922C83885009C50C1 /* AlertHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertHelper.swift; sourceTree = "<group>"; wrapsLines = 0; };
 		9241F9CD22C83AF2009C50C1 /* SplitViewRootController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitViewRootController.swift; sourceTree = "<group>"; };
@@ -508,14 +512,7 @@
 			isa = PBXGroup;
 			children = (
 				926E709E2311F94800A3CCD0 /* PickerManager.swift */,
-			);
-			path = Protocols;
-			sourceTree = "<group>";
-		};
-		926E709D2311F92200A3CCD0 /* Protocols */ = {
-			isa = PBXGroup;
-			children = (
-				926E709923119A6900A3CCD0 /* ToolbarPickerView.swift */,
+				9239B7EE23491477002AFE38 /* TableManager.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -598,10 +595,10 @@
 		92FBA3F122764AB90017910E /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				926E709923119A6900A3CCD0 /* ToolbarPickerView.swift */,
 				926E70A72311FD6E00A3CCD0 /* GroupPickerView.swift */,
 				926BEE3722E63D5100BC3DD4 /* PracticeSessionPickerView.swift */,
 				922C47AE2283F8F600367625 /* VideoGalleryTableViewCell.swift */,
-				926E709D2311F92200A3CCD0 /* Protocols */,
 				926B0D9522F56AD400112743 /* ViewManagers */,
 			);
 			path = Views;
@@ -810,6 +807,7 @@
 				927FA3FE22DD95DA00F58F58 /* VideoUploadService.swift in Sources */,
 				926BEE3422E5930100BC3DD4 /* UIImageView+Extensions.swift in Sources */,
 				926BEE1922E1057600BC3DD4 /* VideoStorageManager.swift in Sources */,
+				9239B7EF23491477002AFE38 /* TableManager.swift in Sources */,
 				926B0D9B22F571E800112743 /* VideoGalleryTableManager.swift in Sources */,
 				9227148622CD2D4900C6CFAC /* UITextView+Extensions.swift in Sources */,
 				926BEE2A22E58C5500BC3DD4 /* PracticeVideo+Extensions.swift in Sources */,
@@ -867,6 +865,7 @@
 				926BEE2B22E58C5500BC3DD4 /* PracticeVideo+Extensions.swift in Sources */,
 				926E70942311950100A3CCD0 /* PracticeSession+CoreDataProperties.swift in Sources */,
 				926BEE3922E63D5100BC3DD4 /* PracticeSessionPickerView.swift in Sources */,
+				9239B7F023491477002AFE38 /* TableManager.swift in Sources */,
 				9227148322CD2C0400C6CFAC /* UILabel+Extensions.swift in Sources */,
 				928D59A5230D02750000945E /* NewGroupVC.swift in Sources */,
 				9214FF98227E139A00387A3B /* Date+Extensions.swift in Sources */,
@@ -934,6 +933,7 @@
 				926BEE2C22E58C5500BC3DD4 /* PracticeVideo+Extensions.swift in Sources */,
 				926E70952311950200A3CCD0 /* PracticeSession+CoreDataProperties.swift in Sources */,
 				926BEE3A22E63D5100BC3DD4 /* PracticeSessionPickerView.swift in Sources */,
+				9239B7F123491477002AFE38 /* TableManager.swift in Sources */,
 				9227148422CD2C0400C6CFAC /* UILabel+Extensions.swift in Sources */,
 				928D59A6230D02750000945E /* NewGroupVC.swift in Sources */,
 				9214FF99227E139A00387A3B /* Date+Extensions.swift in Sources */,

@@ -39,7 +39,7 @@ class PracticeLogVC: UIViewController, Storyboarded {
     private func setUpView() {
         navigationItem.leftItemsSupplementBackButton = true
         navigationItem.leftBarButtonItem = editButtonItem
-        tableView.tableFooterView = UIView()
+        tableManager.managedTableView.tableFooterView = UIView()
     }
     
     @IBAction func createNewPracticeSession(_ sender: UIBarButtonItem) {
@@ -49,10 +49,6 @@ class PracticeLogVC: UIViewController, Storyboarded {
 
     override internal func setEditing(_ editing: Bool, animated: Bool) {
         super.setEditing(editing, animated: animated)
-        
-        guard let _ = splitViewController?.detailVC else {
-            print(InternalErrors.failedToGetReferenceToDetailVC)
-            return
-        }
+        tableManager.managedTableView.setEditing(editing, animated: animated)
     }
 }

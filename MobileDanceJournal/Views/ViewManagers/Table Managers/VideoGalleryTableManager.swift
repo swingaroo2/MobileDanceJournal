@@ -13,7 +13,7 @@ import CoreData
 class VideoGalleryTableManager: NSObject {
     
     private let coreDataManager: CoreDataManager!
-    private let managedTableView: UITableView!
+    let managedTableView: UITableView!
     var managedVC: UIViewController!
     var practiceSession: PracticeSession!
     var practiceSessionPicker: PracticeSessionPickerView!
