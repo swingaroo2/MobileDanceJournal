@@ -10,11 +10,12 @@ import Foundation
 import UIKit
 import CoreData
 
-class VideoGalleryTableManager: NSObject {
+class VideoGalleryTableManager: NSObject, TableManager {
     
-    private let coreDataManager: CoreDataManager!
-    private let managedTableView: UITableView!
-    var managedVC: UIViewController!
+    var coreDataManager: CoreDataManager
+    var managedTableView: UITableView
+    var managedVC: UIViewController
+    
     var practiceSession: PracticeSession!
     var practiceSessionPicker: PracticeSessionPickerView!
     var noContentLabel: UILabel!
@@ -22,9 +23,10 @@ class VideoGalleryTableManager: NSObject {
     var coordinator: VideoGalleryCoordinator!
     var videoToMove: PracticeVideo?
     
-    init(_ managedTableView: UITableView, coreDataManager: CoreDataManager) {
+    required init(_ managedTableView: UITableView,_ coreDataManager: CoreDataManager, managedVC: UIViewController) {
         self.managedTableView = managedTableView
         self.coreDataManager = coreDataManager
+        self.managedVC = managedVC
         super.init()
         self.managedTableView.tableFooterView = UIView()
         self.managedTableView.delegate = self

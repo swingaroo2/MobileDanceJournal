@@ -12,7 +12,7 @@ class VideoGalleryVC: UIViewController, Storyboarded {
 
     var coordinator: VideoGalleryCoordinator!
     var coreDataManager: CoreDataManager!
-    var tableManager: VideoGalleryTableManager!
+    var tableManager: TableManager!
     var videoHelper: VideoHelper!
     var practiceSession: PracticeSession!
     var practiceSessionPicker: PracticeSessionPickerView?
@@ -33,8 +33,7 @@ class VideoGalleryVC: UIViewController, Storyboarded {
     }
     
     private func setUpTableManager() -> VideoGalleryTableManager {
-        let tableManager = VideoGalleryTableManager(videosTableView, coreDataManager: coreDataManager)
-        tableManager.managedVC = self
+        let tableManager = VideoGalleryTableManager(videosTableView, coreDataManager, managedVC: self)
         tableManager.practiceSession = practiceSession
         tableManager.practiceSessionPicker = practiceSessionPicker
         tableManager.noContentLabel = noContentLabel

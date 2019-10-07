@@ -12,7 +12,7 @@ class PracticeLogVC: UIViewController, Storyboarded {
     
     weak var coordinator: PracticeLogCoordinator!
     var coreDataManager: CoreDataManager!
-    var tableManager: PracticeLogTableManager!
+    var tableManager: SelectionTrackingTableManager!
     var currentGroup: Group?
     @IBOutlet weak var tableView: UITableView!
     
@@ -29,9 +29,8 @@ class PracticeLogVC: UIViewController, Storyboarded {
     private func configureTableManager(_ managedTableView: UITableView,_ coreDataManager: CoreDataManager) -> PracticeLogTableManager {
         let practiceLogCount = coreDataManager.fetchPracticeSessions(in: currentGroup)?.count ?? 0
         
-        let tableManager = PracticeLogTableManager(managedTableView, coreDataManager, practiceLogCount)
+        let tableManager = PracticeLogTableManager(managedTableView, coreDataManager, practiceLogCount, managedVC: self)
         tableManager.coordinator = coordinator
-        tableManager.managedVC = self
         tableManager.currentGroup = currentGroup
         return tableManager
     }
@@ -39,7 +38,7 @@ class PracticeLogVC: UIViewController, Storyboarded {
     private func setUpView() {
         navigationItem.leftItemsSupplementBackButton = true
         navigationItem.leftBarButtonItem = editButtonItem
-        tableView.tableFooterView = UIView()
+        tableManager.managedTableView.tableFooterView = UIView()
     }
     
     @IBAction func createNewPracticeSession(_ sender: UIBarButtonItem) {
@@ -49,10 +48,6 @@ class PracticeLogVC: UIViewController, Storyboarded {
 
     override internal func setEditing(_ editing: Bool, animated: Bool) {
         super.setEditing(editing, animated: animated)
-        
-        guard let _ = splitViewController?.detailVC else {
-            print(InternalErrors.failedToGetReferenceToDetailVC)
-            return
-        }
+        tableManager.managedTableView.setEditing(editing, animated: animated)
     }
 }

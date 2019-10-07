@@ -14,7 +14,7 @@ class NotepadTextViewManager: NSObject {
     private let coreDataManager: CoreDataManager!
     private let notepadVC: PracticeNotepadVC
     
-    init(_ notepadVC: PracticeNotepadVC, coreDataManager: CoreDataManager) {
+    init(_ notepadVC: PracticeNotepadVC,_ coreDataManager: CoreDataManager) {
         self.notepadVC = notepadVC
         self.coreDataManager = coreDataManager
         super.init()

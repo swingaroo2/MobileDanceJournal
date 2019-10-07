@@ -16,6 +16,7 @@ protocol PickerManager: UIPickerViewDelegate, UIPickerViewDataSource {
     func doneButtonPressed()
 }
 
+// MARK: - Optional functions
 extension PickerManager {
     func cancelButtonPressed() {
         managedView.hide()

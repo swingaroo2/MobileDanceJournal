@@ -13,7 +13,7 @@ class PracticeGroupsVC: UIViewController, Storyboarded {
     
     weak var coordinator: MainCoordinator!
     var coreDataManager: CoreDataManager!
-    var tableManager: PracticeGroupsTableManager!
+    var tableManager: TableManager!
 
     @IBOutlet weak var tableView: UITableView!
     
@@ -27,12 +27,11 @@ class PracticeGroupsVC: UIViewController, Storyboarded {
         super.viewWillAppear(animated)
         
         // To keep the Uncategorized cell's practice log count up to date
-        tableView.reloadData()
+        tableManager.managedTableView.reloadData()
     }
     
     private func setUpView() {
         title = VCConstants.practiceGroupsVCTitle
-        tableView.tableFooterView = UIView()
         navigationItem.leftBarButtonItem = editButtonItem
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addGroup))
     }
@@ -41,15 +40,14 @@ class PracticeGroupsVC: UIViewController, Storyboarded {
         coordinator.startEditing(group: nil)
     }
     
-    private func configureTableManager(_ managedTableView: UITableView,_ coreDataManager: CoreDataManager) -> PracticeGroupsTableManager{
-        let tableManager = PracticeGroupsTableManager(managedTableView, coreDataManager)
+    private func configureTableManager(_ managedTableView: UITableView,_ coreDataManager: CoreDataManager) -> PracticeGroupsTableManager {
+        let tableManager = PracticeGroupsTableManager(managedTableView, coreDataManager, managedVC: self)
         tableManager.coordinator = coordinator
-        tableManager.managedVC = self
         return tableManager
     }
     
     override func setEditing(_ editing: Bool, animated: Bool) {
         super.setEditing(editing, animated: animated)
-        tableView.setEditing(editing, animated: animated)
+        tableManager.managedTableView.setEditing(editing, animated: animated)
     }
 }

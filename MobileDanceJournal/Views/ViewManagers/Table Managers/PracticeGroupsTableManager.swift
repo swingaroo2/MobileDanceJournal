@@ -10,18 +10,19 @@ import Foundation
 import UIKit
 import CoreData
 
-// TODO: TableManager protocol?
-class PracticeGroupsTableManager: NSObject {
+class PracticeGroupsTableManager: NSObject, TableManager {
     
-    private let managedTableView: UITableView
-    private let coreDataManager: CoreDataManager
-    var managedVC: UIViewController!
+    var coreDataManager: CoreDataManager
+    var managedTableView: UITableView
+    var managedVC: UIViewController
+    
     var coordinator: MainCoordinator!
     var groups: [Group]!
     
-    init(_ managedTableView: UITableView,_ coreDataManager: CoreDataManager) {
+    required init(_ managedTableView: UITableView,_ coreDataManager: CoreDataManager, managedVC: UIViewController) {
         self.managedTableView = managedTableView
         self.coreDataManager = coreDataManager
+        self.managedVC = managedVC
         super.init()
         self.managedTableView.tableFooterView = UIView()
         self.managedTableView.delegate = self
@@ -32,7 +33,7 @@ class PracticeGroupsTableManager: NSObject {
 }
 
 // MARK: - UITableViewDataSource
-extension PracticeGroupsTableManager: UITableViewDataSource {
+extension PracticeGroupsTableManager {
     // TODO: Group cells by month and year
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard let fetchedGroups = coreDataManager.groupFRC.fetchedObjects else { return 1 }
@@ -44,9 +45,7 @@ extension PracticeGroupsTableManager: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifiers.genericCell, for: indexPath)
-        let group = (indexPath.row >= groups.count) ? nil : coreDataManager.groupFRC.object(at: indexPath)
-        
-        configureCell(cell, group)
+        configureCell(cell, indexPath)
         return cell
     }
     
@@ -73,7 +72,7 @@ extension PracticeGroupsTableManager: UITableViewDataSource {
 }
 
 // MARK: - UITableViewDelegate
-extension PracticeGroupsTableManager: UITableViewDelegate {
+extension PracticeGroupsTableManager {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         guard let selectedCell = tableView.cellForRow(at: indexPath) else { return }
@@ -137,7 +136,7 @@ extension PracticeGroupsTableManager: UITableViewDelegate {
 }
 
 // MARK: - NSFetchedResultsControllerDelegate
-extension PracticeGroupsTableManager: NSFetchedResultsControllerDelegate {
+extension PracticeGroupsTableManager {
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
         switch (type) {
         case .insert:
@@ -178,7 +177,8 @@ extension PracticeGroupsTableManager: NSFetchedResultsControllerDelegate {
 
 // MARK: - Private extensions
 private extension PracticeGroupsTableManager {
-    private func configureCell(_ cell: UITableViewCell,_ group: Group?) {
+    func configureCell(_ cell: UITableViewCell, _ indexPath: IndexPath) {
+        let group = (indexPath.row >= groups.count) ? nil : coreDataManager.groupFRC.object(at: indexPath)
         cell.textLabel?.text = (group != nil) ? group!.name : TextConstants.uncategorized
         let isConfiguringUncategorizedCell = cell.textLabel?.text == TextConstants.uncategorized
         
