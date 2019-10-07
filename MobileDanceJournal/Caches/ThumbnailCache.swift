@@ -10,6 +10,8 @@ import Foundation
 import UIKit
 
 class ThumbnailCache: NSCache<NSString,UIImage> {
+    
+    // TODO: Consider throwing exceptions for failure cases
     func add(key: String, value: UIImage) {
         if object(forKey: key as NSString) == nil {
             setObject(value, forKey: key as NSString)

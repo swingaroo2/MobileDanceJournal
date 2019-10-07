@@ -11,16 +11,20 @@ import UIKit
 import CoreData
 
 protocol TableManager: UITableViewDelegate, UITableViewDataSource, NSFetchedResultsControllerDelegate {
-    var managedTableView: UITableView! { get }
-    var coreDataManager: CoreDataManager! { get }
-    var managedVC: UIViewController! { get }
+    var managedTableView: UITableView { get }
+    var coreDataManager: CoreDataManager { get }
+    var managedVC: UIViewController { get }
     
-    init(_ managedTableView: UITableView, _ coreDataManager: CoreDataManager, _ managedVC: UIViewController)
+    init(_ managedTableView: UITableView,_ coreDataManager: CoreDataManager, managedVC: UIViewController)
+}
+
+protocol SelectionTrackingTableManager: TableManager {
+    var selectedRow: Int { get set }
 }
 
 // MARK: - Optional functions
 extension TableManager {
-    func configureCell(_ cell: UITableViewCell, _ indexPath: IndexPath) {
+    func configureCell(_ cell: UITableViewCell,_ indexPath: IndexPath) {
         // TODO: Adopting class must implement
     }
 }

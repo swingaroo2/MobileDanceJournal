@@ -86,12 +86,15 @@ class VideoHelper: NSObject {
     
     // TODO: Move to coordinator
     class func initiate(_ service: UIImagePickerController.SourceType, in viewController: UIViewController & UINavigationControllerDelegate & UIImagePickerControllerDelegate) {
-        let videoPickerController = UIImagePickerController()
-        videoPickerController.delegate = viewController
-        videoPickerController.sourceType = service
-        videoPickerController.allowsEditing = true
-        videoPickerController.mediaTypes = [kUTTypeMovie as String]
-        viewController.present(videoPickerController, animated: true, completion: nil)
+        
+        DispatchQueue.main.async {
+            let videoPickerController = UIImagePickerController()
+            videoPickerController.delegate = viewController
+            videoPickerController.sourceType = service
+            videoPickerController.allowsEditing = true
+            videoPickerController.mediaTypes = [kUTTypeMovie as String]
+            viewController.present(videoPickerController, animated: true, completion: nil)
+        }
     }
     
     func playVideo(at path: URL, in viewController: UIViewController) {

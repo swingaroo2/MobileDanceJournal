@@ -10,30 +10,33 @@ import Foundation
 import UIKit
 import CoreData
 
-class PracticeLogTableManager: NSObject {
+class PracticeLogTableManager: NSObject, SelectionTrackingTableManager {
     
-    private let coreDataManager: CoreDataManager
-    let managedTableView: UITableView
+    var coreDataManager: CoreDataManager
+    var managedTableView: UITableView
+    var managedVC: UIViewController
+    var selectedRow = -1
+    
     var groupPickerView: PracticeSessionPickerView!
-    var managedVC: UIViewController!
     var coordinator: PracticeLogCoordinator!
     var practiceSessions: [PracticeSession]!
     var currentGroup: Group?
-    var selectedRow = -1
     var originalPracticeLogCount = 0
     
-    init(_ managedTableView: UITableView,_ coreDataManager: CoreDataManager) {
+    required init(_ managedTableView: UITableView,_ coreDataManager: CoreDataManager, managedVC: UIViewController) {
         self.managedTableView = managedTableView
         self.coreDataManager = coreDataManager
+        self.managedVC = managedVC
         super.init()
         self.managedTableView.delegate = self
         self.managedTableView.dataSource = self
         self.coreDataManager.practiceSessionDelegate = self
     }
     
-    init(_ managedTableView: UITableView,_ coreDataManager: CoreDataManager,_ originalPracticeLogCount: Int) {
+    init(_ managedTableView: UITableView,_ coreDataManager: CoreDataManager,_ originalPracticeLogCount: Int, managedVC: UIViewController) {
         self.managedTableView = managedTableView
         self.coreDataManager = coreDataManager
+        self.managedVC = managedVC
         self.originalPracticeLogCount = originalPracticeLogCount
         super.init()
         self.managedTableView.delegate = self

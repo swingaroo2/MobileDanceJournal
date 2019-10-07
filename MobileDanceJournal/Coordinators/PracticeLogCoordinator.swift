@@ -55,7 +55,7 @@ extension PracticeLogCoordinator {
         notepadVC.navigationItem.leftBarButtonItem = rootVC.displayModeButtonItem
         notepadVC.navigationItem.leftItemsSupplementBackButton = true
         notepadVC.loadViewIfNeeded()
-        notepadVC.textViewManager = NotepadTextViewManager(notepadVC, coreDataManager: coreDataManager)
+        notepadVC.textViewManager = NotepadTextViewManager(notepadVC, coreDataManager)
         notepadVC.showContent()
         notepadVC.updateView(with: practiceSession)
         
