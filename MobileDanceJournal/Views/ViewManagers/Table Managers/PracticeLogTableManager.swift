@@ -80,6 +80,7 @@ extension PracticeLogTableManager: UITableViewDataSource {
             let practiceSession = coreDataManager.practiceSessionFRC.object(at: indexPath)
             coreDataManager.delete(practiceSession)
             
+            // TODO: Is this necessary?
             let rowToDelete = indexPath.row
             if selectedRow == rowToDelete {
                 coordinator?.clearDetailVC()
@@ -120,7 +121,7 @@ extension PracticeLogTableManager: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        
+        // TODO: Add search to table view
         let deleteAction = UIContextualAction(style: .destructive, title: Actions.delete) { [unowned self] (action, view, completionHandler) in
             
             let deleteAlertAction: ((UIAlertAction) -> Void) = { action in
@@ -147,7 +148,7 @@ extension PracticeLogTableManager: UITableViewDelegate {
                 completionHandler(false)
             }
             
-            self.managedVC.presentYesNoAlert(message: AlertConstants.confirmDelete, isDeleteAlert: true, yesAction: deleteAlertAction, noAction: noAlertAction)
+            self.managedVC.presentYesNoAlert(message: AlertConstants.confirmPracticeLogDelete, isDeleteAlert: true, yesAction: deleteAlertAction, noAction: noAlertAction)
             
         }
         

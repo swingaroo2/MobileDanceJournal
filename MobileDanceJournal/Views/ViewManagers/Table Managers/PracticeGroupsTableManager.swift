@@ -34,7 +34,7 @@ class PracticeGroupsTableManager: NSObject, TableManager {
 
 // MARK: - UITableViewDataSource
 extension PracticeGroupsTableManager {
-    // TODO: Group cells by month and year
+    // TODO: Group cells by year
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard let fetchedGroups = coreDataManager.groupFRC.fetchedObjects else { return 1 }
         
@@ -66,7 +66,7 @@ extension PracticeGroupsTableManager {
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             let selectedGroup = coreDataManager.groupFRC.object(at: indexPath)
-            managedVC.presentYesNoAlert(message: AlertConstants.confirmDelete, isDeleteAlert: true, yesAction: { [unowned self] action in self.coreDataManager.delete(selectedGroup) })
+            managedVC.presentYesNoAlert(message: AlertConstants.confirmGroupDelete, isDeleteAlert: true, yesAction: { [unowned self] action in self.coreDataManager.delete(selectedGroup) })
         }
     }
 }
@@ -112,6 +112,7 @@ extension PracticeGroupsTableManager {
     }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        // TODO: Add search to table view
         let deleteAction = UIContextualAction(style: .destructive, title: Actions.delete) { [unowned self] (action, view, completionHandler) in
             
             let deleteAlertAction: ((UIAlertAction) -> Void) = { action in
@@ -125,7 +126,7 @@ extension PracticeGroupsTableManager {
                 completionHandler(false)
             }
             
-            self.managedVC.presentYesNoAlert(message: AlertConstants.confirmDelete, isDeleteAlert: true, yesAction: deleteAlertAction, noAction: noAlertAction)
+            self.managedVC.presentYesNoAlert(message: AlertConstants.confirmGroupDelete, isDeleteAlert: true, yesAction: deleteAlertAction, noAction: noAlertAction)
             
         }
         

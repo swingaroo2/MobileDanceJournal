@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina6_1" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -225,7 +223,7 @@
             <objects>
                 <viewController storyboardIdentifier="VideoUploadVC" definesPresentationContext="YES" providesPresentationContextTransitionStyle="YES" modalTransitionStyle="crossDissolve" modalPresentationStyle="overCurrentContext" id="7gW-rq-RSE" customClass="VideoUploadVC" customModule="JiveJournal" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="1gv-DA-1Ct">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="500"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="446"/>
                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7GX-mi-rp2" userLabel="Thumbnail Container View">
@@ -249,11 +247,10 @@
                                 </constraints>
                             </view>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="9Xd-cu-3hs">
-                                <rect key="frame" x="32" y="376" width="350" height="30"/>
+                                <rect key="frame" x="32" y="376" width="350" height="34"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="350" id="eKG-mu-v1h"/>
                                 </constraints>
-                                <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="done"/>
                                 <connections>
@@ -262,7 +259,7 @@
                                 </connections>
                             </textField>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kiU-OR-pwc">
-                                <rect key="frame" x="0.0" y="417" width="414" height="49"/>
+                                <rect key="frame" x="0.0" y="402" width="414" height="44"/>
                                 <items>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="Dua-mm-Cy2"/>
                                     <barButtonItem title="Save" id="S7v-Uw-rud">
@@ -328,7 +325,7 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" textLabel="lUy-Ej-QIM" detailTextLabel="wHS-9F-vkm" style="IBUITableViewCellStyleValue1" id="jyH-Z4-YyH">
-                                        <rect key="frame" x="0.0" y="28" width="414" height="44"/>
+                                        <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="jyH-Z4-YyH" id="uUa-3h-HlC">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
@@ -378,11 +375,11 @@
             <objects>
                 <viewController storyboardIdentifier="NewGroupVC" modalTransitionStyle="crossDissolve" modalPresentationStyle="formSheet" id="a6J-Da-jrD" customClass="NewGroupVC" customModule="JiveJournal" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="nZ1-jo-f5W">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="634"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="580"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DkE-i8-q8L">
-                                <rect key="frame" x="20" y="49" width="48" height="30"/>
+                                <rect key="frame" x="20" y="5" width="48" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="48" id="M7g-fA-gAF"/>
                                 </constraints>
@@ -392,7 +389,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DMr-Px-5k4">
-                                <rect key="frame" x="354" y="49" width="34" height="30"/>
+                                <rect key="frame" x="354" y="5" width="34" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="34" id="EEP-BR-BXc"/>
                                 </constraints>
@@ -402,7 +399,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" text="New Group" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jTs-kF-RfP">
-                                <rect key="frame" x="163.5" y="53" width="87" height="21"/>
+                                <rect key="frame" x="163.5" y="9" width="87" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="87" id="sHI-l4-aXJ"/>
                                 </constraints>
@@ -411,23 +408,22 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Group name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3k5-pT-cle">
-                                <rect key="frame" x="20" y="105" width="374" height="21"/>
+                                <rect key="frame" x="20" y="61" width="374" height="21"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="e.g. Hot Rhythm Holiday" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="XoY-jD-rA1" userLabel="Group name text field">
-                                <rect key="frame" x="20" y="134" width="375" height="30"/>
-                                <nil key="textColor"/>
+                                <rect key="frame" x="20" y="90" width="375" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textField>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsMultipleSelection="YES" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="erM-Gj-DDd">
-                                <rect key="frame" x="20" y="234" width="375" height="351"/>
+                                <rect key="frame" x="20" y="194" width="375" height="371"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" textLabel="02Y-Or-PHV" detailTextLabel="dBn-y9-DTF" style="IBUITableViewCellStyleValue1" id="3mV-yR-Kbj">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="28" width="375" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="3mV-yR-Kbj" id="QDa-aZ-ghb">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
@@ -453,7 +449,7 @@
                                 </prototypes>
                             </tableView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Give Ungrouped Practice Logs a Home" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ffF-CC-ocP">
-                                <rect key="frame" x="20" y="205" width="307" height="21"/>
+                                <rect key="frame" x="20" y="165" width="307" height="21"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -511,7 +507,7 @@
             </objects>
             <point key="canvasLocation" x="-1310" y="-389"/>
         </scene>
-        <!--Practice Log-->
+        <!--Practice Logs-->
         <scene sceneID="smW-Zh-WAh">
             <objects>
                 <tableViewController storyboardIdentifier="PracticeLogVC" clearsSelectionOnViewWillAppear="NO" id="7bK-jq-Zjz" customClass="PracticeLogVC" customModule="JiveJournal" customModuleProvider="target" sceneMemberID="viewController">
@@ -521,7 +517,7 @@
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" textLabel="Arm-wq-HPj" detailTextLabel="fuQ-9q-tdU" style="IBUITableViewCellStyleValue1" id="WCw-Qf-5nD">
-                                <rect key="frame" x="0.0" y="28" width="414" height="44"/>
+                                <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="WCw-Qf-5nD" id="37f-cq-3Eg">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
@@ -552,7 +548,7 @@
                             <outlet property="delegate" destination="7bK-jq-Zjz" id="9yk-y8-faO"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Practice Log" id="Zdf-7t-Un8">
+                    <navigationItem key="navigationItem" title="Practice Logs" id="Zdf-7t-Un8">
                         <barButtonItem key="rightBarButtonItem" systemItem="compose" id="DNJ-GC-wdx">
                             <connections>
                                 <action selector="createNewPracticeSession:" destination="7bK-jq-Zjz" id="65z-4z-tu4"/>

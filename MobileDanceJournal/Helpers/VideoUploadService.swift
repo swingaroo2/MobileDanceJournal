@@ -58,5 +58,5 @@ class VideoUploadService: NSObject {
         return nil
     }
     
-    // TODO: When implementing the server component to this, add HTTP requests here.
+    // TODO: Plan out architecture for CloudKit communication
 }

@@ -37,7 +37,6 @@ class VideoHelper: NSObject {
         }
     }
     
-    // TODO: Consider refactoring permissions functions into separate class
     private class func checkCameraPermissions(completion: @autoclosure @escaping () -> Void) {
         switch AVCaptureDevice.authorizationStatus(for: .video) {
         case .authorized:

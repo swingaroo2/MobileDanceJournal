@@ -8,7 +8,6 @@
 
 import UIKit
 
-// TODO: Add search to table view
 class NewGroupVC: UIViewController, Storyboarded {
     
     weak var coordinator: MainCoordinator!

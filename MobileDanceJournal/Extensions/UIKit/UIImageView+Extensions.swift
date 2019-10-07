@@ -12,7 +12,7 @@ import AVFoundation
 
 extension UIImageView {
     
-    // TODO: Figure out rethrows to pass along ThumbnailErrors to calling classes
+    // TODO: Is there a better way to do this?
     
     func setThumbnail(from video: PracticeVideo) throws {
         do {

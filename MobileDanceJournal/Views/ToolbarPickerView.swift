@@ -33,7 +33,6 @@ extension ToolbarPickerView {
         addToolbar(barButtonItems)
     }
     
-    // TODO: Appearance protocol use case?
     func configureContainerView(_ parentView: UIView) {
         let height = picker.getHeight() + toolbarHeight
         frame = CGRect(x: 0, y: parentView.getHeight(), width: parentView.getWidth(), height: height)

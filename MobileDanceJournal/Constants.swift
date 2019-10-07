@@ -8,7 +8,7 @@
 
 import Foundation
 
-// MARK: String constants
+// MARK: - String constants
 struct Storyboards {
     static let main = "Main"
 }
@@ -35,6 +35,8 @@ struct AlertConstants {
     static let uploadFromPhotos = "Import from Photos"
     static let addVideo = "Add Video"
     static let confirmDelete = "Are you sure you want to delete this?"
+    static let confirmGroupDelete = "Are you sure you want to delete this? Orphaned practice logs will be moved to Uncategorized"
+    static let confirmPracticeLogDelete = "Are you sure you want to delete this? Videos in this practice log will be lost"
 }
 
 struct TextConstants {
@@ -66,7 +68,7 @@ struct CustomImages {
     static let videoGallery = "video_gallery"
 }
 
-// MARK: Errors
+// MARK: - Errors
 struct UserErrors {
     static let textFieldContentsInvalid = "Text field contents are not valid."
     static let videoAlreadyExists = "This video has already been uploaded"
@@ -87,7 +89,7 @@ struct VideoUploadErrors {
     static let noURL = "Photos was a meanie-head and didn't give us your video. We apologize for the inconvenience."
 }
 
-// MARK: Core Data
+// MARK: - Core Data
 struct Predicates {
     static let hasGroup = "group == %@"
     static let hasNoGroup = "group == nil"
@@ -121,7 +123,7 @@ struct PracticeVideoConstants {
     static let url = "url"
 }
 
-// MARK: Enums
+// MARK: - Enums
 enum DateFormats: String {
     case longFormat = "'Started' MMMM dd, yyyy 'at' h:mm:ss.SSSS a"
     case notepadDisplayFormat = "'Started' MMMM dd, yyyy"

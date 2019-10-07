@@ -51,7 +51,6 @@ extension VideoGalleryVC: UIImagePickerControllerDelegate {
     
 }
 
-// TODO: Find a way to move this to coordinator
 // MARK: - UINavigationControllerDelegate
 extension VideoGalleryVC: UINavigationControllerDelegate {
     func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {

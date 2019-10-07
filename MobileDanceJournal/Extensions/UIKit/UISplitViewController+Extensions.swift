@@ -9,7 +9,6 @@
 import UIKit
 
 // MARK: - ViewController and NavigationController getters
-// TODO: Revisit this...shit's broke
 extension UISplitViewController {
     var masterNC: UINavigationController? {
         return viewControllers.first as? UINavigationController

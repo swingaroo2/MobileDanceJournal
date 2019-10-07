@@ -192,7 +192,6 @@ extension CoreDataManager {
 }
 
 // MARK: - Insert and update new managed objects
-// TODO: Consistent naming conventions
 extension CoreDataManager {
     func insertAndReturnNewPracticeSession() -> PracticeSession {
         let newPracticeSession = PracticeSession(context: persistentContainer.viewContext)
