@@ -17,11 +17,11 @@ class PracticeLogTableManager: NSObject, SelectionTrackingTableManager {
     var managedVC: UIViewController
     var selectedRow = -1
     
+    var noContentLabel: UILabel?
     var groupPickerView: PracticeSessionPickerView!
     var coordinator: PracticeLogCoordinator!
     var practiceSessions: [PracticeSession]!
     var currentGroup: Group?
-    var originalPracticeLogCount = 0
     
     required init(_ managedTableView: UITableView,_ coreDataManager: CoreDataManager, managedVC: UIViewController) {
         self.managedTableView = managedTableView
@@ -30,18 +30,6 @@ class PracticeLogTableManager: NSObject, SelectionTrackingTableManager {
         super.init()
         self.managedTableView.delegate = self
         self.managedTableView.dataSource = self
-        self.coreDataManager.practiceSessionDelegate = self
-    }
-    
-    init(_ managedTableView: UITableView,_ coreDataManager: CoreDataManager,_ originalPracticeLogCount: Int, managedVC: UIViewController) {
-        self.managedTableView = managedTableView
-        self.coreDataManager = coreDataManager
-        self.managedVC = managedVC
-        self.originalPracticeLogCount = originalPracticeLogCount
-        super.init()
-        self.managedTableView.delegate = self
-        self.managedTableView.dataSource = self
-        self.coreDataManager.practiceSessionDelegate = self
     }
     
     func getSelectedPracticeSessions() -> [PracticeSession] {
@@ -52,7 +40,6 @@ class PracticeLogTableManager: NSObject, SelectionTrackingTableManager {
         print(selectedPracticeSessions)
         return selectedPracticeSessions
     }
-    
 }
 
 // MARK: UITableViewDataSource
@@ -61,8 +48,11 @@ extension PracticeLogTableManager: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard let practiceSessions = coreDataManager.fetchPracticeSessions(in: currentGroup) else { return 0 }
         self.practiceSessions = practiceSessions
-        managedVC.navigationItem.leftBarButtonItem?.isEnabled = practiceSessions.count > 0
-        return practiceSessions.count
+        let numRows = practiceSessions.count
+        
+        managedVC.navigationItem.leftBarButtonItem?.isEnabled = (numRows > 0)
+        noContentLabel?.isHidden = (numRows > 0)
+        return numRows
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -121,25 +111,22 @@ extension PracticeLogTableManager: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        // TODO: Add search to table view
+
         let deleteAction = UIContextualAction(style: .destructive, title: Actions.delete) { [unowned self] (action, view, completionHandler) in
             
             let deleteAlertAction: ((UIAlertAction) -> Void) = { action in
                 let practiceSessionToDelete = self.coreDataManager.practiceSessionFRC.object(at: indexPath)
                 self.coreDataManager.delete(practiceSessionToDelete)
                 
-                guard self.currentGroup != nil else {
-                    completionHandler(true)
-                    return
-                }
                 self.managedTableView.deleteRows(at: [indexPath], with: .fade)
-                self.originalPracticeLogCount -= 1
-
+                guard let fetchedPracticeLogs = self.coreDataManager.fetchPracticeSessions(in: self.currentGroup) else { return }
+                self.noContentLabel?.isHidden = (fetchedPracticeLogs.count > 0)
+                
                 // TODO: Verify if this is necessary (for iPad, it might be)
-//                let rowToDelete = indexPath.row
-//                if self.selectedRow == rowToDelete {
-//                    self.coordinator?.clearDetailVC()
-//                }
+                let rowToDelete = indexPath.row
+                if self.selectedRow == rowToDelete {
+                    self.coordinator?.clearDetailVC()
+                }
                 
                 completionHandler(true)
             }
@@ -177,67 +164,6 @@ extension PracticeLogTableManager: UITableViewDelegate {
         let swipeActionsConfig = UISwipeActionsConfiguration(actions: swipeActions)
         swipeActionsConfig.performsFirstActionWithFullSwipe = false
         return swipeActionsConfig
-    }
-}
-
-// MARK: - NSFetchedResultsControllerDelegate
-extension PracticeLogTableManager: NSFetchedResultsControllerDelegate {
-    
-    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
-        switch (type) {
-        case .insert:
-            print("INSERT: \(anObject)")
-            if let indexPath = newIndexPath {
-                managedTableView.insertRows(at: [indexPath], with: .fade)
-                originalPracticeLogCount += 1
-            }
-            break;
-        case .delete:
-            print("DELETE: \(anObject)")
-            if let indexPath = indexPath {
-                managedTableView.deleteRows(at: [indexPath], with: .fade)
-                originalPracticeLogCount -= 1
-            }
-            break;
-        case .update:
-            print("UPDATE: \(anObject)")
-            if let indexPath = indexPath {
-                guard let practiceLogs = coreDataManager.fetchPracticeSessions(in: currentGroup) else { return }
-                if let cell = managedTableView.cellForRow(at: indexPath) {
-                    if originalPracticeLogCount > practiceLogs.count {
-                        managedTableView.deleteRows(at: [indexPath], with: .fade)
-                        originalPracticeLogCount -= 1
-                    } else if originalPracticeLogCount == practiceLogs.count {
-                        configureCell(cell, indexPath)
-                    } else {
-                        managedTableView.insertRows(at: [indexPath], with: .fade)
-                        originalPracticeLogCount += 1
-                    }
-                } else {
-                    if originalPracticeLogCount < practiceLogs.count {
-                        managedTableView.insertRows(at: [indexPath], with: .fade)
-                        originalPracticeLogCount += 1
-                    }
-                }
-            }
-        case .move:
-            print("MOVE: \(anObject)")
-            if let indexPath = indexPath, let newIndexPath = newIndexPath {
-                managedTableView.deleteRows(at: [indexPath], with: .fade)
-                managedTableView.insertRows(at: [newIndexPath], with: .fade)
-            }
-            break;
-        default:
-            print("\(#file).\(#function): Unhandled type \(type)")
-        }
-    }
-    
-    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        managedTableView.beginUpdates()
-    }
-    
-    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-         managedTableView.endUpdates()
     }
 }
 

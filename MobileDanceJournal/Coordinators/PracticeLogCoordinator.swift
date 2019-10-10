@@ -39,7 +39,7 @@ class PracticeLogCoordinator: Coordinator {
 
 extension PracticeLogCoordinator {
     func startEditingNewPracticeSession() {
-        let newPracticeSession = coreDataManager.insertAndReturnNewPracticeSession()
+        let newPracticeSession = coreDataManager.createAndReturnNewPracticeSession()
         newPracticeSession.group = currentGroup
         showDetails(for: newPracticeSession)
     }

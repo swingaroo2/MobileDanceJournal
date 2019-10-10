@@ -12,11 +12,7 @@ import UIKit
 
 public class CoreDataManager : NSObject {
     
-    weak var practiceSessionDelegate: NSFetchedResultsControllerDelegate? {
-        willSet {
-            self.practiceSessionFRC.delegate = newValue
-        }
-    }
+    private let modelName: String
     
     weak var practiceVideoDelegate: NSFetchedResultsControllerDelegate? {
         willSet {
@@ -29,7 +25,6 @@ public class CoreDataManager : NSObject {
             self.groupFRC.delegate = newValue
         }
     }
-    private let modelName: String
     
     init(modelName: String) {
         self.modelName = modelName
@@ -193,10 +188,11 @@ extension CoreDataManager {
 
 // MARK: - Insert and update new managed objects
 extension CoreDataManager {
-    func insertAndReturnNewPracticeSession() -> PracticeSession {
+    func createAndReturnNewPracticeSession() -> PracticeSession {
         let newPracticeSession = PracticeSession(context: persistentContainer.viewContext)
         let dateText = Date.getStringFromDate(Date(), .longFormat)
         newPracticeSession.date = Date.getDateFromString(dateText) ?? Date()
+        save()
         return newPracticeSession
     }
     

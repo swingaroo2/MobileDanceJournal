@@ -19,6 +19,7 @@ class NewGroupVC: UIViewController, Storyboarded {
     @IBOutlet weak var cancelButton: UIButton!
     @IBOutlet weak var groupNameTextField: UITextField!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var ungroupedPracticeLogsLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,6 +37,9 @@ class NewGroupVC: UIViewController, Storyboarded {
         guard let text = groupNameTextField.text else { return }
         saveButton.isEnabled = !text.isEmpty
         groupNameTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
+        
+        guard let ungroupedPracticeSessions = coreDataManager.fetchPracticeSessions(in: nil) else { return }
+        ungroupedPracticeLogsLabel.isHidden = (ungroupedPracticeSessions.count == 0)
     }
     
     private func configureTableManager(_ managedTableView: UITableView,_ coreDataManager: CoreDataManager) -> PracticeLogTableManager {
