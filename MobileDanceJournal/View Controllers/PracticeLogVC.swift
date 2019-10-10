@@ -40,10 +40,16 @@ class PracticeLogVC: UIViewController, Storyboarded {
     // MARK: - Notifications
     func addNotificationListener() {
         NotificationCenter.default.addObserver(self, selector: #selector(PracticeLogVC.practiceLogUpdated), name: .practiceLogUpdated, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(PracticeLogVC.practiceLogMoved), name: .practiceLogMoved, object: nil)
     }
     
     func removeNotificationListener() {
         NotificationCenter.default.removeObserver(self)
+    }
+    
+    @objc func practiceLogMoved(notification: Notification) {
+        guard let remainingPracticeLogs = coreDataManager.fetchPracticeSessions(in: currentGroup) else { return }
+        noContentLabel.isHidden = remainingPracticeLogs.count > 0
     }
     
     @objc func practiceLogUpdated(notification: Notification) {

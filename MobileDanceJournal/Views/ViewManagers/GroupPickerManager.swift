@@ -28,35 +28,30 @@ class GroupPickerManager: NSObject, PickerManager {
 extension GroupPickerManager {
     func doneButtonPressed() {
         let selectedRow = managedView.picker.selectedRow(inComponent: 0)
-        guard let newGroup = selectedRow >= newGroups.count ? nil : newGroups[selectedRow] else {
-            // Get managed Table View
-            guard let managedTableView = (coordinator.rootVC.masterVC as! PracticeLogVC).tableView else {
-                managedView.hide()
-                return
-            }
-            
-            // Get Practice Logs in the old Group
-            guard let practiceLogs = coreDataManager.fetchPracticeSessions(in: oldGroup) else {
-                managedView.hide()
-                return
-            }
-            
-            // Get rowIndex of IndexPath
-            guard let rowIndex = practiceLogs.firstIndex(of: practiceLogToMove) else {
-                managedView.hide()
-                return
-            }
-            
-            // Delete Practice Log from Table View
-            let indexPath = IndexPath(row: rowIndex, section: 0)
-            coreDataManager.move([practiceLogToMove], from: oldGroup, to: nil)
-            managedTableView.deleteRows(at: [indexPath], with: .fade)
+        
+        guard let managedTableView = (coordinator.rootVC.masterVC as! PracticeLogVC).tableView else {
             managedView.hide()
             return
         }
         
-        // Does not cover Group -> Uncategorized
+        // Get Practice Logs in the old Group
+        guard let practiceLogs = coreDataManager.fetchPracticeSessions(in: oldGroup) else {
+            managedView.hide()
+            return
+        }
+        
+        // Get rowIndex of IndexPath
+        guard let rowIndex = practiceLogs.firstIndex(of: practiceLogToMove) else {
+            managedView.hide()
+            return
+        }
+        
+        let indexPath = IndexPath(row: rowIndex, section: 0)
+        let newGroup = selectedRow >= newGroups.count ? nil : newGroups[selectedRow]
+        
         coreDataManager.move([practiceLogToMove], from: oldGroup, to: newGroup)
+        managedTableView.deleteRows(at: [indexPath], with: .fade)
+        NotificationCenter.default.post(name: .practiceLogMoved, object: self, userInfo: nil)
         managedView.hide()
     }
 }

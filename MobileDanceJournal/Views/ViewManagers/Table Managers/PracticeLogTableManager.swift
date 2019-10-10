@@ -50,8 +50,8 @@ extension PracticeLogTableManager: UITableViewDataSource {
         self.practiceSessions = practiceSessions
         let numRows = practiceSessions.count
         
-        managedVC.navigationItem.leftBarButtonItem?.isEnabled = (numRows > 0)
-        noContentLabel?.isHidden = (numRows > 0)
+        managedVC.navigationItem.leftBarButtonItem?.isEnabled = numRows > 0
+        noContentLabel?.isHidden = numRows > 0
         return numRows
     }
     
@@ -120,7 +120,7 @@ extension PracticeLogTableManager: UITableViewDelegate {
                 
                 self.managedTableView.deleteRows(at: [indexPath], with: .fade)
                 guard let fetchedPracticeLogs = self.coreDataManager.fetchPracticeSessions(in: self.currentGroup) else { return }
-                self.noContentLabel?.isHidden = (fetchedPracticeLogs.count > 0)
+                self.noContentLabel?.isHidden = fetchedPracticeLogs.count > 0
                 
                 // TODO: Verify if this is necessary (for iPad, it might be)
                 let rowToDelete = indexPath.row
