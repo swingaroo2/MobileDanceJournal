@@ -135,3 +135,8 @@ enum Permissions {
     case photos
 }
 
+// MARK: - Notifications
+extension Notification.Name {
+    static let practiceLogUpdated = Notification.Name("practiceLogUpdated")
+    static let practiceLogMoved = Notification.Name("practiceLogMoved")
+}

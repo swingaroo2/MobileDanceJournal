@@ -68,16 +68,10 @@ private extension NotepadTextViewManager {
         }
     }
     
-    func save(_ practiceSession: PracticeSession?) {
-        let practiceSessionToSave = (practiceSession == nil) ? coreDataManager.insertAndReturnNewPracticeSession() : practiceSession!
-        
-        practiceSessionToSave.title = notepadVC.practiceSessionTitleTextView.text
-        practiceSessionToSave.notes = notepadVC.practiceSessionContent.text
-        
-        if let groupToUpdate = notepadVC.coordinator.currentGroup {
-            coreDataManager.add([practiceSessionToSave], to: groupToUpdate)
-        } else {
-            coreDataManager.save()
-        }
+    func save(_ practiceSession: PracticeSession) {
+        practiceSession.title = notepadVC.practiceSessionTitleTextView.text
+        practiceSession.notes = notepadVC.practiceSessionContent.text
+        coreDataManager.save()
+        NotificationCenter.default.post(name: .practiceLogUpdated, object: nil, userInfo: [Notification.Name.practiceLogUpdated : practiceSession])
     }
 }

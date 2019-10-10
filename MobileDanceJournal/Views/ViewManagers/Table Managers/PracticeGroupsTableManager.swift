@@ -28,7 +28,6 @@ class PracticeGroupsTableManager: NSObject, TableManager {
         self.managedTableView.delegate = self
         self.managedTableView.dataSource = self
         self.coreDataManager.practiceGroupsDelegate = self
-        self.coreDataManager.practiceSessionDelegate = nil
     }
 }
 
