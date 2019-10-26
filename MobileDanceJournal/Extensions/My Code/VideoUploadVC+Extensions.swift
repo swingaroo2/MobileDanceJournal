@@ -42,14 +42,14 @@ extension VideoUploadVC {
                 return
             }
             
-            coordinator?.finishEditing(newVideo, from: uploadService, in: self)
+            coordinator?.finishEditing(newVideo, from: uploadService)
         } else {
             guard let updatedVideo = uploadService.video else {
                 coordinator?.dismiss(self, completion: nil)
                 return
             }
             updatedVideo.title = titleText
-            coordinator?.finishEditing(updatedVideo, from: uploadService, in: self)
+            coordinator?.finishEditing(updatedVideo, from: uploadService)
         }
     }
     

@@ -10,6 +10,7 @@ import Foundation
 
 import UIKit
 
+// MARK: Initialization
 class MainCoordinator: Coordinator {
     var rootVC: SplitViewRootController
     var childCoordinators: [Coordinator] = [Coordinator]()
@@ -31,6 +32,11 @@ class MainCoordinator: Coordinator {
         rootVC.detailNC!.topViewController!.navigationItem.leftBarButtonItem = rootVC.displayModeButtonItem
     }
     
+    
+}
+
+// MARK: Navigation functions
+extension MainCoordinator {
     func showPracticeLog(group: Group?) {
         let child = PracticeLogCoordinator(rootVC, coreDataManager, group)
         childCoordinators.append(child)

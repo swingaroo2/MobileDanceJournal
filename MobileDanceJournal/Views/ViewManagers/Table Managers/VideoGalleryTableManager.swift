@@ -89,7 +89,7 @@ extension VideoGalleryTableManager: UITableViewDelegate {
             guard let video = selectedCell.video else { return }
             
             if !tableView.isEditing {
-                self.coordinator?.play(video, from: self.managedVC, self.videoHelper)
+                self.coordinator?.play(video, self.videoHelper)
             } else {
                 self.videoHelper?.uploadService.set(video: video)
                 self.coordinator?.startEditingVideo(videoHelper: self.videoHelper)

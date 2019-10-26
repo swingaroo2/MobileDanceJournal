@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 
+// MARK: Initialization
 class VideoGalleryCoordinator: NSObject, Coordinator {
     private let practiceSession: PracticeSession
     private let coreDataManager: CoreDataManager
@@ -37,17 +38,11 @@ class VideoGalleryCoordinator: NSObject, Coordinator {
         videoGalleryVC.practiceSession = practiceSession
         videoGalleryVC.videoHelper = videoHelper
         
-        if rootVC.hasTwoRootNavigationControllers {
-            guard let detailNC = rootVC.children.last as? UINavigationController else { return }
-            detailNC.pushViewController(videoGalleryVC, animated: true)
-        } else {
-            guard let rootNC = rootVC.children.first else { return }
-            guard let detailNC = rootNC.children.last as? UINavigationController else { return }
-            detailNC.pushViewController(videoGalleryVC, animated: true)
-        }
+        pushVideoGalleryVC(rootVCHasTwoNavControllers: rootVC.hasTwoRootNavigationControllers)
     }
 }
 
+// MARK: Navigation functions
 extension VideoGalleryCoordinator {
     func startEditingVideo(videoHelper: VideoHelper, videoPicker: UIImagePickerController? = nil) {
         let videoUploadVC = VideoUploadVC.instantiate()
@@ -66,7 +61,9 @@ extension VideoGalleryCoordinator {
         }
     }
     
-    func finishEditing(_ video: PracticeVideo, from uploader: VideoUploadService, in uploadVC: VideoUploadVC) {
+    func finishEditing(_ video: PracticeVideo, from uploader: VideoUploadService) {
+        guard let uploadVC = getVideoUploadVC() else { return }
+        
         guard let videoGalleryVC = rootVC.detailNC?.children.last as? VideoGalleryVC else {
             uploadVC.presentBasicAlert(message: "Failed to display videos for this practice session")
             dismiss(uploadVC, completion: nil)
@@ -92,7 +89,8 @@ extension VideoGalleryCoordinator {
         dismiss(videoGalleryVC, completion: nil)
     }
     
-    func play(_ video: PracticeVideo, from presentingVC: UIViewController,_ videoHelper: VideoHelper) {
+    func play(_ video: PracticeVideo,_ videoHelper: VideoHelper) {
+        guard let presentingVC = rootVC.detailVC else { return }
         let videoPath = URLBuilder.getDocumentsFilePathURL(for: video.filename)
         videoHelper.playVideo(at: videoPath, in: presentingVC)
     }
@@ -118,6 +116,7 @@ extension VideoGalleryCoordinator {
     }
 }
 
+// MARK: Helper functions
 private extension VideoGalleryCoordinator {
     func getVideoUploadVC() -> VideoUploadVC? {
         if let uploadVC = rootVC.presentedViewController as? VideoUploadVC {
@@ -127,5 +126,18 @@ private extension VideoGalleryCoordinator {
         }
         
         return nil
+    }
+    
+    func pushVideoGalleryVC(rootVCHasTwoNavControllers: Bool) {
+        let videoGalleryVC = VideoGalleryVC.instantiate()
+        
+        if rootVCHasTwoNavControllers {
+            guard let detailNC = rootVC.children.last as? UINavigationController else { return }
+            detailNC.pushViewController(videoGalleryVC, animated: true)
+        } else {
+            guard let rootNC = rootVC.children.first else { return }
+            guard let detailNC = rootNC.children.last as? UINavigationController else { return }
+            detailNC.pushViewController(videoGalleryVC, animated: true)
+        }
     }
 }
