@@ -42,19 +42,22 @@ extension VideoUploadVC {
                 return
             }
             
-            coordinator?.finishEditing(newVideo, from: uploadService, in: self)
+            coordinator?.finishEditing(newVideo, from: uploadService)
+            uploadService.set(video: nil)
         } else {
             guard let updatedVideo = uploadService.video else {
                 coordinator?.dismiss(self, completion: nil)
                 return
             }
             updatedVideo.title = titleText
-            coordinator?.finishEditing(updatedVideo, from: uploadService, in: self)
+            coordinator?.finishEditing(updatedVideo, from: uploadService)
+            uploadService.set(video: nil)
         }
     }
     
     @IBAction func cancelUpload(_ sender: UIBarButtonItem) {
-        coordinator?.cancel(videoUploader: self)
+        videoHelper?.uploadService.set(video: nil)
+        coordinator?.cancelUpload()
     }
     
     @IBAction func textDidChange(_ sender: UITextField) {

@@ -37,8 +37,9 @@ class VideoUploadService: NSObject {
         super.init()
     }
     
-    func set(video: PracticeVideo) {
+    func set(video: PracticeVideo?) {
         self.video = video
+        guard let video = video else { return }
         url = URLBuilder.getDocumentsFilePathURL(for: video.filename)
     }
     

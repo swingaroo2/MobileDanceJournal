@@ -130,7 +130,7 @@ enum DateFormats: String {
     case practiceLogDisplayFormat = "M/dd/yyyy"
 }
 
-enum Permissions {
+enum UserPermissions {
     case camera
     case photos
 }

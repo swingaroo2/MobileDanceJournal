@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 
+// MARK: Initialization
 class PracticeLogCoordinator: Coordinator {
     let rootVC: SplitViewRootController
     private let coreDataManager: CoreDataManager
@@ -32,6 +33,7 @@ class PracticeLogCoordinator: Coordinator {
     }
 }
 
+// MARK: Navigation functions
 extension PracticeLogCoordinator {
     func startEditingNewPracticeSession() {
         let newPracticeSession = coreDataManager.createAndReturnNewPracticeSession()
@@ -58,7 +60,6 @@ extension PracticeLogCoordinator {
         rootVC.showDetailViewController(detailNC, sender: self)
     }
     
-    // Special deletion case only applies when splitViewController is not collapsed
     func clearDetailVC() {
         guard let detailVC = rootVC.detailVC as? PracticeNotepadVC else { return }
         
