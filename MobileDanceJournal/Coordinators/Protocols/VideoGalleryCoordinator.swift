@@ -9,6 +9,8 @@
 import Foundation
 import UIKit
 import MobileCoreServices
+import AVFoundation
+import AVKit
 
 // MARK: - Initialization
 class VideoGalleryCoordinator: NSObject, Coordinator {
@@ -93,7 +95,12 @@ extension VideoGalleryCoordinator {
     func play(_ video: PracticeVideo,_ videoHelper: VideoHelper) {
         guard let presentingVC = rootVC.detailVC else { return }
         let videoPath = URLBuilder.getDocumentsFilePathURL(for: video.filename)
-        videoHelper.playVideo(at: videoPath, in: presentingVC)
+        let player = AVPlayer(url: videoPath)
+        let playerController = AVPlayerViewController()
+        playerController.player = player
+        presentingVC.navigationController?.present(playerController, animated: true) {
+            playerController.player?.play()
+        }
     }
     
     func share(_ url: URL) {

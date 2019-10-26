@@ -29,15 +29,6 @@ class VideoHelper: NSObject {
         self.uploadService = uploadService
     }
     
-    func playVideo(at path: URL, in viewController: UIViewController) {
-        let player = AVPlayer(url: path)
-        let playerController = AVPlayerViewController()
-        playerController.player = player
-        viewController.navigationController?.present(playerController, animated: true) {
-            playerController.player?.play()
-        }
-    }
-    
     func getThumbnail(from url: URL, completion: ((UIImage?) -> ())? = nil) {
         let filename = url.lastPathComponent
         
