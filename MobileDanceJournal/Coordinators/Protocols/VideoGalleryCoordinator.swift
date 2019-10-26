@@ -126,7 +126,7 @@ extension VideoGalleryCoordinator {
 
 // MARK: - Image picker is a special snowflake
 extension VideoGalleryCoordinator: UINavigationControllerDelegate, UIImagePickerControllerDelegate {
-    func initiate(_ service: UIImagePickerController.SourceType, in viewController: UIViewController & UINavigationControllerDelegate & UIImagePickerControllerDelegate) {
+    func initiate(_ service: UIImagePickerController.SourceType) {
         
         DispatchQueue.main.async {
             let videoPickerController = UIImagePickerController()

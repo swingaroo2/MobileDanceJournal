@@ -31,34 +31,6 @@ extension VideoGalleryVC {
     }
 }
 
-// MARK: - UIImagePickerControllerDelegate
-extension VideoGalleryVC: UIImagePickerControllerDelegate {
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        
-        guard let videoURL = info[.mediaURL] as? URL else {
-            coordinator?.dismiss(picker) { [weak self] in
-                self?.presentBasicAlert(title: VideoUploadErrors.generic, message: VideoUploadErrors.noURL)
-            }
-            return
-        }
-        videoHelper?.uploadService.url = videoURL
-        coordinator?.startEditingVideo(videoHelper: videoHelper, videoPicker: picker)
-    }
-    
-    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        coordinator?.dismiss(picker) { print("\(#function)") }
-    }
-    
-}
-
-// MARK: - UINavigationControllerDelegate
-extension VideoGalleryVC: UINavigationControllerDelegate {
-    func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
-        viewController.navigationItem.title = VCConstants.chooseVideo
-        print("\(#function)")
-    }
-}
-
 // MARK: - Helper functions
 private extension VideoGalleryVC {
     func presentAddVideoActionSheet(from sender: UIBarButtonItem) {
@@ -66,12 +38,12 @@ private extension VideoGalleryVC {
         
         let recordVideoAction = UIAlertAction(title: AlertConstants.recordVideo, style: .default) { (action:UIAlertAction) in
             guard Services.permissions.hasCameraPermission() else { return }
-            self.coordinator.initiate(.camera, in: self)
+            self.coordinator.initiate(.camera)
         }
         
         let uploadFromPhotosAction = UIAlertAction(title: AlertConstants.uploadFromPhotos, style: .default) { (action:UIAlertAction) in
             guard Services.permissions.hasPhotosPermission() else { return }
-            self.coordinator.initiate(.photoLibrary, in: self)
+            self.coordinator.initiate(.photoLibrary)
         }
         
         actionSheet.addAction(recordVideoAction)
