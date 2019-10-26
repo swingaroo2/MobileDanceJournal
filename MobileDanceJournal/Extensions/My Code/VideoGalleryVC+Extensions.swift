@@ -27,7 +27,7 @@ extension VideoGalleryVC {
 // MARK: - IBActions
 extension VideoGalleryVC {
     @IBAction func addVideoButtonPressed(_ sender: UIBarButtonItem) {
-        AlertHelper.presentAddVideoActionSheet(from: self, and: sender)
+        presentAddVideoActionSheet(from: sender)
     }
 }
 
@@ -56,5 +56,31 @@ extension VideoGalleryVC: UINavigationControllerDelegate {
     func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
         viewController.navigationItem.title = VCConstants.chooseVideo
         print("\(#function)")
+    }
+}
+
+// MARK: Helper functions
+private extension VideoGalleryVC {
+    func presentAddVideoActionSheet(from sender: UIBarButtonItem) {
+        let actionSheet = AlertHelper.addVideoActionSheet()
+        
+        let recordVideoAction = UIAlertAction(title: AlertConstants.recordVideo, style: .default) { (action:UIAlertAction) in
+            guard Services.permissions.hasCameraPermission() else { return }
+            VideoHelper.initiate(.camera, in: self)
+        }
+        
+        let uploadFromPhotosAction = UIAlertAction(title: AlertConstants.uploadFromPhotos, style: .default) { (action:UIAlertAction) in
+            guard Services.permissions.hasPhotosPermission() else { return }
+            VideoHelper.initiate(.photoLibrary, in: self)
+        }
+        
+        actionSheet.addAction(recordVideoAction)
+        actionSheet.addAction(uploadFromPhotosAction)
+        
+        if let popoverPresentationController: UIPopoverPresentationController = actionSheet.popoverPresentationController {
+            popoverPresentationController.barButtonItem = sender
+        }
+        
+        present(actionSheet, animated: true) { print("Presented Add Video action sheet") }
     }
 }

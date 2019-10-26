@@ -38,7 +38,7 @@ class VideoGalleryCoordinator: NSObject, Coordinator {
         videoGalleryVC.practiceSession = practiceSession
         videoGalleryVC.videoHelper = videoHelper
         
-        pushVideoGalleryVC(rootVCHasTwoNavControllers: rootVC.hasTwoRootNavigationControllers)
+        push(videoGalleryVC, rootVCHasTwoNavControllers: rootVC.hasTwoRootNavigationControllers)
     }
 }
 
@@ -128,8 +128,7 @@ private extension VideoGalleryCoordinator {
         return nil
     }
     
-    func pushVideoGalleryVC(rootVCHasTwoNavControllers: Bool) {
-        let videoGalleryVC = VideoGalleryVC.instantiate()
+    func push(_ videoGalleryVC: VideoGalleryVC, rootVCHasTwoNavControllers: Bool) {
         
         if rootVCHasTwoNavControllers {
             guard let detailNC = rootVC.children.last as? UINavigationController else { return }

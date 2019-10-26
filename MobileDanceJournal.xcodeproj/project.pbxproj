@@ -82,6 +82,9 @@
 		9241FEAF22C3F9AF00342FC9 /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9241FEAE22C3F9AF00342FC9 /* MainCoordinator.swift */; };
 		9241FEB022C3F9AF00342FC9 /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9241FEAE22C3F9AF00342FC9 /* MainCoordinator.swift */; };
 		9241FEB122C3F9AF00342FC9 /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9241FEAE22C3F9AF00342FC9 /* MainCoordinator.swift */; };
+		924C98FC2364BF0400DD6000 /* Permissions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924C98FB2364BF0400DD6000 /* Permissions.swift */; };
+		924C98FD2364BF0400DD6000 /* Permissions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924C98FB2364BF0400DD6000 /* Permissions.swift */; };
+		924C98FE2364BF0400DD6000 /* Permissions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924C98FB2364BF0400DD6000 /* Permissions.swift */; };
 		92509E9B22D6E20500A915F5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9232AC8B226D4015004DB260 /* Main.storyboard */; };
 		92509E9C22D6E20600A915F5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9232AC8B226D4015004DB260 /* Main.storyboard */; };
 		92509E9E22D6E29600A915F5 /* VideoUploadVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92509E9D22D6E29600A915F5 /* VideoUploadVC.swift */; };
@@ -196,9 +199,9 @@
 		92C67BC82352C7ED003BEAF9 /* Services.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C67BC72352C7ED003BEAF9 /* Services.swift */; };
 		92C67BC92352C7ED003BEAF9 /* Services.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C67BC72352C7ED003BEAF9 /* Services.swift */; };
 		92C67BCA2352C7ED003BEAF9 /* Services.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C67BC72352C7ED003BEAF9 /* Services.swift */; };
-		92C67BCC2352C8E5003BEAF9 /* ActivityController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C67BCB2352C8E5003BEAF9 /* ActivityController.swift */; };
-		92C67BCD2352C8E5003BEAF9 /* ActivityController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C67BCB2352C8E5003BEAF9 /* ActivityController.swift */; };
-		92C67BCE2352C8E5003BEAF9 /* ActivityController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C67BCB2352C8E5003BEAF9 /* ActivityController.swift */; };
+		92C67BCC2352C8E5003BEAF9 /* ShareController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C67BCB2352C8E5003BEAF9 /* ShareController.swift */; };
+		92C67BCD2352C8E5003BEAF9 /* ShareController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C67BCB2352C8E5003BEAF9 /* ShareController.swift */; };
+		92C67BCE2352C8E5003BEAF9 /* ShareController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C67BCB2352C8E5003BEAF9 /* ShareController.swift */; };
 		92EFF22C22CD9A4400DE9401 /* PracticeNotepadVC+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92EFF22B22CD9A4400DE9401 /* PracticeNotepadVC+Extensions.swift */; };
 		92EFF22D22CD9A4800DE9401 /* PracticeNotepadVC+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92EFF22B22CD9A4400DE9401 /* PracticeNotepadVC+Extensions.swift */; };
 		92EFF22E22CD9A4900DE9401 /* PracticeNotepadVC+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92EFF22B22CD9A4400DE9401 /* PracticeNotepadVC+Extensions.swift */; };
@@ -262,8 +265,9 @@
 		9241F9C122C8375A009C50C1 /* Coordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; wrapsLines = 0; };
 		9241F9C922C83885009C50C1 /* AlertHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertHelper.swift; sourceTree = "<group>"; wrapsLines = 0; };
 		9241F9CD22C83AF2009C50C1 /* SplitViewRootController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitViewRootController.swift; sourceTree = "<group>"; };
-		9241FEA522C3F27300342FC9 /* VideoHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoHelper.swift; sourceTree = "<group>"; };
+		9241FEA522C3F27300342FC9 /* VideoHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoHelper.swift; sourceTree = "<group>"; wrapsLines = 0; };
 		9241FEAE22C3F9AF00342FC9 /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; wrapsLines = 0; };
+		924C98FB2364BF0400DD6000 /* Permissions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Permissions.swift; sourceTree = "<group>"; wrapsLines = 0; };
 		92509E9D22D6E29600A915F5 /* VideoUploadVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoUploadVC.swift; sourceTree = "<group>"; usesTabs = 0; wrapsLines = 0; };
 		926B0D9622F56B4300112743 /* NotepadTextViewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotepadTextViewManager.swift; sourceTree = "<group>"; wrapsLines = 0; };
 		926B0D9A22F571E800112743 /* VideoGalleryTableManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoGalleryTableManager.swift; sourceTree = "<group>"; wrapsLines = 0; };
@@ -304,7 +308,7 @@
 		928D59C9230DD03C0000945E /* Group+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Group+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		92C67BC22352C706003BEAF9 /* GroupDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupDTO.swift; sourceTree = "<group>"; };
 		92C67BC72352C7ED003BEAF9 /* Services.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Services.swift; sourceTree = "<group>"; wrapsLines = 0; };
-		92C67BCB2352C8E5003BEAF9 /* ActivityController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityController.swift; sourceTree = "<group>"; wrapsLines = 0; };
+		92C67BCB2352C8E5003BEAF9 /* ShareController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareController.swift; sourceTree = "<group>"; wrapsLines = 0; };
 		92EFF22B22CD9A4400DE9401 /* PracticeNotepadVC+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PracticeNotepadVC+Extensions.swift"; sourceTree = "<group>"; wrapsLines = 0; };
 /* End PBXFileReference section */
 
@@ -607,7 +611,8 @@
 			isa = PBXGroup;
 			children = (
 				92C67BC72352C7ED003BEAF9 /* Services.swift */,
-				92C67BCB2352C8E5003BEAF9 /* ActivityController.swift */,
+				924C98FB2364BF0400DD6000 /* Permissions.swift */,
+				92C67BCB2352C8E5003BEAF9 /* ShareController.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -824,8 +829,9 @@
 				9214FF97227E139A00387A3B /* Date+Extensions.swift in Sources */,
 				9232ACC2226ECACD004DB260 /* UISplitViewController+Extensions.swift in Sources */,
 				928D59CD230DD03C0000945E /* Group+CoreDataProperties.swift in Sources */,
-				92C67BCC2352C8E5003BEAF9 /* ActivityController.swift in Sources */,
+				92C67BCC2352C8E5003BEAF9 /* ShareController.swift in Sources */,
 				9214FF9B227E3B4100387A3B /* UIViewController+Extensions.swift in Sources */,
+				924C98FC2364BF0400DD6000 /* Permissions.swift in Sources */,
 				9241FEAF22C3F9AF00342FC9 /* MainCoordinator.swift in Sources */,
 				926E7093231194FD00A3CCD0 /* PracticeSession+CoreDataProperties.swift in Sources */,
 				9227146922CBFBC000C6CFAC /* SplitViewCoordinator.swift in Sources */,
@@ -895,7 +901,7 @@
 				922E20E92283DD8F00295A19 /* Constants.swift in Sources */,
 				922E20E72283DC2000295A19 /* VideoGalleryVC+Extensions.swift in Sources */,
 				926E70A92311FD6E00A3CCD0 /* GroupPickerView.swift in Sources */,
-				92C67BCD2352C8E5003BEAF9 /* ActivityController.swift in Sources */,
+				92C67BCD2352C8E5003BEAF9 /* ShareController.swift in Sources */,
 				9227146A22CBFBC000C6CFAC /* SplitViewCoordinator.swift in Sources */,
 				926BEE2B22E58C5500BC3DD4 /* PracticeVideo+Extensions.swift in Sources */,
 				926E70942311950100A3CCD0 /* PracticeSession+CoreDataProperties.swift in Sources */,
@@ -933,6 +939,7 @@
 				927FA3F722DD3C2400F58F58 /* VideoLocalStorageManager.swift in Sources */,
 				926B0DA422F58E3500112743 /* PracticeLogTableManager.swift in Sources */,
 				928D59B0230DCBD00000945E /* PracticeVideo+CoreDataProperties copy.swift in Sources */,
+				924C98FD2364BF0400DD6000 /* Permissions.swift in Sources */,
 				928D59A1230B54040000945E /* PracticeGroupsTableManager.swift in Sources */,
 				92C67BC42352C706003BEAF9 /* GroupDTO.swift in Sources */,
 				926E7096231196A000A3CCD0 /* PracticeSession+CoreDataClass.swift in Sources */,
@@ -966,7 +973,7 @@
 				922E20EA2283DD8F00295A19 /* Constants.swift in Sources */,
 				922E20E82283DC2000295A19 /* VideoGalleryVC+Extensions.swift in Sources */,
 				926E70AA2311FD6E00A3CCD0 /* GroupPickerView.swift in Sources */,
-				92C67BCE2352C8E5003BEAF9 /* ActivityController.swift in Sources */,
+				92C67BCE2352C8E5003BEAF9 /* ShareController.swift in Sources */,
 				9227146B22CBFBC000C6CFAC /* SplitViewCoordinator.swift in Sources */,
 				926BEE2C22E58C5500BC3DD4 /* PracticeVideo+Extensions.swift in Sources */,
 				926E70952311950200A3CCD0 /* PracticeSession+CoreDataProperties.swift in Sources */,
@@ -1004,6 +1011,7 @@
 				927FA3F822DD3C2400F58F58 /* VideoLocalStorageManager.swift in Sources */,
 				926B0DA522F58E3500112743 /* PracticeLogTableManager.swift in Sources */,
 				928D59B1230DCBD00000945E /* PracticeVideo+CoreDataProperties copy.swift in Sources */,
+				924C98FE2364BF0400DD6000 /* Permissions.swift in Sources */,
 				928D59A2230B54040000945E /* PracticeGroupsTableManager.swift in Sources */,
 				92C67BC52352C706003BEAF9 /* GroupDTO.swift in Sources */,
 				926E7097231196A000A3CCD0 /* PracticeSession+CoreDataClass.swift in Sources */,

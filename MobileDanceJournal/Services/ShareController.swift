@@ -10,7 +10,7 @@
 
 import Foundation
 
-public class ActivityController: NSObject {
+class ShareController: NSObject {
     
     func share(_ video: PracticeVideo, _ coordinator: Coordinator) {
         let videoURL = URLBuilder.getDocumentsFilePathURL(for: video.filename)

@@ -9,5 +9,6 @@
 import Foundation
 
 class Services: NSObject {
-    static let activity = ActivityController()
+    static let activity = ShareController()
+    static let permissions = PermissionsController()
 }

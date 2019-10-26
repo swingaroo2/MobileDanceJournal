@@ -29,60 +29,6 @@ class VideoHelper: NSObject {
         self.uploadService = uploadService
     }
     
-    class func check(permission: Permissions,_ completion: @autoclosure @escaping () -> Void) {
-        if permission == .camera {
-            VideoHelper.checkCameraPermissions(completion: completion())
-        } else if permission == .photos {
-            VideoHelper.checkPhotosPermissions(completion: completion())
-        }
-    }
-    
-    private class func checkCameraPermissions(completion: @autoclosure @escaping () -> Void) {
-        switch AVCaptureDevice.authorizationStatus(for: .video) {
-        case .authorized:
-            print("Camera access authorized.")
-            completion()
-        case .denied:
-            print("Camera access denied. Change permission in Settings > Privacy > Camera.")
-        case .notDetermined:
-            AVCaptureDevice.requestAccess(for: .video) { success in
-                if success {
-                    print("Camera access granted.")
-                    completion()
-                } else {
-                    print("Camera access denied. Change permission in Settings > Privacy > Camera.")
-                }
-            }
-        case .restricted:
-            print("Camera access restricted. Change permission in Settings > Privacy > Camera.")
-        @unknown default:
-            fatalError("Encountered unknown Photos authorization case")
-        }
-    }
-    
-    private class func checkPhotosPermissions(completion: @autoclosure @escaping () -> Void) {
-        let photoAuthorizationStatus = PHPhotoLibrary.authorizationStatus()
-        switch photoAuthorizationStatus {
-        case .authorized:
-            print("Photos access authorized.")
-            completion()
-        case .denied:
-            print("Photos access denied. Change permission in Settings > Privacy > Camera.")
-        case .notDetermined:
-            PHPhotoLibrary.requestAuthorization({ newStatus in
-                print("Photos authorization status: \(newStatus)")
-                if newStatus == PHAuthorizationStatus.authorized {
-                    print("Photos authorization granted")
-                    completion()
-                }
-            })
-        case .restricted:
-            print("Photos access restricted. Change permission in Settings > Privacy > Camera.")
-        @unknown default:
-            fatalError("Encountered unknown Photos authorization case")
-        }
-    }
-    
     // TODO: Move to coordinator
     class func initiate(_ service: UIImagePickerController.SourceType, in viewController: UIViewController & UINavigationControllerDelegate & UIImagePickerControllerDelegate) {
         
