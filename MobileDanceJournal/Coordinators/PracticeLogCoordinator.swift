@@ -58,7 +58,6 @@ extension PracticeLogCoordinator {
         rootVC.showDetailViewController(detailNC, sender: self)
     }
     
-    // Special deletion case only applies when splitViewController is not collapsed
     func clearDetailVC() {
         guard let detailVC = rootVC.detailVC as? PracticeNotepadVC else { return }
         

@@ -54,7 +54,8 @@ extension VideoUploadVC {
     }
     
     @IBAction func cancelUpload(_ sender: UIBarButtonItem) {
-        coordinator?.cancel(videoUploader: self)
+        videoHelper?.uploadService.set(video: nil)
+        coordinator?.cancelUpload()
     }
     
     @IBAction func textDidChange(_ sender: UITextField) {

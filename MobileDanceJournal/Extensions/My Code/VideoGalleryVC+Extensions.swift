@@ -42,7 +42,7 @@ extension VideoGalleryVC: UIImagePickerControllerDelegate {
             return
         }
         videoHelper?.uploadService.url = videoURL
-        coordinator?.startEditingVideo(presentingVC: self, videoHelper: videoHelper, videoPicker: picker)
+        coordinator?.startEditingVideo(videoHelper: videoHelper, videoPicker: picker)
     }
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {

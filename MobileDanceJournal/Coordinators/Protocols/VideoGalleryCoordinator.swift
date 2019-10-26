@@ -49,7 +49,7 @@ class VideoGalleryCoordinator: NSObject, Coordinator {
 }
 
 extension VideoGalleryCoordinator {
-    func startEditingVideo(presentingVC: UIViewController, videoHelper: VideoHelper, videoPicker: UIImagePickerController? = nil) {
+    func startEditingVideo(videoHelper: VideoHelper, videoPicker: UIImagePickerController? = nil) {
         let videoUploadVC = VideoUploadVC.instantiate()
         videoUploadVC.coordinator = self
         videoUploadVC.coreDataManager = coreDataManager
@@ -57,8 +57,13 @@ extension VideoGalleryCoordinator {
         videoUploadVC.modalTransitionStyle = .crossDissolve
         videoUploadVC.modalPresentationStyle = .formSheet
         
-        let presentingVC = videoPicker == nil ? presentingVC : videoPicker
-        presentingVC?.present(videoUploadVC, animated: true, completion: nil)
+        if let presentingVC = videoPicker {
+            presentingVC.present(videoUploadVC, animated: true, completion: nil)
+        } else if let presentingVC = rootVC.detailVC {
+            presentingVC.present(videoUploadVC, animated: true, completion: nil)
+        } else {
+            print("Failed to find a View Controller to present the VideoUploadVC")
+        }
     }
     
     func finishEditing(_ video: PracticeVideo, from uploader: VideoUploadService, in uploadVC: VideoUploadVC) {
@@ -97,16 +102,30 @@ extension VideoGalleryCoordinator {
         rootVC.detailNC?.visibleViewController?.present(activityVC, animated: true)
     }
     
-    func cancel(videoUploader: VideoUploadVC) {
+    func cancelUpload() {
         if rootVC.isCollapsed {
             guard let practiceVideosVC = rootVC.detailNC?.children.last as? VideoGalleryVC else {
-                videoUploader.presentBasicAlert(message: "Failed to display videos for this practice session")
-                dismiss(videoUploader, completion: nil)
+                guard let uploadVC = getVideoUploadVC() else { return }
+                uploadVC.presentBasicAlert(message: "Failed to display videos for this practice session")
+                dismiss(uploadVC, completion: nil)
                 return
             }
             dismiss(practiceVideosVC, completion: nil)
         } else {
-            dismiss(videoUploader, completion: nil)
+            guard let uploadVC = getVideoUploadVC() else { return }
+            dismiss(uploadVC, completion: nil)
         }
+    }
+}
+
+private extension VideoGalleryCoordinator {
+    func getVideoUploadVC() -> VideoUploadVC? {
+        if let uploadVC = rootVC.presentedViewController as? VideoUploadVC {
+            return uploadVC
+        } else if let uploadVC = rootVC.presentedViewController?.presentedViewController as? VideoUploadVC {
+            return uploadVC
+        }
+        
+        return nil
     }
 }
