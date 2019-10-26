@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-// MARK: Initialization
+// MARK: - Initialization
 class PracticeLogCoordinator: Coordinator {
     let rootVC: SplitViewRootController
     private let coreDataManager: CoreDataManager
@@ -33,7 +33,7 @@ class PracticeLogCoordinator: Coordinator {
     }
 }
 
-// MARK: Navigation functions
+// MARK: - Navigation functions
 extension PracticeLogCoordinator {
     func startEditingNewPracticeSession() {
         let newPracticeSession = coreDataManager.createAndReturnNewPracticeSession()

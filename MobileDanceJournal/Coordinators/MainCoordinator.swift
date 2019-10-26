@@ -10,7 +10,7 @@ import Foundation
 
 import UIKit
 
-// MARK: Initialization
+// MARK: - Initialization
 class MainCoordinator: Coordinator {
     var rootVC: SplitViewRootController
     var childCoordinators: [Coordinator] = [Coordinator]()
@@ -35,7 +35,7 @@ class MainCoordinator: Coordinator {
     
 }
 
-// MARK: Navigation functions
+// MARK: - Navigation functions
 extension MainCoordinator {
     func showPracticeLog(group: Group?) {
         let child = PracticeLogCoordinator(rootVC, coreDataManager, group)
