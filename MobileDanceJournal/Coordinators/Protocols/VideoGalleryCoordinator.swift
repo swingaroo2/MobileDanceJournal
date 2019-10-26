@@ -8,8 +8,9 @@
 
 import Foundation
 import UIKit
+import MobileCoreServices
 
-// MARK: Initialization
+// MARK: - Initialization
 class VideoGalleryCoordinator: NSObject, Coordinator {
     private let practiceSession: PracticeSession
     private let coreDataManager: CoreDataManager
@@ -42,7 +43,7 @@ class VideoGalleryCoordinator: NSObject, Coordinator {
     }
 }
 
-// MARK: Navigation functions
+// MARK: - Navigation functions
 extension VideoGalleryCoordinator {
     func startEditingVideo(videoHelper: VideoHelper, videoPicker: UIImagePickerController? = nil) {
         let videoUploadVC = VideoUploadVC.instantiate()
@@ -116,7 +117,46 @@ extension VideoGalleryCoordinator {
     }
 }
 
-// MARK: Helper functions
+// MARK: - Image picker is a special snowflake
+extension VideoGalleryCoordinator: UINavigationControllerDelegate, UIImagePickerControllerDelegate {
+    func initiate(_ service: UIImagePickerController.SourceType, in viewController: UIViewController & UINavigationControllerDelegate & UIImagePickerControllerDelegate) {
+        
+        DispatchQueue.main.async {
+            let videoPickerController = UIImagePickerController()
+            videoPickerController.delegate = self
+            videoPickerController.sourceType = service
+            videoPickerController.allowsEditing = true
+            videoPickerController.mediaTypes = [kUTTypeMovie as String]
+            self.rootVC.detailVC?.present(videoPickerController, animated: true, completion: nil)
+        }
+    }
+    
+    func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
+        viewController.navigationItem.title = VCConstants.chooseVideo
+        print("\(#function)")
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        
+        guard let videoGalleryVC = rootVC.detailVC as? VideoGalleryVC else { return }
+        
+        guard let videoURL = info[.mediaURL] as? URL else {
+            dismiss(picker) {
+                videoGalleryVC.presentBasicAlert(title: VideoUploadErrors.generic, message: VideoUploadErrors.noURL)
+            }
+            return
+        }
+        
+        videoGalleryVC.videoHelper?.uploadService.url = videoURL
+        startEditingVideo(videoHelper: videoGalleryVC.videoHelper, videoPicker: picker)
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        dismiss(picker) { print("\(#function)") }
+    }
+}
+
+// MARK: - Helper functions
 private extension VideoGalleryCoordinator {
     func getVideoUploadVC() -> VideoUploadVC? {
         if let uploadVC = rootVC.presentedViewController as? VideoUploadVC {

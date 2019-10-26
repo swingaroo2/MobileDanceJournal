@@ -59,19 +59,19 @@ extension VideoGalleryVC: UINavigationControllerDelegate {
     }
 }
 
-// MARK: Helper functions
+// MARK: - Helper functions
 private extension VideoGalleryVC {
     func presentAddVideoActionSheet(from sender: UIBarButtonItem) {
         let actionSheet = AlertHelper.addVideoActionSheet()
         
         let recordVideoAction = UIAlertAction(title: AlertConstants.recordVideo, style: .default) { (action:UIAlertAction) in
             guard Services.permissions.hasCameraPermission() else { return }
-            VideoHelper.initiate(.camera, in: self)
+            self.coordinator.initiate(.camera, in: self)
         }
         
         let uploadFromPhotosAction = UIAlertAction(title: AlertConstants.uploadFromPhotos, style: .default) { (action:UIAlertAction) in
             guard Services.permissions.hasPhotosPermission() else { return }
-            VideoHelper.initiate(.photoLibrary, in: self)
+            self.coordinator.initiate(.photoLibrary, in: self)
         }
         
         actionSheet.addAction(recordVideoAction)

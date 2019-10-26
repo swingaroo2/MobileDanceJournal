@@ -29,19 +29,6 @@ class VideoHelper: NSObject {
         self.uploadService = uploadService
     }
     
-    // TODO: Move to coordinator
-    class func initiate(_ service: UIImagePickerController.SourceType, in viewController: UIViewController & UINavigationControllerDelegate & UIImagePickerControllerDelegate) {
-        
-        DispatchQueue.main.async {
-            let videoPickerController = UIImagePickerController()
-            videoPickerController.delegate = viewController
-            videoPickerController.sourceType = service
-            videoPickerController.allowsEditing = true
-            videoPickerController.mediaTypes = [kUTTypeMovie as String]
-            viewController.present(videoPickerController, animated: true, completion: nil)
-        }
-    }
-    
     func playVideo(at path: URL, in viewController: UIViewController) {
         let player = AVPlayer(url: path)
         let playerController = AVPlayerViewController()
@@ -67,7 +54,6 @@ class VideoHelper: NSObject {
                     completion?(thumbnail)
                 }
             }
-            
         }
     }
 }

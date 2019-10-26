@@ -43,6 +43,7 @@ extension VideoUploadVC {
             }
             
             coordinator?.finishEditing(newVideo, from: uploadService)
+            uploadService.set(video: nil)
         } else {
             guard let updatedVideo = uploadService.video else {
                 coordinator?.dismiss(self, completion: nil)
@@ -50,6 +51,7 @@ extension VideoUploadVC {
             }
             updatedVideo.title = titleText
             coordinator?.finishEditing(updatedVideo, from: uploadService)
+            uploadService.set(video: nil)
         }
     }
     
