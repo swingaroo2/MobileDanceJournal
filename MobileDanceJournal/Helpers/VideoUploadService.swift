@@ -58,5 +58,4 @@ class VideoUploadService: NSObject {
         return nil
     }
     
-    // TODO: Plan out architecture for CloudKit communication
 }

@@ -15,25 +15,24 @@ protocol Coordinator: AnyObject {
     func start()
 }
 
-// Default function definitions
+// MARK: - Default function definitions
 extension Coordinator {
     func dismiss(_ viewController: UIViewController, completion: (() -> Void)?) {
         viewController.dismiss(animated: true, completion: completion)
     }
 }
 
-// Empty default function definitions for classes that use multiple coordinators
+// MARK: - Optional functions
 extension Coordinator {
-    func isDisplayingBothVCs() -> Bool {
-        print("\(#function) Adopting class should implement")
-        return false
-    }
-    
     func clearDetailVC() {
         print("\(#function) Adopting class should implement")
     }
     
     func showDetails(for practiceSession: PracticeSession) {
+        print("\(#function) Adopting class should implement")
+    }
+    
+    func share(_ url: URL) {
         print("\(#function) Adopting class should implement")
     }
 }

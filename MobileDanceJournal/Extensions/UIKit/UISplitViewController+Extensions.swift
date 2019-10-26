@@ -29,12 +29,15 @@ extension UISplitViewController {
         return masterNC?.topViewController
     }
     
-    var detailVC: PracticeNotepadVC? {
-        let childViewController = viewControllers.count > 1 ? viewControllers[1] : nil
-        
-        guard let childVC = childViewController as? UINavigationController else { return childViewController as? PracticeNotepadVC }
-        guard let detailVC = childVC.children.first else { return childViewController as? PracticeNotepadVC }
-        
-        return detailVC as? PracticeNotepadVC
+    var detailVC: UIViewController? {
+        return detailNC?.topViewController
+    }
+    
+    var isDisplayingBothVCs: Bool {
+        return !isCollapsed && displayMode == .allVisible
+    }
+    
+    var hasTwoRootNavigationControllers: Bool {
+        return children.count == 2
     }
 }

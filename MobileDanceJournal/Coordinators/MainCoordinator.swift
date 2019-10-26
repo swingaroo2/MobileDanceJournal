@@ -23,9 +23,11 @@ class MainCoordinator: Coordinator {
     
     func start() {
         rootVC.coordinator = self
-        (rootVC.masterVC as? PracticeGroupsVC)?.coordinator = self
-        (rootVC.masterVC as? PracticeGroupsVC)?.coreDataManager = coreDataManager
-        rootVC.detailVC?.coreDataManager = coreDataManager
+        let groupsVC = rootVC.masterVC as? PracticeGroupsVC
+        let detailVC = rootVC.detailVC as? PracticeNotepadVC
+        groupsVC?.coordinator = self
+        groupsVC?.coreDataManager = coreDataManager
+        detailVC?.coreDataManager = coreDataManager
         rootVC.detailNC!.topViewController!.navigationItem.leftBarButtonItem = rootVC.displayModeButtonItem
     }
     

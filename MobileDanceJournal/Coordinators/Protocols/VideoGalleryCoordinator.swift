@@ -37,8 +37,7 @@ class VideoGalleryCoordinator: NSObject, Coordinator {
         videoGalleryVC.practiceSession = practiceSession
         videoGalleryVC.videoHelper = videoHelper
         
-        let splitViewControllerHasTwoRootNavigationControllers = rootVC.children.count == 2
-        if splitViewControllerHasTwoRootNavigationControllers {
+        if rootVC.hasTwoRootNavigationControllers {
             guard let detailNC = rootVC.children.last as? UINavigationController else { return }
             detailNC.pushViewController(videoGalleryVC, animated: true)
         } else {
@@ -93,10 +92,9 @@ extension VideoGalleryCoordinator {
         videoHelper.playVideo(at: videoPath, in: presentingVC)
     }
     
-    func share(video: PracticeVideo, from presentingVC: UIViewController) {
-        let videoURL = URLBuilder.getDocumentsFilePathURL(for: video.filename)
-        let activityVC = UIActivityViewController(activityItems: [videoURL], applicationActivities: [])
-        presentingVC.present(activityVC, animated: true)
+    func share(_ url: URL) {
+        let activityVC = UIActivityViewController(activityItems: [url], applicationActivities: [])
+        rootVC.detailNC?.visibleViewController?.present(activityVC, animated: true)
     }
     
     func cancel(videoUploader: VideoUploadVC) {

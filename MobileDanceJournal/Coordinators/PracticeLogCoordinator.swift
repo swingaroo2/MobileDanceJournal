@@ -30,11 +30,6 @@ class PracticeLogCoordinator: Coordinator {
         firstVC.currentGroup = currentGroup
         rootVC.masterNC?.pushViewController(firstVC, animated: true)
     }
-    
-    func isDisplayingBothVCs() -> Bool {
-        return !rootVC.isCollapsed && rootVC.displayMode == .allVisible
-    }
-    
 }
 
 extension PracticeLogCoordinator {
@@ -46,8 +41,8 @@ extension PracticeLogCoordinator {
     
     func showDetails(for practiceSession: PracticeSession) {
         
-        let detailVC = isDisplayingBothVCs() ? rootVC.detailVC : PracticeNotepadVC.instantiate()
-        guard let notepadVC = detailVC else { return }
+        let detailVC = rootVC.isDisplayingBothVCs ? rootVC.detailVC : PracticeNotepadVC.instantiate()
+        guard let notepadVC = detailVC as? PracticeNotepadVC else { return }
         
         notepadVC.coordinator = self
         notepadVC.coreDataManager = coreDataManager
@@ -65,7 +60,7 @@ extension PracticeLogCoordinator {
     
     // Special deletion case only applies when splitViewController is not collapsed
     func clearDetailVC() {
-        guard let detailVC = rootVC.detailVC else { return }
+        guard let detailVC = rootVC.detailVC as? PracticeNotepadVC else { return }
         
         if !rootVC.isCollapsed {
             if let navController = detailVC.navigationController {

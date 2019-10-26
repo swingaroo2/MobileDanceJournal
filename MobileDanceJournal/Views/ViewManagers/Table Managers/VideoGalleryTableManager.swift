@@ -148,13 +148,14 @@ extension VideoGalleryTableManager: UITableViewDelegate {
         // rgb(22, 60, 94)
         editAction.backgroundColor = .lightGray
         
-        let shareAction = UIContextualAction(style: .normal, title: Actions.share) { [unowned self] (action, view, completionHandler) in
+        let shareAction = UIContextualAction(style: .normal, title: Actions.share) { (action, view, completionHandler) in
             let selectedCell = tableView.cellForRow(at: indexPath) as! VideoGalleryTableViewCell
             guard let video = selectedCell.video else {
                 completionHandler(false)
                 return
             }
-            self.coordinator?.share(video: video, from: self.managedVC)
+            
+            Services.activity.share(video, self.coordinator)
             completionHandler(true)
         }
         shareAction.backgroundColor = .darkGray
