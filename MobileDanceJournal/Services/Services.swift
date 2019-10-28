@@ -11,4 +11,5 @@ import Foundation
 class Services: NSObject {
     static let activity = ShareController()
     static let permissions = PermissionsController()
+    static let uploads = UploadsController()
 }

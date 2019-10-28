@@ -28,23 +28,4 @@ class VideoHelper: NSObject {
         self.thumbnailCache = cache
         self.uploadService = uploadService
     }
-    
-    func getThumbnail(from url: URL, completion: ((UIImage?) -> ())? = nil) {
-        let filename = url.lastPathComponent
-        
-        if let cachedThumbnail = thumbnailCache.value(for: filename) {
-            let thumbnail = cachedThumbnail
-            completion?(thumbnail)
-        } else {
-            DispatchQueue.global(qos: .userInitiated).async {
-                let thumbnail = self.uploadService.getThumbnail(from: url)
-                DispatchQueue.main.async {
-                    if let thumbnail = thumbnail {
-                        self.thumbnailCache.add(key: filename, value: thumbnail)
-                    }
-                    completion?(thumbnail)
-                }
-            }
-        }
-    }
 }

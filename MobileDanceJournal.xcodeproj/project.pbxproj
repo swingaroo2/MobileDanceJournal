@@ -85,6 +85,9 @@
 		924C98FC2364BF0400DD6000 /* Permissions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924C98FB2364BF0400DD6000 /* Permissions.swift */; };
 		924C98FD2364BF0400DD6000 /* Permissions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924C98FB2364BF0400DD6000 /* Permissions.swift */; };
 		924C98FE2364BF0400DD6000 /* Permissions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924C98FB2364BF0400DD6000 /* Permissions.swift */; };
+		924C99042364E47300DD6000 /* UploadsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924C99032364E47300DD6000 /* UploadsController.swift */; };
+		924C99052364E47300DD6000 /* UploadsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924C99032364E47300DD6000 /* UploadsController.swift */; };
+		924C99062364E47300DD6000 /* UploadsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924C99032364E47300DD6000 /* UploadsController.swift */; };
 		92509E9B22D6E20500A915F5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9232AC8B226D4015004DB260 /* Main.storyboard */; };
 		92509E9C22D6E20600A915F5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9232AC8B226D4015004DB260 /* Main.storyboard */; };
 		92509E9E22D6E29600A915F5 /* VideoUploadVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92509E9D22D6E29600A915F5 /* VideoUploadVC.swift */; };
@@ -114,9 +117,6 @@
 		926BEE2622E5830800BC3DD4 /* ThumbnailCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926BEE2522E5830800BC3DD4 /* ThumbnailCache.swift */; };
 		926BEE2722E5830800BC3DD4 /* ThumbnailCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926BEE2522E5830800BC3DD4 /* ThumbnailCache.swift */; };
 		926BEE2822E5830800BC3DD4 /* ThumbnailCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926BEE2522E5830800BC3DD4 /* ThumbnailCache.swift */; };
-		926BEE2A22E58C5500BC3DD4 /* PracticeVideo+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926BEE2922E58C5500BC3DD4 /* PracticeVideo+Extensions.swift */; };
-		926BEE2B22E58C5500BC3DD4 /* PracticeVideo+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926BEE2922E58C5500BC3DD4 /* PracticeVideo+Extensions.swift */; };
-		926BEE2C22E58C5500BC3DD4 /* PracticeVideo+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926BEE2922E58C5500BC3DD4 /* PracticeVideo+Extensions.swift */; };
 		926BEE3022E58D5300BC3DD4 /* ThumbnailError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926BEE2F22E58D5300BC3DD4 /* ThumbnailError.swift */; };
 		926BEE3122E58D5300BC3DD4 /* ThumbnailError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926BEE2F22E58D5300BC3DD4 /* ThumbnailError.swift */; };
 		926BEE3222E58D5300BC3DD4 /* ThumbnailError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926BEE2F22E58D5300BC3DD4 /* ThumbnailError.swift */; };
@@ -268,6 +268,7 @@
 		9241FEA522C3F27300342FC9 /* VideoHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoHelper.swift; sourceTree = "<group>"; wrapsLines = 0; };
 		9241FEAE22C3F9AF00342FC9 /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; wrapsLines = 0; };
 		924C98FB2364BF0400DD6000 /* Permissions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Permissions.swift; sourceTree = "<group>"; wrapsLines = 0; };
+		924C99032364E47300DD6000 /* UploadsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadsController.swift; sourceTree = "<group>"; wrapsLines = 0; };
 		92509E9D22D6E29600A915F5 /* VideoUploadVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoUploadVC.swift; sourceTree = "<group>"; usesTabs = 0; wrapsLines = 0; };
 		926B0D9622F56B4300112743 /* NotepadTextViewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotepadTextViewManager.swift; sourceTree = "<group>"; wrapsLines = 0; };
 		926B0D9A22F571E800112743 /* VideoGalleryTableManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoGalleryTableManager.swift; sourceTree = "<group>"; wrapsLines = 0; };
@@ -277,7 +278,6 @@
 		926BEE1822E1057600BC3DD4 /* VideoStorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoStorageManager.swift; sourceTree = "<group>"; wrapsLines = 0; };
 		926BEE2122E5820E00BC3DD4 /* Caching.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Caching.swift; sourceTree = "<group>"; };
 		926BEE2522E5830800BC3DD4 /* ThumbnailCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThumbnailCache.swift; sourceTree = "<group>"; };
-		926BEE2922E58C5500BC3DD4 /* PracticeVideo+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PracticeVideo+Extensions.swift"; sourceTree = "<group>"; wrapsLines = 0; };
 		926BEE2F22E58D5300BC3DD4 /* ThumbnailError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThumbnailError.swift; sourceTree = "<group>"; };
 		926BEE3322E5930100BC3DD4 /* UIImageView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extensions.swift"; sourceTree = "<group>"; wrapsLines = 0; };
 		926BEE3722E63D5100BC3DD4 /* PracticeSessionPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PracticeSessionPickerView.swift; sourceTree = "<group>"; wrapsLines = 0; };
@@ -473,7 +473,6 @@
 				92706C9722E01AA4009BA88C /* Foundation */,
 				92706C9522E01A55009BA88C /* My Code */,
 				92706C9622E01A8C009BA88C /* UIKit */,
-				926BEE2D22E58C5A00BC3DD4 /* Managed Objects */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -507,14 +506,6 @@
 				926BEE2522E5830800BC3DD4 /* ThumbnailCache.swift */,
 			);
 			path = Caches;
-			sourceTree = "<group>";
-		};
-		926BEE2D22E58C5A00BC3DD4 /* Managed Objects */ = {
-			isa = PBXGroup;
-			children = (
-				926BEE2922E58C5500BC3DD4 /* PracticeVideo+Extensions.swift */,
-			);
-			path = "Managed Objects";
 			sourceTree = "<group>";
 		};
 		926BEE2E22E58D3700BC3DD4 /* Errors */ = {
@@ -613,6 +604,7 @@
 				92C67BC72352C7ED003BEAF9 /* Services.swift */,
 				924C98FB2364BF0400DD6000 /* Permissions.swift */,
 				92C67BCB2352C8E5003BEAF9 /* ShareController.swift */,
+				924C99032364E47300DD6000 /* UploadsController.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -847,9 +839,9 @@
 				926BEE3422E5930100BC3DD4 /* UIImageView+Extensions.swift in Sources */,
 				926BEE1922E1057600BC3DD4 /* VideoStorageManager.swift in Sources */,
 				9239B7EF23491477002AFE38 /* TableManager.swift in Sources */,
+				924C99042364E47300DD6000 /* UploadsController.swift in Sources */,
 				926B0D9B22F571E800112743 /* VideoGalleryTableManager.swift in Sources */,
 				9227148622CD2D4900C6CFAC /* UITextView+Extensions.swift in Sources */,
-				926BEE2A22E58C5500BC3DD4 /* PracticeVideo+Extensions.swift in Sources */,
 				927B6B06230F116700CC1F9F /* PracticeLogCoordinator.swift in Sources */,
 				927B6B0A230F20AE00CC1F9F /* VideoGalleryCoordinator.swift in Sources */,
 				926E70A82311FD6E00A3CCD0 /* GroupPickerView.swift in Sources */,
@@ -903,7 +895,6 @@
 				926E70A92311FD6E00A3CCD0 /* GroupPickerView.swift in Sources */,
 				92C67BCD2352C8E5003BEAF9 /* ShareController.swift in Sources */,
 				9227146A22CBFBC000C6CFAC /* SplitViewCoordinator.swift in Sources */,
-				926BEE2B22E58C5500BC3DD4 /* PracticeVideo+Extensions.swift in Sources */,
 				926E70942311950100A3CCD0 /* PracticeSession+CoreDataProperties.swift in Sources */,
 				926BEE3922E63D5100BC3DD4 /* PracticeSessionPickerView.swift in Sources */,
 				9239B7F023491477002AFE38 /* TableManager.swift in Sources */,
@@ -930,6 +921,7 @@
 				9214FF9C227E3B4100387A3B /* UIViewController+Extensions.swift in Sources */,
 				9232ACBF226D4390004DB260 /* CoreDataManager.swift in Sources */,
 				9232ACC5226ED01D004DB260 /* PracticeLogVC.swift in Sources */,
+				924C99052364E47300DD6000 /* UploadsController.swift in Sources */,
 				928D599D230B4DE80000945E /* Storyboarded.swift in Sources */,
 				9232AC9D226D4016004DB260 /* MobileDanceJournalTests.swift in Sources */,
 				9241FEA722C3F27300342FC9 /* VideoHelper.swift in Sources */,
@@ -975,7 +967,6 @@
 				926E70AA2311FD6E00A3CCD0 /* GroupPickerView.swift in Sources */,
 				92C67BCE2352C8E5003BEAF9 /* ShareController.swift in Sources */,
 				9227146B22CBFBC000C6CFAC /* SplitViewCoordinator.swift in Sources */,
-				926BEE2C22E58C5500BC3DD4 /* PracticeVideo+Extensions.swift in Sources */,
 				926E70952311950200A3CCD0 /* PracticeSession+CoreDataProperties.swift in Sources */,
 				926BEE3A22E63D5100BC3DD4 /* PracticeSessionPickerView.swift in Sources */,
 				9239B7F123491477002AFE38 /* TableManager.swift in Sources */,
@@ -1002,6 +993,7 @@
 				9214FF9D227E3B4100387A3B /* UIViewController+Extensions.swift in Sources */,
 				9232ACC0226D4390004DB260 /* CoreDataManager.swift in Sources */,
 				9232ACC6226ED01E004DB260 /* PracticeLogVC.swift in Sources */,
+				924C99062364E47300DD6000 /* UploadsController.swift in Sources */,
 				928D599E230B4DE90000945E /* Storyboarded.swift in Sources */,
 				9232ACA8226D4016004DB260 /* MobileDanceJournalUITests.swift in Sources */,
 				9241FEA822C3F27300342FC9 /* VideoHelper.swift in Sources */,

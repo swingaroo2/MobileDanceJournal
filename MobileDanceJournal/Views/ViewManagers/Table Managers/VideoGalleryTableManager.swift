@@ -71,9 +71,7 @@ extension VideoGalleryTableManager: UITableViewDataSource {
         cell.videoTitleLabel.text = video.title
         
         let url = URLBuilder.getDocumentsFilePathURL(for: video.filename)
-        videoHelper?.getThumbnail(from: url) { image in
-            cell.videoThumbnail.image = image
-        }
+        cell.videoThumbnail.setThumbnail(url)
     }
 }
 

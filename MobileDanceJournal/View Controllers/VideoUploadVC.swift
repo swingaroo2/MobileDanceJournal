@@ -48,9 +48,7 @@ class VideoUploadVC: UIViewController, Storyboarded {
     private func configureThumbnail() {
         guard let videoHelper = videoHelper else { return }
         guard let url = videoHelper.uploadService.url else { return }
-        videoHelper.getThumbnail(from: url) { image in
-            self.thumbnail.image = image
-        }
+        thumbnail.setThumbnail(url)
     }
     
 }

@@ -43,20 +43,4 @@ class VideoUploadService: NSObject {
         url = URLBuilder.getDocumentsFilePathURL(for: video.filename)
     }
     
-    func getThumbnail(from videoFilePath: URL) -> UIImage? {
-        do {
-            let asset = AVURLAsset(url: videoFilePath, options: nil)
-            let imageGenerator = AVAssetImageGenerator(asset: asset)
-            imageGenerator.appliesPreferredTrackTransform = true
-            let thumbnailTimestamp = CMTimeMake(value: 0, timescale: 1)
-            let cgThumbnail = try imageGenerator.copyCGImage(at: thumbnailTimestamp, actualTime: nil)
-            let thumbnail = UIImage(cgImage: cgThumbnail)
-            return thumbnail
-        } catch {
-            print("Oops")
-        }
-        
-        return nil
-    }
-    
 }
