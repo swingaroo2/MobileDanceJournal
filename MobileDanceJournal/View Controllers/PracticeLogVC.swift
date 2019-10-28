@@ -34,6 +34,7 @@ class PracticeLogVC: UIViewController, Storyboarded {
         
         if backButtonPressed {
             removeNotificationListener()
+            coordinator.clearDetailVC()
         }
     }
     

@@ -44,7 +44,6 @@ class PracticeLogTableManager: NSObject, SelectionTrackingTableManager {
 
 // MARK: UITableViewDataSource
 extension PracticeLogTableManager: UITableViewDataSource {
-    // TODO: Group cells by year
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard let practiceSessions = coreDataManager.fetchPracticeSessions(in: currentGroup) else { return 0 }
         self.practiceSessions = practiceSessions
@@ -70,7 +69,6 @@ extension PracticeLogTableManager: UITableViewDataSource {
             let practiceSession = coreDataManager.practiceSessionFRC.object(at: indexPath)
             coreDataManager.delete(practiceSession)
             
-            // TODO: Is this necessary?
             let rowToDelete = indexPath.row
             if selectedRow == rowToDelete {
                 coordinator?.clearDetailVC()
@@ -122,7 +120,6 @@ extension PracticeLogTableManager: UITableViewDelegate {
                 guard let fetchedPracticeLogs = self.coreDataManager.fetchPracticeSessions(in: self.currentGroup) else { return }
                 self.noContentLabel?.isHidden = fetchedPracticeLogs.count > 0
                 
-                // TODO: Verify if this is necessary (for iPad, it might be)
                 let rowToDelete = indexPath.row
                 if self.selectedRow == rowToDelete {
                     self.coordinator?.clearDetailVC()

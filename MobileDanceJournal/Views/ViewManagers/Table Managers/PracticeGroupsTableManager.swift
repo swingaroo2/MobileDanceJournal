@@ -33,7 +33,6 @@ class PracticeGroupsTableManager: NSObject, TableManager {
 
 // MARK: - UITableViewDataSource
 extension PracticeGroupsTableManager {
-    // TODO: Group cells by year
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard let fetchedGroups = coreDataManager.groupFRC.fetchedObjects else { return 1 }
         
@@ -111,7 +110,6 @@ extension PracticeGroupsTableManager {
     }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        // TODO: Add search to table view
         let deleteAction = UIContextualAction(style: .destructive, title: Actions.delete) { [unowned self] (action, view, completionHandler) in
             
             let deleteAlertAction: ((UIAlertAction) -> Void) = { action in

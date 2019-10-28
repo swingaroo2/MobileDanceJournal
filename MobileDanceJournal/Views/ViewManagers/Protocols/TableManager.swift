@@ -10,7 +10,6 @@ import Foundation
 import UIKit
 import CoreData
 
-// TODO: Add search to table view (can even part of it be done here? That'd be groovy)
 protocol TableManager: UITableViewDelegate, UITableViewDataSource, NSFetchedResultsControllerDelegate {
     var managedTableView: UITableView { get }
     var coreDataManager: CoreDataManager { get }
