@@ -16,7 +16,6 @@ class VideoUploadVC: UIViewController, Storyboarded {
     
     weak var coordinator: VideoGalleryCoordinator?
     var coreDataManager: CoreDataManager!
-    var videoHelper: VideoHelper?
     var videoToUpload: PracticeVideo?
     
     override func viewWillAppear(_ animated: Bool) {

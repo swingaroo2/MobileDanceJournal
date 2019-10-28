@@ -12,17 +12,3 @@ import Photos
 import MobileCoreServices
 import AVFoundation
 import AVKit
-
-class VideoHelper: NSObject {
-    
-    let thumbnailCache: ThumbnailCache
-    
-    override init() {
-        self.thumbnailCache = ThumbnailCache()
-        super.init()
-    }
-    
-    init(with cache: ThumbnailCache) {
-        self.thumbnailCache = cache
-    }
-}

@@ -31,14 +31,9 @@ class VideoGalleryCoordinator: NSObject, Coordinator {
     
     func start() {
         let videoGalleryVC = VideoGalleryVC.instantiate()
-        
-        let cache = ThumbnailCache()
-        let videoHelper = VideoHelper(with: cache)
-        
         videoGalleryVC.coordinator = self
         videoGalleryVC.coreDataManager = coreDataManager
         videoGalleryVC.practiceSession = practiceSession
-        videoGalleryVC.videoHelper = videoHelper
         
         push(videoGalleryVC, rootVCHasTwoNavControllers: rootVC.hasTwoRootNavigationControllers)
     }
@@ -46,11 +41,10 @@ class VideoGalleryCoordinator: NSObject, Coordinator {
 
 // MARK: - Navigation functions
 extension VideoGalleryCoordinator {
-    func startEditingVideo(videoHelper: VideoHelper, videoPicker: UIImagePickerController? = nil) {
+    func startEditingVideo(videoPicker: UIImagePickerController? = nil) {
         let videoUploadVC = VideoUploadVC.instantiate()
         videoUploadVC.coordinator = self
         videoUploadVC.coreDataManager = coreDataManager
-        videoUploadVC.videoHelper = videoHelper
         videoUploadVC.modalTransitionStyle = .crossDissolve
         videoUploadVC.modalPresentationStyle = .formSheet
         
@@ -91,7 +85,7 @@ extension VideoGalleryCoordinator {
         dismiss(videoGalleryVC, completion: nil)
     }
     
-    func play(_ video: PracticeVideo,_ videoHelper: VideoHelper) {
+    func play(_ video: PracticeVideo) {
         guard let presentingVC = rootVC.detailVC else { return }
         let videoPath = URLBuilder.getDocumentsFilePathURL(for: video.filename)
         let player = AVPlayer(url: videoPath)
@@ -154,7 +148,7 @@ extension VideoGalleryCoordinator: UINavigationControllerDelegate, UIImagePicker
         }
         
         Services.uploads.url = videoURL
-        startEditingVideo(videoHelper: videoGalleryVC.videoHelper, videoPicker: picker)
+        startEditingVideo(videoPicker: picker)
     }
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
