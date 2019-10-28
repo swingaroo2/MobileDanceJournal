@@ -166,9 +166,6 @@
 		927FA3FA22DD959900F58F58 /* URLBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927FA3F922DD959900F58F58 /* URLBuilder.swift */; };
 		927FA3FB22DD959900F58F58 /* URLBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927FA3F922DD959900F58F58 /* URLBuilder.swift */; };
 		927FA3FC22DD959900F58F58 /* URLBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927FA3F922DD959900F58F58 /* URLBuilder.swift */; };
-		927FA3FE22DD95DA00F58F58 /* VideoUploadService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927FA3FD22DD95DA00F58F58 /* VideoUploadService.swift */; };
-		927FA3FF22DD95DA00F58F58 /* VideoUploadService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927FA3FD22DD95DA00F58F58 /* VideoUploadService.swift */; };
-		927FA40022DD95DA00F58F58 /* VideoUploadService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927FA3FD22DD95DA00F58F58 /* VideoUploadService.swift */; };
 		928D5998230B4B9D0000945E /* Storyboarded.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928D5997230B4B9D0000945E /* Storyboarded.swift */; };
 		928D599A230B4D050000945E /* PracticeGroupsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928D5999230B4D050000945E /* PracticeGroupsVC.swift */; };
 		928D599B230B4D050000945E /* PracticeGroupsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928D5999230B4D050000945E /* PracticeGroupsVC.swift */; };
@@ -295,7 +292,6 @@
 		927F66A022CBCA7F0000EF06 /* UIWindow+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIWindow+Extensions.swift"; sourceTree = "<group>"; };
 		927FA3F522DD3C2400F58F58 /* VideoLocalStorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoLocalStorageManager.swift; sourceTree = "<group>"; };
 		927FA3F922DD959900F58F58 /* URLBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLBuilder.swift; sourceTree = "<group>"; };
-		927FA3FD22DD95DA00F58F58 /* VideoUploadService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoUploadService.swift; sourceTree = "<group>"; };
 		927FA40122DE2E6200F58F58 /* DataModel 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "DataModel 2.xcdatamodel"; sourceTree = "<group>"; };
 		928D5997230B4B9D0000945E /* Storyboarded.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Storyboarded.swift; sourceTree = "<group>"; };
 		928D5999230B4D050000945E /* PracticeGroupsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PracticeGroupsVC.swift; sourceTree = "<group>"; wrapsLines = 0; };
@@ -615,7 +611,6 @@
 				9241F9C922C83885009C50C1 /* AlertHelper.swift */,
 				9241FEA522C3F27300342FC9 /* VideoHelper.swift */,
 				927FA3F922DD959900F58F58 /* URLBuilder.swift */,
-				927FA3FD22DD95DA00F58F58 /* VideoUploadService.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -835,7 +830,6 @@
 				92C67BC82352C7ED003BEAF9 /* Services.swift in Sources */,
 				926BEE2622E5830800BC3DD4 /* ThumbnailCache.swift in Sources */,
 				920AAD5D22DCFC4B0097643C /* NSObject+Extensions.swift in Sources */,
-				927FA3FE22DD95DA00F58F58 /* VideoUploadService.swift in Sources */,
 				926BEE3422E5930100BC3DD4 /* UIImageView+Extensions.swift in Sources */,
 				926BEE1922E1057600BC3DD4 /* VideoStorageManager.swift in Sources */,
 				9239B7EF23491477002AFE38 /* TableManager.swift in Sources */,
@@ -908,7 +902,6 @@
 				920AAD5E22DCFC4B0097643C /* NSObject+Extensions.swift in Sources */,
 				926BEE3122E58D5300BC3DD4 /* ThumbnailError.swift in Sources */,
 				926EDD92230B449F003DFDC3 /* RootViewController.swift in Sources */,
-				927FA3FF22DD95DA00F58F58 /* VideoUploadService.swift in Sources */,
 				926E70A02311F94800A3CCD0 /* PickerManager.swift in Sources */,
 				926E709B23119A6900A3CCD0 /* ToolbarPickerView.swift in Sources */,
 				926BEE2322E5820E00BC3DD4 /* Caching.swift in Sources */,
@@ -980,7 +973,6 @@
 				920AAD5F22DCFC4B0097643C /* NSObject+Extensions.swift in Sources */,
 				926BEE3222E58D5300BC3DD4 /* ThumbnailError.swift in Sources */,
 				926EDD93230B449F003DFDC3 /* RootViewController.swift in Sources */,
-				927FA40022DD95DA00F58F58 /* VideoUploadService.swift in Sources */,
 				926E70A12311F94800A3CCD0 /* PickerManager.swift in Sources */,
 				926E709C23119A6900A3CCD0 /* ToolbarPickerView.swift in Sources */,
 				926BEE2422E5820E00BC3DD4 /* Caching.swift in Sources */,

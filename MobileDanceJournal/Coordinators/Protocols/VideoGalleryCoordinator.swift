@@ -33,8 +33,7 @@ class VideoGalleryCoordinator: NSObject, Coordinator {
         let videoGalleryVC = VideoGalleryVC.instantiate()
         
         let cache = ThumbnailCache()
-        let uploadService = VideoUploadService()
-        let videoHelper = VideoHelper(with: cache, and: uploadService)
+        let videoHelper = VideoHelper(with: cache)
         
         videoGalleryVC.coordinator = self
         videoGalleryVC.coreDataManager = coreDataManager
@@ -64,7 +63,7 @@ extension VideoGalleryCoordinator {
         }
     }
     
-    func finishEditing(_ video: PracticeVideo, from uploader: VideoUploadService) {
+    func finishEditing(_ video: PracticeVideo) {
         guard let uploadVC = getVideoUploadVC() else { return }
         
         guard let videoGalleryVC = rootVC.detailNC?.children.last as? VideoGalleryVC else {
@@ -79,7 +78,7 @@ extension VideoGalleryCoordinator {
             return
         }
         
-        let isEditingNewVideo = uploader.video == nil
+        let isEditingNewVideo = Services.uploads.video == nil
         
         if isEditingNewVideo {
             coreDataManager.add(video, to: videoPracticeSession)
@@ -154,7 +153,7 @@ extension VideoGalleryCoordinator: UINavigationControllerDelegate, UIImagePicker
             return
         }
         
-        videoGalleryVC.videoHelper?.uploadService.url = videoURL
+        Services.uploads.url = videoURL
         startEditingVideo(videoHelper: videoGalleryVC.videoHelper, videoPicker: picker)
     }
     

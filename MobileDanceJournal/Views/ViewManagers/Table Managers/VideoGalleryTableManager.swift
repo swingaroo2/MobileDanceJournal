@@ -89,7 +89,7 @@ extension VideoGalleryTableManager: UITableViewDelegate {
             if !tableView.isEditing {
                 self.coordinator?.play(video, self.videoHelper)
             } else {
-                self.videoHelper?.uploadService.set(video: video)
+                Services.uploads.set(video: video)
                 self.coordinator?.startEditingVideo(videoHelper: self.videoHelper)
             }
         }
@@ -138,7 +138,7 @@ extension VideoGalleryTableManager: UITableViewDelegate {
                 return
             }
             
-            self.videoHelper?.uploadService.set(video: video)
+            Services.uploads.set(video: video)
             self.coordinator?.startEditingVideo(videoHelper: self.videoHelper)
             tableView.reloadRows(at: [indexPath], with: .fade)
             completionHandler(true)

@@ -40,14 +40,12 @@ class VideoUploadVC: UIViewController, Storyboarded {
     }
     
     private func prepopulateTitle() {
-        guard let videoHelper = videoHelper else { return }
-        guard let video = videoHelper.uploadService.video else { return }
+        guard let video = Services.uploads.video else { return }
         titleTextField.text = video.title.isEmpty ? "" : video.title
     }
     
     private func configureThumbnail() {
-        guard let videoHelper = videoHelper else { return }
-        guard let url = videoHelper.uploadService.url else { return }
+        guard let url = Services.uploads.url else { return }
         thumbnail.setThumbnail(url)
     }
     

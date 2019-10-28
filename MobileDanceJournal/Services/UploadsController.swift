@@ -20,15 +20,15 @@ class UploadsController: NSObject {
     var video: PracticeVideo?
     
     // MARK: - Setters
-    func set(_ filename: String) {
+    func set(filename: String) {
         self.url = URLBuilder.getDocumentsFilePathURL(for: filename)
     }
     
-    func set(_ url: URL) {
+    func set(url: URL) {
         self.url = url
     }
     
-    func set(_ video: PracticeVideo?) {
+    func set(video: PracticeVideo?) {
         self.video = video
         guard let video = video else { return }
         self.url = URLBuilder.getDocumentsFilePathURL(for: video.filename)

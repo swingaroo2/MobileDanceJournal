@@ -15,17 +15,14 @@ import AVKit
 
 class VideoHelper: NSObject {
     
-    var uploadService: VideoUploadService
     let thumbnailCache: ThumbnailCache
     
     override init() {
         self.thumbnailCache = ThumbnailCache()
-        self.uploadService = VideoUploadService()
         super.init()
     }
     
-    init(with cache: ThumbnailCache, and uploadService: VideoUploadService) {
+    init(with cache: ThumbnailCache) {
         self.thumbnailCache = cache
-        self.uploadService = uploadService
     }
 }
