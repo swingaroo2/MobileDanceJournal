@@ -12,15 +12,8 @@ import UIKit
 // MARK: - IBActions
 extension VideoUploadVC {
     @IBAction func completeUpload(_ sender: UIBarButtonItem) {
-        guard let videoHelper = videoHelper else {
-            presentBasicAlert(message: VideoUploadErrors.serviceUnavailable)
-            coordinator?.dismiss(self, completion: nil)
-            return
-        }
         
-        let uploadService = videoHelper.uploadService
-        
-        guard let videoURL = uploadService.url else {
+        guard let videoURL = Services.uploads.url else {
             presentBasicAlert(message: VideoUploadErrors.lostVideo)
             coordinator?.dismiss(self, completion: nil)
             return
@@ -29,7 +22,7 @@ extension VideoUploadVC {
         let titleText = titleTextField.text ?? "Title"
         let filename = videoURL.lastPathComponent
         
-        let isEditingNewVideo = uploadService.video == nil
+        let isEditingNewVideo = Services.uploads.video == nil
         
         if isEditingNewVideo {
             let newVideo = coreDataManager.createAndConfigureNewPracticeVideo(title: titleText, filename: filename)
@@ -42,21 +35,21 @@ extension VideoUploadVC {
                 return
             }
             
-            coordinator?.finishEditing(newVideo, from: uploadService)
-            uploadService.set(video: nil)
+            coordinator?.finishEditing(newVideo)
+            Services.uploads.set(video: nil)
         } else {
-            guard let updatedVideo = uploadService.video else {
+            guard let updatedVideo = Services.uploads.video else {
                 coordinator?.dismiss(self, completion: nil)
                 return
             }
             updatedVideo.title = titleText
-            coordinator?.finishEditing(updatedVideo, from: uploadService)
-            uploadService.set(video: nil)
+            coordinator?.finishEditing(updatedVideo)
+            Services.uploads.set(video: nil)
         }
     }
     
     @IBAction func cancelUpload(_ sender: UIBarButtonItem) {
-        videoHelper?.uploadService.set(video: nil)
+        Services.uploads.set(video: nil)
         coordinator?.cancelUpload()
     }
     

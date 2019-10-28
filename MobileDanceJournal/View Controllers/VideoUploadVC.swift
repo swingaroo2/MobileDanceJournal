@@ -16,7 +16,6 @@ class VideoUploadVC: UIViewController, Storyboarded {
     
     weak var coordinator: VideoGalleryCoordinator?
     var coreDataManager: CoreDataManager!
-    var videoHelper: VideoHelper?
     var videoToUpload: PracticeVideo?
     
     override func viewWillAppear(_ animated: Bool) {
@@ -40,17 +39,13 @@ class VideoUploadVC: UIViewController, Storyboarded {
     }
     
     private func prepopulateTitle() {
-        guard let videoHelper = videoHelper else { return }
-        guard let video = videoHelper.uploadService.video else { return }
+        guard let video = Services.uploads.video else { return }
         titleTextField.text = video.title.isEmpty ? "" : video.title
     }
     
     private func configureThumbnail() {
-        guard let videoHelper = videoHelper else { return }
-        guard let url = videoHelper.uploadService.url else { return }
-        videoHelper.getThumbnail(from: url) { image in
-            self.thumbnail.image = image
-        }
+        guard let url = Services.uploads.url else { return }
+        thumbnail.setThumbnail(url)
     }
     
 }

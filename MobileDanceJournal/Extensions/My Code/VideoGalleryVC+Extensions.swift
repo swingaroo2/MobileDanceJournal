@@ -38,12 +38,12 @@ private extension VideoGalleryVC {
         
         let recordVideoAction = UIAlertAction(title: AlertConstants.recordVideo, style: .default) { (action:UIAlertAction) in
             guard Services.permissions.hasCameraPermission() else { return }
-            self.coordinator.initiate(.camera)
+            Services.uploads.recordVideo(from: self.coordinator)
         }
         
         let uploadFromPhotosAction = UIAlertAction(title: AlertConstants.uploadFromPhotos, style: .default) { (action:UIAlertAction) in
             guard Services.permissions.hasPhotosPermission() else { return }
-            self.coordinator.initiate(.photoLibrary)
+            Services.uploads.uploadVideoFromPhotos(from: self.coordinator)
         }
         
         actionSheet.addAction(recordVideoAction)

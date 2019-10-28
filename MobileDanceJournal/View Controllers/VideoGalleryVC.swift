@@ -13,7 +13,6 @@ class VideoGalleryVC: UIViewController, Storyboarded {
     var coordinator: VideoGalleryCoordinator!
     var coreDataManager: CoreDataManager!
     var tableManager: TableManager!
-    var videoHelper: VideoHelper!
     var practiceSession: PracticeSession!
     var practiceSessionPicker: PracticeSessionPickerView?
     var videoToMove: PracticeVideo?
@@ -37,7 +36,6 @@ class VideoGalleryVC: UIViewController, Storyboarded {
         tableManager.practiceSession = practiceSession
         tableManager.practiceSessionPicker = practiceSessionPicker
         tableManager.noContentLabel = noContentLabel
-        tableManager.videoHelper = videoHelper
         tableManager.coordinator = coordinator
         tableManager.videoToMove = videoToMove
         return tableManager

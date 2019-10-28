@@ -12,32 +12,14 @@ import AVFoundation
 
 extension UIImageView {
     
-    // TODO: Is there a better way to do this?
-    
-    func setThumbnail(from video: PracticeVideo) throws {
-        do {
-            let thumbnailImage = try video.getThumbnail()
-            image = thumbnailImage
-        } catch ThumbnailError.failedCopy {
-            throw ThumbnailError.failedCopy
-        } catch {
-            throw ThumbnailError.generic
-        }
+    func setThumbnail(_ video: PracticeVideo) {
+        let thumbnailImage = Services.uploads.getThumbnail(video)
+        image = thumbnailImage
     }
     
-    func setThumbnail(from path: URL) throws {
-        do {
-            let asset = AVURLAsset(url: path, options: nil)
-            let imageGenerator = AVAssetImageGenerator(asset: asset)
-            imageGenerator.appliesPreferredTrackTransform = true
-            let thumbnailTimestamp = CMTimeMake(value: 0, timescale: 1)
-            let cgThumbnail = try imageGenerator.copyCGImage(at: thumbnailTimestamp, actualTime: nil)
-            let thumbnailImage = UIImage(cgImage: cgThumbnail)
-            image = thumbnailImage
-        } catch ThumbnailError.failedCopy {
-            throw ThumbnailError.failedCopy
-        } catch {
-            throw ThumbnailError.generic
+    func setThumbnail(_ path: URL) {
+        Services.uploads.getThumbnail(from: path) { cachedImage in
+            self.image = cachedImage
         }
     }
 }

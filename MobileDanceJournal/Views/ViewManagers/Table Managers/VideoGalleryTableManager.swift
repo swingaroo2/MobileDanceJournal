@@ -19,7 +19,6 @@ class VideoGalleryTableManager: NSObject, TableManager {
     var practiceSession: PracticeSession!
     var practiceSessionPicker: PracticeSessionPickerView!
     var noContentLabel: UILabel!
-    var videoHelper: VideoHelper!
     var coordinator: VideoGalleryCoordinator!
     var videoToMove: PracticeVideo?
     
@@ -71,9 +70,7 @@ extension VideoGalleryTableManager: UITableViewDataSource {
         cell.videoTitleLabel.text = video.title
         
         let url = URLBuilder.getDocumentsFilePathURL(for: video.filename)
-        videoHelper?.getThumbnail(from: url) { image in
-            cell.videoThumbnail.image = image
-        }
+        cell.videoThumbnail.setThumbnail(url)
     }
 }
 
@@ -89,10 +86,10 @@ extension VideoGalleryTableManager: UITableViewDelegate {
             guard let video = selectedCell.video else { return }
             
             if !tableView.isEditing {
-                self.coordinator?.play(video, self.videoHelper)
+                self.coordinator?.play(video)
             } else {
-                self.videoHelper?.uploadService.set(video: video)
-                self.coordinator?.startEditingVideo(videoHelper: self.videoHelper)
+                Services.uploads.set(video: video)
+                self.coordinator?.startEditingVideo()
             }
         }
     }
@@ -140,8 +137,8 @@ extension VideoGalleryTableManager: UITableViewDelegate {
                 return
             }
             
-            self.videoHelper?.uploadService.set(video: video)
-            self.coordinator?.startEditingVideo(videoHelper: self.videoHelper)
+            Services.uploads.set(video: video)
+            self.coordinator?.startEditingVideo()
             tableView.reloadRows(at: [indexPath], with: .fade)
             completionHandler(true)
         }
