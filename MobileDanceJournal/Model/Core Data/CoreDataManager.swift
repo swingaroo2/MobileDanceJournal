@@ -83,7 +83,6 @@ public class CoreDataManager : NSObject {
 
 // MARK: - Fetch/Save/Delete
 extension CoreDataManager {
-    
     func fetchPracticeSessions(in group: Group?) -> [PracticeSession]? {
         
         practiceSessionFRC.fetchRequest.predicate = (group != nil) ? NSPredicate(format: Predicates.hasGroup, group!) : NSPredicate(format: Predicates.hasNoGroup)
@@ -144,7 +143,7 @@ extension CoreDataManager {
     }
 }
 
-// MARK: Handling Relationships
+// MARK: Handling relationships
 extension CoreDataManager {
     func add(_ video: PracticeVideo, to practiceSession: PracticeSession) {
         video.practiceSession = practiceSession

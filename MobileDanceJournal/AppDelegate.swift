@@ -35,8 +35,8 @@ extension AppDelegate: UIApplicationDelegate {
     }
 }
 
-extension AppDelegate {
-    private func startCoordinator(with rootVC: SplitViewRootController,_ coreDataManager: CoreDataManager) {
+private extension AppDelegate {
+    func startCoordinator(with rootVC: SplitViewRootController,_ coreDataManager: CoreDataManager) {
         coordinator = MainCoordinator(rootVC, coreDataManager)
         coordinator?.start()
     }

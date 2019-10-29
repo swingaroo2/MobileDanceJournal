@@ -20,6 +20,7 @@ class VideoGalleryVC: UIViewController, Storyboarded {
     @IBOutlet weak var noContentLabel: UILabel!
     @IBOutlet weak var videosTableView: UITableView!
     
+    // MARK: - Lifecycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
          tableManager = setUpTableManager()
@@ -31,6 +32,10 @@ class VideoGalleryVC: UIViewController, Storyboarded {
         prefetchVideos(for: practiceSession)
     }
     
+}
+
+// MARK: - Private Methods
+private extension VideoGalleryVC {
     private func setUpTableManager() -> VideoGalleryTableManager {
         let tableManager = VideoGalleryTableManager(videosTableView, coreDataManager, managedVC: self)
         tableManager.practiceSession = practiceSession
@@ -47,5 +52,4 @@ class VideoGalleryVC: UIViewController, Storyboarded {
         let addVideoButton = UIBarButtonItem.init(image: addVideoImage, landscapeImagePhone: addVideoImage, style: .plain, target: self, action: #selector(addVideoButtonPressed(_:)))
         navigationItem.rightBarButtonItems = [addVideoButton, editButtonItem]
     }
-    
 }

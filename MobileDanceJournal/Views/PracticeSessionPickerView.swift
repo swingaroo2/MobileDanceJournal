@@ -17,6 +17,7 @@ class PracticeSessionPickerView: UIView, ToolbarPickerView {
     private var doneButton: UIBarButtonItem!
     private var cancelButton: UIBarButtonItem!
     
+    // MARK: - Initializers
     required init(_ videoToMove: PracticeVideo, from oldPracticeLog: PracticeSession, to newPracticeLogs: [PracticeSession],_ coreDataManager: CoreDataManager, managedView: UIView) {
         super.init(frame: .zero)
         self.manager = self.configureManager(videoToMove, oldPracticeLog, newPracticeLogs, coreDataManager)
@@ -32,6 +33,7 @@ class PracticeSessionPickerView: UIView, ToolbarPickerView {
     
 }
 
+// MARK: - Private Methods
 private extension PracticeSessionPickerView {
     func configurePickerToolbarButtons() -> [UIBarButtonItem] {
         doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(actionButtonPressed))
@@ -47,9 +49,7 @@ private extension PracticeSessionPickerView {
         manager.practiceSessions = newPracticeLogs.filter { $0 !== oldPracticeLog }
         return manager
     }
-}
-
-private extension PracticeSessionPickerView {
+    
     @objc func actionButtonPressed(_ sender: UIBarButtonItem) {
         switch sender {
         case doneButton:

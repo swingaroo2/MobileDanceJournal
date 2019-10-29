@@ -173,7 +173,7 @@ extension PracticeGroupsTableManager {
     }
 }
 
-// MARK: - Private extensions
+// MARK: - Private Methods
 private extension PracticeGroupsTableManager {
     func configureCell(_ cell: UITableViewCell, _ indexPath: IndexPath) {
         let group = (indexPath.row >= groups.count) ? nil : coreDataManager.groupFRC.object(at: indexPath)

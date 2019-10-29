@@ -24,6 +24,7 @@ class NotepadTextViewManager: NSObject {
     
 }
 
+// MARK: - UITextViewDelegate
 extension NotepadTextViewManager: UITextViewDelegate {
     func textViewDidBeginEditing(_ textView: UITextView) {
         textView.text = handleDefaultFieldText(in: textView)
@@ -45,6 +46,7 @@ extension NotepadTextViewManager: UITextViewDelegate {
     
 }
 
+// MARK: - Private Methods
 private extension NotepadTextViewManager {
     func handleDefaultFieldText(in textView: UITextView) -> String? {
         let textViewHasPlaceholderText = textView.text == PlaceholderText.newPracticeSession ||

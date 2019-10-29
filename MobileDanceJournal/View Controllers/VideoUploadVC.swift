@@ -18,12 +18,16 @@ class VideoUploadVC: UIViewController, Storyboarded {
     var coreDataManager: CoreDataManager!
     var videoToUpload: PracticeVideo?
     
+    // MARK: - Lifecycle Functions
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setUpView()
     }
-    
-    private func setUpView() {
+}
+
+// MARK: - Private Methods
+private extension VideoUploadVC {
+    func setUpView() {
         configureKeyboardToDismissOnOutsideTap()
         configureThumbnail()
         prepopulateTitle()
@@ -38,14 +42,13 @@ class VideoUploadVC: UIViewController, Storyboarded {
         saveButton.isEnabled = !text.isEmpty
     }
     
-    private func prepopulateTitle() {
+    func prepopulateTitle() {
         guard let video = Services.uploads.video else { return }
         titleTextField.text = video.title.isEmpty ? "" : video.title
     }
     
-    private func configureThumbnail() {
+    func configureThumbnail() {
         guard let url = Services.uploads.url else { return }
         thumbnail.setThumbnail(url)
     }
-    
 }

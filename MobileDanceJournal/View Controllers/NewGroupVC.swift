@@ -21,6 +21,7 @@ class NewGroupVC: UIViewController, Storyboarded {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var ungroupedPracticeLogsLabel: UILabel!
     
+    // MARK: - Lifecycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         tableManager = configureTableManager(tableView, coreDataManager)
@@ -29,6 +30,37 @@ class NewGroupVC: UIViewController, Storyboarded {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setUpView(with: editingGroup)
+    }
+}
+
+// MARK: - UITextFieldDelegate
+extension NewGroupVC: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+}
+
+// MARK: - Private Methods
+private extension NewGroupVC {
+    @IBAction func buttonPressed(_ sender: UIButton) {
+        switch sender {
+        case saveButton:
+            let selectedPracticeSessions = tableManager.getSelectedPracticeSessions()
+            
+            if let group = editingGroup {
+                coreDataManager.update(group: group, name: groupNameTextField.text!, practiceSessions: selectedPracticeSessions)
+            } else {
+                coreDataManager.createAndSaveNewGroup(name: groupNameTextField.text!, practiceSessions: selectedPracticeSessions)
+            }
+            break
+        case cancelButton:
+            break
+        default:
+            break
+        }
+        
+        coordinator.dismiss(self, completion: nil)
     }
     
     func setUpView(with group: Group?) {
@@ -42,41 +74,14 @@ class NewGroupVC: UIViewController, Storyboarded {
         ungroupedPracticeLogsLabel.isHidden = (ungroupedPracticeSessions.count == 0)
     }
     
-    private func configureTableManager(_ managedTableView: UITableView,_ coreDataManager: CoreDataManager) -> PracticeLogTableManager {
-        managedTableView.tableFooterView = UIView()
-        let tableManager = PracticeLogTableManager(tableView, coreDataManager, managedVC: self)
-        return tableManager
-    }
-    
-    @IBAction func buttonPressed(_ sender: UIButton) {
-        switch sender {
-            case saveButton:
-                let selectedPracticeSessions = tableManager.getSelectedPracticeSessions()
-                
-                if let group = editingGroup {
-                    coreDataManager.update(group: group, name: groupNameTextField.text!, practiceSessions: selectedPracticeSessions)
-                } else {
-                    coreDataManager.createAndSaveNewGroup(name: groupNameTextField.text!, practiceSessions: selectedPracticeSessions)
-                }
-                break
-            case cancelButton:
-                break
-            default:
-                break
-        }
-        
-        coordinator.dismiss(self, completion: nil)
-    }
-    
-    @objc private func textFieldDidChange(_ textField: UITextField) {
+    @objc func textFieldDidChange(_ textField: UITextField) {
         guard let text = textField.text else { return }
         saveButton.isEnabled = !text.isEmpty
     }
-}
-
-extension NewGroupVC: UITextFieldDelegate {
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        return true
+    
+    func configureTableManager(_ managedTableView: UITableView,_ coreDataManager: CoreDataManager) -> PracticeLogTableManager {
+        managedTableView.tableFooterView = UIView()
+        let tableManager = PracticeLogTableManager(tableView, coreDataManager, managedVC: self)
+        return tableManager
     }
 }

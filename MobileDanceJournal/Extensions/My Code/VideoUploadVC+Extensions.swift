@@ -65,7 +65,6 @@ extension VideoUploadVC {
 
 // MARK: - UITextFieldDelegate
 extension VideoUploadVC: UITextFieldDelegate {
-    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true

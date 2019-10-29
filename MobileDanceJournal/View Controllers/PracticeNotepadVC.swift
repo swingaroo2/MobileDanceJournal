@@ -24,7 +24,7 @@ class PracticeNotepadVC: UIViewController, Storyboarded {
     var textViewManager: NotepadTextViewManager!
     weak var coordinator: PracticeLogCoordinator!
     
-    // MARK: Lifecycle functions
+    // MARK: - Lifecycle Functions
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpKeyboardListeners()
@@ -42,28 +42,10 @@ class PracticeNotepadVC: UIViewController, Storyboarded {
         NotificationCenter.default.removeObserver(self)
     }
     
-    
-    // MARK: View Setup
-    private func setUpView() {
-        configureKeyboardToDismissOnOutsideTap()
-        ensureNotesTextViewIsScrolledToTop()
-        practiceSessionContent.flashScrollIndicators()
-        saveButton.isEnabled = false
-        cameraButton.isEnabled = practiceSession != nil
-    }
-    
-    private func ensureNotesTextViewIsScrolledToTop() {
-        // Yes, this is a total hack. It has, however, lead to a dope animation when opening a practice session. So I'm keeping it.
-        DispatchQueue.main.async {
-            self.practiceSessionContent.setContentOffset(CGPoint(x: 0.0, y: -self.practiceSessionContent.contentInset.top), animated: true)
-        }
-    }
-    
-    private func setUpKeyboardListeners() {
-        NotificationCenter.default.addObserver(self, selector: #selector(adjustForKeyboard), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(adjustForKeyboard), name: UIResponder.keyboardWillHideNotification, object: nil)
-    }
-    
+}
+
+// MARK: - Private Methods
+private extension PracticeNotepadVC {
     @objc func adjustForKeyboard(notification: Notification) {
         guard let keyboardValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else { return }
         
@@ -83,5 +65,25 @@ class PracticeNotepadVC: UIViewController, Storyboarded {
         
         let selectedRange = practiceSessionContent.selectedRange
         practiceSessionContent.scrollRangeToVisible(selectedRange)
+    }
+    
+    func setUpView() {
+        configureKeyboardToDismissOnOutsideTap()
+        ensureNotesTextViewIsScrolledToTop()
+        practiceSessionContent.flashScrollIndicators()
+        saveButton.isEnabled = false
+        cameraButton.isEnabled = practiceSession != nil
+    }
+    
+    func ensureNotesTextViewIsScrolledToTop() {
+        // Yes, this is a total hack. It has, however, lead to a dope animation when opening a practice session. So I'm keeping it.
+        DispatchQueue.main.async {
+            self.practiceSessionContent.setContentOffset(CGPoint(x: 0.0, y: -self.practiceSessionContent.contentInset.top), animated: true)
+        }
+    }
+    
+    func setUpKeyboardListeners() {
+        NotificationCenter.default.addObserver(self, selector: #selector(adjustForKeyboard), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(adjustForKeyboard), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
 }

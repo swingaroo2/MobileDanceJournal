@@ -17,6 +17,7 @@ class PracticeLogVC: UIViewController, Storyboarded {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var noContentLabel: UILabel!
     
+    // MARK: - Lifecycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         tableManager = configureTableManager(tableView, coreDataManager)
@@ -37,17 +38,23 @@ class PracticeLogVC: UIViewController, Storyboarded {
             coordinator.clearDetailVC()
         }
     }
-    
-    // MARK: - Notifications
-    func addNotificationListener() {
-        NotificationCenter.default.addObserver(self, selector: #selector(PracticeLogVC.practiceLogUpdated), name: .practiceLogUpdated, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(PracticeLogVC.practiceLogMoved), name: .practiceLogMoved, object: nil)
+
+    override internal func setEditing(_ editing: Bool, animated: Bool) {
+        super.setEditing(editing, animated: animated)
+        tableManager.managedTableView.setEditing(editing, animated: animated)
     }
-    
-    func removeNotificationListener() {
-        NotificationCenter.default.removeObserver(self)
+}
+
+// MARK: - Private Methods
+private extension PracticeLogVC {
+
+    @IBAction func createNewPracticeSession(_ sender: UIBarButtonItem) {
+        let newIndexPath = IndexPath(row: 0, section: 0)
+        tableManager.selectedRow = 0
+        coordinator?.startEditingNewPracticeSession()
+        tableManager.managedTableView.insertRows(at: [newIndexPath], with: .fade)
     }
-    
+
     @objc func practiceLogMoved(notification: Notification) {
         guard let remainingPracticeLogs = coreDataManager.fetchPracticeSessions(in: currentGroup) else { return }
         noContentLabel.isHidden = remainingPracticeLogs.count > 0
@@ -58,7 +65,16 @@ class PracticeLogVC: UIViewController, Storyboarded {
         tableManager.managedTableView.reloadRows(at: [indexPathToUpdate], with: .fade)
     }
     
-    private func configureTableManager(_ managedTableView: UITableView,_ coreDataManager: CoreDataManager) -> PracticeLogTableManager {
+    func addNotificationListener() {
+        NotificationCenter.default.addObserver(self, selector: #selector(PracticeLogVC.practiceLogUpdated), name: .practiceLogUpdated, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(PracticeLogVC.practiceLogMoved), name: .practiceLogMoved, object: nil)
+    }
+    
+    func removeNotificationListener() {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    func configureTableManager(_ managedTableView: UITableView,_ coreDataManager: CoreDataManager) -> PracticeLogTableManager {
         let tableManager = PracticeLogTableManager(managedTableView, coreDataManager, managedVC: self)
         tableManager.noContentLabel = noContentLabel
         tableManager.coordinator = coordinator
@@ -66,21 +82,9 @@ class PracticeLogVC: UIViewController, Storyboarded {
         return tableManager
     }
     
-    private func setUpView() {
+    func setUpView() {
         navigationItem.leftItemsSupplementBackButton = true
         navigationItem.leftBarButtonItem = editButtonItem
         tableManager.managedTableView.tableFooterView = UIView()
-    }
-    
-    @IBAction func createNewPracticeSession(_ sender: UIBarButtonItem) {
-        let newIndexPath = IndexPath(row: 0, section: 0)
-        tableManager.selectedRow = 0
-        coordinator?.startEditingNewPracticeSession()
-        tableManager.managedTableView.insertRows(at: [newIndexPath], with: .fade)
-    }
-
-    override internal func setEditing(_ editing: Bool, animated: Bool) {
-        super.setEditing(editing, animated: animated)
-        tableManager.managedTableView.setEditing(editing, animated: animated)
     }
 }

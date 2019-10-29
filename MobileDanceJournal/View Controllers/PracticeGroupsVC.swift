@@ -17,6 +17,7 @@ class PracticeGroupsVC: UIViewController, Storyboarded {
 
     @IBOutlet weak var tableView: UITableView!
     
+    // MARK: - Lifecycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         tableManager = configureTableManager(tableView, coreDataManager)
@@ -30,24 +31,27 @@ class PracticeGroupsVC: UIViewController, Storyboarded {
         tableManager.managedTableView.reloadData()
     }
     
-    private func setUpView() {
+    override internal func setEditing(_ editing: Bool, animated: Bool) {
+        super.setEditing(editing, animated: animated)
+        tableManager.managedTableView.setEditing(editing, animated: animated)
+    }
+}
+
+// MARK: - Private Methods
+private extension PracticeGroupsVC {
+    func setUpView() {
         title = VCConstants.practiceGroupsVCTitle
         navigationItem.leftBarButtonItem = editButtonItem
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addGroup))
     }
     
-    @objc private func addGroup() {
+    @objc func addGroup() {
         coordinator.startEditing(group: nil)
     }
     
-    private func configureTableManager(_ managedTableView: UITableView,_ coreDataManager: CoreDataManager) -> PracticeGroupsTableManager {
+    func configureTableManager(_ managedTableView: UITableView,_ coreDataManager: CoreDataManager) -> PracticeGroupsTableManager {
         let tableManager = PracticeGroupsTableManager(managedTableView, coreDataManager, managedVC: self)
         tableManager.coordinator = coordinator
         return tableManager
-    }
-    
-    override func setEditing(_ editing: Bool, animated: Bool) {
-        super.setEditing(editing, animated: animated)
-        tableManager.managedTableView.setEditing(editing, animated: animated)
     }
 }

@@ -16,6 +16,7 @@ class GroupPickerView: UIView, ToolbarPickerView {
     private var doneButton: UIBarButtonItem!
     private var cancelButton: UIBarButtonItem!
     
+    // MARK: - Initializers
     required init(_ practiceLogToMove: PracticeSession,_ oldGroup: Group?,_ newGroups: [Group],_ coreDataManager: CoreDataManager, managedView: UIView,_ coordinator: PracticeLogCoordinator) {
         super.init(frame: .zero)
         self.manager = self.configureManager(practiceLogToMove, oldGroup, newGroups, coreDataManager, coordinator)
@@ -31,6 +32,7 @@ class GroupPickerView: UIView, ToolbarPickerView {
     
 }
 
+// MARK: - Private Methods
 private extension GroupPickerView {
     func configurePickerToolbarButtons() -> [UIBarButtonItem] {
         doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(actionButtonPressed))
@@ -46,9 +48,7 @@ private extension GroupPickerView {
         manager.newGroups = newGroups.filter { $0 !== oldGroup }
         return manager
     }
-}
-
-private extension GroupPickerView {
+    
     @objc func actionButtonPressed(_ sender: UIBarButtonItem) {
         switch sender {
         case doneButton:

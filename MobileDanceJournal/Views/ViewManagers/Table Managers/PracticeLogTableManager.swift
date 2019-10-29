@@ -135,7 +135,7 @@ extension PracticeLogTableManager: UITableViewDelegate {
             self.managedVC.presentYesNoAlert(message: AlertConstants.confirmPracticeLogDelete, isDeleteAlert: true, yesAction: deleteAlertAction, noAction: noAlertAction)
             
         }
-        
+          
         let moveAction = UIContextualAction(style: .normal, title: Actions.move) { [unowned self] (action, view, completionHandler) in
             let practiceLogToMove = self.coreDataManager.practiceSessionFRC.object(at: indexPath)
 
