@@ -14,4 +14,10 @@ extension NSObject {
         let pathURL = URL(string: pathString)!
         return pathURL
     }
+    
+    var className: String {
+        let fullName = NSStringFromClass(type(of: self))
+        let className = fullName.components(separatedBy: ".")[1]
+        return className
+    }
 }
