@@ -12,7 +12,7 @@ import CoreData
 
 extension UITextView {
     func configure(with managedObject: NSManagedObject, for keyPath: String) {
-        
+        Log.trace()
         let rawValue = managedObject.value(forKey: keyPath)
         text = rawValue as? String
         

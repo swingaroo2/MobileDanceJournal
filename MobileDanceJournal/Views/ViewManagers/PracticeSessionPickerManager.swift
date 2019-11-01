@@ -18,6 +18,7 @@ class PracticeSessionPickerManager: NSObject, PickerManager {
     var videoToMove: PracticeVideo!
     
     required init(_ managedView: ToolbarPickerView,_ coreDataManager: CoreDataManager) {
+        Log.trace()
         self.managedView = managedView
         self.coreDataManager = coreDataManager
     }
@@ -26,12 +27,13 @@ class PracticeSessionPickerManager: NSObject, PickerManager {
 // MARK: UIPickerViewDelegate
 extension PracticeSessionPickerManager: UIPickerViewDelegate {
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        Log.trace()
         let practiceSession = practiceSessions[row]
         return practiceSession.title
     }
     
     func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
-        
+        Log.trace()
         var label: UILabel
         
         if let view = view as? UILabel {
@@ -55,10 +57,12 @@ extension PracticeSessionPickerManager: UIPickerViewDelegate {
 extension PracticeSessionPickerManager: UIPickerViewDataSource {
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        Log.trace()
         return 1
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        Log.trace()
         return practiceSessions.count
     }
 }
@@ -66,6 +70,7 @@ extension PracticeSessionPickerManager: UIPickerViewDataSource {
 // MARK: - IBActions
 extension PracticeSessionPickerManager {
     func doneButtonPressed() {
+        Log.trace()
         let selectedRow = managedView.picker.selectedRow(inComponent: 0)
         let destinationPracticeSession = practiceSessions[selectedRow]
         

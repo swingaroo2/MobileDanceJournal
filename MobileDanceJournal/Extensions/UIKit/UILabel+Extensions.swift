@@ -12,7 +12,7 @@ import CoreData
 
 extension UILabel {
     func configure(with managedObject: NSManagedObject, for keyPath: String) {
-        
+        Log.trace()
         let rawValue: Any? = managedObject.value(forKey: keyPath)
         text = rawValue as? String
         

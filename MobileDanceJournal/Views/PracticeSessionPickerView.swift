@@ -20,6 +20,7 @@ class PracticeSessionPickerView: UIView, ToolbarPickerView {
     // MARK: - Initializers
     required init(_ videoToMove: PracticeVideo, from oldPracticeLog: PracticeSession, to newPracticeLogs: [PracticeSession],_ coreDataManager: CoreDataManager, managedView: UIView) {
         super.init(frame: .zero)
+        Log.trace()
         self.manager = self.configureManager(videoToMove, oldPracticeLog, newPracticeLogs, coreDataManager)
         self.picker.dataSource = self.manager
         self.picker.delegate = self.manager
@@ -29,6 +30,7 @@ class PracticeSessionPickerView: UIView, ToolbarPickerView {
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+        Log.trace()
     }
     
 }
@@ -36,6 +38,7 @@ class PracticeSessionPickerView: UIView, ToolbarPickerView {
 // MARK: - Private Methods
 private extension PracticeSessionPickerView {
     func configurePickerToolbarButtons() -> [UIBarButtonItem] {
+        Log.trace()
         doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(actionButtonPressed))
         cancelButton = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(actionButtonPressed))
         let spacer = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
@@ -43,6 +46,7 @@ private extension PracticeSessionPickerView {
     }
     
     func configureManager(_ videoToMove: PracticeVideo,_ oldPracticeLog: PracticeSession,_ newPracticeLogs: [PracticeSession],_ coreDataManager: CoreDataManager) -> PracticeSessionPickerManager {
+        Log.trace()
         let manager = PracticeSessionPickerManager(self, coreDataManager)
         manager.videoToMove = videoToMove
         manager.oldPracticeSession = oldPracticeLog
@@ -51,6 +55,7 @@ private extension PracticeSessionPickerView {
     }
     
     @objc func actionButtonPressed(_ sender: UIBarButtonItem) {
+        Log.trace()
         switch sender {
         case doneButton:
             manager.doneButtonPressed()

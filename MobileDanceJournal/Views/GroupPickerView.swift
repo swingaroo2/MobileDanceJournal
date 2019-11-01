@@ -19,6 +19,7 @@ class GroupPickerView: UIView, ToolbarPickerView {
     // MARK: - Initializers
     required init(_ practiceLogToMove: PracticeSession,_ oldGroup: Group?,_ newGroups: [Group],_ coreDataManager: CoreDataManager, managedView: UIView,_ coordinator: PracticeLogCoordinator) {
         super.init(frame: .zero)
+        Log.trace()
         self.manager = self.configureManager(practiceLogToMove, oldGroup, newGroups, coreDataManager, coordinator)
         self.picker.dataSource = self.manager
         self.picker.delegate = self.manager
@@ -28,6 +29,7 @@ class GroupPickerView: UIView, ToolbarPickerView {
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+        Log.trace()
     }
     
 }
@@ -35,6 +37,7 @@ class GroupPickerView: UIView, ToolbarPickerView {
 // MARK: - Private Methods
 private extension GroupPickerView {
     func configurePickerToolbarButtons() -> [UIBarButtonItem] {
+        Log.trace()
         doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(actionButtonPressed))
         cancelButton = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(actionButtonPressed))
         let spacer = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
@@ -42,6 +45,7 @@ private extension GroupPickerView {
     }
     
     func configureManager(_ practiceLogToMove: PracticeSession,_ oldGroup: Group?,_ newGroups: [Group],_ coreDataManager: CoreDataManager,_ coordinator: PracticeLogCoordinator) -> GroupPickerManager {
+        Log.trace()
         let manager = GroupPickerManager(self, coreDataManager, coordinator)
         manager.practiceLogToMove = practiceLogToMove
         manager.oldGroup = oldGroup
@@ -50,6 +54,7 @@ private extension GroupPickerView {
     }
     
     @objc func actionButtonPressed(_ sender: UIBarButtonItem) {
+        Log.trace()
         switch sender {
         case doneButton:
             manager.doneButtonPressed()

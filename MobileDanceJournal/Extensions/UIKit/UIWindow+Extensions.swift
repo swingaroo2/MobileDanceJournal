@@ -11,6 +11,7 @@ import UIKit
 
 extension UIWindow {
     class func createNewWindow(with rootViewController: UIViewController) -> UIWindow {
+        Log.trace()
         let window = UIWindow(frame: UIScreen.main.bounds)
         window.rootViewController = rootViewController
         window.makeKeyAndVisible()

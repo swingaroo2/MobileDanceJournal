@@ -19,12 +19,14 @@ class PracticeLogCoordinator: Coordinator {
     var navigationController = UINavigationController()
     
     init(_ rootViewController: SplitViewRootController,_ coreDataManager: CoreDataManager,_ currentGroup: Group?) {
+        Log.trace()
         self.rootVC = rootViewController
         self.coreDataManager = coreDataManager
         self.currentGroup = currentGroup
     }
     
     func start() {
+        Log.trace()
         let firstVC = PracticeLogVC.instantiate()
         firstVC.coordinator = self
         firstVC.coreDataManager = coreDataManager
@@ -36,13 +38,14 @@ class PracticeLogCoordinator: Coordinator {
 // MARK: - Navigation functions
 extension PracticeLogCoordinator {
     func startEditingNewPracticeSession() {
+        Log.trace()
         let newPracticeSession = coreDataManager.createAndReturnNewPracticeSession()
         newPracticeSession.group = currentGroup
         showDetails(for: newPracticeSession)
     }
     
     func showDetails(for practiceSession: PracticeSession) {
-        
+        Log.trace()
         let detailVC = rootVC.isDisplayingBothVCs ? rootVC.detailVC : PracticeNotepadVC.instantiate()
         guard let notepadVC = detailVC as? PracticeNotepadVC else { return }
         
@@ -61,6 +64,7 @@ extension PracticeLogCoordinator {
     }
     
     func clearDetailVC() {
+        Log.trace()
         guard let detailVC = rootVC.detailVC as? PracticeNotepadVC else { return }
         
         if !rootVC.isCollapsed {
@@ -77,6 +81,7 @@ extension PracticeLogCoordinator {
     }
     
     func viewVideos(for practiceSession: PracticeSession) {
+        Log.trace()
         let child = VideoGalleryCoordinator(rootVC, coreDataManager, currentGroup, practiceSession)
         childCoordinators.append(child)
         child.start()

@@ -20,6 +20,7 @@ class PracticeGroupsTableManager: NSObject, TableManager {
     var groups: [Group]!
     
     required init(_ managedTableView: UITableView,_ coreDataManager: CoreDataManager, managedVC: UIViewController) {
+        Log.trace()
         self.managedTableView = managedTableView
         self.coreDataManager = coreDataManager
         self.managedVC = managedVC
@@ -34,6 +35,7 @@ class PracticeGroupsTableManager: NSObject, TableManager {
 // MARK: - UITableViewDataSource
 extension PracticeGroupsTableManager {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        Log.trace()
         guard let fetchedGroups = coreDataManager.groupFRC.fetchedObjects else { return 1 }
         
         // +1 for Uncategorized cell
@@ -42,12 +44,14 @@ extension PracticeGroupsTableManager {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        Log.trace()
         let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifiers.genericCell, for: indexPath)
         configureCell(cell, indexPath)
         return cell
     }
     
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        Log.trace()
         guard let fetchedGroups = coreDataManager.groupFRC.fetchedObjects else { return false }
         
         var canEdit = false
@@ -62,6 +66,7 @@ extension PracticeGroupsTableManager {
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        Log.trace()
         if editingStyle == .delete {
             let selectedGroup = coreDataManager.groupFRC.object(at: indexPath)
             managedVC.presentYesNoAlert(message: AlertConstants.confirmGroupDelete, isDeleteAlert: true, yesAction: { [unowned self] action in self.coreDataManager.delete(selectedGroup) })
@@ -72,7 +77,7 @@ extension PracticeGroupsTableManager {
 // MARK: - UITableViewDelegate
 extension PracticeGroupsTableManager {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        Log.trace()
         guard let selectedCell = tableView.cellForRow(at: indexPath) else { return }
         selectedCell.isSelected = false
         guard let textLabel = selectedCell.textLabel else { return }
@@ -99,6 +104,7 @@ extension PracticeGroupsTableManager {
     }
     
     func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+        Log.trace()
         guard let selectedCell = tableView.cellForRow(at: indexPath) else { return .none }
         guard let textLabel = selectedCell.textLabel else { return .delete }
         
@@ -110,6 +116,7 @@ extension PracticeGroupsTableManager {
     }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        Log.trace()
         let deleteAction = UIContextualAction(style: .destructive, title: Actions.delete) { [unowned self] (action, view, completionHandler) in
             
             let deleteAlertAction: ((UIAlertAction) -> Void) = { action in
@@ -136,6 +143,7 @@ extension PracticeGroupsTableManager {
 // MARK: - NSFetchedResultsControllerDelegate
 extension PracticeGroupsTableManager {
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+        Log.trace()
         switch (type) {
         case .insert:
             print("INSERT: \(anObject)")
@@ -165,10 +173,12 @@ extension PracticeGroupsTableManager {
     }
     
     func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        Log.trace()
         managedTableView.beginUpdates()
     }
     
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        Log.trace()
         managedTableView.endUpdates()
     }
 }
@@ -176,6 +186,7 @@ extension PracticeGroupsTableManager {
 // MARK: - Private Methods
 private extension PracticeGroupsTableManager {
     func configureCell(_ cell: UITableViewCell, _ indexPath: IndexPath) {
+        Log.trace()
         let group = (indexPath.row >= groups.count) ? nil : coreDataManager.groupFRC.object(at: indexPath)
         cell.textLabel?.text = (group != nil) ? group!.name : TextConstants.uncategorized
         let isConfiguringUncategorizedCell = cell.textLabel?.text == TextConstants.uncategorized

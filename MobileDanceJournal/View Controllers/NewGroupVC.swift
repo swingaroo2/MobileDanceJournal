@@ -24,11 +24,13 @@ class NewGroupVC: UIViewController, Storyboarded {
     // MARK: - Lifecycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
+        Log.trace()
         tableManager = configureTableManager(tableView, coreDataManager)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        Log.trace()
         setUpView(with: editingGroup)
     }
 }
@@ -36,6 +38,7 @@ class NewGroupVC: UIViewController, Storyboarded {
 // MARK: - UITextFieldDelegate
 extension NewGroupVC: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        Log.trace()
         textField.resignFirstResponder()
         return true
     }
@@ -44,6 +47,7 @@ extension NewGroupVC: UITextFieldDelegate {
 // MARK: - Private Methods
 private extension NewGroupVC {
     @IBAction func buttonPressed(_ sender: UIButton) {
+        Log.trace()
         switch sender {
         case saveButton:
             let selectedPracticeSessions = tableManager.getSelectedPracticeSessions()
@@ -64,6 +68,7 @@ private extension NewGroupVC {
     }
     
     func setUpView(with group: Group?) {
+        Log.trace()
         groupNameTextField.delegate = self
         groupNameTextField.text = editingGroup?.name
         guard let text = groupNameTextField.text else { return }
@@ -75,11 +80,13 @@ private extension NewGroupVC {
     }
     
     @objc func textFieldDidChange(_ textField: UITextField) {
+        Log.trace()
         guard let text = textField.text else { return }
         saveButton.isEnabled = !text.isEmpty
     }
     
     func configureTableManager(_ managedTableView: UITableView,_ coreDataManager: CoreDataManager) -> PracticeLogTableManager {
+        Log.trace()
         managedTableView.tableFooterView = UIView()
         let tableManager = PracticeLogTableManager(tableView, coreDataManager, managedVC: self)
         return tableManager

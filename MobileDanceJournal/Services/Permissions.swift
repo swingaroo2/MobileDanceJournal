@@ -12,6 +12,7 @@ import Photos
 
 class PermissionsController: NSObject {
     func hasCameraPermission() -> Bool {
+        Log.trace()
         switch AVCaptureDevice.authorizationStatus(for: .video) {
          case .authorized:
              print("Camera access authorized.")
@@ -43,6 +44,7 @@ class PermissionsController: NSObject {
     }
     
     func hasPhotosPermission() -> Bool {
+        Log.trace()
         let photoAuthorizationStatus = PHPhotoLibrary.authorizationStatus()
         switch photoAuthorizationStatus {
         case .authorized:

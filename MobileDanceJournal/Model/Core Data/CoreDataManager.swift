@@ -27,10 +27,12 @@ public class CoreDataManager : NSObject {
     }
     
     init(modelName: String) {
+        Log.trace()
         self.modelName = modelName
     }
     
     lazy var groupFRC: NSFetchedResultsController<Group> = {
+        Log.trace()
         let fetchRequest: NSFetchRequest<Group> = Group.fetchRequest()
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: GroupConstants.dateCreated, ascending: false),
                                         NSSortDescriptor(key: GroupConstants.name, ascending: false)]
@@ -44,6 +46,7 @@ public class CoreDataManager : NSObject {
     }()
     
     lazy var practiceSessionFRC: NSFetchedResultsController<PracticeSession> = {
+        Log.trace()
         let fetchRequest: NSFetchRequest<PracticeSession> = PracticeSession.fetchRequest()
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: PracticeSessionConstants.date, ascending: false),
                                         NSSortDescriptor(key: PracticeSessionConstants.title, ascending: false)]
@@ -57,6 +60,7 @@ public class CoreDataManager : NSObject {
     }()
     
     lazy var practiceVideoFRC: NSFetchedResultsController<PracticeVideo> = {
+        Log.trace()
         let fetchRequest: NSFetchRequest<PracticeVideo> = PracticeVideo.fetchRequest()
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: PracticeVideoConstants.uploadDate, ascending: false)]
         let fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest,
@@ -69,6 +73,7 @@ public class CoreDataManager : NSObject {
     }()
     
     lazy var persistentContainer: NSPersistentContainer = {
+        Log.trace()
         let container = NSPersistentContainer(name: ModelConstants.modelName)
         
         container.loadPersistentStores { (storeDescription, error) in
@@ -84,7 +89,7 @@ public class CoreDataManager : NSObject {
 // MARK: - Fetch/Save/Delete
 extension CoreDataManager {
     func fetchPracticeSessions(in group: Group?) -> [PracticeSession]? {
-        
+        Log.trace()
         practiceSessionFRC.fetchRequest.predicate = (group != nil) ? NSPredicate(format: Predicates.hasGroup, group!) : NSPredicate(format: Predicates.hasNoGroup)
         
         try? practiceSessionFRC.performFetch()
@@ -92,6 +97,7 @@ extension CoreDataManager {
     }
     
     func fetchVideos(for practiceSession: PracticeSession, with filename: String? = nil) -> [PracticeVideo] {
+        Log.trace()
         let predicate = (filename == nil) ? NSPredicate(format: Predicates.hasPracticeSession, practiceSession) : NSPredicate(format: Predicates.hasPracticeSessionWithFilename, practiceSession, filename!)
         
         practiceVideoFRC.fetchRequest.predicate = predicate
@@ -105,6 +111,7 @@ extension CoreDataManager {
     }
     
     func save() {
+        Log.trace()
         if persistentContainer.viewContext.hasChanges {
             print("[CoreDataManager] \(#function)")
             self.executeSave()
@@ -114,6 +121,7 @@ extension CoreDataManager {
     }
     
     private func executeSave() {
+        Log.trace()
         do {
             try persistentContainer.viewContext.save()
         } catch {
@@ -123,11 +131,13 @@ extension CoreDataManager {
     }
     
     func delete(_ managedObject: NSManagedObject) {
+        Log.trace()
         persistentContainer.viewContext.delete(managedObject)
         save()
     }
     
     func deleteAllRecords(entityName: String) {
+        Log.trace()
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
         fetchRequest.returnsObjectsAsFaults = false
         do {
@@ -146,30 +156,35 @@ extension CoreDataManager {
 // MARK: Handling relationships
 extension CoreDataManager {
     func add(_ video: PracticeVideo, to practiceSession: PracticeSession) {
+        Log.trace()
         video.practiceSession = practiceSession
         practiceSession.addToVideos(video)
         save()
     }
     
     func add(_ newPracticeSessions: [PracticeSession], to group: Group) {
+        Log.trace()
         let practiceSessionSet = NSSet(array: newPracticeSessions)
         group.addToPracticeSessions(practiceSessionSet)
         save()
     }
     
     func delete(_ video: PracticeVideo, from practiceSession: PracticeSession) {
+        Log.trace()
         persistentContainer.viewContext.delete(video)
         practiceSession.removeFromVideos(video)
         save()
     }
     
     func delete(_ practiceSession: PracticeSession, from group: Group) {
+        Log.trace()
         persistentContainer.viewContext.delete(practiceSession)
         group.removeFromPracticeSessions(practiceSession)
         save()
     }
     
     func move(_ videos: [PracticeVideo], from oldPracticeSession: PracticeSession, to newPracticeSession: PracticeSession) {
+        Log.trace()
         let videoSet = NSSet(array: videos)
         oldPracticeSession.removeFromVideos(videoSet)
         newPracticeSession.addToVideos(videoSet)
@@ -177,6 +192,7 @@ extension CoreDataManager {
     }
     
     func move(_ practiceSessions: [PracticeSession], from oldGroup: Group?, to newGroup: Group?) {
+        Log.trace()
         let _ = practiceSessions.map { $0.group = newGroup }
         save()
     }
@@ -186,6 +202,7 @@ extension CoreDataManager {
 // MARK: - Insert and update new managed objects
 extension CoreDataManager {
     func createAndReturnNewPracticeSession() -> PracticeSession {
+        Log.trace()
         let newPracticeSession = PracticeSession(context: persistentContainer.viewContext)
         let dateText = Date.getStringFromDate(Date(), .longFormat)
         newPracticeSession.date = Date.getDateFromString(dateText) ?? Date()
@@ -194,6 +211,7 @@ extension CoreDataManager {
     }
     
     func createAndConfigureNewPracticeVideo(title: String, filename: String) -> PracticeVideo {
+        Log.trace()
         let newVideo = PracticeVideo(context: persistentContainer.viewContext)
         let dateText = Date.getStringFromDate(Date(), .longFormat)
         newVideo.uploadDate = Date.getDateFromString(dateText) ?? Date()
@@ -203,6 +221,7 @@ extension CoreDataManager {
     }
     
     func createAndSaveNewGroup(name: String, practiceSessions: [PracticeSession]?) {
+        Log.trace()
         let newGroup = Group(context: persistentContainer.viewContext)
         newGroup.name = name
         newGroup.dateCreated = Date()
@@ -215,6 +234,7 @@ extension CoreDataManager {
     }
     
     func update(group: Group, name: String, practiceSessions: [PracticeSession]?) {
+        Log.trace()
         if name != group.name {
             group.name = name
         }

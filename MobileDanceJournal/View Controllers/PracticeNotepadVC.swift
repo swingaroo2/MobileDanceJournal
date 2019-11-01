@@ -27,6 +27,7 @@ class PracticeNotepadVC: UIViewController, Storyboarded {
     // MARK: - Lifecycle Functions
     override func viewDidLoad() {
         super.viewDidLoad()
+        Log.trace()
         setUpKeyboardListeners()
         practiceSessionTitleTextView.delegate = textViewManager
         practiceSessionContent.delegate = textViewManager
@@ -34,11 +35,13 @@ class PracticeNotepadVC: UIViewController, Storyboarded {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        Log.trace()
         setUpView()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        Log.trace()
         NotificationCenter.default.removeObserver(self)
     }
     
@@ -47,6 +50,7 @@ class PracticeNotepadVC: UIViewController, Storyboarded {
 // MARK: - Private Methods
 private extension PracticeNotepadVC {
     @objc func adjustForKeyboard(notification: Notification) {
+        Log.trace()
         guard let keyboardValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else { return }
         
         let keyboardScreenEndFrame = keyboardValue.cgRectValue
@@ -68,6 +72,7 @@ private extension PracticeNotepadVC {
     }
     
     func setUpView() {
+        Log.trace()
         configureKeyboardToDismissOnOutsideTap()
         ensureNotesTextViewIsScrolledToTop()
         practiceSessionContent.flashScrollIndicators()
@@ -76,6 +81,7 @@ private extension PracticeNotepadVC {
     }
     
     func ensureNotesTextViewIsScrolledToTop() {
+        Log.trace()
         // Yes, this is a total hack. It has, however, lead to a dope animation when opening a practice session. So I'm keeping it.
         DispatchQueue.main.async {
             self.practiceSessionContent.setContentOffset(CGPoint(x: 0.0, y: -self.practiceSessionContent.contentInset.top), animated: true)
@@ -83,6 +89,7 @@ private extension PracticeNotepadVC {
     }
     
     func setUpKeyboardListeners() {
+        Log.trace()
         NotificationCenter.default.addObserver(self, selector: #selector(adjustForKeyboard), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(adjustForKeyboard), name: UIResponder.keyboardWillHideNotification, object: nil)
     }

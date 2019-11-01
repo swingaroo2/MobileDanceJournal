@@ -11,6 +11,7 @@ import Foundation
 class VideoLocalStorageManager: VideoStorageManager {
     
     static func saveVideo(from originalPath: URL) -> NSError? {
+        Log.trace()
         do {
             
             let documentsURL = URLBuilder.getDocumentsFilePathURL(for: originalPath.lastPathComponent)
@@ -33,7 +34,7 @@ class VideoLocalStorageManager: VideoStorageManager {
     }
     
     static func delete(_ video: PracticeVideo, from practiceSession: PracticeSession, _ coreDataManager: CoreDataManager) -> NSError? {
-        
+        Log.trace()
         let documentsURL = URLBuilder.getDocumentsFilePathURL(for: video.filename)
         coreDataManager.delete(video, from: practiceSession)
         

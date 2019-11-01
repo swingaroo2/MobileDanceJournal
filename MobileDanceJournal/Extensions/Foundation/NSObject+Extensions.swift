@@ -10,12 +10,14 @@ import Foundation
 
 extension NSObject {
     var documentsDirectory: URL {
+        Log.trace()
         let pathString = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, FileManager.SearchPathDomainMask.userDomainMask, true).first!
         let pathURL = URL(string: pathString)!
         return pathURL
     }
     
     var className: String {
+        Log.trace()
         let fullName = NSStringFromClass(type(of: self))
         let className = fullName.components(separatedBy: ".")[1]
         return className

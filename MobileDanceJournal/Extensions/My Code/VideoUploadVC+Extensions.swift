@@ -12,7 +12,7 @@ import UIKit
 // MARK: - IBActions
 extension VideoUploadVC {
     @IBAction func completeUpload(_ sender: UIBarButtonItem) {
-        
+        Log.trace()
         guard let videoURL = Services.uploads.url else {
             presentBasicAlert(message: VideoUploadErrors.lostVideo)
             coordinator?.dismiss(self, completion: nil)
@@ -49,11 +49,13 @@ extension VideoUploadVC {
     }
     
     @IBAction func cancelUpload(_ sender: UIBarButtonItem) {
+        Log.trace()
         Services.uploads.set(video: nil)
         coordinator?.cancelUpload()
     }
     
     @IBAction func textDidChange(_ sender: UITextField) {
+        Log.trace()
         guard let title = sender.text else {
             saveButton.isEnabled = false
             return
@@ -66,6 +68,7 @@ extension VideoUploadVC {
 // MARK: - UITextFieldDelegate
 extension VideoUploadVC: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        Log.trace()
         textField.resignFirstResponder()
         return true
     }

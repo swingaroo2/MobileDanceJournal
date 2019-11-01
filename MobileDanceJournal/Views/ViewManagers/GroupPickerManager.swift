@@ -18,6 +18,7 @@ class GroupPickerManager: NSObject, PickerManager {
     var practiceLogToMove: PracticeSession!
     
     required init(_ managedView: ToolbarPickerView,_ coreDataManager: CoreDataManager,_ coordinator: PracticeLogCoordinator) {
+        Log.trace()
         self.managedView = managedView
         self.coreDataManager = coreDataManager
         self.coordinator = coordinator
@@ -27,6 +28,7 @@ class GroupPickerManager: NSObject, PickerManager {
 
 extension GroupPickerManager {
     func doneButtonPressed() {
+        Log.trace()
         let selectedRow = managedView.picker.selectedRow(inComponent: 0)
         
         guard let managedTableView = (coordinator.rootVC.masterVC as! PracticeLogVC).tableView else {
@@ -59,12 +61,13 @@ extension GroupPickerManager {
 // MARK: UIPickerViewDelegate
 extension GroupPickerManager {
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        Log.trace()
         let groupName = row >= newGroups.count ? TextConstants.uncategorized : newGroups[row].name
         return groupName
     }
     
     func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
-        
+        Log.trace()
         var label: UILabel
         
         if let view = view as? UILabel {
@@ -87,11 +90,13 @@ extension GroupPickerManager {
 // MARK: UIPickerViewDataSource
 extension GroupPickerManager {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        Log.trace()
         return 1
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         // +1 for Uncategorized
+        Log.trace()
         let count = oldGroup == nil ? newGroups.count : newGroups.count + 1
         return count
     }

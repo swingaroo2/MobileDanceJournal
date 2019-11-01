@@ -20,19 +20,21 @@ class PracticeGroupsVC: UIViewController, Storyboarded {
     // MARK: - Lifecycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
+        Log.trace()
         tableManager = configureTableManager(tableView, coreDataManager)
         setUpView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+        Log.trace()
         // To keep the Uncategorized cell's practice log count up to date
         tableManager.managedTableView.reloadData()
     }
     
     override internal func setEditing(_ editing: Bool, animated: Bool) {
         super.setEditing(editing, animated: animated)
+        Log.trace()
         tableManager.managedTableView.setEditing(editing, animated: animated)
     }
 }
@@ -40,16 +42,19 @@ class PracticeGroupsVC: UIViewController, Storyboarded {
 // MARK: - Private Methods
 private extension PracticeGroupsVC {
     func setUpView() {
+        Log.trace()
         title = VCConstants.practiceGroupsVCTitle
         navigationItem.leftBarButtonItem = editButtonItem
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addGroup))
     }
     
     @objc func addGroup() {
+        Log.trace()
         coordinator.startEditing(group: nil)
     }
     
     func configureTableManager(_ managedTableView: UITableView,_ coreDataManager: CoreDataManager) -> PracticeGroupsTableManager {
+        Log.trace()
         let tableManager = PracticeGroupsTableManager(managedTableView, coreDataManager, managedVC: self)
         tableManager.coordinator = coordinator
         return tableManager

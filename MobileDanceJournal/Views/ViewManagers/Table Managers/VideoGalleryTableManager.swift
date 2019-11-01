@@ -23,6 +23,7 @@ class VideoGalleryTableManager: NSObject, TableManager {
     var videoToMove: PracticeVideo?
     
     required init(_ managedTableView: UITableView,_ coreDataManager: CoreDataManager, managedVC: UIViewController) {
+        Log.trace()
         self.managedTableView = managedTableView
         self.coreDataManager = coreDataManager
         self.managedVC = managedVC
@@ -38,6 +39,7 @@ class VideoGalleryTableManager: NSObject, TableManager {
 extension VideoGalleryTableManager: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        Log.trace()
         let fetchedObjects = coreDataManager.fetchVideos(for: practiceSession)
         
         if let rightBarButtonItems = managedVC.navigationItem.rightBarButtonItems {
@@ -58,6 +60,7 @@ extension VideoGalleryTableManager: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        Log.trace()
         let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifiers.videoCell, for: indexPath) as! VideoGalleryTableViewCell
         let video = coreDataManager.practiceVideoFRC.object(at: indexPath)
         configure(cell, with: video)
@@ -66,6 +69,7 @@ extension VideoGalleryTableManager: UITableViewDataSource {
     
     // MARK: UITableViewDataSource Helper Methods
     func configure(_ cell: VideoGalleryTableViewCell, with video: PracticeVideo) {
+        Log.trace()
         cell.video = video
         cell.videoTitleLabel.text = video.title
         
@@ -78,7 +82,7 @@ extension VideoGalleryTableManager: UITableViewDataSource {
 extension VideoGalleryTableManager: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        Log.trace()
         // Workaround for an Apple bug where setting the cell selection style to None (see storyboard) causes
         // an inconsistent delay in this code being run.
         DispatchQueue.main.async {
@@ -95,10 +99,12 @@ extension VideoGalleryTableManager: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        Log.trace()
         return true
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        Log.trace()
         if editingStyle == .delete {
             if let error = deleteVideo(in: tableView, at: indexPath) {
                 managedVC.presentBasicAlert(title: UserErrors.deleteError, message: error.localizedDescription)
@@ -107,7 +113,7 @@ extension VideoGalleryTableManager: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        
+        Log.trace()
         let deleteAction = UIContextualAction(style: .destructive, title: Actions.delete) { [unowned self] (action, view, completionHandler) in
             
             let deleteAlertAction: ((UIAlertAction) -> Void) = { action in
@@ -188,6 +194,7 @@ extension VideoGalleryTableManager: UITableViewDelegate {
 
 private extension VideoGalleryTableManager {
     func deleteVideo(in tableView: UITableView, at indexPath: IndexPath) -> NSError? {
+        Log.trace()
         let videoToDelete = coreDataManager.practiceVideoFRC.object(at: indexPath)
         
         guard let practiceSession = practiceSession else {

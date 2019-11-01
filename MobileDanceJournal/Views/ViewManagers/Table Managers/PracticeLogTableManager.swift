@@ -24,6 +24,7 @@ class PracticeLogTableManager: NSObject, SelectionTrackingTableManager {
     var currentGroup: Group?
     
     required init(_ managedTableView: UITableView,_ coreDataManager: CoreDataManager, managedVC: UIViewController) {
+        Log.trace()
         self.managedTableView = managedTableView
         self.coreDataManager = coreDataManager
         self.managedVC = managedVC
@@ -33,6 +34,7 @@ class PracticeLogTableManager: NSObject, SelectionTrackingTableManager {
     }
     
     func getSelectedPracticeSessions() -> [PracticeSession] {
+        Log.trace()
         var selectedPracticeSessions = [PracticeSession]()
         guard let selectedIndexPaths = managedTableView.indexPathsForSelectedRows else { return selectedPracticeSessions }
         guard let practiceSessions = self.practiceSessions else { return selectedPracticeSessions }
@@ -45,6 +47,7 @@ class PracticeLogTableManager: NSObject, SelectionTrackingTableManager {
 // MARK: UITableViewDataSource
 extension PracticeLogTableManager: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        Log.trace()
         guard let practiceSessions = coreDataManager.fetchPracticeSessions(in: currentGroup) else { return 0 }
         self.practiceSessions = practiceSessions
         let numRows = practiceSessions.count
@@ -55,16 +58,19 @@ extension PracticeLogTableManager: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        Log.trace()
         let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifiers.genericCell, for: indexPath)
         configureCell(cell, indexPath)
         return cell
     }
     
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        Log.trace()
         return true
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        Log.trace()
         if editingStyle == .delete {
             let practiceSession = coreDataManager.practiceSessionFRC.object(at: indexPath)
             coreDataManager.delete(practiceSession)
@@ -80,7 +86,7 @@ extension PracticeLogTableManager: UITableViewDataSource {
 // MARK: UITableViewDelegate
 extension PracticeLogTableManager: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        Log.trace()
         if !tableView.isEditing {
             selectedRow = indexPath.row
             
@@ -99,17 +105,19 @@ extension PracticeLogTableManager: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        Log.trace()
         guard let selectedCell = tableView.cellForRow(at: indexPath) else { return }
         selectedCell.accessoryType = (selectedCell.accessoryType == .checkmark) ? .none : selectedCell.accessoryType
     }
     
     func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+        Log.trace()
         let editingStyle = tableView.allowsMultipleSelection ? UITableViewCell.EditingStyle.none : .delete
         return editingStyle
     }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-
+        Log.trace()
         let deleteAction = UIContextualAction(style: .destructive, title: Actions.delete) { [unowned self] (action, view, completionHandler) in
             
             let deleteAlertAction: ((UIAlertAction) -> Void) = { action in
@@ -166,6 +174,7 @@ extension PracticeLogTableManager: UITableViewDelegate {
 
 private extension PracticeLogTableManager {
     private func configureCell(_ cell: UITableViewCell, _ indexPath: IndexPath) {
+        Log.trace()
         guard let practiceSessions = coreDataManager.fetchPracticeSessions(in: currentGroup) else { return }
         
         let practiceSession = practiceSessions[indexPath.row]

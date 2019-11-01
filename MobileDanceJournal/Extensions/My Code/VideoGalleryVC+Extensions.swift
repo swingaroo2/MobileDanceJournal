@@ -13,11 +13,13 @@ import CoreData
 // MARK: - General Behavior
 extension VideoGalleryVC {
     override func setEditing(_ editing: Bool, animated: Bool) {
+        Log.trace()
         super.setEditing(editing, animated: animated)
         videosTableView.setEditing(editing, animated: animated)
     }
     
     func prefetchVideos(for practiceSession: PracticeSession?) {
+        Log.trace()
         guard let practiceSession = self.practiceSession else { return }
         let fetchedVideos = coreDataManager.fetchVideos(for: practiceSession)
         noContentLabel.isHidden = !fetchedVideos.isEmpty
@@ -27,6 +29,7 @@ extension VideoGalleryVC {
 // MARK: - IBActions
 extension VideoGalleryVC {
     @IBAction func addVideoButtonPressed(_ sender: UIBarButtonItem) {
+        Log.trace()
         presentAddVideoActionSheet(from: sender)
     }
 }
@@ -34,6 +37,7 @@ extension VideoGalleryVC {
 // MARK: - Helper functions
 private extension VideoGalleryVC {
     func presentAddVideoActionSheet(from sender: UIBarButtonItem) {
+        Log.trace()
         let actionSheet = AlertHelper.addVideoActionSheet()
         
         let recordVideoAction = UIAlertAction(title: AlertConstants.recordVideo, style: .default) { (action:UIAlertAction) in

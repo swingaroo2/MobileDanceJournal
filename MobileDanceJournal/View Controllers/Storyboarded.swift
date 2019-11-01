@@ -14,6 +14,7 @@ protocol Storyboarded {
 
 extension Storyboarded where Self: UIViewController {
     static func instantiate() -> Self {
+        Log.trace()
         let fullName = NSStringFromClass(self)
         let className = fullName.components(separatedBy: ".")[1]
         let storyboard = UIStoryboard(name: Storyboards.main, bundle: Bundle.main)

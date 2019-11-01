@@ -18,11 +18,13 @@ class MainCoordinator: Coordinator {
     private var coreDataManager: CoreDataManager
     
     init(_ rootViewController: SplitViewRootController,_ coreDataManager: CoreDataManager) {
+        Log.trace()
         self.rootVC = rootViewController
         self.coreDataManager = coreDataManager
     }
     
     func start() {
+        Log.trace()
         rootVC.coordinator = self
         let groupsVC = rootVC.masterVC as? PracticeGroupsVC
         let detailVC = rootVC.detailVC as? PracticeNotepadVC
@@ -38,12 +40,14 @@ class MainCoordinator: Coordinator {
 // MARK: - Navigation functions
 extension MainCoordinator {
     func showPracticeLog(group: Group?) {
+        Log.trace()
         let child = PracticeLogCoordinator(rootVC, coreDataManager, group)
         childCoordinators.append(child)
         child.start()
     }
     
     func startEditing(group: Group?) {
+        Log.trace()
         let nextVC = NewGroupVC.instantiate()
         nextVC.coordinator = self
         nextVC.coreDataManager = coreDataManager

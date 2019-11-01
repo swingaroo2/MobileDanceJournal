@@ -21,6 +21,7 @@ class VideoUploadVC: UIViewController, Storyboarded {
     // MARK: - Lifecycle Functions
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        Log.trace()
         setUpView()
     }
 }
@@ -28,6 +29,7 @@ class VideoUploadVC: UIViewController, Storyboarded {
 // MARK: - Private Methods
 private extension VideoUploadVC {
     func setUpView() {
+        Log.trace()
         configureKeyboardToDismissOnOutsideTap()
         configureThumbnail()
         prepopulateTitle()
@@ -43,11 +45,13 @@ private extension VideoUploadVC {
     }
     
     func prepopulateTitle() {
+        Log.trace()
         guard let video = Services.uploads.video else { return }
         titleTextField.text = video.title.isEmpty ? "" : video.title
     }
     
     func configureThumbnail() {
+        Log.trace()
         guard let url = Services.uploads.url else { return }
         thumbnail.setThumbnail(url)
     }

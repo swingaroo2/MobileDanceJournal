@@ -18,6 +18,7 @@ protocol Coordinator: AnyObject {
 // MARK: - Default function definitions
 extension Coordinator {
     func dismiss(_ viewController: UIViewController, completion: (() -> Void)?) {
+        Log.trace()
         viewController.dismiss(animated: true, completion: completion)
     }
 }
@@ -25,14 +26,17 @@ extension Coordinator {
 // MARK: - Optional functions
 extension Coordinator {
     func clearDetailVC() {
+        Log.trace()
         print("\(#function) Adopting class should implement")
     }
     
     func showDetails(for practiceSession: PracticeSession) {
+        Log.trace()
         print("\(#function) Adopting class should implement")
     }
     
     func share(_ url: URL) {
+        Log.trace()
         print("\(#function) Adopting class should implement")
     }
 }

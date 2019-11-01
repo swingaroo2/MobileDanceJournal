@@ -20,6 +20,7 @@ struct GroupDTO: Codable {
     }
     
     init(from decoder: Decoder) throws {
+        Log.trace()
         let values = try decoder.container(keyedBy: CodingKeys.self)
         self.name = try values.decode(String.self, forKey: .name)
         self.dateCreated = try values.decode(Date.self, forKey: .dateCreated)
@@ -27,6 +28,7 @@ struct GroupDTO: Codable {
     }
     
     init(_ group: Group) {
+        Log.trace()
         self.name = group.name
         self.dateCreated = group.dateCreated
         self.practiceSessions = (group.practiceSessions?.allObjects as? [PracticeSessionDTO]) ?? [PracticeSessionDTO]()
@@ -47,6 +49,7 @@ struct PracticeSessionDTO: Codable {
     }
     
     init(from decoder: Decoder) throws {
+        Log.trace()
         let values = try decoder.container(keyedBy: CodingKeys.self)
         self.date = try values.decode(Date.self, forKey: .date)
         self.notes = try values.decode(String.self, forKey: .notes)
@@ -55,6 +58,7 @@ struct PracticeSessionDTO: Codable {
     }
     
     init(_ practiceSession: PracticeSession) {
+        Log.trace()
         self.date = practiceSession.date
         self.notes = practiceSession.notes
         self.title = practiceSession.title

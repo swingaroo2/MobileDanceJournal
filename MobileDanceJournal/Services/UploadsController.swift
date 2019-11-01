@@ -21,14 +21,17 @@ class UploadsController: NSObject {
     
     // MARK: - Setters
     func set(filename: String) {
+        Log.trace()
         self.url = URLBuilder.getDocumentsFilePathURL(for: filename)
     }
     
     func set(url: URL) {
+        Log.trace()
         self.url = url
     }
     
     func set(video: PracticeVideo?) {
+        Log.trace()
         self.video = video
         guard let video = video else { return }
         self.url = URLBuilder.getDocumentsFilePathURL(for: video.filename)
@@ -36,15 +39,18 @@ class UploadsController: NSObject {
     
     // MARK: - Add Video Operations
     func recordVideo(from coordinator: VideoGalleryCoordinator) {
+        Log.trace()
         coordinator.initiate(.camera)
     }
     
     func uploadVideoFromPhotos(from coordinator: VideoGalleryCoordinator) {
+        Log.trace()
         coordinator.initiate(.photoLibrary)
     }
     
     // MARK: - Thumbnails
     func getThumbnail(from url: URL, completion: ((UIImage?) -> ())? = nil) {
+        Log.trace()
         let filename = url.lastPathComponent
         
         if let cachedThumbnail = thumbnailCache.value(for: filename) {
@@ -64,6 +70,7 @@ class UploadsController: NSObject {
     }
     
     func getThumbnail(_ video: PracticeVideo) -> UIImage? {
+        Log.trace()
         let videoFilePath = URLBuilder.getDocumentsFilePathURL(for: video.filename)
         let thumbnailImage = getThumbnail(videoFilePath)
         return thumbnailImage
@@ -72,6 +79,7 @@ class UploadsController: NSObject {
 
 private extension UploadsController {
     func getThumbnail(_ videoFilePath: URL) -> UIImage? {
+        Log.trace()
         let asset = AVURLAsset(url: videoFilePath, options: nil)
         let imageGenerator = AVAssetImageGenerator(asset: asset)
         imageGenerator.appliesPreferredTrackTransform = true
