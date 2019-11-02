@@ -17,10 +17,12 @@ class VideoGalleryTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        Log.trace()
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
+        Log.trace()
     }
 
 }

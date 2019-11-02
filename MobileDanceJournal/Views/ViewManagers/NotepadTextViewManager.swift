@@ -15,6 +15,7 @@ class NotepadTextViewManager: NSObject {
     private let notepadVC: PracticeNotepadVC
     
     init(_ notepadVC: PracticeNotepadVC,_ coreDataManager: CoreDataManager) {
+        Log.trace()
         self.notepadVC = notepadVC
         self.coreDataManager = coreDataManager
         super.init()
@@ -27,10 +28,12 @@ class NotepadTextViewManager: NSObject {
 // MARK: - UITextViewDelegate
 extension NotepadTextViewManager: UITextViewDelegate {
     func textViewDidBeginEditing(_ textView: UITextView) {
+        Log.trace()
         textView.text = handleDefaultFieldText(in: textView)
     }
     
     func textViewDidEndEditing(_ textView: UITextView) {
+        Log.trace()
         if textView.text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
             textView.text = getPlaceholderText(in: textView)
         } else {
@@ -49,6 +52,7 @@ extension NotepadTextViewManager: UITextViewDelegate {
 // MARK: - Private Methods
 private extension NotepadTextViewManager {
     func handleDefaultFieldText(in textView: UITextView) -> String? {
+        Log.trace()
         let textViewHasPlaceholderText = textView.text == PlaceholderText.newPracticeSession ||
             textView.text == PlaceholderText.tapToEditContent
         let placeholderText = textViewHasPlaceholderText ? "" : textView.text
@@ -61,6 +65,7 @@ private extension NotepadTextViewManager {
     }
     
     func getPlaceholderText(in textView: UITextView) -> String {
+        Log.trace()
         if textView == notepadVC.practiceSessionTitleTextView {
             return PlaceholderText.newPracticeSession
         } else if textView == notepadVC.practiceSessionContent {
@@ -71,6 +76,7 @@ private extension NotepadTextViewManager {
     }
     
     func save(_ practiceSession: PracticeSession) {
+        Log.trace()
         practiceSession.title = notepadVC.practiceSessionTitleTextView.text
         practiceSession.notes = notepadVC.practiceSessionContent.text
         coreDataManager.save()

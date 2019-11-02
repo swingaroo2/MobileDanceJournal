@@ -23,6 +23,7 @@ class VideoGalleryTableManager: NSObject, TableManager {
     var videoToMove: PracticeVideo?
     
     required init(_ managedTableView: UITableView,_ coreDataManager: CoreDataManager, managedVC: UIViewController) {
+        Log.trace()
         self.managedTableView = managedTableView
         self.coreDataManager = coreDataManager
         self.managedVC = managedVC
@@ -53,7 +54,7 @@ extension VideoGalleryTableManager: UITableViewDataSource {
         UIView.transition(with: noContentLabel, duration: 0.4, options: .transitionCrossDissolve, animations: {
             self.noContentLabel.isHidden = count > 0
         })
-        
+        Log.trace("\(count) rows in the Video Gallery table")
         return count
     }
     
@@ -66,6 +67,7 @@ extension VideoGalleryTableManager: UITableViewDataSource {
     
     // MARK: UITableViewDataSource Helper Methods
     func configure(_ cell: VideoGalleryTableViewCell, with video: PracticeVideo) {
+        Log.trace()
         cell.video = video
         cell.videoTitleLabel.text = video.title
         
@@ -78,12 +80,18 @@ extension VideoGalleryTableManager: UITableViewDataSource {
 extension VideoGalleryTableManager: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        Log.trace()
         // Workaround for an Apple bug where setting the cell selection style to None (see storyboard) causes
         // an inconsistent delay in this code being run.
         DispatchQueue.main.async {
-            guard let selectedCell = tableView.cellForRow(at: indexPath) as? VideoGalleryTableViewCell else { return }
-            guard let video = selectedCell.video else { return }
+            guard let selectedCell = tableView.cellForRow(at: indexPath) as? VideoGalleryTableViewCell else {
+                Log.error("Failed to get cell for row at Index Path: \(indexPath)")
+                return
+            }
+            guard let video = selectedCell.video else {
+                Log.error("Failed to get reference to the video in the selected cell")
+                return
+            }
             
             if !tableView.isEditing {
                 self.coordinator?.play(video)
@@ -107,7 +115,7 @@ extension VideoGalleryTableManager: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        
+        Log.trace()
         let deleteAction = UIContextualAction(style: .destructive, title: Actions.delete) { [unowned self] (action, view, completionHandler) in
             
             let deleteAlertAction: ((UIAlertAction) -> Void) = { action in
@@ -131,6 +139,7 @@ extension VideoGalleryTableManager: UITableViewDelegate {
             let selectedCell = tableView.cellForRow(at: indexPath) as! VideoGalleryTableViewCell
             
             guard let video = selectedCell.video else {
+                Log.error("Failed to get reference to video in selected cell")
                 completionHandler(false)
                 return
             }
@@ -146,6 +155,7 @@ extension VideoGalleryTableManager: UITableViewDelegate {
         let shareAction = UIContextualAction(style: .normal, title: Actions.share) { (action, view, completionHandler) in
             let selectedCell = tableView.cellForRow(at: indexPath) as! VideoGalleryTableViewCell
             guard let video = selectedCell.video else {
+                Log.error("Failed to get reference to video in selected cell")
                 completionHandler(false)
                 return
             }
@@ -157,10 +167,14 @@ extension VideoGalleryTableManager: UITableViewDelegate {
         
         let moveAction = UIContextualAction(style: .normal, title: Actions.move) { [unowned self] (action, view, completionHandler) in
             let selectedCell = tableView.cellForRow(at: indexPath) as! VideoGalleryTableViewCell
-            guard let video = selectedCell.video else { return }
+            guard let video = selectedCell.video else {
+                Log.error("Failed to get reference to video in selected cell")
+                return
+            }
             self.videoToMove = video
             
             guard let practiceSessions = self.coreDataManager.practiceSessionFRC.fetchedObjects else {
+                Log.error("Failed to fetch Practice Logs")
                 completionHandler(false)
                 return
             }
@@ -188,9 +202,11 @@ extension VideoGalleryTableManager: UITableViewDelegate {
 
 private extension VideoGalleryTableManager {
     func deleteVideo(in tableView: UITableView, at indexPath: IndexPath) -> NSError? {
+        Log.trace()
         let videoToDelete = coreDataManager.practiceVideoFRC.object(at: indexPath)
         
         guard let practiceSession = practiceSession else {
+            Log.error("Failed to get reference to Practice Log")
             let noPracticeSessionError = NSError(domain: "VideoGallery", code: 0, userInfo: nil)
             noPracticeSessionError.setValue(UserErrors.noPracticeSession, forKey: NSLocalizedDescriptionKey)
             return noPracticeSessionError
@@ -224,49 +240,17 @@ extension VideoGalleryTableManager: NSFetchedResultsControllerDelegate {
             }
             break;
         default:
-            print("\(#function): Unhandled case")
+            Log.error("\(#function): Unhandled case")
         }
     }
     
     func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        Log.trace()
         managedTableView.beginUpdates()
     }
     
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        Log.trace()
         managedTableView.endUpdates()
     }
 }
-
-// MARK: - NSFetchedResultsControllerDelegate
-extension VideoGalleryVC: NSFetchedResultsControllerDelegate {
-    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
-        switch (type) {
-        case .insert:
-            if let indexPath = newIndexPath {
-                videosTableView.insertRows(at: [indexPath], with: .fade)
-            }
-            break;
-        case .delete:
-            if let indexPath = indexPath {
-                videosTableView.deleteRows(at: [indexPath], with: .fade)
-            }
-            break;
-        case .update:
-            if let indexPath = indexPath {
-                videosTableView.reloadRows(at: [indexPath], with: .fade)
-            }
-            break;
-        default:
-            print("\(#function): Unhandled case")
-        }
-    }
-    
-    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        videosTableView.beginUpdates()
-    }
-    
-    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        videosTableView.endUpdates()
-    }
-}
-

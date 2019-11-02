@@ -24,6 +24,7 @@ class PracticeLogTableManager: NSObject, SelectionTrackingTableManager {
     var currentGroup: Group?
     
     required init(_ managedTableView: UITableView,_ coreDataManager: CoreDataManager, managedVC: UIViewController) {
+        Log.trace()
         self.managedTableView = managedTableView
         self.coreDataManager = coreDataManager
         self.managedVC = managedVC
@@ -33,11 +34,18 @@ class PracticeLogTableManager: NSObject, SelectionTrackingTableManager {
     }
     
     func getSelectedPracticeSessions() -> [PracticeSession] {
+        Log.trace()
         var selectedPracticeSessions = [PracticeSession]()
-        guard let selectedIndexPaths = managedTableView.indexPathsForSelectedRows else { return selectedPracticeSessions }
-        guard let practiceSessions = self.practiceSessions else { return selectedPracticeSessions }
+        guard let selectedIndexPaths = managedTableView.indexPathsForSelectedRows else {
+            Log.error("Failed to get Index Paths for selected rows")
+            return selectedPracticeSessions
+        }
+        guard let practiceSessions = self.practiceSessions else {
+            Log.error("Failed to get reference to Practice Logs")
+            return selectedPracticeSessions
+        }
         selectedPracticeSessions = selectedIndexPaths.map { practiceSessions[$0.row] }
-        print(selectedPracticeSessions)
+        Log.trace("Selected practice logs: \(selectedPracticeSessions)")
         return selectedPracticeSessions
     }
 }
@@ -45,12 +53,16 @@ class PracticeLogTableManager: NSObject, SelectionTrackingTableManager {
 // MARK: UITableViewDataSource
 extension PracticeLogTableManager: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let practiceSessions = coreDataManager.fetchPracticeSessions(in: currentGroup) else { return 0 }
+        guard let practiceSessions = coreDataManager.fetchPracticeSessions(in: currentGroup) else {
+            Log.error("Failed to fetch Practice Logs from group: \(currentGroup?.name ?? "NIL")")
+            return 0
+        }
         self.practiceSessions = practiceSessions
         let numRows = practiceSessions.count
         
         managedVC.navigationItem.leftBarButtonItem?.isEnabled = numRows > 0
         noContentLabel?.isHidden = numRows > 0
+        Log.trace("\(numRows) rows in the Practice Log table")
         return numRows
     }
     
@@ -80,11 +92,14 @@ extension PracticeLogTableManager: UITableViewDataSource {
 // MARK: UITableViewDelegate
 extension PracticeLogTableManager: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        Log.trace()
         if !tableView.isEditing {
             selectedRow = indexPath.row
             
-            guard let selectedCell = tableView.cellForRow(at: indexPath) else { return }
+            guard let selectedCell = tableView.cellForRow(at: indexPath) else {
+                Log.error("Failed to get cell for row at Index Path: \(indexPath)")
+                return
+            }
             selectedCell.isSelected = false
             selectedCell.textLabel?.highlightedTextColor = .darkText
             
@@ -92,14 +107,21 @@ extension PracticeLogTableManager: UITableViewDelegate {
                 selectedCell.accessoryType = (selectedCell.accessoryType == .none) ? .checkmark : .none
             } else {
                 let practiceSession = coreDataManager.practiceSessionFRC.object(at: indexPath)
-                guard let coordinator = self.coordinator else { return }
+                guard let coordinator = self.coordinator else {
+                    Log.error("Failed to get reference to Practice Log Coordinator")
+                    return
+                }
                 coordinator.showDetails(for: practiceSession)
             }
         }
     }
     
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-        guard let selectedCell = tableView.cellForRow(at: indexPath) else { return }
+        Log.trace()
+        guard let selectedCell = tableView.cellForRow(at: indexPath) else {
+            Log.error("Failed to get cell for row at Index Path: \(indexPath)")
+            return
+        }
         selectedCell.accessoryType = (selectedCell.accessoryType == .checkmark) ? .none : selectedCell.accessoryType
     }
     
@@ -109,7 +131,7 @@ extension PracticeLogTableManager: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-
+        Log.trace()
         let deleteAction = UIContextualAction(style: .destructive, title: Actions.delete) { [unowned self] (action, view, completionHandler) in
             
             let deleteAlertAction: ((UIAlertAction) -> Void) = { action in
@@ -117,7 +139,10 @@ extension PracticeLogTableManager: UITableViewDelegate {
                 self.coreDataManager.delete(practiceSessionToDelete)
                 
                 self.managedTableView.deleteRows(at: [indexPath], with: .fade)
-                guard let fetchedPracticeLogs = self.coreDataManager.fetchPracticeSessions(in: self.currentGroup) else { return }
+                guard let fetchedPracticeLogs = self.coreDataManager.fetchPracticeSessions(in: self.currentGroup) else {
+                    Log.error("Failed to fetch Practice Logs in group: \(self.currentGroup?.name ?? "NIL")")
+                    return
+                }
                 self.noContentLabel?.isHidden = fetchedPracticeLogs.count > 0
                 
                 let rowToDelete = indexPath.row
@@ -140,6 +165,7 @@ extension PracticeLogTableManager: UITableViewDelegate {
             let practiceLogToMove = self.coreDataManager.practiceSessionFRC.object(at: indexPath)
 
             guard let groups = self.coreDataManager.groupFRC.fetchedObjects else {
+                Log.error("Failed to fetch groups")
                 completionHandler(false)
                 return
             }
@@ -166,7 +192,10 @@ extension PracticeLogTableManager: UITableViewDelegate {
 
 private extension PracticeLogTableManager {
     private func configureCell(_ cell: UITableViewCell, _ indexPath: IndexPath) {
-        guard let practiceSessions = coreDataManager.fetchPracticeSessions(in: currentGroup) else { return }
+        guard let practiceSessions = coreDataManager.fetchPracticeSessions(in: currentGroup) else {
+            Log.error("Failed to fetch Practice Logs in group: \(currentGroup?.name ?? "NIL")")
+            return
+        }
         
         let practiceSession = practiceSessions[indexPath.row]
         cell.textLabel?.text = practiceSession.title

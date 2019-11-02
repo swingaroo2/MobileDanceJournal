@@ -25,6 +25,6 @@ protocol SelectionTrackingTableManager: TableManager {
 // MARK: - Optional functions
 extension TableManager {
     func configureCell(_ cell: UITableViewCell,_ indexPath: IndexPath) {
-        // Adopting class must implement
+        Log.trace("Adopting class must implement")
     }
 }

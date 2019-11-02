@@ -15,6 +15,8 @@ class SplitViewRootController: UISplitViewController, Storyboarded {
     var coreDataManager: CoreDataManager!
     
     override func viewDidLoad() {
+        super.viewDidLoad()
+        Log.trace()
         self.delegate = self
         self.preferredDisplayMode = .allVisible
     }
@@ -25,8 +27,15 @@ extension SplitViewRootController: UISplitViewControllerDelegate {
                              collapseSecondary secondaryViewController:UIViewController,
                              onto primaryViewController:UIViewController) -> Bool
     {
-        guard let secondaryAsNavController = secondaryViewController as? UINavigationController else { return false }
-        guard let topAsDetailController = secondaryAsNavController.topViewController as? PracticeNotepadVC else { return false }
+        Log.trace()
+        guard let secondaryAsNavController = secondaryViewController as? UINavigationController else {
+            Log.error("Failed to get reference to secondary Navigation Controller")
+            return false
+        }
+        guard let topAsDetailController = secondaryAsNavController.topViewController as? PracticeNotepadVC else {
+            Log.error("Failed to get reference to PracticeNotepadVC as detail View Controller")
+            return false
+        }
         return topAsDetailController.practiceSession == nil
     }
 }

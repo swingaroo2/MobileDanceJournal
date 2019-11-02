@@ -20,6 +20,7 @@ class PracticeGroupsTableManager: NSObject, TableManager {
     var groups: [Group]!
     
     required init(_ managedTableView: UITableView,_ coreDataManager: CoreDataManager, managedVC: UIViewController) {
+        Log.trace()
         self.managedTableView = managedTableView
         self.coreDataManager = coreDataManager
         self.managedVC = managedVC
@@ -34,11 +35,16 @@ class PracticeGroupsTableManager: NSObject, TableManager {
 // MARK: - UITableViewDataSource
 extension PracticeGroupsTableManager {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let fetchedGroups = coreDataManager.groupFRC.fetchedObjects else { return 1 }
+        guard let fetchedGroups = coreDataManager.groupFRC.fetchedObjects else {
+            Log.error("Failed to fetch groups")
+            return 1
+        }
         
         // +1 for Uncategorized cell
         groups = fetchedGroups
-        return fetchedGroups.count + 1
+        let numRows = fetchedGroups.count + 1
+        Log.trace("\(numRows) rows in the groups table")
+        return numRows
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -48,7 +54,10 @@ extension PracticeGroupsTableManager {
     }
     
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        guard let fetchedGroups = coreDataManager.groupFRC.fetchedObjects else { return false }
+        guard let fetchedGroups = coreDataManager.groupFRC.fetchedObjects else {
+            Log.error("Failed to fetch groups")
+            return false
+        }
         
         var canEdit = false
         
@@ -72,10 +81,16 @@ extension PracticeGroupsTableManager {
 // MARK: - UITableViewDelegate
 extension PracticeGroupsTableManager {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        guard let selectedCell = tableView.cellForRow(at: indexPath) else { return }
+        Log.trace()
+        guard let selectedCell = tableView.cellForRow(at: indexPath) else {
+            Log.error("Failed to get cell for row at Index Path: \(indexPath)")
+            return
+        }
         selectedCell.isSelected = false
-        guard let textLabel = selectedCell.textLabel else { return }
+        guard let textLabel = selectedCell.textLabel else {
+            Log.critical("Failed to get reference to the selected cell's text label")
+            return
+        }
         
         if !tableView.isEditing {
             if textLabel.text == TextConstants.uncategorized {
@@ -85,12 +100,13 @@ extension PracticeGroupsTableManager {
                 coordinator.showPracticeLog(group: selectedGroup)
             }
         } else {
-            if textLabel.text == TextConstants.uncategorized {
-                return
-            }
+            if textLabel.text == TextConstants.uncategorized { return }
             
             managedVC.setEditing(false, animated: true)
-            guard let fetchedObjects = coreDataManager.groupFRC.fetchedObjects else { return }
+            guard let fetchedObjects = coreDataManager.groupFRC.fetchedObjects else {
+                Log.error("Failed to fetch groups")
+                return
+            }
             if indexPath.row < fetchedObjects.count {
                 let selectedGroup = coreDataManager.groupFRC.object(at: indexPath)
                 coordinator.startEditing(group: selectedGroup)
@@ -99,8 +115,14 @@ extension PracticeGroupsTableManager {
     }
     
     func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
-        guard let selectedCell = tableView.cellForRow(at: indexPath) else { return .none }
-        guard let textLabel = selectedCell.textLabel else { return .delete }
+        guard let selectedCell = tableView.cellForRow(at: indexPath) else {
+            Log.error("Failed to get cell for row at Index Path: \(indexPath)")
+            return .none
+        }
+        guard let textLabel = selectedCell.textLabel else {
+            Log.critical("Failed to get reference to the selected cell's text label")
+            return .delete
+        }
         
         if textLabel.text == TextConstants.uncategorized {
             return .none
@@ -110,11 +132,12 @@ extension PracticeGroupsTableManager {
     }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        Log.trace()
         let deleteAction = UIContextualAction(style: .destructive, title: Actions.delete) { [unowned self] (action, view, completionHandler) in
             
             let deleteAlertAction: ((UIAlertAction) -> Void) = { action in
                 let practiceGroupToDelete = self.coreDataManager.groupFRC.object(at: indexPath)
-                print("Deleting group \(practiceGroupToDelete.name) at \(indexPath)")
+                Log.trace("Deleting group \(practiceGroupToDelete.name) at \(indexPath)")
                 self.coreDataManager.delete(practiceGroupToDelete)
                 completionHandler(true)
             }
@@ -136,9 +159,10 @@ extension PracticeGroupsTableManager {
 // MARK: - NSFetchedResultsControllerDelegate
 extension PracticeGroupsTableManager {
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+        Log.trace()
         switch (type) {
         case .insert:
-            print("INSERT: \(anObject)")
+            Log.trace("INSERT: \(anObject)")
             if let indexPath = newIndexPath {
                 managedTableView.insertRows(at: [indexPath], with: .fade)
                 
@@ -146,7 +170,7 @@ extension PracticeGroupsTableManager {
                 managedTableView.reloadRows(at: [IndexPath(row: numberOfRows - 1, section: 0)], with: .fade)
             }
         case .delete:
-            print("DELETE: \(anObject)")
+            Log.trace("DELETE: \(anObject)")
             if let indexPath = indexPath {
                 managedTableView.deleteRows(at: [indexPath], with: .fade)
                 
@@ -154,21 +178,23 @@ extension PracticeGroupsTableManager {
                 managedTableView.reloadRows(at: [IndexPath(row: numberOfRows - 1, section: 0)], with: .fade)
             }
         case .update:
-            print("UPDATE: \(anObject)")
+            Log.trace("UPDATE: \(anObject)")
             if let indexPath = indexPath {
                 managedTableView.reloadRows(at: [indexPath], with: .fade)
             }
         default:
-            print("\(#file).\(#function): Unhandled type: \(type)")
+            Log.error("\(#file).\(#function): Unhandled type: \(type)")
             break
         }
     }
     
     func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        Log.trace()
         managedTableView.beginUpdates()
     }
     
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        Log.trace()
         managedTableView.endUpdates()
     }
 }
@@ -184,7 +210,10 @@ private extension PracticeGroupsTableManager {
         cell.detailTextLabel?.highlightedTextColor = .darkText
         
         if group != nil || isConfiguringUncategorizedCell {
-            guard let practiceLogs = coreDataManager.fetchPracticeSessions(in: group) else { return }
+            guard let practiceLogs = coreDataManager.fetchPracticeSessions(in: group) else {
+                Log.error("Failed to fetch Practice Logs")
+                return
+            }
             cell.detailTextLabel?.text = "\(practiceLogs.count) \(practiceLogs.count != 1 ? "Practice Logs" : "Practice Log")"
         }
     }

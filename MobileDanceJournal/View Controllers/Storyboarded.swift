@@ -16,6 +16,7 @@ extension Storyboarded where Self: UIViewController {
     static func instantiate() -> Self {
         let fullName = NSStringFromClass(self)
         let className = fullName.components(separatedBy: ".")[1]
+        Log.trace("Instantiating class from Storyboard: \(className)")
         let storyboard = UIStoryboard(name: Storyboards.main, bundle: Bundle.main)
         return storyboard.instantiateViewController(withIdentifier: className) as! Self
     }

@@ -21,6 +21,7 @@ class VideoUploadVC: UIViewController, Storyboarded {
     // MARK: - Lifecycle Functions
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        Log.trace()
         setUpView()
     }
 }
@@ -28,6 +29,7 @@ class VideoUploadVC: UIViewController, Storyboarded {
 // MARK: - Private Methods
 private extension VideoUploadVC {
     func setUpView() {
+        Log.trace()
         configureKeyboardToDismissOnOutsideTap()
         configureThumbnail()
         prepopulateTitle()
@@ -35,6 +37,7 @@ private extension VideoUploadVC {
         titleTextField.becomeFirstResponder()
         
         guard let text = titleTextField.text else {
+            Log.critical("Failed to get reference to video title Text Field")
             saveButton.isEnabled = false
             return
         }
@@ -43,12 +46,20 @@ private extension VideoUploadVC {
     }
     
     func prepopulateTitle() {
-        guard let video = Services.uploads.video else { return }
+        Log.trace()
+        guard let video = Services.uploads.video else {
+            Log.error("Failed to get reference to video. Cannot prepopulate video title")
+            return
+        }
         titleTextField.text = video.title.isEmpty ? "" : video.title
     }
     
     func configureThumbnail() {
-        guard let url = Services.uploads.url else { return }
+        Log.trace()
+        guard let url = Services.uploads.url else {
+            Log.error("Failed to get reference to video URL. Cannot set video thumbnail")
+            return
+        }
         thumbnail.setThumbnail(url)
     }
 }

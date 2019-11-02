@@ -13,11 +13,16 @@ import Foundation
 class ShareController: NSObject {
     
     func share(_ video: PracticeVideo, _ coordinator: VideoGalleryCoordinator) {
+        Log.trace()
         let videoURL = URLBuilder.getDocumentsFilePathURL(for: video.filename)
         coordinator.share(videoURL)
     }
     
-    func share(_ practiceSession: PracticeSession,_ coordinator: Coordinator) {}
+    func share(_ practiceSession: PracticeSession,_ coordinator: Coordinator) {
+        Log.trace()
+    }
     
-    func share(_ group: Group,_ coordinator: Coordinator) {}
+    func share(_ group: Group,_ coordinator: Coordinator) {
+        Log.trace()
+    }
 }

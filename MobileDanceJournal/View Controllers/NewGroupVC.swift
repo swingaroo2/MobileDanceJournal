@@ -24,11 +24,13 @@ class NewGroupVC: UIViewController, Storyboarded {
     // MARK: - Lifecycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
+        Log.trace()
         tableManager = configureTableManager(tableView, coreDataManager)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        Log.trace()
         setUpView(with: editingGroup)
     }
 }
@@ -36,6 +38,7 @@ class NewGroupVC: UIViewController, Storyboarded {
 // MARK: - UITextFieldDelegate
 extension NewGroupVC: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        Log.trace()
         textField.resignFirstResponder()
         return true
     }
@@ -44,6 +47,7 @@ extension NewGroupVC: UITextFieldDelegate {
 // MARK: - Private Methods
 private extension NewGroupVC {
     @IBAction func buttonPressed(_ sender: UIButton) {
+        Log.trace()
         switch sender {
         case saveButton:
             let selectedPracticeSessions = tableManager.getSelectedPracticeSessions()
@@ -64,22 +68,33 @@ private extension NewGroupVC {
     }
     
     func setUpView(with group: Group?) {
+        Log.trace("Setting up view for group: \(group?.name ?? "NIL")")
         groupNameTextField.delegate = self
         groupNameTextField.text = editingGroup?.name
-        guard let text = groupNameTextField.text else { return }
+        guard let text = groupNameTextField.text else {
+            Log.critical("Failed to get reference to group name Text Field")
+            return
+        }
         saveButton.isEnabled = !text.isEmpty
         groupNameTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
         
-        guard let ungroupedPracticeSessions = coreDataManager.fetchPracticeSessions(in: nil) else { return }
+        guard let ungroupedPracticeSessions = coreDataManager.fetchPracticeSessions(in: nil) else {
+            Log.error("Failed to fetch ungrouped Practice Logs")
+            return
+        }
         ungroupedPracticeLogsLabel.isHidden = (ungroupedPracticeSessions.count == 0)
     }
     
     @objc func textFieldDidChange(_ textField: UITextField) {
-        guard let text = textField.text else { return }
+        guard let text = textField.text else {
+            Log.critical("Failed to get reference to group title Text Field")
+            return
+        }
         saveButton.isEnabled = !text.isEmpty
     }
     
     func configureTableManager(_ managedTableView: UITableView,_ coreDataManager: CoreDataManager) -> PracticeLogTableManager {
+        Log.trace()
         managedTableView.tableFooterView = UIView()
         let tableManager = PracticeLogTableManager(tableView, coreDataManager, managedVC: self)
         return tableManager

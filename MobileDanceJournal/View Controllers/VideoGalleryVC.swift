@@ -23,11 +23,13 @@ class VideoGalleryVC: UIViewController, Storyboarded {
     // MARK: - Lifecycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
+        Log.trace()
          tableManager = setUpTableManager()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        Log.trace()
         setUpView()
         prefetchVideos(for: practiceSession)
     }
@@ -37,6 +39,7 @@ class VideoGalleryVC: UIViewController, Storyboarded {
 // MARK: - Private Methods
 private extension VideoGalleryVC {
     private func setUpTableManager() -> VideoGalleryTableManager {
+        Log.trace()
         let tableManager = VideoGalleryTableManager(videosTableView, coreDataManager, managedVC: self)
         tableManager.practiceSession = practiceSession
         tableManager.practiceSessionPicker = practiceSessionPicker
@@ -47,6 +50,7 @@ private extension VideoGalleryVC {
     }
     
     private func setUpView() {
+        Log.trace()
         navigationItem.title = VCConstants.videos
         let addVideoImage = UIImage(named: CustomImages.addVideo)
         let addVideoButton = UIBarButtonItem.init(image: addVideoImage, landscapeImagePhone: addVideoImage, style: .plain, target: self, action: #selector(addVideoButtonPressed(_:)))

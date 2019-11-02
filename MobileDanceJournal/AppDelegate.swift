@@ -18,8 +18,9 @@ class AppDelegate: UIResponder {
 
 extension AppDelegate: UIApplicationDelegate {
     
-    func application(_ application: UIApplication,
-                       didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        Log.trace()
+        initializeLogger()
         let rootVC = SplitViewRootController.instantiate()
         let coreDataManager = CoreDataManager(modelName: ModelConstants.modelName)
         rootVC.coreDataManager = coreDataManager
@@ -31,13 +32,23 @@ extension AppDelegate: UIApplicationDelegate {
     }
     
     func applicationWillTerminate(_ application: UIApplication) {
+        Log.trace()
         self.coreDataManager?.save()
     }
 }
 
+// MARK: - Private Methods
 private extension AppDelegate {
     func startCoordinator(with rootVC: SplitViewRootController,_ coreDataManager: CoreDataManager) {
+        Log.trace()
         coordinator = MainCoordinator(rootVC, coreDataManager)
         coordinator?.start()
     }
+    
+    func initializeLogger() {
+        Log.logLevel = .trace
+        Log.trace()
+    }
+    
+    
 }
