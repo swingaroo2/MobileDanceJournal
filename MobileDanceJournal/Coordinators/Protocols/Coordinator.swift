@@ -26,17 +26,14 @@ extension Coordinator {
 // MARK: - Optional functions
 extension Coordinator {
     func clearDetailVC() {
-        Log.trace()
-        print("\(#function) Adopting class should implement")
+        Log.trace("\(#function) Adopting class should implement")
     }
     
     func showDetails(for practiceSession: PracticeSession) {
-        Log.trace()
-        print("\(#function) Adopting class should implement")
+        Log.trace("\(#function) Adopting class should implement")
     }
     
     func share(_ url: URL) {
-        Log.trace()
-        print("\(#function) Adopting class should implement")
+        Log.trace("\(#function) Adopting class should implement")
     }
 }

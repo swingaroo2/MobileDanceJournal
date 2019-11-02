@@ -78,7 +78,7 @@ public class CoreDataManager : NSObject {
         
         container.loadPersistentStores { (storeDescription, error) in
             if let error = error as NSError? {
-                fatalError("[CoreDataManager] Unresolved error \(error), \(error.userInfo)")
+                Log.critical("Unresolved error \(error), \(error.userInfo)")
             }
             container.viewContext.automaticallyMergesChangesFromParent = true
         }
@@ -89,7 +89,6 @@ public class CoreDataManager : NSObject {
 // MARK: - Fetch/Save/Delete
 extension CoreDataManager {
     func fetchPracticeSessions(in group: Group?) -> [PracticeSession]? {
-        Log.trace()
         practiceSessionFRC.fetchRequest.predicate = (group != nil) ? NSPredicate(format: Predicates.hasGroup, group!) : NSPredicate(format: Predicates.hasNoGroup)
         
         try? practiceSessionFRC.performFetch()
@@ -97,7 +96,6 @@ extension CoreDataManager {
     }
     
     func fetchVideos(for practiceSession: PracticeSession, with filename: String? = nil) -> [PracticeVideo] {
-        Log.trace()
         let predicate = (filename == nil) ? NSPredicate(format: Predicates.hasPracticeSession, practiceSession) : NSPredicate(format: Predicates.hasPracticeSessionWithFilename, practiceSession, filename!)
         
         practiceVideoFRC.fetchRequest.predicate = predicate
@@ -106,17 +104,17 @@ extension CoreDataManager {
             try practiceVideoFRC.performFetch()
             return practiceVideoFRC.fetchedObjects ?? [PracticeVideo]()
         } catch {
-            fatalError("[CoreDataManager] Failed to fetch [PracticeVideo]: \(error)")
+            Log.critical("Failed to fetch [PracticeVideo]: \(error.localizedDescription)")
+            return []
         }
     }
     
     func save() {
         Log.trace()
         if persistentContainer.viewContext.hasChanges {
-            print("[CoreDataManager] \(#function)")
             self.executeSave()
         } else {
-            print("[CoreDataManager] No changes in viewContext")
+            Log.trace("No changes in viewContext")
         }
     }
     
@@ -126,7 +124,7 @@ extension CoreDataManager {
             try persistentContainer.viewContext.save()
         } catch {
             let error = error as NSError
-            fatalError("[CoreDataManager] Failed to save. Error: \(error), \(error.userInfo)")
+            Log.critical("Failed to save. Error: \(error), \(error.userInfo)")
         }
     }
     
@@ -148,7 +146,7 @@ extension CoreDataManager {
                 save()
             }
         } catch let error {
-            print("[CoreDataManager] Failed to delete all data in \(entityName) error :", error)
+            Log.critical("Failed to delete all data in \(entityName) error: \(error.localizedDescription)")
         }
     }
 }

@@ -44,7 +44,6 @@ extension NotepadTextViewManager: UITextViewDelegate {
     }
     
     func textViewDidChange(_ textView: UITextView) {
-        Log.trace()
         handleState(of: notepadVC.saveButton, with: textView)
     }
     
@@ -61,7 +60,6 @@ private extension NotepadTextViewManager {
     }
     
     func handleState(of button: UIBarButtonItem, with textView: UITextView) {
-        Log.trace()
         let isSaveButton = button == notepadVC.saveButton
         button.isEnabled = (isSaveButton && !textView.text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
     }

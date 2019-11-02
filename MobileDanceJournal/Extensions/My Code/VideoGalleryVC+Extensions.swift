@@ -20,7 +20,10 @@ extension VideoGalleryVC {
     
     func prefetchVideos(for practiceSession: PracticeSession?) {
         Log.trace()
-        guard let practiceSession = self.practiceSession else { return }
+        guard let practiceSession = self.practiceSession else {
+            Log.error("Failed to get reference to Practice Log")
+            return
+        }
         let fetchedVideos = coreDataManager.fetchVideos(for: practiceSession)
         noContentLabel.isHidden = !fetchedVideos.isEmpty
     }
@@ -57,6 +60,6 @@ private extension VideoGalleryVC {
             popoverPresentationController.barButtonItem = sender
         }
         
-        present(actionSheet, animated: true) { print("Presented Add Video action sheet") }
+        present(actionSheet, animated: true) { Log.trace("Presented Add Video action sheet") }
     }
 }

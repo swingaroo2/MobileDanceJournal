@@ -45,7 +45,7 @@ extension Log {
         logger.log(level: .notice, fullMessage)
     }
     
-    static func warning(_ message: String = "", file: String = #file, function: String = #function, line: Int = #line) {
+    static func warn(_ message: String = "", file: String = #file, function: String = #function, line: Int = #line) {
         let fullMessage = buildLogMessage(message, file: file, function: function, line: line)
         logger.log(level: .warning, fullMessage)
     }
@@ -64,8 +64,8 @@ extension Log {
 // MARK: - Private Methods
 private extension Log {
     static func buildLogMessage(_ message: String, file: String = #file, function: String = #function, line: Int = #line) -> Logger.Message {
-        let className = URL(string: file)!.lastPathComponent
-        let fullMessage = className + " " + function + " \(line) " + message
+        let className = URL(string: file.replacingOccurrences(of: " ", with: ""))!.lastPathComponent.replacingOccurrences(of: ".swift", with: "")
+        let fullMessage = message == "" ? className + " " + function + " \(line)" : className + " " + function + " \(line): " + message
         let message = Logger.Message(stringLiteral: fullMessage)
         return message
     }

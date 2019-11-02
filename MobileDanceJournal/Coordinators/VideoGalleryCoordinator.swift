@@ -23,7 +23,7 @@ class VideoGalleryCoordinator: NSObject, Coordinator {
     var currentGroup: Group?
     
     init(_ rootViewController: SplitViewRootController,_ coreDataManager: CoreDataManager,_ group: Group?,_ practiceSession: PracticeSession) {
-        Log.trace()
+        Log.trace("Initializing Video Gallery Coordinator for group \(group?.name ?? "NIL") and Practice Log: \(practiceSession.title)")
         self.rootVC = rootViewController
         self.coreDataManager = coreDataManager
         self.currentGroup = group
@@ -56,12 +56,12 @@ extension VideoGalleryCoordinator {
         } else if let presentingVC = rootVC.detailVC {
             presentingVC.present(videoUploadVC, animated: true, completion: nil)
         } else {
-            print("Failed to find a View Controller to present the VideoUploadVC")
+            Log.error("Failed to find a View Controller to present the VideoUploadVC")
         }
     }
     
     func finishEditing(_ video: PracticeVideo) {
-        Log.trace()
+        Log.trace("Done editing video: \(video.title)")
         guard let uploadVC = getVideoUploadVC() else { return }
         
         guard let videoGalleryVC = rootVC.detailNC?.children.last as? VideoGalleryVC else {
@@ -90,8 +90,11 @@ extension VideoGalleryCoordinator {
     }
     
     func play(_ video: PracticeVideo) {
-        Log.trace()
-        guard let presentingVC = rootVC.detailVC else { return }
+        Log.trace("Playing video: \(video.title)")
+        guard let presentingVC = rootVC.detailVC else {
+            Log.error("Failed to get reference to Detail View Controller")
+            return
+        }
         let videoPath = URLBuilder.getDocumentsFilePathURL(for: video.filename)
         let player = AVPlayer(url: videoPath)
         let playerController = AVPlayerViewController()
@@ -102,7 +105,7 @@ extension VideoGalleryCoordinator {
     }
     
     func share(_ url: URL) {
-        Log.trace()
+        Log.trace("Sharing: \(url.lastPathComponent)")
         let activityVC = UIActivityViewController(activityItems: [url], applicationActivities: [])
         rootVC.detailNC?.visibleViewController?.present(activityVC, animated: true)
     }
@@ -141,14 +144,17 @@ extension VideoGalleryCoordinator: UINavigationControllerDelegate, UIImagePicker
     func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
         Log.trace()
         viewController.navigationItem.title = VCConstants.chooseVideo
-        print("\(#function)")
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         Log.trace()
-        guard let videoGalleryVC = rootVC.detailVC as? VideoGalleryVC else { return }
+        guard let videoGalleryVC = rootVC.detailVC as? VideoGalleryVC else {
+            Log.error("VideoGalleryVC is nil")
+            return
+        }
         
         guard let videoURL = info[.mediaURL] as? URL else {
+            Log.error("Failed to get a reference to the selected media")
             dismiss(picker) {
                 videoGalleryVC.presentBasicAlert(title: VideoUploadErrors.generic, message: VideoUploadErrors.noURL)
             }
@@ -161,7 +167,7 @@ extension VideoGalleryCoordinator: UINavigationControllerDelegate, UIImagePicker
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         Log.trace()
-        dismiss(picker) { print("\(#function)") }
+        dismiss(picker, completion: nil)
     }
 }
 
@@ -175,17 +181,27 @@ private extension VideoGalleryCoordinator {
             return uploadVC
         }
         
+        Log.error("Failed to get reference to VideoUploadVC")
         return nil
     }
     
     func push(_ videoGalleryVC: VideoGalleryVC, rootVCHasTwoNavControllers: Bool) {
         Log.trace()
         if rootVCHasTwoNavControllers {
-            guard let detailNC = rootVC.children.last as? UINavigationController else { return }
+            guard let detailNC = rootVC.children.last as? UINavigationController else {
+                Log.error("Failed to get a reference to the Detail View Controller")
+                return
+            }
             detailNC.pushViewController(videoGalleryVC, animated: true)
         } else {
-            guard let rootNC = rootVC.children.first else { return }
-            guard let detailNC = rootNC.children.last as? UINavigationController else { return }
+            guard let rootNC = rootVC.children.first else {
+                Log.error("Failed to get a reference to the Root Navigation Controller")
+                return
+            }
+            guard let detailNC = rootNC.children.last as? UINavigationController else {
+                Log.error("Failed to get a reference to the Detail Navigation Controller")
+                return
+            }
             detailNC.pushViewController(videoGalleryVC, animated: true)
         }
     }

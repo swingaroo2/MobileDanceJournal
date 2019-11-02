@@ -14,33 +14,33 @@ class PermissionsController: NSObject {
     func hasCameraPermission() -> Bool {
         Log.trace()
         switch AVCaptureDevice.authorizationStatus(for: .video) {
-         case .authorized:
-             print("Camera access authorized.")
-             return true
-         case .denied:
-             print("Camera access denied. Change permission in Settings > Privacy > Camera.")
+        case .authorized:
+            Log.trace("Camera access authorized.")
+            return true
+        case .denied:
+            Log.warn("Camera access denied. Change permission in Settings > Privacy > Camera.")
             return false
-         case .notDetermined:
+        case .notDetermined:
             var isAuthorized = false
             
-             AVCaptureDevice.requestAccess(for: .video) { success in
-                 if success {
-                     print("Camera access granted.")
-                     isAuthorized = true
-                 } else {
-                     print("Camera access denied. Change permission in Settings > Privacy > Camera.")
+            AVCaptureDevice.requestAccess(for: .video) { success in
+                if success {
+                    Log.trace("Camera access granted.")
+                    isAuthorized = true
+                } else {
+                    Log.warn("Camera access denied. Change permission in Settings > Privacy > Camera.")
                     isAuthorized = false
-                 }
-             }
+                }
+            }
             
             return isAuthorized
-         case .restricted:
-             print("Camera access restricted. Change permission in Settings > Privacy > Camera.")
+        case .restricted:
+            Log.warn("Camera access restricted. Change permission in Settings > Privacy > Camera.")
             return false
-         @unknown default:
-             print("Encountered unknown Photos authorization case")
+        @unknown default:
+            Log.critical("Encountered unknown Photos authorization case")
             return false
-         }
+        }
     }
     
     func hasPhotosPermission() -> Bool {
@@ -48,28 +48,28 @@ class PermissionsController: NSObject {
         let photoAuthorizationStatus = PHPhotoLibrary.authorizationStatus()
         switch photoAuthorizationStatus {
         case .authorized:
-            print("Photos access authorized.")
+            Log.trace("Photos access authorized.")
             return true
         case .denied:
-            print("Photos access denied. Change permission in Settings > Privacy > Camera.")
+            Log.warn("Photos access denied. Change permission in Settings > Privacy > Camera.")
             return false
         case .notDetermined:
             var isAuthorized = false
             
             PHPhotoLibrary.requestAuthorization({ newStatus in
-                print("Photos authorization status: \(newStatus)")
+                Log.trace("Photos authorization status: \(newStatus)")
                 if newStatus == PHAuthorizationStatus.authorized {
-                    print("Photos authorization granted")
+                    Log.trace("Photos authorization granted")
                     isAuthorized = true
                 }
             })
             
             return isAuthorized
         case .restricted:
-            print("Photos access restricted. Change permission in Settings > Privacy > Camera.")
+            Log.warn("Photos access restricted. Change permission in Settings > Privacy > Camera.")
             return false
         @unknown default:
-            print("Encountered unknown Photos authorization case")
+            Log.critical("Encountered unknown Photos authorization case")
             return false
         }
     }

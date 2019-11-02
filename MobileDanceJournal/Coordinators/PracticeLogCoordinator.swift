@@ -19,7 +19,7 @@ class PracticeLogCoordinator: Coordinator {
     var navigationController = UINavigationController()
     
     init(_ rootViewController: SplitViewRootController,_ coreDataManager: CoreDataManager,_ currentGroup: Group?) {
-        Log.trace()
+        Log.trace("Initializing Practice Log Coordinator for group: \(currentGroup?.name ?? "NIL")")
         self.rootVC = rootViewController
         self.coreDataManager = coreDataManager
         self.currentGroup = currentGroup
@@ -45,9 +45,12 @@ extension PracticeLogCoordinator {
     }
     
     func showDetails(for practiceSession: PracticeSession) {
-        Log.trace()
+        Log.trace("Showing details for practice log: \(practiceSession.title)")
         let detailVC = rootVC.isDisplayingBothVCs ? rootVC.detailVC : PracticeNotepadVC.instantiate()
-        guard let notepadVC = detailVC as? PracticeNotepadVC else { return }
+        guard let notepadVC = detailVC as? PracticeNotepadVC else {
+            Log.error("PracticeNotepadVC is nil")
+            return
+        }
         
         notepadVC.coordinator = self
         notepadVC.coreDataManager = coreDataManager
@@ -65,7 +68,10 @@ extension PracticeLogCoordinator {
     
     func clearDetailVC() {
         Log.trace()
-        guard let detailVC = rootVC.detailVC as? PracticeNotepadVC else { return }
+        guard let detailVC = rootVC.detailVC as? PracticeNotepadVC else {
+            Log.error("PracticeNotepadVC is nil")
+            return
+        }
         
         if !rootVC.isCollapsed {
             if let navController = detailVC.navigationController {
@@ -81,7 +87,7 @@ extension PracticeLogCoordinator {
     }
     
     func viewVideos(for practiceSession: PracticeSession) {
-        Log.trace()
+        Log.trace("Viewing videos for practice log: \(practiceSession.title)")
         let child = VideoGalleryCoordinator(rootVC, coreDataManager, currentGroup, practiceSession)
         childCoordinators.append(child)
         child.start()

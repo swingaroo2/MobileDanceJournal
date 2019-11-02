@@ -17,7 +17,10 @@ extension UILabel {
         text = rawValue as? String
         
         if keyPath.lowercased() == "date" {
-            guard let date = rawValue as? Date else { return }
+            guard let date = rawValue as? Date else {
+                Log.error("Failed to get a reference to date")
+                return
+            }
             let dateText = Date.getStringFromDate(date, .notepadDisplayFormat)
             text = dateText
         }

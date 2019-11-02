@@ -29,6 +29,9 @@ class PracticeLogVC: UIViewController, Storyboarded {
         super.viewWillAppear(animated)
         Log.trace()
         addNotificationListener()
+        
+        // To update video counts
+        self.tableManager.managedTableView.reloadData()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -62,7 +65,10 @@ private extension PracticeLogVC {
 
     @objc func practiceLogMoved(notification: Notification) {
         Log.trace()
-        guard let remainingPracticeLogs = coreDataManager.fetchPracticeSessions(in: currentGroup) else { return }
+        guard let remainingPracticeLogs = coreDataManager.fetchPracticeSessions(in: currentGroup) else {
+            Log.error("Failed to fetch Practice Logs from group: \(currentGroup?.name ?? "NIL")")
+            return
+        }
         noContentLabel.isHidden = remainingPracticeLogs.count > 0
     }
     

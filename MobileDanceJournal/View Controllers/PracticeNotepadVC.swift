@@ -51,7 +51,10 @@ class PracticeNotepadVC: UIViewController, Storyboarded {
 private extension PracticeNotepadVC {
     @objc func adjustForKeyboard(notification: Notification) {
         Log.trace()
-        guard let keyboardValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else { return }
+        guard let keyboardValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else {
+            Log.error("Failed to get keyboard frame-end value")
+            return
+        }
         
         let keyboardScreenEndFrame = keyboardValue.cgRectValue
         let keyboardViewEndFrame = view.convert(keyboardScreenEndFrame, from: view.window)

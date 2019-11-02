@@ -18,8 +18,14 @@ extension UISplitViewController {
     var detailNC: UINavigationController? {
         Log.trace()
         if isCollapsed {
-            guard let topNavController = children.first as? UINavigationController else { return nil }
-            guard let detailNC = topNavController.children.last as? UINavigationController else { return nil }
+            guard let topNavController = children.first as? UINavigationController else {
+                Log.error("Failed to get a reference to top Navigation Controller")
+                return nil
+            }
+            guard let detailNC = topNavController.children.last as? UINavigationController else {
+                Log.error("Failed to get a reference to detail Navigation Controller")
+                return nil
+            }
             return detailNC
         }
         

@@ -32,18 +32,21 @@ extension GroupPickerManager {
         let selectedRow = managedView.picker.selectedRow(inComponent: 0)
         
         guard let managedTableView = (coordinator.rootVC.masterVC as! PracticeLogVC).tableView else {
+            Log.error("Failed to get reference to managed Table View. Hiding picker")
             managedView.hide()
             return
         }
         
         // Get Practice Logs in the old Group
         guard let practiceLogs = coreDataManager.fetchPracticeSessions(in: oldGroup) else {
+            Log.error("Failed to get reference to Practice Logs. Hiding picker")
             managedView.hide()
             return
         }
         
         // Get rowIndex of IndexPath
         guard let rowIndex = practiceLogs.firstIndex(of: practiceLogToMove) else {
+            Log.error("Failed to get reference to the index of the Practice Log to move. Hiding picker")
             managedView.hide()
             return
         }

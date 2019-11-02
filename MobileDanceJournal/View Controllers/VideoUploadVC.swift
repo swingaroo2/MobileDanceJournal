@@ -37,6 +37,7 @@ private extension VideoUploadVC {
         titleTextField.becomeFirstResponder()
         
         guard let text = titleTextField.text else {
+            Log.critical("Failed to get reference to video title Text Field")
             saveButton.isEnabled = false
             return
         }
@@ -46,13 +47,19 @@ private extension VideoUploadVC {
     
     func prepopulateTitle() {
         Log.trace()
-        guard let video = Services.uploads.video else { return }
+        guard let video = Services.uploads.video else {
+            Log.error("Failed to get reference to video. Cannot prepopulate video title")
+            return
+        }
         titleTextField.text = video.title.isEmpty ? "" : video.title
     }
     
     func configureThumbnail() {
         Log.trace()
-        guard let url = Services.uploads.url else { return }
+        guard let url = Services.uploads.url else {
+            Log.error("Failed to get reference to video URL. Cannot set video thumbnail")
+            return
+        }
         thumbnail.setThumbnail(url)
     }
 }

@@ -33,7 +33,10 @@ class UploadsController: NSObject {
     func set(video: PracticeVideo?) {
         Log.trace()
         self.video = video
-        guard let video = video else { return }
+        guard let video = video else {
+            Log.debug("Video is nil. We may be intentionally setting it nil.")
+            return
+        }
         self.url = URLBuilder.getDocumentsFilePathURL(for: video.filename)
     }
     
@@ -84,7 +87,10 @@ private extension UploadsController {
         let imageGenerator = AVAssetImageGenerator(asset: asset)
         imageGenerator.appliesPreferredTrackTransform = true
         let thumbnailTimestamp = CMTimeMake(value: 0, timescale: 1)
-        guard let cgThumbnail = try? imageGenerator.copyCGImage(at: thumbnailTimestamp, actualTime: nil) else { return nil }
+        guard let cgThumbnail = try? imageGenerator.copyCGImage(at: thumbnailTimestamp, actualTime: nil) else {
+            Log.error("Failed to get reference to CGImage")
+            return nil
+        }
         let thumbnail = UIImage(cgImage: cgThumbnail)
         return thumbnail
     }

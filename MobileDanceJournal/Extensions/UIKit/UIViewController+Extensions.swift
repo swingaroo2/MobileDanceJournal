@@ -27,7 +27,7 @@ extension UIViewController {
 // MARK: - AlertHelper
 extension UIViewController {
     func presentBasicAlert(title: String? = nil, message: String) {
-        Log.trace()
+        Log.trace("ALERT Title: \(title ?? "NIL") Message: \(message)")
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let okAction = UIAlertAction(title: Actions.ok, style: .cancel, handler: nil)
         alert.addAction(okAction)
@@ -35,7 +35,7 @@ extension UIViewController {
     }
     
     func presentYesNoAlert(title: String? = nil, message: String, isDeleteAlert: Bool, yesAction: @escaping (((UIAlertAction) -> Void)), noAction: (((UIAlertAction) -> Void))? = nil) {
-        Log.trace()
+        Log.trace("ALERT Title: \(title ?? "NIL") Message: \(message)")
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let yesAction = UIAlertAction(title: Actions.yes, style: (isDeleteAlert ? .destructive : .default), handler: yesAction)
         let noAction = UIAlertAction(title: Actions.onSecondThought, style: .cancel, handler: noAction)

@@ -68,20 +68,28 @@ private extension NewGroupVC {
     }
     
     func setUpView(with group: Group?) {
-        Log.trace()
+        Log.trace("Setting up view for group: \(group?.name ?? "NIL")")
         groupNameTextField.delegate = self
         groupNameTextField.text = editingGroup?.name
-        guard let text = groupNameTextField.text else { return }
+        guard let text = groupNameTextField.text else {
+            Log.critical("Failed to get reference to group name Text Field")
+            return
+        }
         saveButton.isEnabled = !text.isEmpty
         groupNameTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
         
-        guard let ungroupedPracticeSessions = coreDataManager.fetchPracticeSessions(in: nil) else { return }
+        guard let ungroupedPracticeSessions = coreDataManager.fetchPracticeSessions(in: nil) else {
+            Log.error("Failed to fetch ungrouped Practice Logs")
+            return
+        }
         ungroupedPracticeLogsLabel.isHidden = (ungroupedPracticeSessions.count == 0)
     }
     
     @objc func textFieldDidChange(_ textField: UITextField) {
-        Log.trace()
-        guard let text = textField.text else { return }
+        guard let text = textField.text else {
+            Log.critical("Failed to get reference to group title Text Field")
+            return
+        }
         saveButton.isEnabled = !text.isEmpty
     }
     

@@ -40,14 +40,14 @@ class MainCoordinator: Coordinator {
 // MARK: - Navigation functions
 extension MainCoordinator {
     func showPracticeLog(group: Group?) {
-        Log.trace()
+        Log.trace("Showing practice log for group: \(group?.name ?? "NIL")")
         let child = PracticeLogCoordinator(rootVC, coreDataManager, group)
         childCoordinators.append(child)
         child.start()
     }
     
     func startEditing(group: Group?) {
-        Log.trace()
+        Log.trace("Starting to edit group: \(group?.name ?? "NIL")")
         let nextVC = NewGroupVC.instantiate()
         nextVC.coordinator = self
         nextVC.coreDataManager = coreDataManager

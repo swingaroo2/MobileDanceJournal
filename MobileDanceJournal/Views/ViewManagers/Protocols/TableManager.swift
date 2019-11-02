@@ -26,6 +26,5 @@ protocol SelectionTrackingTableManager: TableManager {
 extension TableManager {
     func configureCell(_ cell: UITableViewCell,_ indexPath: IndexPath) {
         Log.trace("Adopting class must implement")
-        // Adopting class must implement
     }
 }

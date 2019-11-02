@@ -29,7 +29,10 @@ extension VideoUploadVC {
             
             if let error = VideoLocalStorageManager.saveVideo(from: videoURL) {
                 coordinator?.dismiss(self) { [weak self] in
-                    guard let self = self else { return }
+                    guard let self = self else {
+                        Log.critical("Failed to get reference to self. That's weird.")
+                        return
+                    }
                     self.presentBasicAlert(title: VideoUploadErrors.generic, message: error.localizedDescription)
                 }
                 return
@@ -39,6 +42,7 @@ extension VideoUploadVC {
             Services.uploads.set(video: nil)
         } else {
             guard let updatedVideo = Services.uploads.video else {
+                Log.error("Failed to get reference to updated Video")
                 coordinator?.dismiss(self, completion: nil)
                 return
             }
@@ -55,8 +59,8 @@ extension VideoUploadVC {
     }
     
     @IBAction func textDidChange(_ sender: UITextField) {
-        Log.trace()
         guard let title = sender.text else {
+            Log.error("Failed to get reference to video title Text Field's text")
             saveButton.isEnabled = false
             return
         }
