@@ -43,7 +43,7 @@ extension PracticeGroupsTableManager {
         // +1 for Uncategorized cell
         groups = fetchedGroups
         let numRows = fetchedGroups.count + 1
-        Log.trace("\(numRows) rows in the groups table")
+        Log.trace("\(numRows) \(numRows != 1 ? "rows" : "row") in the group table")
         return numRows
     }
     

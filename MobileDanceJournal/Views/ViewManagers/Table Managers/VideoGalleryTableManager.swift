@@ -49,13 +49,13 @@ extension VideoGalleryTableManager: UITableViewDataSource {
             }
         }
         
-        let count = fetchedObjects.count
+        let numRows = fetchedObjects.count
 
         UIView.transition(with: noContentLabel, duration: 0.4, options: .transitionCrossDissolve, animations: {
-            self.noContentLabel.isHidden = count > 0
+            self.noContentLabel.isHidden = numRows > 0
         })
-        Log.trace("\(count) rows in the Video Gallery table")
-        return count
+        Log.trace("\(numRows) \(numRows != 1 ? "rows" : "row") in the Video Gallery table")
+        return numRows
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

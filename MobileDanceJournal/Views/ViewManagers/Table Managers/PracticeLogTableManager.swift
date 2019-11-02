@@ -62,7 +62,7 @@ extension PracticeLogTableManager: UITableViewDataSource {
         
         managedVC.navigationItem.leftBarButtonItem?.isEnabled = numRows > 0
         noContentLabel?.isHidden = numRows > 0
-        Log.trace("\(numRows) rows in the Practice Log table")
+        Log.trace("\(numRows) \(numRows != 1 ? "rows" : "row") in the Practice Log table")
         return numRows
     }
     

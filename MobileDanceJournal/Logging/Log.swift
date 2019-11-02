@@ -26,46 +26,46 @@ struct Log {
 // MARK: - Log function wrappers
 extension Log {
     static func trace(_ message: String = "", file: String = #file, function: String = #function, line: Int = #line) {
-        let fullMessage = buildLogMessage(message, file: file, function: function, line: line)
+        let fullMessage = buildLogMessage(message, file: file, function: function, line: line, emoji: "🕵🏽‍♂️")
         logger.log(level: .trace, fullMessage)
     }
     
     static func info(_ message: String = "", file: String = #file, function: String = #function, line: Int = #line) {
-        let fullMessage = buildLogMessage(message, file: file, function: function, line: line)
+        let fullMessage = buildLogMessage(message, file: file, function: function, line: line, emoji: "ℹ")
         logger.log(level: .info, fullMessage)
     }
     
     static func debug(_ message: String = "", file: String = #file, function: String = #function, line: Int = #line) {
-        let fullMessage = buildLogMessage(message, file: file, function: function, line: line)
+        let fullMessage = buildLogMessage(message, file: file, function: function, line: line, emoji: "🐞")
         logger.log(level: .debug, fullMessage)
     }
     
     static func notice(_ message: String = "", file: String = #file, function: String = #function, line: Int = #line) {
-        let fullMessage = buildLogMessage(message, file: file, function: function, line: line)
+        let fullMessage = buildLogMessage(message, file: file, function: function, line: line, emoji: "❕")
         logger.log(level: .notice, fullMessage)
     }
     
     static func warn(_ message: String = "", file: String = #file, function: String = #function, line: Int = #line) {
-        let fullMessage = buildLogMessage(message, file: file, function: function, line: line)
+        let fullMessage = buildLogMessage(message, file: file, function: function, line: line, emoji: "⚠️")
         logger.log(level: .warning, fullMessage)
     }
     
     static func error(_ message: String = "", file: String = #file, function: String = #function, line: Int = #line) {
-        let fullMessage = buildLogMessage(message, file: file, function: function, line: line)
+        let fullMessage = buildLogMessage(message, file: file, function: function, line: line, emoji: "❗️")
         logger.log(level: .error, fullMessage)
     }
     
     static func critical(_ message: String = "", file: String = #file, function: String = #function, line: Int = #line) {
-        let fullMessage = buildLogMessage(message, file: file, function: function, line: line)
+        let fullMessage = buildLogMessage(message, file: file, function: function, line: line, emoji: "‼️")
         logger.log(level: .critical, fullMessage)
     }
 }
 
 // MARK: - Private Methods
 private extension Log {
-    static func buildLogMessage(_ message: String, file: String = #file, function: String = #function, line: Int = #line) -> Logger.Message {
+    static func buildLogMessage(_ message: String, file: String = #file, function: String = #function, line: Int = #line, emoji: String) -> Logger.Message {
         let className = URL(string: file.replacingOccurrences(of: " ", with: ""))!.lastPathComponent.replacingOccurrences(of: ".swift", with: "")
-        let fullMessage = message == "" ? className + " " + function + " \(line)" : className + " " + function + " \(line): " + message
+        let fullMessage = message == "" ? "\(emoji) \(className) \(line) \(function)" : "\(emoji) \(className) \(line) \(function): \(message)"
         let message = Logger.Message(stringLiteral: fullMessage)
         return message
     }

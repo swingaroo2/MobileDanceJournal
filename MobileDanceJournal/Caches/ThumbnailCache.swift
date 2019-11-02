@@ -23,7 +23,7 @@ class ThumbnailCache: NSCache<NSString,UIImage> {
     func value(for key: String) -> UIImage? {
         Log.trace("Retrieving cached image for key: \(key)")
         guard let thumbnail = object(forKey: key as NSString) else {
-            Log.error("Unable to retrieve thumbnail from cache")
+            Log.warn("Unable to retrieve thumbnail from cache")
             return nil
         }
         

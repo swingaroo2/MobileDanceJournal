@@ -33,7 +33,6 @@ extension PracticeSessionPickerManager: UIPickerViewDelegate {
     }
     
     func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
-        Log.trace()
         var label: UILabel
         
         if let view = view as? UILabel {
@@ -57,7 +56,6 @@ extension PracticeSessionPickerManager: UIPickerViewDelegate {
 extension PracticeSessionPickerManager: UIPickerViewDataSource {
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        Log.trace()
         return 1
     }
     

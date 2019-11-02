@@ -23,7 +23,7 @@ extension UISplitViewController {
                 return nil
             }
             guard let detailNC = topNavController.children.last as? UINavigationController else {
-                Log.error("Failed to get a reference to detail Navigation Controller")
+                Log.warn("Failed to get a reference to detail Navigation Controller")
                 return nil
             }
             return detailNC

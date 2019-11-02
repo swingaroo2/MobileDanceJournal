@@ -69,7 +69,7 @@ extension PracticeLogCoordinator {
     func clearDetailVC() {
         Log.trace()
         guard let detailVC = rootVC.detailVC as? PracticeNotepadVC else {
-            Log.error("PracticeNotepadVC is nil")
+            Log.warn("PracticeNotepadVC is nil")
             return
         }
         
