@@ -112,7 +112,7 @@ DEPENDENCIES:
   - Logging (~> 1.1)
 
 SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
+  https://github.com/CocoaPods/Specs.git:
     - Crashlytics
     - Fabric
     - Firebase
@@ -160,4 +160,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 7f41ff3b307767af235e7d921885c784b52075bb
 
-COCOAPODS: 1.7.1
+COCOAPODS: 1.8.4
