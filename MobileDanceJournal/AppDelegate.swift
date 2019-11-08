@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import Firebase
 
 @UIApplicationMain
 class AppDelegate: UIResponder {
@@ -21,6 +22,7 @@ extension AppDelegate: UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         Log.trace()
         initializeLogger()
+        initializeFirebase()
         let rootVC = SplitViewRootController.instantiate()
         let coreDataManager = CoreDataManager(modelName: ModelConstants.modelName)
         rootVC.coreDataManager = coreDataManager
@@ -50,5 +52,8 @@ private extension AppDelegate {
         Log.trace()
     }
     
-    
+    func initializeFirebase() {
+        FirebaseConfiguration.shared.setLoggerLevel(.min)
+        FirebaseApp.configure()
+    }
 }

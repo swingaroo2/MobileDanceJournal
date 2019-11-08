@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -143,7 +143,7 @@
 		926E70AA2311FD6E00A3CCD0 /* GroupPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926E70A72311FD6E00A3CCD0 /* GroupPickerView.swift */; };
 		92706C9822E01BC7009BA88C /* UIWindow+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927F66A022CBCA7F0000EF06 /* UIWindow+Extensions.swift */; };
 		92706C9922E01BC8009BA88C /* UIWindow+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927F66A022CBCA7F0000EF06 /* UIWindow+Extensions.swift */; };
-		9271F68723694E4100B0A2C2 /* Logging in Frameworks */ = {isa = PBXBuildFile; productRef = 9271F68623694E4100B0A2C2 /* Logging */; };
+		92734D7C236F572500DC907E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 92E7BC0F236F43BA0059D373 /* GoogleService-Info.plist */; };
 		927B6B06230F116700CC1F9F /* PracticeLogCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927B6B05230F116700CC1F9F /* PracticeLogCoordinator.swift */; };
 		927B6B07230F116700CC1F9F /* PracticeLogCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927B6B05230F116700CC1F9F /* PracticeLogCoordinator.swift */; };
 		927B6B08230F116700CC1F9F /* PracticeLogCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927B6B05230F116700CC1F9F /* PracticeLogCoordinator.swift */; };
@@ -199,6 +199,7 @@
 		92F7FE33236A5D3F0033091D /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F7FE30236A5D3F0033091D /* Log.swift */; };
 		92FBA3DE22718E9C0017910E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9232AC85226D4015004DB260 /* AppDelegate.swift */; };
 		92FBA3DF22718E9D0017910E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9232AC85226D4015004DB260 /* AppDelegate.swift */; };
+		C5C7B6486741FE6B952F446C /* Pods_MobileDanceJournal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35491D983DBBB650B936FA7E /* Pods_MobileDanceJournal.framework */; };
 		D2E25804E9D332961BECCF5B /* Pods_MobileDanceJournalUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AFFE2351CA825208C203B1B /* Pods_MobileDanceJournalUITests.framework */; };
 		E0032ED1B191631F91665B3B /* Pods_MobileDanceJournalTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 801DD73F8C3BECE4091A7715 /* Pods_MobileDanceJournalTests.framework */; };
 /* End PBXBuildFile section */
@@ -222,8 +223,13 @@
 
 /* Begin PBXFileReference section */
 		0AFFE2351CA825208C203B1B /* Pods_MobileDanceJournalUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MobileDanceJournalUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		313014B086B78A82F9E0AD3F /* Pods-MobileDanceJournalUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MobileDanceJournalUITests.debug.xcconfig"; path = "Target Support Files/Pods-MobileDanceJournalUITests/Pods-MobileDanceJournalUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		35491D983DBBB650B936FA7E /* Pods_MobileDanceJournal.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MobileDanceJournal.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		56C343A7B378DD68129A796E /* Pods-MobileDanceJournalTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MobileDanceJournalTests.release.xcconfig"; path = "Target Support Files/Pods-MobileDanceJournalTests/Pods-MobileDanceJournalTests.release.xcconfig"; sourceTree = "<group>"; };
+		675E238E6647173F4EFD8E7D /* Pods-MobileDanceJournal.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MobileDanceJournal.release.xcconfig"; path = "Target Support Files/Pods-MobileDanceJournal/Pods-MobileDanceJournal.release.xcconfig"; sourceTree = "<group>"; };
 		801DD73F8C3BECE4091A7715 /* Pods_MobileDanceJournalTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MobileDanceJournalTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		897706F742C8F567FC188A92 /* Pods-MobileDanceJournal.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MobileDanceJournal.debug.xcconfig"; path = "Target Support Files/Pods-MobileDanceJournal/Pods-MobileDanceJournal.debug.xcconfig"; sourceTree = "<group>"; };
+		8A91FEE0D44DB431FA3AEED3 /* Pods-MobileDanceJournalUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MobileDanceJournalUITests.release.xcconfig"; path = "Target Support Files/Pods-MobileDanceJournalUITests/Pods-MobileDanceJournalUITests.release.xcconfig"; sourceTree = "<group>"; };
 		920AAD4822D92BD60097643C /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
 		920AAD5C22DCFC4B0097643C /* NSObject+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSObject+Extensions.swift"; sourceTree = "<group>"; };
 		9214FF96227E139A00387A3B /* Date+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
@@ -297,8 +303,10 @@
 		92C67BC22352C706003BEAF9 /* GroupDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupDTO.swift; sourceTree = "<group>"; };
 		92C67BC72352C7ED003BEAF9 /* Services.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Services.swift; sourceTree = "<group>"; wrapsLines = 0; };
 		92C67BCB2352C8E5003BEAF9 /* ShareController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareController.swift; sourceTree = "<group>"; wrapsLines = 0; };
+		92E7BC0F236F43BA0059D373 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		92EFF22B22CD9A4400DE9401 /* PracticeNotepadVC+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PracticeNotepadVC+Extensions.swift"; sourceTree = "<group>"; wrapsLines = 0; };
 		92F7FE30236A5D3F0033091D /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; wrapsLines = 0; };
+		F8F3A82B86A86B308AF853B4 /* Pods-MobileDanceJournalTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MobileDanceJournalTests.debug.xcconfig"; path = "Target Support Files/Pods-MobileDanceJournalTests/Pods-MobileDanceJournalTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -306,7 +314,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9271F68723694E4100B0A2C2 /* Logging in Frameworks */,
+				C5C7B6486741FE6B952F446C /* Pods_MobileDanceJournal.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -369,6 +377,7 @@
 				9232AC9B226D4016004DB260 /* MobileDanceJournalTests */,
 				9232ACA6226D4016004DB260 /* MobileDanceJournalUITests */,
 				9232AC83226D4015004DB260 /* Products */,
+				FE7903998EA634A8B9F4D72E /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -385,6 +394,7 @@
 		9232AC84226D4015004DB260 /* MobileDanceJournal */ = {
 			isa = PBXGroup;
 			children = (
+				92E7BC0F236F43BA0059D373 /* GoogleService-Info.plist */,
 				9232AC93226D4016004DB260 /* Info.plist */,
 				9232AC85226D4015004DB260 /* AppDelegate.swift */,
 				9232ACB7226D4298004DB260 /* Constants.swift */,
@@ -627,6 +637,19 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		FE7903998EA634A8B9F4D72E /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				897706F742C8F567FC188A92 /* Pods-MobileDanceJournal.debug.xcconfig */,
+				675E238E6647173F4EFD8E7D /* Pods-MobileDanceJournal.release.xcconfig */,
+				F8F3A82B86A86B308AF853B4 /* Pods-MobileDanceJournalTests.debug.xcconfig */,
+				56C343A7B378DD68129A796E /* Pods-MobileDanceJournalTests.release.xcconfig */,
+				313014B086B78A82F9E0AD3F /* Pods-MobileDanceJournalUITests.debug.xcconfig */,
+				8A91FEE0D44DB431FA3AEED3 /* Pods-MobileDanceJournalUITests.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -634,18 +657,18 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 9232ACAC226D4016004DB260 /* Build configuration list for PBXNativeTarget "MobileDanceJournal" */;
 			buildPhases = (
+				C3162DE7D1CB4A7EA8343CF9 /* [CP] Check Pods Manifest.lock */,
 				9232AC7E226D4015004DB260 /* Sources */,
 				9232AC7F226D4015004DB260 /* Frameworks */,
 				9232AC80226D4015004DB260 /* Resources */,
+				3AB4205EEBAEBC3F4F4F7E91 /* [CP] Embed Pods Frameworks */,
+				92734D7D236F5C5100DC907E /* ShellScript */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = MobileDanceJournal;
-			packageProductDependencies = (
-				9271F68623694E4100B0A2C2 /* Logging */,
-			);
 			productName = MobileDanceJournal2;
 			productReference = 9232AC82226D4015004DB260 /* JiveJournal.app */;
 			productType = "com.apple.product-type.application";
@@ -720,9 +743,6 @@
 				Base,
 			);
 			mainGroup = 9232AC79226D4015004DB260;
-			packageReferences = (
-				9271F68523694E4100B0A2C2 /* XCRemoteSwiftPackageReference "swift-log" */,
-			);
 			productRefGroup = 9232AC83226D4015004DB260 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -741,6 +761,7 @@
 			files = (
 				9232AC92226D4016004DB260 /* LaunchScreen.storyboard in Resources */,
 				9232AC8F226D4016004DB260 /* Assets.xcassets in Resources */,
+				92734D7C236F572500DC907E /* GoogleService-Info.plist in Resources */,
 				9232AC8D226D4015004DB260 /* Main.storyboard in Resources */,
 				927F669F22CB04150000EF06 /* Default-568h@2x.png in Resources */,
 			);
@@ -765,6 +786,23 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		3AB4205EEBAEBC3F4F4F7E91 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MobileDanceJournal/Pods-MobileDanceJournal-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MobileDanceJournal/Pods-MobileDanceJournal-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MobileDanceJournal/Pods-MobileDanceJournal-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		863209C0C9670095B19B1A46 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -781,6 +819,45 @@
 			);
 			outputPaths = (
 				"$(DERIVED_FILE_DIR)/Pods-MobileDanceJournalUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		92734D7D236F5C5100DC907E /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\"${PODS_ROOT}/Fabric/run\"\n";
+		};
+		C3162DE7D1CB4A7EA8343CF9 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-MobileDanceJournal-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1087,7 +1164,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -1171,10 +1248,13 @@
 		};
 		9232ACAD226D4016004DB260 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 897706F742C8F567FC188A92 /* Pods-MobileDanceJournal.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 8CD362E4H7;
+				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = MobileDanceJournal/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1190,10 +1270,12 @@
 		};
 		9232ACAE226D4016004DB260 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 675E238E6647173F4EFD8E7D /* Pods-MobileDanceJournal.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 8CD362E4H7;
+				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = MobileDanceJournal/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1209,6 +1291,7 @@
 		};
 		9232ACB0226D4016004DB260 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F8F3A82B86A86B308AF853B4 /* Pods-MobileDanceJournalTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -1230,6 +1313,7 @@
 		};
 		9232ACB1226D4016004DB260 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 56C343A7B378DD68129A796E /* Pods-MobileDanceJournalTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -1251,6 +1335,7 @@
 		};
 		9232ACB3226D4016004DB260 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 313014B086B78A82F9E0AD3F /* Pods-MobileDanceJournalUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -1271,6 +1356,7 @@
 		};
 		9232ACB4226D4016004DB260 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8A91FEE0D44DB431FA3AEED3 /* Pods-MobileDanceJournalUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -1329,25 +1415,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		9271F68523694E4100B0A2C2 /* XCRemoteSwiftPackageReference "swift-log" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/apple/swift-log.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.1.1;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		9271F68623694E4100B0A2C2 /* Logging */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 9271F68523694E4100B0A2C2 /* XCRemoteSwiftPackageReference "swift-log" */;
-			productName = Logging;
-		};
-/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		920AAD4722D92BD60097643C /* DataModel.xcdatamodeld */ = {

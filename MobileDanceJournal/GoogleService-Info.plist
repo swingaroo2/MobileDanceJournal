@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>212548728074-gcc36tk175ar21adslqt847rff9pjn8t.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.212548728074-gcc36tk175ar21adslqt847rff9pjn8t</string>
+	<key>API_KEY</key>
+	<string>AIzaSyBA4dSswfcAvEHo5-QIBQ5M5ZMSryNdxlw</string>
+	<key>GCM_SENDER_ID</key>
+	<string>212548728074</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.swingaroo2.apps.MobileDanceJournal</string>
+	<key>PROJECT_ID</key>
+	<string>jivejournal-118ea</string>
+	<key>STORAGE_BUCKET</key>
+	<string>jivejournal-118ea.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:212548728074:ios:8b869bae9a86f66d6676f3</string>
+	<key>DATABASE_URL</key>
+	<string>https://jivejournal-118ea.firebaseio.com</string>
+</dict>
+</plist>
