@@ -11,13 +11,13 @@ import CoreData
 @testable import JiveJournal
 
 class CoreDataManagerTests: XCTestCase {
-
+    
     var sut = CoreDataManager(modelName: "testModel")
     
     override func setUp() {
         sut.wipe()
     }
-
+    
     // MARK: - Fetching existing entities
     func testFetchPracticeSessionsInGroup() {
         addTestDataWithGroupedPracticeSession()
@@ -333,21 +333,6 @@ class CoreDataManagerTests: XCTestCase {
     }
     
     // MARK: - Creating and fetching new entities
-    func testCreateNewGroup() {
-        sut.createAndSaveNewGroup(name: "test group", practiceSessions: [])
-        
-        guard let fetchedGroups = sut.groupFRC.fetchedObjects else {
-            XCTFail("Fetched groups are nil")
-            return
-        }
-        
-        let aGroupWasSaved = fetchedGroups.count == 1
-        XCTAssertTrue(aGroupWasSaved)
-        
-        let originalGroupWasSaved = fetchedGroups[0].name == "test group"
-        XCTAssertTrue(originalGroupWasSaved)
-    }
-    
     func testCreateNewPracticeSession() {
         let newPracticeSession = sut.createAndReturnNewPracticeSession()
         XCTAssertNotNil(newPracticeSession)
@@ -383,6 +368,91 @@ class CoreDataManagerTests: XCTestCase {
         XCTAssertTrue(originalVideoWasSaved)
     }
     
+    func testCreateNewGroup() {
+        sut.createAndSaveNewGroup(name: "test group", practiceSessions: [])
+        
+        guard let fetchedGroups = sut.groupFRC.fetchedObjects else {
+            XCTFail("Fetched groups are nil")
+            return
+        }
+        
+        let aGroupWasSaved = fetchedGroups.count == 1
+        XCTAssertTrue(aGroupWasSaved)
+        
+        let originalGroupWasSaved = fetchedGroups[0].name == "test group"
+        XCTAssertTrue(originalGroupWasSaved)
+    }
+    
+    func testUpdateGroupWithPracticeSessions_unnamedGroup() {
+        let group = Group(context: sut.persistentContainer.viewContext)
+        let practiceSessionToAdd = PracticeSession(context: sut.persistentContainer.viewContext)
+        
+        let groupHasNoName = group.name.isEmpty
+        let groupPracticeSessionsIsNotNil = group.practiceSessions != nil
+        let groupHasNoPracticeSessions = group.practiceSessions!.count == 0
+        XCTAssertTrue(groupHasNoName)
+        XCTAssertTrue(groupPracticeSessionsIsNotNil)
+        XCTAssertTrue(groupHasNoPracticeSessions)
+        
+        sut.update(group: group, name: "test group", practiceSessions: [practiceSessionToAdd])
+        let groupHasName = group.name == "test group"
+        let groupHasPracticeSession = group.practiceSessions!.count == 1
+        XCTAssertTrue(groupHasName)
+        XCTAssertTrue(groupHasPracticeSession)
+    }
+    
+    func testUpdateGroupWithPracticeSessions_renamedGroup() {
+        let group = Group(context: sut.persistentContainer.viewContext)
+        group.name = "original name"
+        let practiceSessionToAdd = PracticeSession(context: sut.persistentContainer.viewContext)
+        
+        let groupHasOriginalName = group.name == "original name"
+        let groupPracticeSessionsIsNotNil = group.practiceSessions != nil
+        let groupHasNoPracticeSessions = group.practiceSessions!.count == 0
+        XCTAssertTrue(groupHasOriginalName)
+        XCTAssertTrue(groupPracticeSessionsIsNotNil)
+        XCTAssertTrue(groupHasNoPracticeSessions)
+        
+        sut.update(group: group, name: "test group", practiceSessions: [practiceSessionToAdd])
+        let groupWasRenamed = group.name == "test group"
+        let groupHasPracticeSession = group.practiceSessions!.count == 1
+        XCTAssertTrue(groupWasRenamed)
+        XCTAssertTrue(groupHasPracticeSession)
+    }
+    
+    func testUpdateGroupWithPracticeSessions_nilPracticeSessions() {
+        let group = Group(context: sut.persistentContainer.viewContext)
+        
+        let groupHasNoName = group.name.isEmpty
+        let groupPracticeSessionsIsNotNil = group.practiceSessions != nil
+        let groupHasNoPracticeSessions = group.practiceSessions!.count == 0
+        XCTAssertTrue(groupHasNoName)
+        XCTAssertTrue(groupPracticeSessionsIsNotNil)
+        XCTAssertTrue(groupHasNoPracticeSessions)
+        
+        sut.update(group: group, name: "test group", practiceSessions: nil)
+        let groupHasName = group.name == "test group"
+        XCTAssertTrue(groupHasName)
+        XCTAssertTrue(groupPracticeSessionsIsNotNil)
+        XCTAssertTrue(groupHasNoPracticeSessions)
+    }
+    
+    func testUpdateGroupWithPracticeSessions_emptyPracticeSessions() {
+        let group = Group(context: sut.persistentContainer.viewContext)
+        
+        let groupHasNoName = group.name.isEmpty
+        let groupPracticeSessionsIsNotNil = group.practiceSessions != nil
+        let groupHasNoPracticeSessions = group.practiceSessions!.count == 0
+        XCTAssertTrue(groupHasNoName)
+        XCTAssertTrue(groupPracticeSessionsIsNotNil)
+        XCTAssertTrue(groupHasNoPracticeSessions)
+        
+        sut.update(group: group, name: "test group", practiceSessions: [])
+        let groupHasName = group.name == "test group"
+        XCTAssertTrue(groupHasName)
+        XCTAssertTrue(groupPracticeSessionsIsNotNil)
+        XCTAssertTrue(groupHasNoPracticeSessions)
+    }
 }
 
 // MARK: - Private helper functions
