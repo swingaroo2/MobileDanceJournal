@@ -7,28 +7,24 @@ target 'MobileDanceJournal' do
 
   # Pods for MobileDanceJournal
   pod 'Logging', '~> 1.1'
-  
-  # add the Firebase pod for Google Analytics
   pod 'Firebase/Analytics'
-  
-  # Crash Analytics
+  pod 'Firebase/Performance'
   pod 'Fabric'
   pod 'Crashlytics'
-  
-  # Performancem Monitoring
-  pod 'Firebase/Performance'
   
   # add pods for any other desired Firebase products
   # https://firebase.google.com/docs/ios/setup#available-pods
 
-  target 'MobileDanceJournalTests' do
+  target 'JiveJournalTests' do
     inherit! :search_paths
-    # Pods for testing
+    pod 'Firebase/Analytics'
+    pod 'Firebase/Performance'
   end
 
-  target 'MobileDanceJournalUITests' do
+  target 'JiveJournalUITests' do
     inherit! :search_paths
-    # Pods for testing
+    pod 'Firebase/Analytics'
+    pod 'Firebase/Performance'
   end
 
 end

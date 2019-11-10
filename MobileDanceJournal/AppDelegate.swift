@@ -20,8 +20,8 @@ class AppDelegate: UIResponder {
 extension AppDelegate: UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        Log.trace()
         initializeLogger()
+        Log.trace()
         initializeFirebase()
         let rootVC = SplitViewRootController.instantiate()
         let coreDataManager = CoreDataManager(modelName: ModelConstants.modelName)

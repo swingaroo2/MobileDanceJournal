@@ -181,6 +181,13 @@ extension CoreDataManager {
         save()
     }
     
+    func wipe() {
+        Log.trace()
+        deleteAllData(GroupConstants.managedObject)
+        deleteAllData(PracticeSessionConstants.managedObject)
+        deleteAllData(PracticeVideoConstants.managedObject)
+    }
+    
     func move(_ videos: [PracticeVideo], from oldPracticeSession: PracticeSession, to newPracticeSession: PracticeSession) {
         Log.trace()
         let videoSet = NSSet(array: videos)
@@ -244,5 +251,22 @@ extension CoreDataManager {
         }
         
         save()
+    }
+}
+
+private extension CoreDataManager {
+    func deleteAllData(_ entityName: String) {
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
+        fetchRequest.returnsObjectsAsFaults = false
+        do {
+            let results = try persistentContainer.viewContext.fetch(fetchRequest)
+            for object in results {
+                guard let objectData = object as? NSManagedObject else {continue}
+                persistentContainer.viewContext.delete(objectData)
+            }
+            Log.trace("Successfully wiped data for entity: \(entityName)")
+        } catch let error {
+            Log.error("Delete all data in \(entityName) error :\(error.localizedDescription)")
+        }
     }
 }
