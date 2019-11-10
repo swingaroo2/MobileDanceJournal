@@ -120,6 +120,7 @@ class CoreDataManagerTests: XCTestCase {
         
         sut.add(video, to: practiceSession)
         sut.add(video, to: practiceSession)
+        
         let practiceSessionHasOneVideo = practiceSession.videos.count == 1
         XCTAssertTrue(practiceSessionHasOneVideo)
     }
@@ -138,9 +139,197 @@ class CoreDataManagerTests: XCTestCase {
         
         sut.add(practiceSessions, to: group)
         
+        let groupHasPracticeSessions = groupPracticeSessions.count == 1
+        XCTAssertTrue(groupHasPracticeSessions)
+    }
+    
+    func testAddPracticeSessionToGroup_duplicatePracticeSessions() {
+        let practiceSessions = [PracticeSession(context: sut.persistentContainer.viewContext)]
+        let group = Group(context: sut.persistentContainer.viewContext)
+        
+        guard let groupPracticeSessions = group.practiceSessions else {
+            XCTFail("Fetched practice sessions are nil")
+            return
+        }
+        
+        let groupHasNoPracticeSessions = groupPracticeSessions.count == 0
+        XCTAssertTrue(groupHasNoPracticeSessions)
+        
+        sut.add(practiceSessions, to: group)
+        sut.add(practiceSessions, to: group)
         
         let groupHasPracticeSessions = groupPracticeSessions.count == 1
         XCTAssertTrue(groupHasPracticeSessions)
+    }
+    
+    func testDeletePracticeVideoFromPracticeSession() {
+        let video = PracticeVideo(context: sut.persistentContainer.viewContext)
+        let practiceSession = PracticeSession(context: sut.persistentContainer.viewContext)
+        
+        let practiceSessionHasNoVideos = practiceSession.videos.count == 0
+        XCTAssertTrue(practiceSessionHasNoVideos)
+        
+        sut.add(video, to: practiceSession)
+        
+        let practiceSessionHasOneVideo = practiceSession.videos.count == 1
+        XCTAssertTrue(practiceSessionHasOneVideo)
+        
+        sut.delete(video, from: practiceSession)
+        XCTAssertTrue(practiceSessionHasNoVideos)
+    }
+    
+    func testDeletePracticeSessionFromGroup() {
+        let practiceSessions = [PracticeSession(context: sut.persistentContainer.viewContext)]
+        let group = Group(context: sut.persistentContainer.viewContext)
+        
+        guard let groupPracticeSessions = group.practiceSessions else {
+            XCTFail("Fetched practice sessions are nil")
+            return
+        }
+        
+        var groupHasNoPracticeSessions = groupPracticeSessions.count == 0
+        XCTAssertTrue(groupHasNoPracticeSessions)
+        
+        sut.add(practiceSessions, to: group)
+        
+        let groupHasPracticeSessions = groupPracticeSessions.count == 1
+        XCTAssertTrue(groupHasPracticeSessions)
+        
+        sut.delete(practiceSessions[0], from: group)
+        
+        groupHasNoPracticeSessions = groupPracticeSessions.count == 0
+        XCTAssertTrue(groupHasNoPracticeSessions)
+    }
+    
+    func testMoveVideoToNewPracticeSession() {
+        let oldPracticeSession = PracticeSession(context: sut.persistentContainer.viewContext)
+        let newPracticeSession = PracticeSession(context: sut.persistentContainer.viewContext)
+        let video = PracticeVideo(context: sut.persistentContainer.viewContext)
+        
+        let oldPracticeSessionIsEmpty = oldPracticeSession.videos.count == 0
+        let newPracticeSessionIsEmpty = newPracticeSession.videos.count == 0
+        
+        XCTAssertTrue(oldPracticeSessionIsEmpty)
+        XCTAssertTrue(newPracticeSessionIsEmpty)
+        
+        oldPracticeSession.addToVideos(video)
+        let oldPracticeSessionHasVideo = oldPracticeSession.videos.count == 1
+        XCTAssertTrue(oldPracticeSessionHasVideo)
+        
+        sut.move([video], from: oldPracticeSession, to: newPracticeSession)
+        XCTAssertTrue(oldPracticeSessionIsEmpty)
+        
+        let newPracticeSessionHasVideo = newPracticeSession.videos.count == 1
+        XCTAssertTrue(newPracticeSessionHasVideo)
+    }
+    
+    func testMoveVideosToNewPracticeSession() {
+        let oldPracticeSession = PracticeSession(context: sut.persistentContainer.viewContext)
+        let newPracticeSession = PracticeSession(context: sut.persistentContainer.viewContext)
+        let video = PracticeVideo(context: sut.persistentContainer.viewContext)
+        let video2 = PracticeVideo(context: sut.persistentContainer.viewContext)
+        
+        let oldPracticeSessionIsEmpty = oldPracticeSession.videos.count == 0
+        let newPracticeSessionIsEmpty = newPracticeSession.videos.count == 0
+        
+        XCTAssertTrue(oldPracticeSessionIsEmpty)
+        XCTAssertTrue(newPracticeSessionIsEmpty)
+        
+        oldPracticeSession.addToVideos(video)
+        oldPracticeSession.addToVideos(video2)
+        let oldPracticeSessionHasVideos = oldPracticeSession.videos.count == 2
+        XCTAssertTrue(oldPracticeSessionHasVideos)
+        
+        sut.move([video, video2], from: oldPracticeSession, to: newPracticeSession)
+        XCTAssertTrue(oldPracticeSessionIsEmpty)
+        
+        let newPracticeSessionHasVideos = newPracticeSession.videos.count == 2
+        XCTAssertTrue(newPracticeSessionHasVideos)
+    }
+    
+    func testMoveEmptyArrayOfVideosToNewPracticeSession() {
+        let oldPracticeSession = PracticeSession(context: sut.persistentContainer.viewContext)
+        let newPracticeSession = PracticeSession(context: sut.persistentContainer.viewContext)
+        
+        let oldPracticeSessionHasNoVideos = oldPracticeSession.videos.count == 0
+        let newPracticeSessionHasNoVideos = newPracticeSession.videos.count == 0
+        
+        XCTAssertTrue(oldPracticeSessionHasNoVideos)
+        XCTAssertTrue(newPracticeSessionHasNoVideos)
+        
+        sut.move([], from: oldPracticeSession, to: newPracticeSession)
+        XCTAssertTrue(oldPracticeSessionHasNoVideos)
+    }
+    
+    func testMovePracticeSessionToNewGroup() {
+        let practiceSession = PracticeSession(context: sut.persistentContainer.viewContext)
+        let oldGroup = Group(context: sut.persistentContainer.viewContext)
+        let newGroup = Group(context: sut.persistentContainer.viewContext)
+        
+        let oldGroupIsNotNil = oldGroup.practiceSessions != nil
+        let newGroupIsNotNil = newGroup.practiceSessions != nil
+        XCTAssertTrue(oldGroupIsNotNil)
+        XCTAssertTrue(newGroupIsNotNil)
+        
+        let oldGroupHasNoPracticeSessions = oldGroup.practiceSessions!.count == 0
+        let newGroupHasNoPracticeSessions = newGroup.practiceSessions!.count == 0
+        XCTAssertTrue(oldGroupHasNoPracticeSessions)
+        XCTAssertTrue(newGroupHasNoPracticeSessions)
+        
+        oldGroup.addToPracticeSessions(practiceSession)
+        let oldGroupHasPracticeSession = oldGroup.practiceSessions!.count == 1
+        XCTAssertTrue(oldGroupHasPracticeSession)
+        
+        sut.move([practiceSession], from: oldGroup, to: newGroup)
+        let newGroupHasPracticeSession = newGroup.practiceSessions!.count == 1
+        XCTAssertTrue(oldGroupHasNoPracticeSessions)
+        XCTAssertTrue(newGroupHasPracticeSession)
+    }
+    
+    func testMovePracticeSessionsToNewGroup() {
+        let practiceSession = PracticeSession(context: sut.persistentContainer.viewContext)
+        let practiceSession2 = PracticeSession(context: sut.persistentContainer.viewContext)
+        let oldGroup = Group(context: sut.persistentContainer.viewContext)
+        let newGroup = Group(context: sut.persistentContainer.viewContext)
+        
+        let oldGroupIsNotNil = oldGroup.practiceSessions != nil
+        let newGroupIsNotNil = newGroup.practiceSessions != nil
+        XCTAssertTrue(oldGroupIsNotNil)
+        XCTAssertTrue(newGroupIsNotNil)
+        
+        let oldGroupHasNoPracticeSessions = oldGroup.practiceSessions!.count == 0
+        let newGroupHasNoPracticeSessions = newGroup.practiceSessions!.count == 0
+        XCTAssertTrue(oldGroupHasNoPracticeSessions)
+        XCTAssertTrue(newGroupHasNoPracticeSessions)
+        
+        oldGroup.addToPracticeSessions(practiceSession)
+        oldGroup.addToPracticeSessions(practiceSession2)
+        let oldGroupHasPracticeSession = oldGroup.practiceSessions!.count == 2
+        XCTAssertTrue(oldGroupHasPracticeSession)
+        
+        sut.move([practiceSession, practiceSession2], from: oldGroup, to: newGroup)
+        let newGroupHasPracticeSession = newGroup.practiceSessions!.count == 2
+        XCTAssertTrue(oldGroupHasNoPracticeSessions)
+        XCTAssertTrue(newGroupHasPracticeSession)
+    }
+    
+    func testMoveEmptyArrayOfPracticeSessionsToNewGroup() {
+        let oldGroup = Group(context: sut.persistentContainer.viewContext)
+        let newGroup = Group(context: sut.persistentContainer.viewContext)
+        
+        let oldGroupIsNotNil = oldGroup.practiceSessions != nil
+        let newGroupIsNotNil = newGroup.practiceSessions != nil
+        XCTAssertTrue(oldGroupIsNotNil)
+        XCTAssertTrue(newGroupIsNotNil)
+        
+        let oldGroupHasNoPracticeSessions = oldGroup.practiceSessions!.count == 0
+        let newGroupHasNoPracticeSessions = newGroup.practiceSessions!.count == 0
+        XCTAssertTrue(oldGroupHasNoPracticeSessions)
+        XCTAssertTrue(newGroupHasNoPracticeSessions)
+        
+        sut.move([], from: oldGroup, to: newGroup)
+        XCTAssertTrue(oldGroupHasNoPracticeSessions)
+        XCTAssertTrue(newGroupHasNoPracticeSessions)
     }
     
     // MARK: - Creating and fetching new entities
@@ -196,6 +385,7 @@ class CoreDataManagerTests: XCTestCase {
     
 }
 
+// MARK: - Private helper functions
 private extension CoreDataManagerTests {
     func addTestDataWithGroupedPracticeSession() {
         let video = PracticeVideo(context: sut.persistentContainer.viewContext)
@@ -226,5 +416,30 @@ private extension CoreDataManagerTests {
         practiceSession.title = "testPracticeSession\(index)"
         practiceSession.notes = "Heckin' chonker #\(index)"
         sut.save()
+    }
+}
+
+// MARK: - Testing functions
+private extension CoreDataManager {
+    func wipe() {
+        Log.trace()
+        deleteAllData(GroupConstants.managedObject)
+        deleteAllData(PracticeSessionConstants.managedObject)
+        deleteAllData(PracticeVideoConstants.managedObject)
+    }
+    
+    func deleteAllData(_ entityName: String) {
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
+        fetchRequest.returnsObjectsAsFaults = false
+        do {
+            let results = try persistentContainer.viewContext.fetch(fetchRequest)
+            for object in results {
+                guard let objectData = object as? NSManagedObject else {continue}
+                persistentContainer.viewContext.delete(objectData)
+            }
+            Log.trace("Successfully wiped data for entity: \(entityName)")
+        } catch let error {
+            Log.error("Delete all data in \(entityName) error :\(error.localizedDescription)")
+        }
     }
 }
