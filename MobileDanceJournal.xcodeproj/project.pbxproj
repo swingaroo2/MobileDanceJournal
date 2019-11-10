@@ -59,6 +59,7 @@
 		927BF1BB2375FF2E000426BF /* JiveJournalUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927BF1BA2375FF2E000426BF /* JiveJournalUITests.swift */; };
 		927BF1C72377644A000426BF /* AppDelegateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927BF1C62377644A000426BF /* AppDelegateTests.swift */; };
 		927BF1C923776836000426BF /* CoreDataManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927BF1C823776836000426BF /* CoreDataManagerTests.swift */; };
+		927BF1CB2378C14E000426BF /* MainCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927BF1CA2378C14E000426BF /* MainCoordinatorTests.swift */; };
 		927F669F22CB04150000EF06 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 927F669E22CB04150000EF06 /* Default-568h@2x.png */; };
 		927F66A122CBCA7F0000EF06 /* UIWindow+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927F66A022CBCA7F0000EF06 /* UIWindow+Extensions.swift */; };
 		927FA3F622DD3C2400F58F58 /* VideoLocalStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927FA3F522DD3C2400F58F58 /* VideoLocalStorageManager.swift */; };
@@ -167,6 +168,7 @@
 		927BF1BC2375FF2E000426BF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		927BF1C62377644A000426BF /* AppDelegateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegateTests.swift; sourceTree = "<group>"; };
 		927BF1C823776836000426BF /* CoreDataManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManagerTests.swift; sourceTree = "<group>"; wrapsLines = 0; };
+		927BF1CA2378C14E000426BF /* MainCoordinatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinatorTests.swift; sourceTree = "<group>"; };
 		927F669E22CB04150000EF06 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		927F66A022CBCA7F0000EF06 /* UIWindow+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIWindow+Extensions.swift"; sourceTree = "<group>"; };
 		927FA3F522DD3C2400F58F58 /* VideoLocalStorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoLocalStorageManager.swift; sourceTree = "<group>"; };
@@ -440,6 +442,7 @@
 		927BF1AB2375FF19000426BF /* JiveJournalTests */ = {
 			isa = PBXGroup;
 			children = (
+				927BF1CA2378C14E000426BF /* MainCoordinatorTests.swift */,
 				927BF1C823776836000426BF /* CoreDataManagerTests.swift */,
 				927BF1C62377644A000426BF /* AppDelegateTests.swift */,
 				927BF1AE2375FF19000426BF /* Info.plist */,
@@ -888,6 +891,7 @@
 			files = (
 				927BF1C923776836000426BF /* CoreDataManagerTests.swift in Sources */,
 				927BF1C72377644A000426BF /* AppDelegateTests.swift in Sources */,
+				927BF1CB2378C14E000426BF /* MainCoordinatorTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
