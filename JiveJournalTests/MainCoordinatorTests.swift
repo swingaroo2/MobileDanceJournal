@@ -12,14 +12,7 @@ import XCTest
 class MainCoordinatorTests: XCTestCase {
 
     let sut = (UIApplication.shared.delegate as! AppDelegate).coordinator!
-    
-    override func setUp() {
-        print()
-    }
-
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
+    let coreDataManager = (UIApplication.shared.delegate as! AppDelegate).coreDataManager!
     
     func testInitialization() {
         XCTAssertNotNil(sut.rootVC)
@@ -27,5 +20,19 @@ class MainCoordinatorTests: XCTestCase {
         XCTAssertTrue(sut.childCoordinators.isEmpty)
         XCTAssertNotNil(sut.navigationController)
     }
+    
+    func testShowPracticeLog_withGroup() {
+        let group = Group(context: coreDataManager.persistentContainer.viewContext)
+        sut.showPracticeLog(group: group)
+        XCTAssertTrue(sut.childCoordinators[0] is PracticeLogCoordinator)
+    }
+    
+    func testShowPracticeLog_withoutGroup() {
+        sut.showPracticeLog(group: nil)
+        XCTAssertTrue(sut.childCoordinators[0] is PracticeLogCoordinator)
+    }
+    
+    func testStartEditing_withGroup() {}
+    func testStartEditing_withoutGroup() {}
 
 }

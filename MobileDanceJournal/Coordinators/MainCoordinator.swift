@@ -33,8 +33,6 @@ class MainCoordinator: Coordinator {
         detailVC?.coreDataManager = coreDataManager
         rootVC.detailNC!.topViewController!.navigationItem.leftBarButtonItem = rootVC.displayModeButtonItem
     }
-    
-    
 }
 
 // MARK: - Navigation functions
