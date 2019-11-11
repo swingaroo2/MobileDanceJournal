@@ -59,7 +59,6 @@
 		927BF1BB2375FF2E000426BF /* JiveJournalUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927BF1BA2375FF2E000426BF /* JiveJournalUITests.swift */; };
 		927BF1C72377644A000426BF /* AppDelegateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927BF1C62377644A000426BF /* AppDelegateTests.swift */; };
 		927BF1C923776836000426BF /* CoreDataManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927BF1C823776836000426BF /* CoreDataManagerTests.swift */; };
-		927BF1CB2378C14E000426BF /* MainCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927BF1CA2378C14E000426BF /* MainCoordinatorTests.swift */; };
 		927F669F22CB04150000EF06 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 927F669E22CB04150000EF06 /* Default-568h@2x.png */; };
 		927F66A122CBCA7F0000EF06 /* UIWindow+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927F66A022CBCA7F0000EF06 /* UIWindow+Extensions.swift */; };
 		927FA3F622DD3C2400F58F58 /* VideoLocalStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927FA3F522DD3C2400F58F58 /* VideoLocalStorageManager.swift */; };
@@ -72,6 +71,7 @@
 		928D59B2230DCBD00000945E /* PracticeVideo+CoreDataClass copy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928D59AA230DCBD00000945E /* PracticeVideo+CoreDataClass copy.swift */; };
 		928D59CA230DD03C0000945E /* Group+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928D59C8230DD03C0000945E /* Group+CoreDataClass.swift */; };
 		928D59CD230DD03C0000945E /* Group+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928D59C9230DD03C0000945E /* Group+CoreDataProperties.swift */; };
+		92B9D9112378E075003D8A9E /* ThumbnailCacheTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B9D9102378E075003D8A9E /* ThumbnailCacheTests.swift */; };
 		92C67BC32352C706003BEAF9 /* GroupDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C67BC22352C706003BEAF9 /* GroupDTO.swift */; };
 		92C67BC82352C7ED003BEAF9 /* Services.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C67BC72352C7ED003BEAF9 /* Services.swift */; };
 		92C67BCC2352C8E5003BEAF9 /* ShareController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C67BCB2352C8E5003BEAF9 /* ShareController.swift */; };
@@ -168,7 +168,6 @@
 		927BF1BC2375FF2E000426BF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		927BF1C62377644A000426BF /* AppDelegateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegateTests.swift; sourceTree = "<group>"; };
 		927BF1C823776836000426BF /* CoreDataManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManagerTests.swift; sourceTree = "<group>"; wrapsLines = 0; };
-		927BF1CA2378C14E000426BF /* MainCoordinatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinatorTests.swift; sourceTree = "<group>"; };
 		927F669E22CB04150000EF06 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		927F66A022CBCA7F0000EF06 /* UIWindow+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIWindow+Extensions.swift"; sourceTree = "<group>"; };
 		927FA3F522DD3C2400F58F58 /* VideoLocalStorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoLocalStorageManager.swift; sourceTree = "<group>"; };
@@ -183,6 +182,7 @@
 		928D59AA230DCBD00000945E /* PracticeVideo+CoreDataClass copy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PracticeVideo+CoreDataClass copy.swift"; sourceTree = "<group>"; };
 		928D59C8230DD03C0000945E /* Group+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Group+CoreDataClass.swift"; sourceTree = "<group>"; };
 		928D59C9230DD03C0000945E /* Group+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Group+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		92B9D9102378E075003D8A9E /* ThumbnailCacheTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThumbnailCacheTests.swift; sourceTree = "<group>"; };
 		92C67BC22352C706003BEAF9 /* GroupDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupDTO.swift; sourceTree = "<group>"; };
 		92C67BC72352C7ED003BEAF9 /* Services.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Services.swift; sourceTree = "<group>"; wrapsLines = 0; };
 		92C67BCB2352C8E5003BEAF9 /* ShareController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareController.swift; sourceTree = "<group>"; wrapsLines = 0; };
@@ -442,7 +442,7 @@
 		927BF1AB2375FF19000426BF /* JiveJournalTests */ = {
 			isa = PBXGroup;
 			children = (
-				927BF1CA2378C14E000426BF /* MainCoordinatorTests.swift */,
+				92B9D9102378E075003D8A9E /* ThumbnailCacheTests.swift */,
 				927BF1C823776836000426BF /* CoreDataManagerTests.swift */,
 				927BF1C62377644A000426BF /* AppDelegateTests.swift */,
 				927BF1AE2375FF19000426BF /* Info.plist */,
@@ -890,8 +890,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				927BF1C923776836000426BF /* CoreDataManagerTests.swift in Sources */,
+				92B9D9112378E075003D8A9E /* ThumbnailCacheTests.swift in Sources */,
 				927BF1C72377644A000426BF /* AppDelegateTests.swift in Sources */,
-				927BF1CB2378C14E000426BF /* MainCoordinatorTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
