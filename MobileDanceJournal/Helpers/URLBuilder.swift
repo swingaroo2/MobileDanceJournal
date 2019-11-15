@@ -9,14 +9,6 @@
 import Foundation
 
 class URLBuilder {
-    class func isTempStorage(_ path: URL) -> Bool {
-        Log.trace()
-        let tmpDirectory = FileManager.default.temporaryDirectory
-        let tmpSearchURL = tmpDirectory.appendingPathComponent(path.lastPathComponent)
-        let isTempStorage = FileManager.default.fileExists(atPath: tmpSearchURL.path)
-        return isTempStorage
-    }
-    
     class func getDocumentsFilePathURL(for filename: String) -> URL {
         Log.trace()
         let documentsDirectory = FileManager.default.documentsDirectory

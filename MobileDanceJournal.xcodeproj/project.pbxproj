@@ -36,6 +36,9 @@
 		924C98FC2364BF0400DD6000 /* Permissions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924C98FB2364BF0400DD6000 /* Permissions.swift */; };
 		924C99042364E47300DD6000 /* UploadsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924C99032364E47300DD6000 /* UploadsController.swift */; };
 		92509E9E22D6E29600A915F5 /* VideoUploadVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92509E9D22D6E29600A915F5 /* VideoUploadVC.swift */; };
+		9266EB64237E26BF006C9D1D /* DateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9266EB63237E26BF006C9D1D /* DateTests.swift */; };
+		9266EB66237E3B95006C9D1D /* NSObjectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9266EB65237E3B95006C9D1D /* NSObjectTests.swift */; };
+		9266EB68237E3F8E006C9D1D /* URLBuilderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9266EB67237E3F8E006C9D1D /* URLBuilderTests.swift */; };
 		926B0D9722F56B4300112743 /* NotepadTextViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926B0D9622F56B4300112743 /* NotepadTextViewManager.swift */; };
 		926B0D9B22F571E800112743 /* VideoGalleryTableManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926B0D9A22F571E800112743 /* VideoGalleryTableManager.swift */; };
 		926B0D9F22F58DCF00112743 /* PracticeSessionPickerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926B0D9E22F58DCF00112743 /* PracticeSessionPickerManager.swift */; };
@@ -142,6 +145,9 @@
 		924C98FB2364BF0400DD6000 /* Permissions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Permissions.swift; sourceTree = "<group>"; wrapsLines = 0; };
 		924C99032364E47300DD6000 /* UploadsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadsController.swift; sourceTree = "<group>"; wrapsLines = 0; };
 		92509E9D22D6E29600A915F5 /* VideoUploadVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoUploadVC.swift; sourceTree = "<group>"; usesTabs = 0; wrapsLines = 0; };
+		9266EB63237E26BF006C9D1D /* DateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateTests.swift; sourceTree = "<group>"; };
+		9266EB65237E3B95006C9D1D /* NSObjectTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSObjectTests.swift; sourceTree = "<group>"; };
+		9266EB67237E3F8E006C9D1D /* URLBuilderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLBuilderTests.swift; sourceTree = "<group>"; };
 		926B0D9622F56B4300112743 /* NotepadTextViewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotepadTextViewManager.swift; sourceTree = "<group>"; wrapsLines = 0; };
 		926B0D9A22F571E800112743 /* VideoGalleryTableManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoGalleryTableManager.swift; sourceTree = "<group>"; wrapsLines = 0; };
 		926B0D9E22F58DCF00112743 /* PracticeSessionPickerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PracticeSessionPickerManager.swift; sourceTree = "<group>"; wrapsLines = 0; };
@@ -442,6 +448,9 @@
 		927BF1AB2375FF19000426BF /* JiveJournalTests */ = {
 			isa = PBXGroup;
 			children = (
+				9266EB67237E3F8E006C9D1D /* URLBuilderTests.swift */,
+				9266EB65237E3B95006C9D1D /* NSObjectTests.swift */,
+				9266EB63237E26BF006C9D1D /* DateTests.swift */,
 				92B9D9102378E075003D8A9E /* ThumbnailCacheTests.swift */,
 				927BF1C823776836000426BF /* CoreDataManagerTests.swift */,
 				927BF1C62377644A000426BF /* AppDelegateTests.swift */,
@@ -892,6 +901,9 @@
 				927BF1C923776836000426BF /* CoreDataManagerTests.swift in Sources */,
 				92B9D9112378E075003D8A9E /* ThumbnailCacheTests.swift in Sources */,
 				927BF1C72377644A000426BF /* AppDelegateTests.swift in Sources */,
+				9266EB64237E26BF006C9D1D /* DateTests.swift in Sources */,
+				9266EB66237E3B95006C9D1D /* NSObjectTests.swift in Sources */,
+				9266EB68237E3F8E006C9D1D /* URLBuilderTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
