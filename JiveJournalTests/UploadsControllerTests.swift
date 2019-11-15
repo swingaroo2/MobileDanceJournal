@@ -17,6 +17,7 @@ class UploadsControllerTests: XCTestCase {
         sut = UploadsController()
     }
     
+    // MARK: - Setters
     func testSetFilename() {
         let testFilename = "testfilename"
         sut.set(filename: testFilename)
@@ -60,4 +61,6 @@ class UploadsControllerTests: XCTestCase {
         let urlWasSet = sutURL == url
         XCTAssertTrue(urlWasSet)
     }
+    
+    // MARK: - Thumbnail Retrieval
 }

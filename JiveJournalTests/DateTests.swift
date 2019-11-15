@@ -16,12 +16,8 @@ class DateTests: XCTestCase {
     override func setUp() {
         testDate = createTestDate(year: 1992, day: 23, month: 2)
     }
-
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
-
-    // MARK: Date -> String Tests
+    
+    // MARK: - Date -> String Tests
     func testGetStringFromDate_longFormat() {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "'Started' MMMM dd, yyyy 'at' h:mm:ss.SSSS a"
@@ -51,7 +47,7 @@ class DateTests: XCTestCase {
         XCTAssertTrue(expectedStringMatchesActualString)
     }
 
-    // MARK: String -> Date Tests
+    // MARK: - String -> Date Tests
     func testGetDateFromString() {
         let referenceDate = createTestDate(year: 1992, day: 23, month: 2)
         let dateText = Date.getStringFromDate(referenceDate, .longFormat)
