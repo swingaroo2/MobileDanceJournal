@@ -29,6 +29,9 @@
 		9232ACBE226D4390004DB260 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9232ACBD226D4390004DB260 /* CoreDataManager.swift */; };
 		9232ACC2226ECACD004DB260 /* UISplitViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9232ACC1226ECACD004DB260 /* UISplitViewController+Extensions.swift */; };
 		9239B7EF23491477002AFE38 /* TableManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9239B7EE23491477002AFE38 /* TableManager.swift */; };
+		923B5B3D2380A2D600644EA6 /* testVideo.mov in Resources */ = {isa = PBXBuildFile; fileRef = 923B5B3C2380A2D600644EA6 /* testVideo.mov */; };
+		923B5B3E2380A69D00644EA6 /* testVideo.mov in Resources */ = {isa = PBXBuildFile; fileRef = 923B5B3C2380A2D600644EA6 /* testVideo.mov */; };
+		923B5B3F2380A69F00644EA6 /* testVideo.mov in Resources */ = {isa = PBXBuildFile; fileRef = 923B5B3C2380A2D600644EA6 /* testVideo.mov */; };
 		9241F9C222C8375A009C50C1 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9241F9C122C8375A009C50C1 /* Coordinator.swift */; };
 		9241F9CA22C83885009C50C1 /* AlertHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9241F9C922C83885009C50C1 /* AlertHelper.swift */; };
 		9241F9CE22C83AF2009C50C1 /* SplitViewRootController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9241F9CD22C83AF2009C50C1 /* SplitViewRootController.swift */; };
@@ -140,6 +143,7 @@
 		9232ACBD226D4390004DB260 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; wrapsLines = 0; };
 		9232ACC1226ECACD004DB260 /* UISplitViewController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UISplitViewController+Extensions.swift"; sourceTree = "<group>"; wrapsLines = 0; };
 		9239B7EE23491477002AFE38 /* TableManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableManager.swift; sourceTree = "<group>"; };
+		923B5B3C2380A2D600644EA6 /* testVideo.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; name = testVideo.mov; path = Resources/testVideo.mov; sourceTree = SOURCE_ROOT; };
 		9241F9C122C8375A009C50C1 /* Coordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; wrapsLines = 0; };
 		9241F9C922C83885009C50C1 /* AlertHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertHelper.swift; sourceTree = "<group>"; wrapsLines = 0; };
 		9241F9CD22C83AF2009C50C1 /* SplitViewRootController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitViewRootController.swift; sourceTree = "<group>"; };
@@ -270,6 +274,7 @@
 		9232AC79226D4015004DB260 = {
 			isa = PBXGroup;
 			children = (
+				923B5B3B2380A29D00644EA6 /* Resources */,
 				837407CE4410454D61B84F71 /* Frameworks */,
 				927BF1AB2375FF19000426BF /* JiveJournalTests */,
 				927BF1B92375FF2E000426BF /* JiveJournalUITests */,
@@ -354,6 +359,14 @@
 				92706C9622E01A8C009BA88C /* UIKit */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		923B5B3B2380A29D00644EA6 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				923B5B3C2380A2D600644EA6 /* testVideo.mov */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		9241FEA922C3F6D600342FC9 /* Coordinators */ = {
@@ -670,6 +683,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				923B5B3D2380A2D600644EA6 /* testVideo.mov in Resources */,
 				9232AC92226D4016004DB260 /* LaunchScreen.storyboard in Resources */,
 				9232AC8F226D4016004DB260 /* Assets.xcassets in Resources */,
 				92734D7C236F572500DC907E /* GoogleService-Info.plist in Resources */,
@@ -682,6 +696,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				923B5B3E2380A69D00644EA6 /* testVideo.mov in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -689,6 +704,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				923B5B3F2380A69F00644EA6 /* testVideo.mov in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

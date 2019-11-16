@@ -14,14 +14,19 @@ class VideoLocalStorageManager: VideoStorageManager {
         Log.trace()
         do {
             
-            let documentsURL = URLBuilder.getDocumentsFilePathURL(for: originalPath.lastPathComponent)
+            var mutableOriginalPath = originalPath
+            if !mutableOriginalPath.isFileURL {
+                mutableOriginalPath = URL(fileURLWithPath: originalPath.path)
+            }
+            
+            let documentsURL = URLBuilder.getDocumentsFilePathURL(for: mutableOriginalPath.lastPathComponent)
             
             if !FileManager.default.fileExists(atPath: documentsURL.path) {
-                let data = try Data(contentsOf: originalPath)
+                let data = try Data(contentsOf: mutableOriginalPath)
                 try data.write(to: documentsURL)
                 Log.trace("Successfully saved video to path: \(documentsURL)")
             } else {
-                let videoExistsError = NSError(domain: "VideoGallery", code: 0, userInfo: nil)
+                let videoExistsError = NSError(domain: "com.swingaroo.videoGallery", code: 0, userInfo: nil)
                 videoExistsError.setValue(UserErrors.videoAlreadyExists, forKey: NSLocalizedDescriptionKey)
                 Log.error(UserErrors.videoAlreadyExists)
                 return videoExistsError

@@ -80,6 +80,7 @@ class UploadsController: NSObject {
     }
 }
 
+// MARK: - Private Methods
 private extension UploadsController {
     func getThumbnail(_ videoFilePath: URL) -> UIImage? {
         Log.trace()
