@@ -36,9 +36,62 @@ class VideoGalleryVC: UIViewController, Storyboarded {
     
 }
 
+extension VideoGalleryVC {
+    override func setEditing(_ editing: Bool, animated: Bool) {
+        Log.trace()
+        super.setEditing(editing, animated: animated)
+        videosTableView.setEditing(editing, animated: animated)
+    }
+    
+    func prefetchVideos(for practiceSession: PracticeSession?) {
+        Log.trace()
+        guard let practiceSession = self.practiceSession else {
+            Log.error("Failed to get reference to Practice Log")
+            return
+        }
+        let fetchedVideos = coreDataManager.fetchVideos(for: practiceSession)
+        noContentLabel.isHidden = !fetchedVideos.isEmpty
+    }
+}
+
+// MARK: - IBActions
+extension VideoGalleryVC {
+    @IBAction func addVideoButtonPressed(_ sender: UIBarButtonItem) {
+        Log.trace()
+        presentAddVideoActionSheet(from: sender)
+    }
+}
+
+// MARK: - Helper functions
+private extension VideoGalleryVC {
+    func presentAddVideoActionSheet(from sender: UIBarButtonItem) {
+        Log.trace()
+        let actionSheet = AlertHelper.addVideoActionSheet()
+        
+        let recordVideoAction = UIAlertAction(title: AlertConstants.recordVideo, style: .default) { (action:UIAlertAction) in
+            guard Services.permissions.hasCameraPermission() else { return }
+            Services.uploads.recordVideo(from: self.coordinator)
+        }
+        
+        let uploadFromPhotosAction = UIAlertAction(title: AlertConstants.uploadFromPhotos, style: .default) { (action:UIAlertAction) in
+            guard Services.permissions.hasPhotosPermission() else { return }
+            Services.uploads.uploadVideoFromPhotos(from: self.coordinator)
+        }
+        
+        actionSheet.addAction(recordVideoAction)
+        actionSheet.addAction(uploadFromPhotosAction)
+        
+        if let popoverPresentationController: UIPopoverPresentationController = actionSheet.popoverPresentationController {
+            popoverPresentationController.barButtonItem = sender
+        }
+        
+        present(actionSheet, animated: true) { Log.trace("Presented Add Video action sheet") }
+    }
+}
+
 // MARK: - Private Methods
 private extension VideoGalleryVC {
-    private func setUpTableManager() -> VideoGalleryTableManager {
+    func setUpTableManager() -> VideoGalleryTableManager {
         Log.trace()
         let tableManager = VideoGalleryTableManager(videosTableView, coreDataManager, managedVC: self)
         tableManager.practiceSession = practiceSession
@@ -49,7 +102,7 @@ private extension VideoGalleryVC {
         return tableManager
     }
     
-    private func setUpView() {
+    func setUpView() {
         Log.trace()
         navigationItem.title = VCConstants.videos
         let addVideoImage = UIImage(named: CustomImages.addVideo)

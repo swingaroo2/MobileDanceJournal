@@ -10,22 +10,6 @@ import Foundation
 import UIKit
 
 extension UIView {
-    func loadViewFromNib() -> UIView! {
-        Log.trace()
-        let bundle = Bundle(for: type(of: self))
-        let nib = UINib(nibName: "\(type(of: self))", bundle: bundle)
-        let view = nib.instantiate(withOwner: self, options: nil)[0] as! UIView
-        return view
-    }
-    
-    func xibSetup(with contentView: UIView?) {
-        Log.trace()
-        let contentView = loadViewFromNib()
-        contentView!.frame = bounds
-        contentView!.autoresizingMask = [UIView.AutoresizingMask.flexibleWidth, UIView.AutoresizingMask.flexibleHeight]
-        addSubview(contentView!)
-    }
-    
     // MARK: - Frame convenience methods
     func getWidth(multiplier: CGFloat = 1.0) -> CGFloat {
         Log.trace()

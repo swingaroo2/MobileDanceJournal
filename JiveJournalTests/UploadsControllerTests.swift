@@ -12,7 +12,7 @@ import XCTest
 class UploadsControllerTests: XCTestCase {
     
     var sut: UploadsController!
-    let coreDataManager = CoreDataManager(modelName: "testModel")
+    let coreDataManager = CoreDataManager(modelName: "uploadsControllerTestsModel")
     
     override func setUp() {
         sut = UploadsController()
@@ -97,7 +97,6 @@ class UploadsControllerTests: XCTestCase {
     }
     
     func testGetThumbnail_fromPracticeVideo_nilResult() throws {
-        let coreDataManager = CoreDataManager(modelName: "\(#function)")
         let video = PracticeVideo(context: coreDataManager.persistentContainer.viewContext)
         XCTAssertNil(sut.getThumbnail(video))
     }

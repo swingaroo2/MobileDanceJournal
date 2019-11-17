@@ -11,16 +11,9 @@ import UIKit
 import AVFoundation
 
 extension UIImageView {
-    
-    func setThumbnail(_ video: PracticeVideo) {
+    func setThumbnail(_ url: URL) {
         Log.trace()
-        let thumbnailImage = Services.uploads.getThumbnail(video)
-        image = thumbnailImage
-    }
-    
-    func setThumbnail(_ path: URL) {
-        Log.trace()
-        Services.uploads.getThumbnail(from: path) { cachedImage in
+        Services.uploads.getThumbnail(from: url) { cachedImage in
             self.image = cachedImage
         }
     }

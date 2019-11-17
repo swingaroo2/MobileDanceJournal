@@ -47,6 +47,45 @@ class PracticeNotepadVC: UIViewController, Storyboarded {
     
 }
 
+// MARK: - View State Handlers
+extension PracticeNotepadVC {
+    func updateView(with practiceSession: PracticeSession) {
+        Log.trace()
+        practiceSessionTitleTextView.configure(with: practiceSession, for: PracticeSessionConstants.title)
+        practiceSessionDateLabel.configure(with: practiceSession, for: PracticeSessionConstants.date)
+        practiceSessionContent.configure(with: practiceSession, for: PracticeSessionConstants.notes)
+    }
+
+    func hideContent() {
+        Log.trace()
+        scrollView.isHidden = true
+        noContentLabel.isHidden = false
+        saveButton.isEnabled = false
+        cameraButton.isEnabled = false
+    }
+
+    func showContent() {
+        Log.trace()
+        scrollView.isHidden = false
+        noContentLabel.isHidden = true
+    }
+}
+
+// MARK: - IBActions
+extension PracticeNotepadVC {
+    @IBAction func saveButtonPressed(_ sender: UIBarButtonItem) {
+        Log.trace()
+        practiceSessionTitleTextView.resignFirstResponder()
+        practiceSessionContent.resignFirstResponder()
+        saveButton.isEnabled = false
+    }
+    
+    @IBAction func cameraButtonPressed(_ sender: UIBarButtonItem) {
+        Log.trace()
+        coordinator?.viewVideos(for: practiceSession)
+    }
+}
+
 // MARK: - Private Methods
 private extension PracticeNotepadVC {
     @objc func adjustForKeyboard(notification: Notification) {
