@@ -10,10 +10,9 @@ import Foundation
 
 class URLBuilder {
     class func getDocumentsFilePathURL(for filename: String) -> URL {
-        Log.trace()
+        Log.trace("Creating file path for \(filename) in Documents directory")
         let documentsDirectory = FileManager.default.documentsDirectory
-        let savePath = documentsDirectory.appendingPathComponent(filename)
-        let saveFileURL = URL(fileURLWithPath: savePath.path)
-        return saveFileURL
+        let saveURL = documentsDirectory.appendingPathComponent(filename)
+        return saveURL
     }
 }

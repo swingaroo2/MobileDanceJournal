@@ -70,11 +70,10 @@ struct CustomImages {
 
 // MARK: - Errors
 struct UserErrors {
-    static let textFieldContentsInvalid = "Text field contents are not valid."
-    static let videoAlreadyExists = "This video has already been uploaded"
     static let deleteError = "Deletion Error"
     static let failedToGetLinkToVideo = "Failed to get link to selected video"
     static let noPracticeSession = "Failed to find the currently-selected practice session"
+    static let textFieldContentsInvalid = "Text field contents are not valid."
 }
 
 struct InternalErrors {
@@ -83,10 +82,11 @@ struct InternalErrors {
 
 struct VideoUploadErrors {
     static let generic = "Video upload failed"
-    static let serviceUnavailable = "Upload service unavailable"
-    static let thumbnailFailedCopy = "Failed to get thumbnail from video"
     static let lostVideo = "We forgot where we saved your video. Sorry about that."
     static let noURL = "Photos was a meanie-head and didn't give us your video. We apologize for the inconvenience."
+    static let serviceUnavailable = "Upload service unavailable"
+    static let thumbnailFailedCopy = "Failed to get thumbnail from video"
+    static let videoAlreadyExists = "This video has already been uploaded"
 }
 
 // MARK: - Core Data

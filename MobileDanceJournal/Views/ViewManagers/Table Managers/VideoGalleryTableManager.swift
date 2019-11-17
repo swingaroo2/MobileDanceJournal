@@ -106,9 +106,7 @@ extension VideoGalleryTableManager: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            if let error = deleteVideo(in: tableView, at: indexPath) {
-                managedVC.presentBasicAlert(title: UserErrors.deleteError, message: error.localizedDescription)
-            }
+            deleteVideo(in: tableView, at: indexPath)
         }
     }
     
@@ -117,11 +115,7 @@ extension VideoGalleryTableManager: UITableViewDelegate {
         let deleteAction = UIContextualAction(style: .destructive, title: Actions.delete) { [unowned self] (action, view, completionHandler) in
             
             let deleteAlertAction: ((UIAlertAction) -> Void) = { action in
-                var deleteSucceeded = true
-                if let error = self.deleteVideo(in: tableView, at: indexPath) {
-                    self.managedVC.presentBasicAlert(title: UserErrors.deleteError, message: error.localizedDescription)
-                    deleteSucceeded = false
-                }
+                let deleteSucceeded = self.deleteVideo(in: tableView, at: indexPath)
                 completionHandler(deleteSucceeded)
             }
             
@@ -198,23 +192,20 @@ extension VideoGalleryTableManager: UITableViewDelegate {
     }
 }
 
+// MARK: - Private Methods
 private extension VideoGalleryTableManager {
-    func deleteVideo(in tableView: UITableView, at indexPath: IndexPath) -> NSError? {
+    @discardableResult
+    func deleteVideo(in tableView: UITableView, at indexPath: IndexPath) -> Bool {
         Log.trace()
         let videoToDelete = Model.coreData.practiceVideoFRC.object(at: indexPath)
-        
-        guard let practiceSession = practiceSession else {
-            Log.error("Failed to get reference to Practice Log")
-            let noPracticeSessionError = NSError(domain: "com.swingaroo.videoGallery", code: 0, userInfo: nil)
-            noPracticeSessionError.setValue(UserErrors.noPracticeSession, forKey: NSLocalizedDescriptionKey)
-            return noPracticeSessionError
+
+        do {
+            try Model.videoStorage.delete(videoToDelete)
+            return true
+        } catch {
+            Log.error("Failed to delete video with error: \(error.localizedDescription)")
+            return false
         }
-        
-        if let error = Model.videoStorage.delete(videoToDelete, from: practiceSession) {
-            return error
-        }
-        
-        return nil
     }
 }
 

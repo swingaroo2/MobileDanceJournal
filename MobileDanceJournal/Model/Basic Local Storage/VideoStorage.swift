@@ -9,6 +9,6 @@
 import Foundation
 
 protocol VideoStorage {
-    func saveVideo(from origianlPath: URL) -> NSError?
-    func delete(_ video: PracticeVideo, from practiceSession: PracticeSession) -> NSError?
+    func saveVideo(_ url: URL) throws
+    func delete(_ video: PracticeVideo) throws
 }

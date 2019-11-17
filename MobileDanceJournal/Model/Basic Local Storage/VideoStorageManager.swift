@@ -10,51 +10,38 @@ import Foundation
 
 class VideoStorageManager: VideoStorage {
     
-    func saveVideo(from originalPath: URL) -> NSError? {
-        Log.trace()
-        do {
-            
-            var mutableOriginalPath = originalPath
-            if !mutableOriginalPath.isFileURL {
-                mutableOriginalPath = URL(fileURLWithPath: originalPath.path)
-            }
-            
-            let documentsURL = URLBuilder.getDocumentsFilePathURL(for: mutableOriginalPath.lastPathComponent)
-            
-            if !FileManager.default.fileExists(atPath: documentsURL.path) {
-                let data = try Data(contentsOf: mutableOriginalPath)
-                try data.write(to: documentsURL)
-                Log.trace("Successfully saved video to path: \(documentsURL)")
-            } else {
-                let videoExistsError = NSError(domain: "com.swingaroo.videoGallery", code: 0, userInfo: nil)
-                videoExistsError.setValue(UserErrors.videoAlreadyExists, forKey: NSLocalizedDescriptionKey)
-                Log.error(UserErrors.videoAlreadyExists)
-                return videoExistsError
-            }
-            
-        } catch {
-            Log.error(error.localizedDescription)
-            return error as NSError
+    func saveVideo(_ url: URL) throws {
+        Log.trace("Saving video: \(url.lastPathComponent)")
+        var mutableOriginalPath = url
+        if !mutableOriginalPath.isFileURL {
+            mutableOriginalPath = URL(fileURLWithPath: url.path)
         }
         
-        return nil
+        let documentsURL = URLBuilder.getDocumentsFilePathURL(for: url.lastPathComponent)
+        
+        if !FileManager.default.fileExists(atPath: documentsURL.path) {
+            let data = try Data(contentsOf: mutableOriginalPath)
+            try? data.write(to: documentsURL)
+            Log.trace("Successfully saved video to path: \(documentsURL)")
+        } else {
+            Log.error(VideoUploadErrors.videoAlreadyExists)
+            throw VideoStorageError.videoAlreadyExists(filename: url.lastPathComponent)
+        }
     }
     
-    func delete(_ video: PracticeVideo, from practiceSession: PracticeSession) -> NSError? {
-        Log.trace()
-        let documentsURL = URLBuilder.getDocumentsFilePathURL(for: video.filename)
-        Model.coreData.delete(video, from: practiceSession)
+    func delete(_ video: PracticeVideo) throws {
+        Log.trace("Deleting video: \(video.filename)")
         
-        if FileManager.default.fileExists(atPath: documentsURL.path) {
-            do {
-                try FileManager.default.removeItem(at: documentsURL)
-                Log.trace("Removed video at path: \(documentsURL.path)")
-            } catch {
-                Log.error(error.localizedDescription)
-                return error as NSError
-            }
+        let filename = video.filename
+        
+        if let practiceSession = video.practiceSession {
+            Model.coreData.delete(video, from: practiceSession)
         }
         
-        return nil
+        let documentsURL = URLBuilder.getDocumentsFilePathURL(for: filename)
+        if FileManager.default.fileExists(atPath: documentsURL.path) {
+            try FileManager.default.removeItem(at: documentsURL)
+            Log.trace("Removed video at path: \(documentsURL.path)")
+        }
     }
 }

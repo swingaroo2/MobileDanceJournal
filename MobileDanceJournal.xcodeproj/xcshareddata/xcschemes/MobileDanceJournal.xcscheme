@@ -68,16 +68,6 @@
                ReferencedContainer = "container:MobileDanceJournal.xcodeproj">
             </BuildableReference>
          </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "927BF1B72375FF2E000426BF"
-               BuildableName = "JiveJournalUITests.xctest"
-               BlueprintName = "JiveJournalUITests"
-               ReferencedContainer = "container:MobileDanceJournal.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction

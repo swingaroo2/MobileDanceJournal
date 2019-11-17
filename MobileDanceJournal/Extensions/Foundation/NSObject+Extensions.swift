@@ -11,8 +11,7 @@ import Foundation
 extension NSObject {
     var documentsDirectory: URL {
         Log.trace()
-        let pathString = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, FileManager.SearchPathDomainMask.userDomainMask, true).first!
-        let pathURL = URL(string: pathString)!
+        let pathURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
         return pathURL
     }
     

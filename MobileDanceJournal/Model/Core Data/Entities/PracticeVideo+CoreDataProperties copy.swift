@@ -19,6 +19,6 @@ extension PracticeVideo {
     @NSManaged public var title: String
     @NSManaged public var uploadDate: Date
     @NSManaged public var filename: String
-    @NSManaged public var practiceSession: PracticeSession
+    @NSManaged public var practiceSession: PracticeSession?
 
 }

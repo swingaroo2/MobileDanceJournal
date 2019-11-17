@@ -43,38 +43,7 @@ extension VideoUploadVC {
             coordinator?.dismiss(self, completion: nil)
             return
         }
-        
-        let titleText = titleTextField.text ?? "Title"
-        let filename = videoURL.lastPathComponent
-        
-        let isEditingNewVideo = Services.uploads.video == nil
-        
-        if isEditingNewVideo {
-            let newVideo = Model.coreData.createAndConfigureNewPracticeVideo(title: titleText, filename: filename)
-            
-            if let error = Model.videoStorage.saveVideo(from: videoURL) {
-                coordinator?.dismiss(self) { [weak self] in
-                    guard let self = self else {
-                        Log.critical("Failed to get reference to self. That's weird.")
-                        return
-                    }
-                    self.presentBasicAlert(title: VideoUploadErrors.generic, message: error.localizedDescription)
-                }
-                return
-            }
-            
-            coordinator?.finishEditing(newVideo)
-            Services.uploads.set(video: nil)
-        } else {
-            guard let updatedVideo = Services.uploads.video else {
-                Log.error("Failed to get reference to updated Video")
-                coordinator?.dismiss(self, completion: nil)
-                return
-            }
-            updatedVideo.title = titleText
-            coordinator?.finishEditing(updatedVideo)
-            Services.uploads.set(video: nil)
-        }
+        updateModelAndFinishEditing(videoURL)
     }
     
     @IBAction func cancelUpload(_ sender: UIBarButtonItem) {
@@ -96,6 +65,44 @@ extension VideoUploadVC {
 
 // MARK: - Private Methods
 private extension VideoUploadVC {
+    func updateModelAndFinishEditing(_ videoURL: URL) {
+        let titleText = titleTextField.text ?? "Title"
+        let filename = videoURL.lastPathComponent
+        let isEditingNewVideo = Services.uploads.video == nil
+        if isEditingNewVideo {
+            let newVideo = Model.coreData.createAndConfigureNewPracticeVideo(title: titleText, filename: filename)
+            saveVideoFile(at: videoURL)
+            coordinator?.finishEditing(newVideo)
+            Services.uploads.set(video: nil)
+        } else {
+            guard let updatedVideo = Services.uploads.video else {
+                Log.error("Failed to get reference to updated Video")
+                coordinator?.dismiss(self, completion: nil)
+                return
+            }
+            updatedVideo.title = titleText
+            coordinator?.finishEditing(updatedVideo)
+            Services.uploads.set(video: nil)
+        }
+    }
+    
+    func saveVideoFile(at url: URL) {
+        do {
+            try Model.videoStorage.saveVideo(url)
+            coordinator?.dismiss(self) { [weak self] in
+                guard let self = self else {
+                    Log.critical("Failed to get reference to self. That's weird.")
+                    return
+                }
+                self.presentBasicAlert(title: VideoUploadErrors.generic, message: VideoUploadErrors.videoAlreadyExists)
+            }
+        } catch VideoStorageError.videoAlreadyExists(let filename) {
+            Log.error("Video named \(filename) already exists in Documents directory")
+        } catch {
+            Log.error("Unexpected error: \(error.localizedDescription)")
+        }
+    }
+    
     func setUpView() {
         Log.trace()
         configureKeyboardToDismissOnOutsideTap()

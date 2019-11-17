@@ -34,6 +34,8 @@
 		923B5B412380C58500644EA6 /* UIKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923B5B402380C58500644EA6 /* UIKitTests.swift */; };
 		923B5B432380D7D900644EA6 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923B5B422380D7D900644EA6 /* Model.swift */; };
 		923B5B472380D85600644EA6 /* ModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923B5B462380D85600644EA6 /* ModelTests.swift */; };
+		923B5B492381AE1800644EA6 /* VideoStorageManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923B5B482381AE1800644EA6 /* VideoStorageManagerTests.swift */; };
+		923B5B4B2381B9D800644EA6 /* VideoStorageError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923B5B4A2381B9D800644EA6 /* VideoStorageError.swift */; };
 		9241F9C222C8375A009C50C1 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9241F9C122C8375A009C50C1 /* Coordinator.swift */; };
 		9241F9CA22C83885009C50C1 /* AlertHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9241F9C922C83885009C50C1 /* AlertHelper.swift */; };
 		9241F9CE22C83AF2009C50C1 /* SplitViewRootController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9241F9CD22C83AF2009C50C1 /* SplitViewRootController.swift */; };
@@ -146,6 +148,8 @@
 		923B5B402380C58500644EA6 /* UIKitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIKitTests.swift; sourceTree = "<group>"; };
 		923B5B422380D7D900644EA6 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; wrapsLines = 0; };
 		923B5B462380D85600644EA6 /* ModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelTests.swift; sourceTree = "<group>"; };
+		923B5B482381AE1800644EA6 /* VideoStorageManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoStorageManagerTests.swift; sourceTree = "<group>"; };
+		923B5B4A2381B9D800644EA6 /* VideoStorageError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoStorageError.swift; sourceTree = "<group>"; };
 		9241F9C122C8375A009C50C1 /* Coordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; wrapsLines = 0; };
 		9241F9C922C83885009C50C1 /* AlertHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertHelper.swift; sourceTree = "<group>"; wrapsLines = 0; };
 		9241F9CD22C83AF2009C50C1 /* SplitViewRootController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitViewRootController.swift; sourceTree = "<group>"; };
@@ -405,6 +409,7 @@
 			isa = PBXGroup;
 			children = (
 				926BEE2F22E58D5300BC3DD4 /* ThumbnailError.swift */,
+				923B5B4A2381B9D800644EA6 /* VideoStorageError.swift */,
 			);
 			path = Errors;
 			sourceTree = "<group>";
@@ -455,6 +460,7 @@
 		927BF1AB2375FF19000426BF /* JiveJournalTests */ = {
 			isa = PBXGroup;
 			children = (
+				923B5B482381AE1800644EA6 /* VideoStorageManagerTests.swift */,
 				923B5B462380D85600644EA6 /* ModelTests.swift */,
 				923B5B402380C58500644EA6 /* UIKitTests.swift */,
 				9266EB6B237E44CE006C9D1D /* UploadsControllerTests.swift */,
@@ -872,6 +878,7 @@
 				9227148622CD2D4900C6CFAC /* UITextView+Extensions.swift in Sources */,
 				927B6B06230F116700CC1F9F /* PracticeLogCoordinator.swift in Sources */,
 				927B6B0A230F20AE00CC1F9F /* VideoGalleryCoordinator.swift in Sources */,
+				923B5B4B2381B9D800644EA6 /* VideoStorageError.swift in Sources */,
 				926E70A82311FD6E00A3CCD0 /* GroupPickerView.swift in Sources */,
 				9232AC88226D4015004DB260 /* PracticeLogVC.swift in Sources */,
 				9232AC86226D4015004DB260 /* AppDelegate.swift in Sources */,
@@ -918,6 +925,7 @@
 				9266EB66237E3B95006C9D1D /* NSObjectTests.swift in Sources */,
 				9266EB6C237E44CE006C9D1D /* UploadsControllerTests.swift in Sources */,
 				923B5B472380D85600644EA6 /* ModelTests.swift in Sources */,
+				923B5B492381AE1800644EA6 /* VideoStorageManagerTests.swift in Sources */,
 				9266EB68237E3F8E006C9D1D /* URLBuilderTests.swift in Sources */,
 				923B5B412380C58500644EA6 /* UIKitTests.swift in Sources */,
 			);
