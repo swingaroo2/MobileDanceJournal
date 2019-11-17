@@ -9,6 +9,11 @@
 import Foundation
 
 class Model: NSObject {
-    static let coreData = CoreDataManager(modelName: ModelConstants.modelName)
-    static let videoFileStorage = VideoLocalStorageManager()
+    static var coreData: CoreDataManager!
+    static var videoStorage: VideoStorageManager!
+    
+    static func start() {
+        coreData = CoreDataManager(modelName: ModelConstants.modelName)
+        videoStorage = VideoStorageManager()
+    }
 }

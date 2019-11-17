@@ -1,5 +1,5 @@
 //
-//  VideoStorageManager.swift
+//  VideoStorage.swift
 //  MobileDanceJournal
 //
 //  Created by Zach Lockett-Streiff on 7/18/19.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol VideoStorageManager {
-    static func saveVideo(from origianlPath: URL) -> NSError?
-    static func delete(_ video: PracticeVideo, from practiceSession: PracticeSession,_ coreDataManager: CoreDataManager) -> NSError?
+protocol VideoStorage {
+    func saveVideo(from origianlPath: URL) -> NSError?
+    func delete(_ video: PracticeVideo, from practiceSession: PracticeSession,_ coreDataManager: CoreDataManager) -> NSError?
 }

@@ -10,6 +10,11 @@ import XCTest
 @testable import JiveJournal
 
 class ServicesTests: XCTestCase {
+    
+    override func setUp() {
+        Services.start()
+    }
+    
     func testServicesExist() {
         XCTAssertNotNil(Services.activity)
         XCTAssertNotNil(Services.permissions)

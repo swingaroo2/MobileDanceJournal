@@ -79,7 +79,7 @@ class UploadsControllerTests: XCTestCase {
             try? FileManager.default.removeItem(atPath: documentsFilePath)
         }
         
-        XCTAssertNil(VideoLocalStorageManager.saveVideo(from: url))
+        XCTAssertNil(Model.videoStorage.saveVideo(from: url))
         
         let _ = try XCTUnwrap(sut.getThumbnail(video))
     }

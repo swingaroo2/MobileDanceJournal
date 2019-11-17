@@ -1,5 +1,5 @@
 //
-//  VideoLocalStorageManager.swift
+//  VideoStorageManager.swift
 //  MobileDanceJournal
 //
 //  Created by Zach Lockett-Streiff on 7/15/19.
@@ -8,9 +8,9 @@
 
 import Foundation
 
-class VideoLocalStorageManager: VideoStorageManager {
+class VideoStorageManager: VideoStorage {
     
-    static func saveVideo(from originalPath: URL) -> NSError? {
+    func saveVideo(from originalPath: URL) -> NSError? {
         Log.trace()
         do {
             
@@ -40,7 +40,7 @@ class VideoLocalStorageManager: VideoStorageManager {
         return nil
     }
     
-    static func delete(_ video: PracticeVideo, from practiceSession: PracticeSession, _ coreDataManager: CoreDataManager) -> NSError? {
+    func delete(_ video: PracticeVideo, from practiceSession: PracticeSession, _ coreDataManager: CoreDataManager) -> NSError? {
         Log.trace()
         let documentsURL = URLBuilder.getDocumentsFilePathURL(for: video.filename)
         coreDataManager.delete(video, from: practiceSession)

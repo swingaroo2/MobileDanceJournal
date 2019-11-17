@@ -10,8 +10,13 @@ import XCTest
 @testable import JiveJournal
 
 class ModelTests: XCTestCase {
+    
+    override func setUp() {
+        Model.start()
+    }
+    
     func testModelsExist() {
         XCTAssertNotNil(Model.coreData)
-        XCTAssertNotNil(Model.videoFileStorage)
+        XCTAssertNotNil(Model.videoStorage)
     }
 }

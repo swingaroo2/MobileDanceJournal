@@ -53,7 +53,7 @@ extension VideoUploadVC {
         if isEditingNewVideo {
             let newVideo = coreDataManager.createAndConfigureNewPracticeVideo(title: titleText, filename: filename)
             
-            if let error = VideoLocalStorageManager.saveVideo(from: videoURL) {
+            if let error = Model.videoStorage.saveVideo(from: videoURL) {
                 coordinator?.dismiss(self) { [weak self] in
                     guard let self = self else {
                         Log.critical("Failed to get reference to self. That's weird.")

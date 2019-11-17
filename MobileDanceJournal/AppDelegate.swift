@@ -23,6 +23,8 @@ extension AppDelegate: UIApplicationDelegate {
         initializeLogger()
         Log.trace()
         initializeFirebase()
+        Services.start()
+        Model.start()
         let rootVC = SplitViewRootController.instantiate()
         let coreDataManager = CoreDataManager(modelName: ModelConstants.modelName)
         rootVC.coreDataManager = coreDataManager

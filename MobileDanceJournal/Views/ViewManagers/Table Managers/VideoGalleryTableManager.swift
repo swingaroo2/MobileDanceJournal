@@ -212,7 +212,7 @@ private extension VideoGalleryTableManager {
             return noPracticeSessionError
         }
         
-        if let error = VideoLocalStorageManager.delete(videoToDelete, from: practiceSession, coreDataManager) {
+        if let error = Model.videoStorage.delete(videoToDelete, from: practiceSession, coreDataManager) {
             return error
         }
         
