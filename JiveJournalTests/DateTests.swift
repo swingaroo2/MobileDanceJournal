@@ -37,6 +37,7 @@ class DateTests: XCTestCase {
         let expectedStringMatchesActualString = expectedString == actualString
         XCTAssertTrue(expectedStringMatchesActualString)
     }
+    
     func testGetStringFromDate_practiceLogDisplayFormat() {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "M/dd/yyyy"
@@ -48,16 +49,12 @@ class DateTests: XCTestCase {
     }
 
     // MARK: - String -> Date Tests
-    func testGetDateFromString() {
+    func testGetDateFromString() throws {
         let referenceDate = createTestDate(year: 1992, day: 23, month: 2)
         let dateText = Date.getStringFromDate(referenceDate, .longFormat)
         let date = Date.getDateFromString(dateText)
         
-        guard let unwrapped = date else {
-            XCTFail("Failed to unwrap date")
-            return
-        }
-        
+        let unwrapped = try XCTUnwrap(date)
         let convertedDateMatchesReferenceDate = referenceDate == unwrapped
         XCTAssertTrue(convertedDateMatchesReferenceDate)
     }

@@ -12,68 +12,50 @@ import CoreData
 
 class CoreDataManagerTests: XCTestCase {
     
-    var sut = CoreDataManager(modelName: "testModel")
+    var sut = CoreDataManager(modelName: "coreDataManagerTests")
     
     override func setUp() {
         sut.wipe()
     }
     
     // MARK: - Fetching existing entities
-    func testFetchPracticeSessionsInGroup() {
+    func testFetchPracticeSessionsInGroup() throws {
         addTestDataWithGroupedPracticeSession()
         
-        guard let fetchedGroups = sut.groupFRC.fetchedObjects else {
-            XCTFail("Fetched group is nil")
-            return
-        }
+        let fetchedGroups = try XCTUnwrap(sut.groupFRC.fetchedObjects)
         
         let fetchedObjectsNotEmpty = fetchedGroups.count == 1
         XCTAssertTrue(fetchedObjectsNotEmpty)
         
         let group = fetchedGroups[0]
-        guard let fetchedPracticeSessions = sut.fetchPracticeSessions(in: group) else {
-            XCTFail("Fetched practice sessions are nil")
-            return
-        }
+        let fetchedPracticeSessions = try XCTUnwrap(sut.fetchPracticeSessions(in: group))
+        let fetchedPracticeSessionExists = fetchedPracticeSessions.count == 1
+        XCTAssertTrue(fetchedPracticeSessionExists)
+    }
+    
+    func testFetchUngroupedPracticeSessions() throws {
+        addTestDataWithUngroupedPracticeSession()
+        
+        let fetchedPracticeSessions = try XCTUnwrap(sut.fetchPracticeSessions(in: nil))
         
         let fetchedPracticeSessionExists = fetchedPracticeSessions.count == 1
         XCTAssertTrue(fetchedPracticeSessionExists)
     }
     
-    func testFetchUngroupedPracticeSessions() {
+    func testFetchVideosForPracticeSession_withFilename() throws {
         addTestDataWithUngroupedPracticeSession()
         
-        guard let fetchedPracticeSessions = sut.fetchPracticeSessions(in: nil) else {
-            XCTFail("Fetched practice sessions are nil")
-            return
-        }
-        
-        let fetchedPracticeSessionExists = fetchedPracticeSessions.count == 1
-        XCTAssertTrue(fetchedPracticeSessionExists)
-    }
-    
-    func testFetchVideosForPracticeSession_withFilename() {
-        addTestDataWithUngroupedPracticeSession()
-        
-        guard let fetchedPracticeSessions = sut.fetchPracticeSessions(in: nil) else {
-            XCTFail("Fetched practice sessions are nil")
-            return
-        }
-        
+        let fetchedPracticeSessions = try XCTUnwrap(sut.fetchPracticeSessions(in: nil))
         let fetchedVideos = sut.fetchVideos(for: fetchedPracticeSessions[0], with: documentsDirectory.path)
         
         let videoWasFetched = fetchedVideos.count == 1
         XCTAssertTrue(videoWasFetched)
     }
     
-    func testFetchVideosForPracticeSession_withoutFilename() {
+    func testFetchVideosForPracticeSession_withoutFilename() throws {
         addTestDataWithUngroupedPracticeSession()
         
-        guard let fetchedPracticeSessions = sut.fetchPracticeSessions(in: nil) else {
-            XCTFail("Fetched practice sessions are nil")
-            return
-        }
-        
+        let fetchedPracticeSessions = try XCTUnwrap(sut.fetchPracticeSessions(in: nil))
         let fetchedVideos = sut.fetchVideos(for: fetchedPracticeSessions[0])
         
         let videoWasFetched = fetchedVideos.count == 1
@@ -81,22 +63,19 @@ class CoreDataManagerTests: XCTestCase {
     }
     
     // MARK: - Saving
-    func testSave() {
+    func testSave() throws {
         let group = Group(context: sut.persistentContainer.viewContext)
         group.name = "\(#function)"
         
         sut.save()
         
-        guard let fetchedGroups = sut.groupFRC.fetchedObjects else {
-            XCTFail("Fetched groups is nil")
-            return
-        }
+        let fetchedGroups = try XCTUnwrap(sut.groupFRC.fetchedObjects)
         
         let fetchedGroupExists = fetchedGroups[0]
         XCTAssertNotNil(fetchedGroupExists)
     }
     
-    // TODO: Why did my delete test fail? It works fine in the app...
+    // TODO: Why did my delete test fail? Deleting works fine in the app...
     
     // MARK: - Relationships
     func testAddVideoToPracticeSession() {
@@ -125,15 +104,11 @@ class CoreDataManagerTests: XCTestCase {
         XCTAssertTrue(practiceSessionHasOneVideo)
     }
     
-    func testAddNewPracticeSessionToGroup() {
+    func testAddNewPracticeSessionToGroup() throws {
         let practiceSessions = [PracticeSession(context: sut.persistentContainer.viewContext)]
         let group = Group(context: sut.persistentContainer.viewContext)
         
-        guard let groupPracticeSessions = group.practiceSessions else {
-            XCTFail("Fetched practice sessions are nil")
-            return
-        }
-        
+        let groupPracticeSessions = try XCTUnwrap(group.practiceSessions)
         let groupHasNoPracticeSessions = groupPracticeSessions.count == 0
         XCTAssertTrue(groupHasNoPracticeSessions)
         
@@ -143,14 +118,11 @@ class CoreDataManagerTests: XCTestCase {
         XCTAssertTrue(groupHasPracticeSessions)
     }
     
-    func testAddPracticeSessionToGroup_duplicatePracticeSessions() {
+    func testAddPracticeSessionToGroup_duplicatePracticeSessions() throws {
         let practiceSessions = [PracticeSession(context: sut.persistentContainer.viewContext)]
         let group = Group(context: sut.persistentContainer.viewContext)
         
-        guard let groupPracticeSessions = group.practiceSessions else {
-            XCTFail("Fetched practice sessions are nil")
-            return
-        }
+        let groupPracticeSessions = try XCTUnwrap(group.practiceSessions)
         
         let groupHasNoPracticeSessions = groupPracticeSessions.count == 0
         XCTAssertTrue(groupHasNoPracticeSessions)
@@ -178,15 +150,11 @@ class CoreDataManagerTests: XCTestCase {
         XCTAssertTrue(practiceSessionHasNoVideos)
     }
     
-    func testDeletePracticeSessionFromGroup() {
+    func testDeletePracticeSessionFromGroup() throws {
         let practiceSessions = [PracticeSession(context: sut.persistentContainer.viewContext)]
         let group = Group(context: sut.persistentContainer.viewContext)
         
-        guard let groupPracticeSessions = group.practiceSessions else {
-            XCTFail("Fetched practice sessions are nil")
-            return
-        }
-        
+        let groupPracticeSessions = try XCTUnwrap(group.practiceSessions)
         var groupHasNoPracticeSessions = groupPracticeSessions.count == 0
         XCTAssertTrue(groupHasNoPracticeSessions)
         
@@ -333,18 +301,14 @@ class CoreDataManagerTests: XCTestCase {
     }
     
     // MARK: - Creating and fetching new entities
-    func testCreateNewPracticeSession() {
+    func testCreateNewPracticeSession() throws {
         let newPracticeSession = sut.createAndReturnNewPracticeSession()
         XCTAssertNotNil(newPracticeSession)
         
         newPracticeSession.title = "test practice session"
         sut.save()
         
-        guard let fetchedPracticeSessions = sut.practiceSessionFRC.fetchedObjects else {
-            XCTFail("Fetched practice sessions are nil")
-            return
-        }
-        
+        let fetchedPracticeSessions = try XCTUnwrap(sut.practiceSessionFRC.fetchedObjects)
         let aPracticeSessionWasSaved = fetchedPracticeSessions.count == 1
         XCTAssertTrue(aPracticeSessionWasSaved)
         
@@ -352,14 +316,11 @@ class CoreDataManagerTests: XCTestCase {
         XCTAssertTrue(originalPracticeSessionWasSaved)
     }
     
-    func testCreateNewPracticeVideo() {
+    func testCreateNewPracticeVideo() throws {
         let newVideo = sut.createAndConfigureNewPracticeVideo(title: "test video", filename: documentsDirectory.path)
         XCTAssertNotNil(newVideo)
         
-        guard let fetchedVideos = sut.practiceVideoFRC.fetchedObjects else {
-            XCTFail("Fetched practice videos are nil")
-            return
-        }
+        let fetchedVideos = try XCTUnwrap(sut.practiceVideoFRC.fetchedObjects)
         
         let aVideoWasSaved = fetchedVideos.count == 1
         XCTAssertTrue(aVideoWasSaved)
@@ -368,14 +329,10 @@ class CoreDataManagerTests: XCTestCase {
         XCTAssertTrue(originalVideoWasSaved)
     }
     
-    func testCreateNewGroup() {
+    func testCreateNewGroup() throws {
         sut.createAndSaveNewGroup(name: "test group", practiceSessions: [])
         
-        guard let fetchedGroups = sut.groupFRC.fetchedObjects else {
-            XCTFail("Fetched groups are nil")
-            return
-        }
-        
+        let fetchedGroups = try XCTUnwrap(sut.groupFRC.fetchedObjects)
         let aGroupWasSaved = fetchedGroups.count == 1
         XCTAssertTrue(aGroupWasSaved)
         

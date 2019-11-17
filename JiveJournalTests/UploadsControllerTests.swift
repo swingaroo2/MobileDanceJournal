@@ -19,33 +19,25 @@ class UploadsControllerTests: XCTestCase {
     }
     
     // MARK: - Setters
-    func testSetFilename() {
+    func testSetFilename() throws {
         let testFilename = "testfilename"
         sut.set(filename: testFilename)
         
-        guard let sutURL = sut.url else {
-            XCTFail("Failed to unwrap URL")
-            return
-        }
-        
+        let sutURL = try XCTUnwrap(sut.url)
         let urlWasSet = sutURL == URLBuilder.getDocumentsFilePathURL(for: testFilename)
         XCTAssertTrue(urlWasSet)
     }
     
-    func testSetURL() {
+    func testSetURL() throws {
         let testURL = URL(string: "testfilename")!
         sut.set(url: testURL)
         
-        guard let sutURL = sut.url else {
-            XCTFail("Failed to unwrap URL")
-            return
-        }
-        
+        let sutURL = try XCTUnwrap(sut.url)
         let urlWasSet = sutURL == testURL
         XCTAssertTrue(urlWasSet)
     }
     
-    func testSetPracticeVideo() {
+    func testSetPracticeVideo() throws {
         let testFilename = "testfilename"
         let video = PracticeVideo(context: coreDataManager.persistentContainer.viewContext)
         video.filename = testFilename
@@ -53,11 +45,7 @@ class UploadsControllerTests: XCTestCase {
         sut.set(video: video)
         let url = URLBuilder.getDocumentsFilePathURL(for: video.filename)
         
-        guard let sutURL = sut.url else {
-            XCTFail("Failed to unwrap URL")
-            return
-        }
-        
+        let sutURL = try XCTUnwrap(sut.url)
         let urlWasSet = sutURL == url
         XCTAssertTrue(urlWasSet)
     }
