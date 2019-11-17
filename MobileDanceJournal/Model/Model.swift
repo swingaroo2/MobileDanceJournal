@@ -14,6 +14,7 @@ class Model: NSObject {
     
     static func start() {
         coreData = CoreDataManager(modelName: ModelConstants.modelName)
+        let _ = coreData.persistentContainer
         videoStorage = VideoStorageManager()
     }
 }

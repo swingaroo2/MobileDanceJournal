@@ -18,10 +18,10 @@ class PracticeSessionPickerView: UIView, ToolbarPickerView {
     private var cancelButton: UIBarButtonItem!
     
     // MARK: - Initializers
-    required init(_ videoToMove: PracticeVideo, from oldPracticeLog: PracticeSession, to newPracticeLogs: [PracticeSession],_ coreDataManager: CoreDataManager, managedView: UIView) {
+    required init(_ videoToMove: PracticeVideo, from oldPracticeLog: PracticeSession, to newPracticeLogs: [PracticeSession], managedView: UIView) {
         super.init(frame: .zero)
         Log.trace()
-        self.manager = self.configureManager(videoToMove, oldPracticeLog, newPracticeLogs, coreDataManager)
+        self.manager = self.configureManager(videoToMove, oldPracticeLog, newPracticeLogs)
         self.picker.dataSource = self.manager
         self.picker.delegate = self.manager
         let toolbarButtons = configurePickerToolbarButtons()
@@ -45,9 +45,9 @@ private extension PracticeSessionPickerView {
         return [doneButton, spacer, cancelButton]
     }
     
-    func configureManager(_ videoToMove: PracticeVideo,_ oldPracticeLog: PracticeSession,_ newPracticeLogs: [PracticeSession],_ coreDataManager: CoreDataManager) -> PracticeSessionPickerManager {
+    func configureManager(_ videoToMove: PracticeVideo,_ oldPracticeLog: PracticeSession,_ newPracticeLogs: [PracticeSession]) -> PracticeSessionPickerManager {
         Log.trace()
-        let manager = PracticeSessionPickerManager(self, coreDataManager)
+        let manager = PracticeSessionPickerManager(self)
         manager.videoToMove = videoToMove
         manager.oldPracticeSession = oldPracticeLog
         manager.practiceSessions = newPracticeLogs.filter { $0 !== oldPracticeLog }

@@ -20,7 +20,6 @@ class PracticeNotepadVC: UIViewController, Storyboarded {
     @IBOutlet var saveButton: UIBarButtonItem!
     
     var practiceSession: PracticeSession!
-    var coreDataManager: CoreDataManager!
     var textViewManager: NotepadTextViewManager!
     weak var coordinator: PracticeLogCoordinator!
     

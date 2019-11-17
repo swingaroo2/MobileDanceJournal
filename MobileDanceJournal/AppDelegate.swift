@@ -14,7 +14,6 @@ import Firebase
 class AppDelegate: UIResponder {
     var window: UIWindow?
     var coordinator: MainCoordinator?
-    var coreDataManager: CoreDataManager?
 }
 
 extension AppDelegate: UIApplicationDelegate {
@@ -26,26 +25,22 @@ extension AppDelegate: UIApplicationDelegate {
         Services.start()
         Model.start()
         let rootVC = SplitViewRootController.instantiate()
-        let coreDataManager = CoreDataManager(modelName: ModelConstants.modelName)
-        rootVC.coreDataManager = coreDataManager
-        let _ = coreDataManager.persistentContainer
-        startCoordinator(with: rootVC, coreDataManager)
-        self.coreDataManager = coreDataManager
+        startCoordinator(with: rootVC)
         window = UIWindow.createNewWindow(with: rootVC)
         return true
     }
     
     func applicationWillTerminate(_ application: UIApplication) {
         Log.trace()
-        self.coreDataManager?.save()
+        Model.coreData.save()
     }
 }
 
 // MARK: - Private Methods
 private extension AppDelegate {
-    func startCoordinator(with rootVC: SplitViewRootController,_ coreDataManager: CoreDataManager) {
+    func startCoordinator(with rootVC: SplitViewRootController) {
         Log.trace()
-        coordinator = MainCoordinator(rootVC, coreDataManager)
+        coordinator = MainCoordinator(rootVC)
         coordinator?.start()
     }
     

@@ -17,10 +17,10 @@ class GroupPickerView: UIView, ToolbarPickerView {
     private var cancelButton: UIBarButtonItem!
     
     // MARK: - Initializers
-    required init(_ practiceLogToMove: PracticeSession,_ oldGroup: Group?,_ newGroups: [Group],_ coreDataManager: CoreDataManager, managedView: UIView,_ coordinator: PracticeLogCoordinator) {
+    required init(_ practiceLogToMove: PracticeSession,_ oldGroup: Group?,_ newGroups: [Group], managedView: UIView,_ coordinator: PracticeLogCoordinator) {
         super.init(frame: .zero)
         Log.trace()
-        self.manager = self.configureManager(practiceLogToMove, oldGroup, newGroups, coreDataManager, coordinator)
+        self.manager = self.configureManager(practiceLogToMove, oldGroup, newGroups, coordinator)
         self.picker.dataSource = self.manager
         self.picker.delegate = self.manager
         let toolbarButtons = configurePickerToolbarButtons()
@@ -44,9 +44,9 @@ private extension GroupPickerView {
         return [doneButton, spacer, cancelButton]
     }
     
-    func configureManager(_ practiceLogToMove: PracticeSession,_ oldGroup: Group?,_ newGroups: [Group],_ coreDataManager: CoreDataManager,_ coordinator: PracticeLogCoordinator) -> GroupPickerManager {
+    func configureManager(_ practiceLogToMove: PracticeSession,_ oldGroup: Group?,_ newGroups: [Group],_ coordinator: PracticeLogCoordinator) -> GroupPickerManager {
         Log.trace()
-        let manager = GroupPickerManager(self, coreDataManager, coordinator)
+        let manager = GroupPickerManager(self, coordinator)
         manager.practiceLogToMove = practiceLogToMove
         manager.oldGroup = oldGroup
         manager.newGroups = newGroups.filter { $0 !== oldGroup }

@@ -12,7 +12,6 @@ import CoreData
 
 class PracticeLogTableManager: NSObject, SelectionTrackingTableManager {
     
-    var coreDataManager: CoreDataManager
     var managedTableView: UITableView
     var managedVC: UIViewController
     var selectedRow = -1
@@ -23,10 +22,9 @@ class PracticeLogTableManager: NSObject, SelectionTrackingTableManager {
     var practiceSessions: [PracticeSession]!
     var currentGroup: Group?
     
-    required init(_ managedTableView: UITableView,_ coreDataManager: CoreDataManager, managedVC: UIViewController) {
+    required init(_ managedTableView: UITableView, managedVC: UIViewController) {
         Log.trace()
         self.managedTableView = managedTableView
-        self.coreDataManager = coreDataManager
         self.managedVC = managedVC
         super.init()
         self.managedTableView.delegate = self
@@ -53,7 +51,7 @@ class PracticeLogTableManager: NSObject, SelectionTrackingTableManager {
 // MARK: UITableViewDataSource
 extension PracticeLogTableManager: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let practiceSessions = coreDataManager.fetchPracticeSessions(in: currentGroup) else {
+        guard let practiceSessions = Model.coreData.fetchPracticeSessions(in: currentGroup) else {
             Log.error("Failed to fetch Practice Logs from group: \(currentGroup?.name ?? "NIL")")
             return 0
         }
@@ -78,8 +76,8 @@ extension PracticeLogTableManager: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            let practiceSession = coreDataManager.practiceSessionFRC.object(at: indexPath)
-            coreDataManager.delete(practiceSession)
+            let practiceSession = Model.coreData.practiceSessionFRC.object(at: indexPath)
+            Model.coreData.delete(practiceSession)
             
             let rowToDelete = indexPath.row
             if selectedRow == rowToDelete {
@@ -106,7 +104,7 @@ extension PracticeLogTableManager: UITableViewDelegate {
             if tableView.allowsMultipleSelection {
                 selectedCell.accessoryType = (selectedCell.accessoryType == .none) ? .checkmark : .none
             } else {
-                let practiceSession = coreDataManager.practiceSessionFRC.object(at: indexPath)
+                let practiceSession = Model.coreData.practiceSessionFRC.object(at: indexPath)
                 guard let coordinator = self.coordinator else {
                     Log.error("Failed to get reference to Practice Log Coordinator")
                     return
@@ -135,11 +133,11 @@ extension PracticeLogTableManager: UITableViewDelegate {
         let deleteAction = UIContextualAction(style: .destructive, title: Actions.delete) { [unowned self] (action, view, completionHandler) in
             
             let deleteAlertAction: ((UIAlertAction) -> Void) = { action in
-                let practiceSessionToDelete = self.coreDataManager.practiceSessionFRC.object(at: indexPath)
-                self.coreDataManager.delete(practiceSessionToDelete)
+                let practiceSessionToDelete = Model.coreData.practiceSessionFRC.object(at: indexPath)
+                Model.coreData.delete(practiceSessionToDelete)
                 
                 self.managedTableView.deleteRows(at: [indexPath], with: .fade)
-                guard let fetchedPracticeLogs = self.coreDataManager.fetchPracticeSessions(in: self.currentGroup) else {
+                guard let fetchedPracticeLogs = Model.coreData.fetchPracticeSessions(in: self.currentGroup) else {
                     Log.error("Failed to fetch Practice Logs in group: \(self.currentGroup?.name ?? "NIL")")
                     return
                 }
@@ -162,15 +160,15 @@ extension PracticeLogTableManager: UITableViewDelegate {
         }
           
         let moveAction = UIContextualAction(style: .normal, title: Actions.move) { [unowned self] (action, view, completionHandler) in
-            let practiceLogToMove = self.coreDataManager.practiceSessionFRC.object(at: indexPath)
+            let practiceLogToMove = Model.coreData.practiceSessionFRC.object(at: indexPath)
 
-            guard let groups = self.coreDataManager.groupFRC.fetchedObjects else {
+            guard let groups = Model.coreData.groupFRC.fetchedObjects else {
                 Log.error("Failed to fetch groups")
                 completionHandler(false)
                 return
             }
             
-            let groupPickerView = GroupPickerView(practiceLogToMove, practiceLogToMove.group, groups, self.coreDataManager, managedView: self.managedVC.view, self.coordinator)
+            let groupPickerView = GroupPickerView(practiceLogToMove, practiceLogToMove.group, groups, managedView: self.managedVC.view, self.coordinator)
             groupPickerView.show()
             completionHandler(true)
         }
@@ -178,7 +176,7 @@ extension PracticeLogTableManager: UITableViewDelegate {
         
         var swipeActions = [deleteAction, moveAction]
         
-        if let fetchedGroups = coreDataManager.groupFRC.fetchedObjects {
+        if let fetchedGroups = Model.coreData.groupFRC.fetchedObjects {
             if fetchedGroups.count == 1 {
                 swipeActions = [deleteAction]
             }
@@ -192,7 +190,7 @@ extension PracticeLogTableManager: UITableViewDelegate {
 
 private extension PracticeLogTableManager {
     private func configureCell(_ cell: UITableViewCell, _ indexPath: IndexPath) {
-        guard let practiceSessions = coreDataManager.fetchPracticeSessions(in: currentGroup) else {
+        guard let practiceSessions = Model.coreData.fetchPracticeSessions(in: currentGroup) else {
             Log.error("Failed to fetch Practice Logs in group: \(currentGroup?.name ?? "NIL")")
             return
         }

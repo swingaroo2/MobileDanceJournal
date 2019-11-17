@@ -11,16 +11,14 @@ import UIKit
 
 class GroupPickerManager: NSObject, PickerManager {
     var managedView: ToolbarPickerView
-    var coreDataManager: CoreDataManager
     var coordinator: PracticeLogCoordinator
     var oldGroup: Group?
     var newGroups: [Group]!
     var practiceLogToMove: PracticeSession!
     
-    required init(_ managedView: ToolbarPickerView,_ coreDataManager: CoreDataManager,_ coordinator: PracticeLogCoordinator) {
+    required init(_ managedView: ToolbarPickerView,_ coordinator: PracticeLogCoordinator) {
         Log.trace()
         self.managedView = managedView
-        self.coreDataManager = coreDataManager
         self.coordinator = coordinator
     }
     
@@ -38,7 +36,7 @@ extension GroupPickerManager {
         }
         
         // Get Practice Logs in the old Group
-        guard let practiceLogs = coreDataManager.fetchPracticeSessions(in: oldGroup) else {
+        guard let practiceLogs = Model.coreData.fetchPracticeSessions(in: oldGroup) else {
             Log.error("Failed to get reference to Practice Logs. Hiding picker")
             managedView.hide()
             return
@@ -54,7 +52,7 @@ extension GroupPickerManager {
         let indexPath = IndexPath(row: rowIndex, section: 0)
         let newGroup = selectedRow >= newGroups.count ? nil : newGroups[selectedRow]
         
-        coreDataManager.move([practiceLogToMove], from: oldGroup, to: newGroup)
+        Model.coreData.move([practiceLogToMove], from: oldGroup, to: newGroup)
         managedTableView.deleteRows(at: [indexPath], with: .fade)
         NotificationCenter.default.post(name: .practiceLogMoved, object: self, userInfo: nil)
         managedView.hide()

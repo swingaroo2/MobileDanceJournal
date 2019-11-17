@@ -11,7 +11,6 @@ import UIKit
 class VideoGalleryVC: UIViewController, Storyboarded {
 
     var coordinator: VideoGalleryCoordinator!
-    var coreDataManager: CoreDataManager!
     var tableManager: TableManager!
     var practiceSession: PracticeSession!
     var practiceSessionPicker: PracticeSessionPickerView?
@@ -49,7 +48,7 @@ extension VideoGalleryVC {
             Log.error("Failed to get reference to Practice Log")
             return
         }
-        let fetchedVideos = coreDataManager.fetchVideos(for: practiceSession)
+        let fetchedVideos = Model.coreData.fetchVideos(for: practiceSession)
         noContentLabel.isHidden = !fetchedVideos.isEmpty
     }
 }
@@ -93,7 +92,7 @@ private extension VideoGalleryVC {
 private extension VideoGalleryVC {
     func setUpTableManager() -> VideoGalleryTableManager {
         Log.trace()
-        let tableManager = VideoGalleryTableManager(videosTableView, coreDataManager, managedVC: self)
+        let tableManager = VideoGalleryTableManager(videosTableView, managedVC: self)
         tableManager.practiceSession = practiceSession
         tableManager.practiceSessionPicker = practiceSessionPicker
         tableManager.noContentLabel = noContentLabel

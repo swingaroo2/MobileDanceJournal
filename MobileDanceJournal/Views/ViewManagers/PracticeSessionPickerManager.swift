@@ -12,15 +12,13 @@ import UIKit
 class PracticeSessionPickerManager: NSObject, PickerManager {
     
     var managedView: ToolbarPickerView
-    var coreDataManager: CoreDataManager
     var practiceSessions: [PracticeSession]!
     var oldPracticeSession: PracticeSession!
     var videoToMove: PracticeVideo!
     
-    required init(_ managedView: ToolbarPickerView,_ coreDataManager: CoreDataManager) {
+    required init(_ managedView: ToolbarPickerView) {
         Log.trace()
         self.managedView = managedView
-        self.coreDataManager = coreDataManager
     }
 }
 
@@ -72,7 +70,7 @@ extension PracticeSessionPickerManager {
         let selectedRow = managedView.picker.selectedRow(inComponent: 0)
         let destinationPracticeSession = practiceSessions[selectedRow]
         
-        coreDataManager.move([videoToMove], from: oldPracticeSession, to: destinationPracticeSession)
+        Model.coreData.move([videoToMove], from: oldPracticeSession, to: destinationPracticeSession)
         managedView.hide()
     }
 }

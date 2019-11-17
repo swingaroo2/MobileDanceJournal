@@ -50,7 +50,7 @@
 		926B0D9B22F571E800112743 /* VideoGalleryTableManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926B0D9A22F571E800112743 /* VideoGalleryTableManager.swift */; };
 		926B0D9F22F58DCF00112743 /* PracticeSessionPickerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926B0D9E22F58DCF00112743 /* PracticeSessionPickerManager.swift */; };
 		926B0DA322F58E3500112743 /* PracticeLogTableManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926B0DA222F58E3500112743 /* PracticeLogTableManager.swift */; };
-		926BEE1922E1057600BC3DD4 /* VideoStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926BEE1822E1057600BC3DD4 /* VideoStorageManager.swift */; };
+		926BEE1922E1057600BC3DD4 /* VideoStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926BEE1822E1057600BC3DD4 /* VideoStorage.swift */; };
 		926BEE2222E5820E00BC3DD4 /* Caching.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926BEE2122E5820E00BC3DD4 /* Caching.swift */; };
 		926BEE2622E5830800BC3DD4 /* ThumbnailCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926BEE2522E5830800BC3DD4 /* ThumbnailCache.swift */; };
 		926BEE3022E58D5300BC3DD4 /* ThumbnailError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926BEE2F22E58D5300BC3DD4 /* ThumbnailError.swift */; };
@@ -70,7 +70,7 @@
 		927BF1C923776836000426BF /* CoreDataManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927BF1C823776836000426BF /* CoreDataManagerTests.swift */; };
 		927F669F22CB04150000EF06 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 927F669E22CB04150000EF06 /* Default-568h@2x.png */; };
 		927F66A122CBCA7F0000EF06 /* UIWindow+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927F66A022CBCA7F0000EF06 /* UIWindow+Extensions.swift */; };
-		927FA3F622DD3C2400F58F58 /* VideoLocalStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927FA3F522DD3C2400F58F58 /* VideoLocalStorageManager.swift */; };
+		927FA3F622DD3C2400F58F58 /* VideoStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927FA3F522DD3C2400F58F58 /* VideoStorageManager.swift */; };
 		927FA3FA22DD959900F58F58 /* URLBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927FA3F922DD959900F58F58 /* URLBuilder.swift */; };
 		928D5998230B4B9D0000945E /* Storyboarded.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928D5997230B4B9D0000945E /* Storyboarded.swift */; };
 		928D599A230B4D050000945E /* PracticeGroupsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928D5999230B4D050000945E /* PracticeGroupsVC.swift */; };
@@ -162,7 +162,7 @@
 		926B0D9A22F571E800112743 /* VideoGalleryTableManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoGalleryTableManager.swift; sourceTree = "<group>"; wrapsLines = 0; };
 		926B0D9E22F58DCF00112743 /* PracticeSessionPickerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PracticeSessionPickerManager.swift; sourceTree = "<group>"; wrapsLines = 0; };
 		926B0DA222F58E3500112743 /* PracticeLogTableManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PracticeLogTableManager.swift; sourceTree = "<group>"; wrapsLines = 0; };
-		926BEE1822E1057600BC3DD4 /* VideoStorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoStorageManager.swift; sourceTree = "<group>"; wrapsLines = 0; };
+		926BEE1822E1057600BC3DD4 /* VideoStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoStorage.swift; sourceTree = "<group>"; wrapsLines = 0; };
 		926BEE2122E5820E00BC3DD4 /* Caching.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Caching.swift; sourceTree = "<group>"; };
 		926BEE2522E5830800BC3DD4 /* ThumbnailCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThumbnailCache.swift; sourceTree = "<group>"; };
 		926BEE2F22E58D5300BC3DD4 /* ThumbnailError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThumbnailError.swift; sourceTree = "<group>"; };
@@ -185,7 +185,7 @@
 		927BF1C823776836000426BF /* CoreDataManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManagerTests.swift; sourceTree = "<group>"; wrapsLines = 0; };
 		927F669E22CB04150000EF06 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		927F66A022CBCA7F0000EF06 /* UIWindow+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIWindow+Extensions.swift"; sourceTree = "<group>"; };
-		927FA3F522DD3C2400F58F58 /* VideoLocalStorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoLocalStorageManager.swift; sourceTree = "<group>"; };
+		927FA3F522DD3C2400F58F58 /* VideoStorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoStorageManager.swift; sourceTree = "<group>"; };
 		927FA3F922DD959900F58F58 /* URLBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLBuilder.swift; sourceTree = "<group>"; };
 		927FA40122DE2E6200F58F58 /* DataModel 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "DataModel 2.xcdatamodel"; sourceTree = "<group>"; };
 		928D5997230B4B9D0000945E /* Storyboarded.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Storyboarded.swift; sourceTree = "<group>"; };
@@ -493,8 +493,8 @@
 			isa = PBXGroup;
 			children = (
 				92C67BC12352C62A003BEAF9 /* DTOs */,
-				926BEE1822E1057600BC3DD4 /* VideoStorageManager.swift */,
-				927FA3F522DD3C2400F58F58 /* VideoLocalStorageManager.swift */,
+				926BEE1822E1057600BC3DD4 /* VideoStorage.swift */,
+				927FA3F522DD3C2400F58F58 /* VideoStorageManager.swift */,
 			);
 			path = "Basic Local Storage";
 			sourceTree = "<group>";
@@ -865,7 +865,7 @@
 				926BEE2622E5830800BC3DD4 /* ThumbnailCache.swift in Sources */,
 				920AAD5D22DCFC4B0097643C /* NSObject+Extensions.swift in Sources */,
 				926BEE3422E5930100BC3DD4 /* UIImageView+Extensions.swift in Sources */,
-				926BEE1922E1057600BC3DD4 /* VideoStorageManager.swift in Sources */,
+				926BEE1922E1057600BC3DD4 /* VideoStorage.swift in Sources */,
 				9239B7EF23491477002AFE38 /* TableManager.swift in Sources */,
 				924C99042364E47300DD6000 /* UploadsController.swift in Sources */,
 				926B0D9B22F571E800112743 /* VideoGalleryTableManager.swift in Sources */,
@@ -883,7 +883,7 @@
 				927F66A122CBCA7F0000EF06 /* UIWindow+Extensions.swift in Sources */,
 				928D59A0230B54040000945E /* PracticeGroupsTableManager.swift in Sources */,
 				92509E9E22D6E29600A915F5 /* VideoUploadVC.swift in Sources */,
-				927FA3F622DD3C2400F58F58 /* VideoLocalStorageManager.swift in Sources */,
+				927FA3F622DD3C2400F58F58 /* VideoStorageManager.swift in Sources */,
 				923B5B432380D7D900644EA6 /* Model.swift in Sources */,
 				9232ACB8226D4298004DB260 /* Constants.swift in Sources */,
 				926E70A42311FB2300A3CCD0 /* GroupPickerManager.swift in Sources */,

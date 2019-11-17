@@ -17,7 +17,6 @@ class AppDelegateTests: XCTestCase {
     func testAppLaunch() {
         XCTAssertNotNil(FirebaseApp.app())
         XCTAssertNotNil(sut.coordinator)
-        XCTAssertNotNil(sut.coreDataManager)
         XCTAssertNotNil(sut.window)
     }
 

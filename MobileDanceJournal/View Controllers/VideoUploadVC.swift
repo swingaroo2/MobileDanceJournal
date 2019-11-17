@@ -15,7 +15,6 @@ class VideoUploadVC: UIViewController, Storyboarded {
     @IBOutlet weak var saveButton: UIBarButtonItem!
     
     weak var coordinator: VideoGalleryCoordinator?
-    var coreDataManager: CoreDataManager!
     var videoToUpload: PracticeVideo?
     
     // MARK: - Lifecycle Functions
@@ -51,7 +50,7 @@ extension VideoUploadVC {
         let isEditingNewVideo = Services.uploads.video == nil
         
         if isEditingNewVideo {
-            let newVideo = coreDataManager.createAndConfigureNewPracticeVideo(title: titleText, filename: filename)
+            let newVideo = Model.coreData.createAndConfigureNewPracticeVideo(title: titleText, filename: filename)
             
             if let error = Model.videoStorage.saveVideo(from: videoURL) {
                 coordinator?.dismiss(self) { [weak self] in
