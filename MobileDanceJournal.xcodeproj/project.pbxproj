@@ -32,6 +32,8 @@
 		923B5B3E2380A69D00644EA6 /* testVideo.mov in Resources */ = {isa = PBXBuildFile; fileRef = 923B5B3C2380A2D600644EA6 /* testVideo.mov */; };
 		923B5B3F2380A69F00644EA6 /* testVideo.mov in Resources */ = {isa = PBXBuildFile; fileRef = 923B5B3C2380A2D600644EA6 /* testVideo.mov */; };
 		923B5B412380C58500644EA6 /* UIKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923B5B402380C58500644EA6 /* UIKitTests.swift */; };
+		923B5B432380D7D900644EA6 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923B5B422380D7D900644EA6 /* Model.swift */; };
+		923B5B472380D85600644EA6 /* ModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923B5B462380D85600644EA6 /* ModelTests.swift */; };
 		9241F9C222C8375A009C50C1 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9241F9C122C8375A009C50C1 /* Coordinator.swift */; };
 		9241F9CA22C83885009C50C1 /* AlertHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9241F9C922C83885009C50C1 /* AlertHelper.swift */; };
 		9241F9CE22C83AF2009C50C1 /* SplitViewRootController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9241F9CD22C83AF2009C50C1 /* SplitViewRootController.swift */; };
@@ -142,6 +144,8 @@
 		9239B7EE23491477002AFE38 /* TableManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableManager.swift; sourceTree = "<group>"; };
 		923B5B3C2380A2D600644EA6 /* testVideo.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; name = testVideo.mov; path = Resources/testVideo.mov; sourceTree = SOURCE_ROOT; };
 		923B5B402380C58500644EA6 /* UIKitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIKitTests.swift; sourceTree = "<group>"; };
+		923B5B422380D7D900644EA6 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; wrapsLines = 0; };
+		923B5B462380D85600644EA6 /* ModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelTests.swift; sourceTree = "<group>"; };
 		9241F9C122C8375A009C50C1 /* Coordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; wrapsLines = 0; };
 		9241F9C922C83885009C50C1 /* AlertHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertHelper.swift; sourceTree = "<group>"; wrapsLines = 0; };
 		9241F9CD22C83AF2009C50C1 /* SplitViewRootController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitViewRootController.swift; sourceTree = "<group>"; };
@@ -343,6 +347,7 @@
 			children = (
 				927FA3F422DD3B4200F58F58 /* Basic Local Storage */,
 				927FA3F322DD3B2F00F58F58 /* Core Data */,
+				923B5B422380D7D900644EA6 /* Model.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -450,6 +455,7 @@
 		927BF1AB2375FF19000426BF /* JiveJournalTests */ = {
 			isa = PBXGroup;
 			children = (
+				923B5B462380D85600644EA6 /* ModelTests.swift */,
 				923B5B402380C58500644EA6 /* UIKitTests.swift */,
 				9266EB6B237E44CE006C9D1D /* UploadsControllerTests.swift */,
 				9266EB69237E4419006C9D1D /* ServicesTests.swift */,
@@ -878,6 +884,7 @@
 				928D59A0230B54040000945E /* PracticeGroupsTableManager.swift in Sources */,
 				92509E9E22D6E29600A915F5 /* VideoUploadVC.swift in Sources */,
 				927FA3F622DD3C2400F58F58 /* VideoLocalStorageManager.swift in Sources */,
+				923B5B432380D7D900644EA6 /* Model.swift in Sources */,
 				9232ACB8226D4298004DB260 /* Constants.swift in Sources */,
 				926E70A42311FB2300A3CCD0 /* GroupPickerManager.swift in Sources */,
 				9227147622CC819000C6CFAC /* UITextField+Extensions.swift in Sources */,
@@ -910,6 +917,7 @@
 				9266EB64237E26BF006C9D1D /* DateTests.swift in Sources */,
 				9266EB66237E3B95006C9D1D /* NSObjectTests.swift in Sources */,
 				9266EB6C237E44CE006C9D1D /* UploadsControllerTests.swift in Sources */,
+				923B5B472380D85600644EA6 /* ModelTests.swift in Sources */,
 				9266EB68237E3F8E006C9D1D /* URLBuilderTests.swift in Sources */,
 				923B5B412380C58500644EA6 /* UIKitTests.swift in Sources */,
 			);
