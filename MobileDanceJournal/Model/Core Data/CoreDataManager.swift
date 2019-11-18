@@ -102,7 +102,7 @@ extension CoreDataManager {
         
         do {
             try practiceVideoFRC.performFetch()
-            return practiceVideoFRC.fetchedObjects ?? [PracticeVideo]()
+            return practiceVideoFRC.fetchedObjects!
         } catch {
             Log.critical("Failed to fetch [PracticeVideo]: \(error.localizedDescription)")
             return []

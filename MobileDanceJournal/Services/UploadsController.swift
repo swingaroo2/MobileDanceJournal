@@ -25,11 +25,6 @@ class UploadsController: NSObject {
         self.url = URLBuilder.getDocumentsFilePathURL(for: filename)
     }
     
-    func set(url: URL) {
-        Log.trace()
-        self.url = url
-    }
-    
     func set(video: PracticeVideo?) {
         Log.trace()
         self.video = video
@@ -54,14 +49,17 @@ class UploadsController: NSObject {
     // MARK: - Thumbnails
     func getThumbnail(from url: URL, completion: ((UIImage?) -> ())? = nil) {
         Log.trace()
-        let filename = url.lastPathComponent
+        
+        let fileURL = URLBuilder.getDocumentsFilePathURL(for: url.lastPathComponent)
+        
+        let filename = fileURL.lastPathComponent
         
         if let cachedThumbnail = thumbnailCache.value(for: filename) {
             let thumbnail = cachedThumbnail
             completion?(thumbnail)
         } else {
             DispatchQueue.global(qos: .userInitiated).async {
-                let thumbnail = self.getThumbnail(url)
+                let thumbnail = self.getThumbnail(fileURL)
                 DispatchQueue.main.async {
                     if let thumbnail = thumbnail {
                         self.thumbnailCache.add(key: filename, value: thumbnail)

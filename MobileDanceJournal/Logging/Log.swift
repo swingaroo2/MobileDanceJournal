@@ -64,7 +64,7 @@ extension Log {
 private extension Log {
     static func buildLogMessage(_ message: String, file: String = #file, function: String = #function, line: Int = #line, emoji: String) -> Logger.Message {
         let className = URL(string: file.replacingOccurrences(of: " ", with: ""))!.lastPathComponent.replacingOccurrences(of: ".swift", with: "")
-        let fullMessage = message == "" ? "\(emoji) \(className) \(line) \(function)" : "\(emoji) \(className) \(line) \(function): \(message)"
+        let fullMessage = message == "" ? "\(emoji) \(className) \(line) \(function)" : "\(emoji) \(className) \(line) \(function) -- \(message)"
         let message = Logger.Message(stringLiteral: fullMessage)
         return message
     }

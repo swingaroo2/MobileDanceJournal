@@ -21,5 +21,15 @@ class ThumbnailCacheTests: XCTestCase {
         sut.add(key: key, value: testImage)
         XCTAssertNotNil(sut.value(for: key))
     }
+    
+    func testAdd_duplicate() {
+        let testImage = UIImage()
+        let key = "key"
+        XCTAssertNil(sut.value(for: key))
+        
+        sut.add(key: key, value: testImage)
+        sut.add(key: key, value: testImage)
+        XCTAssertNotNil(sut.value(for: key))
+    }
 
 }

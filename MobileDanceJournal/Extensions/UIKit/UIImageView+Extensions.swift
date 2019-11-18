@@ -14,7 +14,9 @@ extension UIImageView {
     func setThumbnail(_ url: URL) {
         Log.trace()
         Services.uploads.getThumbnail(from: url) { cachedImage in
-            self.image = cachedImage
+            DispatchQueue.main.async {
+                self.image = cachedImage
+            }
         }
     }
 }

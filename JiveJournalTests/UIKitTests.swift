@@ -16,6 +16,7 @@ class UIKitTests: XCTestCase {
 
     override func setUp() {
         practiceSession = createTestPracticeSession()
+        clearLocalStorage()
     }
     
     // MARK: - UIWindow Tests
@@ -27,6 +28,32 @@ class UIKitTests: XCTestCase {
         XCTAssertTrue(window.rootViewController == rootViewController)
         XCTAssertTrue(window.frame == UIScreen.main.bounds)
         XCTAssertTrue(window.isKeyWindow)
+    }
+    
+    // MARK: - UINavigationControllerTests
+    func testDisplayChildren_zeroChildVCs() {
+        let navController = UINavigationController()
+        let children = navController.displayChildren
+        let expectedString = "[]"
+        XCTAssertTrue(children == expectedString)
+    }
+    
+    func testDisplayChildren_oneChildVC() {
+        let vc1 = UIViewController()
+        let navController = UINavigationController(rootViewController: vc1)
+        let children = navController.displayChildren
+        let expectedString = "[\"UIViewController\"]"
+        XCTAssertTrue(children == expectedString)
+    }
+    
+    func testDisplayChildren_twoChildVCs() {
+        let vc1 = UIViewController()
+        let vc2 = UIViewController()
+        let navController = UINavigationController(rootViewController: vc1)
+        navController.addChild(vc2)
+        let children = navController.displayChildren
+        let expectedString = "[\"UIViewController\", \"UIViewController\"]"
+        XCTAssertTrue(children == expectedString)
     }
     
     // MARK: - UITextView Tests
@@ -87,20 +114,6 @@ class UIKitTests: XCTestCase {
         label.configure(with: practiceSession, for: PracticeSessionConstants.title)
         XCTAssertTrue(label.text == practiceSession.title)
     }
-
-    // MARK: - UIImageView Tests
-    func testSetThumbnail_url() throws {
-        let path = try XCTUnwrap(Bundle.main.path(forResource: "testVideo", ofType: "mov"))
-        let url = try XCTUnwrap(URL(string: path))
-        let imageView = UIImageView()
-        imageView.setThumbnail(url)
-        
-        Services.uploads.getThumbnail(from: url) { cachedImage in
-            DispatchQueue.main.async {
-                XCTAssertTrue(imageView.image == cachedImage)
-            }
-        }
-    }
 }
 
 private extension UIKitTests {
@@ -117,5 +130,18 @@ private extension UIKitTests {
         let calendar = Calendar(identifier: .gregorian)
         let components = DateComponents(year: year, month: month, day: day)
         return calendar.date(from: components)!
+    }
+    
+    func clearLocalStorage() {
+        do {
+            let path = try XCTUnwrap(Bundle.main.path(forResource: "testVideo", ofType: "mov"))
+            let url = try XCTUnwrap(URL(string: path))
+            let documentsURL = URLBuilder.getDocumentsFilePathURL(for: url.lastPathComponent)
+            if FileManager.default.fileExists(atPath: documentsURL.path) {
+                try FileManager.default.removeItem(at: documentsURL)
+            }
+        } catch {
+            Log.trace("Exception: \(error.localizedDescription)")
+        }
     }
 }

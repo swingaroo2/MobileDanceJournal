@@ -50,6 +50,7 @@ private extension AppDelegate {
     }
     
     func initializeFirebase() {
+        Log.logLevel = .trace
         FirebaseConfiguration.shared.setLoggerLevel(.min)
         FirebaseApp.configure()
     }

@@ -18,7 +18,12 @@ extension NSObject {
     var className: String {
         Log.trace()
         let fullName = NSStringFromClass(type(of: self))
-        let className = fullName.components(separatedBy: ".")[1]
-        return className
+        let components = fullName.components(separatedBy: ".")
+        
+        guard components.count > 1, let nameOfClass = components.last else {
+            return fullName
+        }
+        
+        return nameOfClass
     }
 }

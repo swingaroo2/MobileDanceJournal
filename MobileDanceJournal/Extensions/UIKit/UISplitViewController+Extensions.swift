@@ -11,12 +11,12 @@ import UIKit
 // MARK: - ViewController and NavigationController getters
 extension UISplitViewController {
     var masterNC: UINavigationController? {
-        Log.trace()
+        let navController = viewControllers.first as? UINavigationController
+        Log.trace("MasterNC Children: \(navController == nil ? "NIL" : navController!.displayChildren)")
         return viewControllers.first as? UINavigationController
     }
     
     var detailNC: UINavigationController? {
-        Log.trace()
         if isCollapsed {
             guard let topNavController = children.first as? UINavigationController else {
                 Log.error("Failed to get a reference to top Navigation Controller")
@@ -26,21 +26,46 @@ extension UISplitViewController {
                 Log.warn("Failed to get a reference to detail Navigation Controller")
                 return nil
             }
+            Log.trace("DetailNC Children: \(detailNC.displayChildren)")
             return detailNC
         }
         
         let childVC = viewControllers.count > 1 ? viewControllers.last : nil
-        return childVC as? UINavigationController
+        let navController = childVC as? UINavigationController
+        
+        Log.trace("DetailNC Children: \(navController == nil ? "NIL" : navController!.displayChildren)")
+        
+        return navController
     }
     
     var masterVC: UIViewController? {
-        Log.trace()
-        return masterNC?.topViewController
+        guard let masterNC = masterNC else {
+            Log.trace("NIL masterNC")
+            return nil
+        }
+        
+        guard let topVC = masterNC.topViewController else {
+            Log.trace("NIL topViewController")
+            return nil
+        }
+        
+        Log.trace("MasterVC: \(topVC.className)")
+        return topVC
     }
     
     var detailVC: UIViewController? {
-        Log.trace()
-        return detailNC?.topViewController
+        guard let detailNC = detailNC else {
+            Log.trace("NIL masterNC")
+            return nil
+        }
+        
+        guard let topVC = detailNC.topViewController else {
+            Log.trace("NIL topViewController")
+            return nil
+        }
+        
+        Log.trace("DetailVC: \(topVC.className)")
+        return topVC
     }
     
     var isDisplayingBothVCs: Bool {

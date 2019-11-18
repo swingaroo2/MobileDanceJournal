@@ -12,15 +12,12 @@ class VideoStorageManager: VideoStorage {
     
     func saveVideo(_ url: URL) throws {
         Log.trace("Saving video: \(url.lastPathComponent)")
-        var mutableOriginalPath = url
-        if !mutableOriginalPath.isFileURL {
-            mutableOriginalPath = URL(fileURLWithPath: url.path)
-        }
+        let mutableOriginalURL = url.isFileURL ? url : URL(fileURLWithPath: url.path)
         
         let documentsURL = URLBuilder.getDocumentsFilePathURL(for: url.lastPathComponent)
         
         if !FileManager.default.fileExists(atPath: documentsURL.path) {
-            let data = try Data(contentsOf: mutableOriginalPath)
+            let data = try Data(contentsOf: mutableOriginalURL)
             try? data.write(to: documentsURL)
             Log.trace("Successfully saved video to path: \(documentsURL)")
         } else {

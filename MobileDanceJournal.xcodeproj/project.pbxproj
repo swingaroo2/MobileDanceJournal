@@ -36,6 +36,7 @@
 		923B5B472380D85600644EA6 /* ModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923B5B462380D85600644EA6 /* ModelTests.swift */; };
 		923B5B492381AE1800644EA6 /* VideoStorageManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923B5B482381AE1800644EA6 /* VideoStorageManagerTests.swift */; };
 		923B5B4B2381B9D800644EA6 /* VideoStorageError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923B5B4A2381B9D800644EA6 /* VideoStorageError.swift */; };
+		923B5B4D2381F67700644EA6 /* UINavigationController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923B5B4C2381F67700644EA6 /* UINavigationController+Extensions.swift */; };
 		9241F9C222C8375A009C50C1 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9241F9C122C8375A009C50C1 /* Coordinator.swift */; };
 		9241F9CA22C83885009C50C1 /* AlertHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9241F9C922C83885009C50C1 /* AlertHelper.swift */; };
 		9241F9CE22C83AF2009C50C1 /* SplitViewRootController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9241F9CD22C83AF2009C50C1 /* SplitViewRootController.swift */; };
@@ -150,6 +151,7 @@
 		923B5B462380D85600644EA6 /* ModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelTests.swift; sourceTree = "<group>"; };
 		923B5B482381AE1800644EA6 /* VideoStorageManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoStorageManagerTests.swift; sourceTree = "<group>"; };
 		923B5B4A2381B9D800644EA6 /* VideoStorageError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoStorageError.swift; sourceTree = "<group>"; };
+		923B5B4C2381F67700644EA6 /* UINavigationController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "UINavigationController+Extensions.swift"; path = "/Users/Zach/Developer/iOS/MobileDanceJournal/MobileDanceJournal/Extensions/UIKit/UINavigationController+Extensions.swift"; sourceTree = "<absolute>"; };
 		9241F9C122C8375A009C50C1 /* Coordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; wrapsLines = 0; };
 		9241F9C922C83885009C50C1 /* AlertHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertHelper.swift; sourceTree = "<group>"; wrapsLines = 0; };
 		9241F9CD22C83AF2009C50C1 /* SplitViewRootController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitViewRootController.swift; sourceTree = "<group>"; };
@@ -436,14 +438,15 @@
 		92706C9622E01A8C009BA88C /* UIKit */ = {
 			isa = PBXGroup;
 			children = (
+				926BEE3322E5930100BC3DD4 /* UIImageView+Extensions.swift */,
 				9227148122CD2C0400C6CFAC /* UILabel+Extensions.swift */,
+				923B5B4C2381F67700644EA6 /* UINavigationController+Extensions.swift */,
 				9232ACC1226ECACD004DB260 /* UISplitViewController+Extensions.swift */,
 				9227147522CC819000C6CFAC /* UITextField+Extensions.swift */,
 				9227148522CD2D4900C6CFAC /* UITextView+Extensions.swift */,
 				922E20DD228123B600295A19 /* UIView+Extensions.swift */,
 				9214FF9A227E3B4100387A3B /* UIViewController+Extensions.swift */,
 				927F66A022CBCA7F0000EF06 /* UIWindow+Extensions.swift */,
-				926BEE3322E5930100BC3DD4 /* UIImageView+Extensions.swift */,
 			);
 			path = UIKit;
 			sourceTree = "<group>";
@@ -881,6 +884,7 @@
 				923B5B4B2381B9D800644EA6 /* VideoStorageError.swift in Sources */,
 				926E70A82311FD6E00A3CCD0 /* GroupPickerView.swift in Sources */,
 				9232AC88226D4015004DB260 /* PracticeLogVC.swift in Sources */,
+				923B5B4D2381F67700644EA6 /* UINavigationController+Extensions.swift in Sources */,
 				9232AC86226D4015004DB260 /* AppDelegate.swift in Sources */,
 				92F7FE31236A5D3F0033091D /* Log.swift in Sources */,
 				928D59B2230DCBD00000945E /* PracticeVideo+CoreDataClass copy.swift in Sources */,

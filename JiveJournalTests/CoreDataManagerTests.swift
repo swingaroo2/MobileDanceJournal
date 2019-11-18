@@ -66,17 +66,14 @@ class CoreDataManagerTests: XCTestCase {
     func testSave() throws {
         let group = Group(context: sut.persistentContainer.viewContext)
         group.name = "\(#function)"
-        
+        group.dateCreated = Date()
         sut.save()
         
         let fetchedGroups = try XCTUnwrap(sut.groupFRC.fetchedObjects)
-        
         let fetchedGroupExists = fetchedGroups[0]
         XCTAssertNotNil(fetchedGroupExists)
     }
-    
-    // TODO: Why did my delete test fail? Deleting works fine in the app...
-    
+
     // MARK: - Relationships
     func testAddVideoToPracticeSession() {
         let video = PracticeVideo(context: sut.persistentContainer.viewContext)
@@ -331,6 +328,17 @@ class CoreDataManagerTests: XCTestCase {
     
     func testCreateNewGroup() throws {
         sut.createAndSaveNewGroup(name: "test group", practiceSessions: [])
+        
+        let fetchedGroups = try XCTUnwrap(sut.groupFRC.fetchedObjects)
+        let aGroupWasSaved = fetchedGroups.count == 1
+        XCTAssertTrue(aGroupWasSaved)
+        
+        let originalGroupWasSaved = fetchedGroups[0].name == "test group"
+        XCTAssertTrue(originalGroupWasSaved)
+    }
+    
+    func testCreateNewGroup_nil() throws {
+        sut.createAndSaveNewGroup(name: "test group", practiceSessions: nil)
         
         let fetchedGroups = try XCTUnwrap(sut.groupFRC.fetchedObjects)
         let aGroupWasSaved = fetchedGroups.count == 1
