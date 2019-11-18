@@ -12,30 +12,28 @@ import CoreData
 
 class PracticeGroupsTableManager: NSObject, TableManager {
     
-    var coreDataManager: CoreDataManager
     var managedTableView: UITableView
     var managedVC: UIViewController
     
     var coordinator: MainCoordinator!
     var groups: [Group]!
     
-    required init(_ managedTableView: UITableView,_ coreDataManager: CoreDataManager, managedVC: UIViewController) {
+    required init(_ managedTableView: UITableView, managedVC: UIViewController) {
         Log.trace()
         self.managedTableView = managedTableView
-        self.coreDataManager = coreDataManager
         self.managedVC = managedVC
         super.init()
         self.managedTableView.tableFooterView = UIView()
         self.managedTableView.delegate = self
         self.managedTableView.dataSource = self
-        self.coreDataManager.practiceGroupsDelegate = self
+        Model.coreData.practiceGroupsDelegate = self
     }
 }
 
 // MARK: - UITableViewDataSource
 extension PracticeGroupsTableManager {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let fetchedGroups = coreDataManager.groupFRC.fetchedObjects else {
+        guard let fetchedGroups = Model.coreData.groupFRC.fetchedObjects else {
             Log.error("Failed to fetch groups")
             return 1
         }
@@ -54,7 +52,7 @@ extension PracticeGroupsTableManager {
     }
     
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        guard let fetchedGroups = coreDataManager.groupFRC.fetchedObjects else {
+        guard let fetchedGroups = Model.coreData.groupFRC.fetchedObjects else {
             Log.error("Failed to fetch groups")
             return false
         }
@@ -72,8 +70,8 @@ extension PracticeGroupsTableManager {
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            let selectedGroup = coreDataManager.groupFRC.object(at: indexPath)
-            managedVC.presentYesNoAlert(message: AlertConstants.confirmGroupDelete, isDeleteAlert: true, yesAction: { [unowned self] action in self.coreDataManager.delete(selectedGroup) })
+            let selectedGroup = Model.coreData.groupFRC.object(at: indexPath)
+            managedVC.presentYesNoAlert(message: AlertConstants.confirmGroupDelete, isDeleteAlert: true, yesAction: { action in Model.coreData.delete(selectedGroup) })
         }
     }
 }
@@ -96,19 +94,19 @@ extension PracticeGroupsTableManager {
             if textLabel.text == TextConstants.uncategorized {
                 coordinator.showPracticeLog(group: nil)
             } else {
-                let selectedGroup = coreDataManager.groupFRC.object(at: indexPath)
+                let selectedGroup = Model.coreData.groupFRC.object(at: indexPath)
                 coordinator.showPracticeLog(group: selectedGroup)
             }
         } else {
             if textLabel.text == TextConstants.uncategorized { return }
             
             managedVC.setEditing(false, animated: true)
-            guard let fetchedObjects = coreDataManager.groupFRC.fetchedObjects else {
+            guard let fetchedObjects = Model.coreData.groupFRC.fetchedObjects else {
                 Log.error("Failed to fetch groups")
                 return
             }
             if indexPath.row < fetchedObjects.count {
-                let selectedGroup = coreDataManager.groupFRC.object(at: indexPath)
+                let selectedGroup = Model.coreData.groupFRC.object(at: indexPath)
                 coordinator.startEditing(group: selectedGroup)
             }
         }
@@ -136,9 +134,9 @@ extension PracticeGroupsTableManager {
         let deleteAction = UIContextualAction(style: .destructive, title: Actions.delete) { [unowned self] (action, view, completionHandler) in
             
             let deleteAlertAction: ((UIAlertAction) -> Void) = { action in
-                let practiceGroupToDelete = self.coreDataManager.groupFRC.object(at: indexPath)
+                let practiceGroupToDelete = Model.coreData.groupFRC.object(at: indexPath)
                 Log.trace("Deleting group \(practiceGroupToDelete.name) at \(indexPath)")
-                self.coreDataManager.delete(practiceGroupToDelete)
+                Model.coreData.delete(practiceGroupToDelete)
                 completionHandler(true)
             }
             
@@ -202,7 +200,7 @@ extension PracticeGroupsTableManager {
 // MARK: - Private Methods
 private extension PracticeGroupsTableManager {
     func configureCell(_ cell: UITableViewCell, _ indexPath: IndexPath) {
-        let group = (indexPath.row >= groups.count) ? nil : coreDataManager.groupFRC.object(at: indexPath)
+        let group = (indexPath.row >= groups.count) ? nil : Model.coreData.groupFRC.object(at: indexPath)
         cell.textLabel?.text = (group != nil) ? group!.name : TextConstants.uncategorized
         let isConfiguringUncategorizedCell = cell.textLabel?.text == TextConstants.uncategorized
         
@@ -210,7 +208,7 @@ private extension PracticeGroupsTableManager {
         cell.detailTextLabel?.highlightedTextColor = .darkText
         
         if group != nil || isConfiguringUncategorizedCell {
-            guard let practiceLogs = coreDataManager.fetchPracticeSessions(in: group) else {
+            guard let practiceLogs = Model.coreData.fetchPracticeSessions(in: group) else {
                 Log.error("Failed to fetch Practice Logs")
                 return
             }

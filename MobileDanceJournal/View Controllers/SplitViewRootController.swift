@@ -12,7 +12,6 @@ import UIKit
 class SplitViewRootController: UISplitViewController, Storyboarded {
 
     weak var coordinator: MainCoordinator?
-    var coreDataManager: CoreDataManager!
     
     override func viewDidLoad() {
         super.viewDidLoad()

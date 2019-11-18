@@ -12,10 +12,9 @@ import CoreData
 
 protocol TableManager: UITableViewDelegate, UITableViewDataSource, NSFetchedResultsControllerDelegate {
     var managedTableView: UITableView { get }
-    var coreDataManager: CoreDataManager { get }
     var managedVC: UIViewController { get }
     
-    init(_ managedTableView: UITableView,_ coreDataManager: CoreDataManager, managedVC: UIViewController)
+    init(_ managedTableView: UITableView, managedVC: UIViewController)
 }
 
 protocol SelectionTrackingTableManager: TableManager {

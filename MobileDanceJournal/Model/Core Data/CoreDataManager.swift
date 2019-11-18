@@ -102,7 +102,7 @@ extension CoreDataManager {
         
         do {
             try practiceVideoFRC.performFetch()
-            return practiceVideoFRC.fetchedObjects ?? [PracticeVideo]()
+            return practiceVideoFRC.fetchedObjects!
         } catch {
             Log.critical("Failed to fetch [PracticeVideo]: \(error.localizedDescription)")
             return []
@@ -183,6 +183,10 @@ extension CoreDataManager {
     
     func move(_ videos: [PracticeVideo], from oldPracticeSession: PracticeSession, to newPracticeSession: PracticeSession) {
         Log.trace()
+        guard !videos.isEmpty else {
+            Log.warn("Attempted to move empty array of videos")
+            return
+        }
         let videoSet = NSSet(array: videos)
         oldPracticeSession.removeFromVideos(videoSet)
         newPracticeSession.addToVideos(videoSet)
@@ -191,6 +195,10 @@ extension CoreDataManager {
     
     func move(_ practiceSessions: [PracticeSession], from oldGroup: Group?, to newGroup: Group?) {
         Log.trace()
+        guard !practiceSessions.isEmpty else {
+            Log.warn("Attempted to move empty array of practice sessions")
+            return
+        }
         let _ = practiceSessions.map { $0.group = newGroup }
         save()
     }

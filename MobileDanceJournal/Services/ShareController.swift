@@ -17,12 +17,4 @@ class ShareController: NSObject {
         let videoURL = URLBuilder.getDocumentsFilePathURL(for: video.filename)
         coordinator.share(videoURL)
     }
-    
-    func share(_ practiceSession: PracticeSession,_ coordinator: Coordinator) {
-        Log.trace()
-    }
-    
-    func share(_ group: Group,_ coordinator: Coordinator) {
-        Log.trace()
-    }
 }

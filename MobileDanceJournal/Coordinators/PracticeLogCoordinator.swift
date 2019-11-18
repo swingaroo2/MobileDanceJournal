@@ -12,16 +12,14 @@ import UIKit
 // MARK: - Initialization
 class PracticeLogCoordinator: Coordinator {
     let rootVC: SplitViewRootController
-    private let coreDataManager: CoreDataManager
     let currentGroup: Group?
     
     var childCoordinators = [Coordinator]()
     var navigationController = UINavigationController()
     
-    init(_ rootViewController: SplitViewRootController,_ coreDataManager: CoreDataManager,_ currentGroup: Group?) {
+    init(_ rootViewController: SplitViewRootController,_ currentGroup: Group?) {
         Log.trace("Initializing Practice Log Coordinator for group: \(currentGroup?.name ?? "NIL")")
         self.rootVC = rootViewController
-        self.coreDataManager = coreDataManager
         self.currentGroup = currentGroup
     }
     
@@ -29,7 +27,6 @@ class PracticeLogCoordinator: Coordinator {
         Log.trace()
         let firstVC = PracticeLogVC.instantiate()
         firstVC.coordinator = self
-        firstVC.coreDataManager = coreDataManager
         firstVC.currentGroup = currentGroup
         rootVC.masterNC?.pushViewController(firstVC, animated: true)
     }
@@ -39,7 +36,7 @@ class PracticeLogCoordinator: Coordinator {
 extension PracticeLogCoordinator {
     func startEditingNewPracticeSession() {
         Log.trace()
-        let newPracticeSession = coreDataManager.createAndReturnNewPracticeSession()
+        let newPracticeSession = Model.coreData.createAndReturnNewPracticeSession()
         newPracticeSession.group = currentGroup
         showDetails(for: newPracticeSession)
     }
@@ -53,12 +50,11 @@ extension PracticeLogCoordinator {
         }
         
         notepadVC.coordinator = self
-        notepadVC.coreDataManager = coreDataManager
         notepadVC.practiceSession = practiceSession
         notepadVC.navigationItem.leftBarButtonItem = rootVC.displayModeButtonItem
         notepadVC.navigationItem.leftItemsSupplementBackButton = true
         notepadVC.loadViewIfNeeded()
-        notepadVC.textViewManager = NotepadTextViewManager(notepadVC, coreDataManager)
+        notepadVC.textViewManager = NotepadTextViewManager(notepadVC)
         notepadVC.showContent()
         notepadVC.updateView(with: practiceSession)
         
@@ -88,7 +84,7 @@ extension PracticeLogCoordinator {
     
     func viewVideos(for practiceSession: PracticeSession) {
         Log.trace("Viewing videos for practice log: \(practiceSession.title)")
-        let child = VideoGalleryCoordinator(rootVC, coreDataManager, currentGroup, practiceSession)
+        let child = VideoGalleryCoordinator(rootVC, currentGroup, practiceSession)
         childCoordinators.append(child)
         child.start()
     }

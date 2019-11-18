@@ -9,7 +9,6 @@
 import Foundation
 import Logging
 
-// TODO: Use emojis in lieu of color
 struct Log {
     private static var logger = Logger(label: Bundle.main.bundleIdentifier!)
     static var logLevel: Logger.Level {
@@ -23,7 +22,7 @@ struct Log {
     }
 }
 
-// MARK: - Log function wrappers
+// MARK: - Log Function Wrappers
 extension Log {
     static func trace(_ message: String = "", file: String = #file, function: String = #function, line: Int = #line) {
         let fullMessage = buildLogMessage(message, file: file, function: function, line: line, emoji: "🕵🏽‍♂️")
@@ -65,7 +64,7 @@ extension Log {
 private extension Log {
     static func buildLogMessage(_ message: String, file: String = #file, function: String = #function, line: Int = #line, emoji: String) -> Logger.Message {
         let className = URL(string: file.replacingOccurrences(of: " ", with: ""))!.lastPathComponent.replacingOccurrences(of: ".swift", with: "")
-        let fullMessage = message == "" ? "\(emoji) \(className) \(line) \(function)" : "\(emoji) \(className) \(line) \(function): \(message)"
+        let fullMessage = message == "" ? "\(emoji) \(className) \(line) \(function)" : "\(emoji) \(className) \(line) \(function) -- \(message)"
         let message = Logger.Message(stringLiteral: fullMessage)
         return message
     }

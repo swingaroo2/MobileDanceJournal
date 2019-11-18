@@ -9,7 +9,15 @@
 import Foundation
 
 class Services: NSObject {
-    static let activity = ShareController()
-    static let permissions = PermissionsController()
-    static let uploads = UploadsController()
+    
+    static var activity: ShareController!
+    static var permissions: PermissionsController!
+    static var uploads: UploadsController!
+    
+    class func start() {
+        activity = ShareController()
+        permissions = PermissionsController()
+        uploads = UploadsController()
+    }
+    
 }

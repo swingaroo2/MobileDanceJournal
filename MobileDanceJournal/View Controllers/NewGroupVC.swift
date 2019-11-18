@@ -11,7 +11,6 @@ import UIKit
 class NewGroupVC: UIViewController, Storyboarded {
     
     weak var coordinator: MainCoordinator!
-    var coreDataManager: CoreDataManager!
     var tableManager: PracticeLogTableManager!
     var editingGroup: Group?
     
@@ -25,7 +24,7 @@ class NewGroupVC: UIViewController, Storyboarded {
     override func viewDidLoad() {
         super.viewDidLoad()
         Log.trace()
-        tableManager = configureTableManager(tableView, coreDataManager)
+        tableManager = configureTableManager(tableView)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -53,9 +52,9 @@ private extension NewGroupVC {
             let selectedPracticeSessions = tableManager.getSelectedPracticeSessions()
             
             if let group = editingGroup {
-                coreDataManager.update(group: group, name: groupNameTextField.text!, practiceSessions: selectedPracticeSessions)
+                Model.coreData.update(group: group, name: groupNameTextField.text!, practiceSessions: selectedPracticeSessions)
             } else {
-                coreDataManager.createAndSaveNewGroup(name: groupNameTextField.text!, practiceSessions: selectedPracticeSessions)
+                Model.coreData.createAndSaveNewGroup(name: groupNameTextField.text!, practiceSessions: selectedPracticeSessions)
             }
             break
         case cancelButton:
@@ -78,7 +77,7 @@ private extension NewGroupVC {
         saveButton.isEnabled = !text.isEmpty
         groupNameTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
         
-        guard let ungroupedPracticeSessions = coreDataManager.fetchPracticeSessions(in: nil) else {
+        guard let ungroupedPracticeSessions = Model.coreData.fetchPracticeSessions(in: nil) else {
             Log.error("Failed to fetch ungrouped Practice Logs")
             return
         }
@@ -93,10 +92,10 @@ private extension NewGroupVC {
         saveButton.isEnabled = !text.isEmpty
     }
     
-    func configureTableManager(_ managedTableView: UITableView,_ coreDataManager: CoreDataManager) -> PracticeLogTableManager {
+    func configureTableManager(_ managedTableView: UITableView) -> PracticeLogTableManager {
         Log.trace()
         managedTableView.tableFooterView = UIView()
-        let tableManager = PracticeLogTableManager(tableView, coreDataManager, managedVC: self)
+        let tableManager = PracticeLogTableManager(tableView, managedVC: self)
         return tableManager
     }
 }

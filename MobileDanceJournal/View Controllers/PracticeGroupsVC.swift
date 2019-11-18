@@ -12,7 +12,6 @@ import UIKit
 class PracticeGroupsVC: UIViewController, Storyboarded {
     
     weak var coordinator: MainCoordinator!
-    var coreDataManager: CoreDataManager!
     var tableManager: TableManager!
 
     @IBOutlet weak var tableView: UITableView!
@@ -21,7 +20,7 @@ class PracticeGroupsVC: UIViewController, Storyboarded {
     override func viewDidLoad() {
         super.viewDidLoad()
         Log.trace()
-        tableManager = configureTableManager(tableView, coreDataManager)
+        tableManager = configureTableManager(tableView)
         setUpView()
     }
     
@@ -53,9 +52,9 @@ private extension PracticeGroupsVC {
         coordinator.startEditing(group: nil)
     }
     
-    func configureTableManager(_ managedTableView: UITableView,_ coreDataManager: CoreDataManager) -> PracticeGroupsTableManager {
+    func configureTableManager(_ managedTableView: UITableView) -> PracticeGroupsTableManager {
         Log.trace()
-        let tableManager = PracticeGroupsTableManager(managedTableView, coreDataManager, managedVC: self)
+        let tableManager = PracticeGroupsTableManager(managedTableView, managedVC: self)
         tableManager.coordinator = coordinator
         return tableManager
     }

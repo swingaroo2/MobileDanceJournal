@@ -11,7 +11,6 @@ import UIKit
 class PracticeLogVC: UIViewController, Storyboarded {
     
     weak var coordinator: PracticeLogCoordinator!
-    var coreDataManager: CoreDataManager!
     var tableManager: SelectionTrackingTableManager!
     var currentGroup: Group?
     @IBOutlet weak var tableView: UITableView!
@@ -21,7 +20,7 @@ class PracticeLogVC: UIViewController, Storyboarded {
     override func viewDidLoad() {
         super.viewDidLoad()
         Log.trace()
-        tableManager = configureTableManager(tableView, coreDataManager)
+        tableManager = configureTableManager(tableView)
         setUpView()
     }
 
@@ -65,7 +64,7 @@ private extension PracticeLogVC {
 
     @objc func practiceLogMoved(notification: Notification) {
         Log.trace()
-        guard let remainingPracticeLogs = coreDataManager.fetchPracticeSessions(in: currentGroup) else {
+        guard let remainingPracticeLogs = Model.coreData.fetchPracticeSessions(in: currentGroup) else {
             Log.error("Failed to fetch Practice Logs from group: \(currentGroup?.name ?? "NIL")")
             return
         }
@@ -89,9 +88,9 @@ private extension PracticeLogVC {
         NotificationCenter.default.removeObserver(self)
     }
     
-    func configureTableManager(_ managedTableView: UITableView,_ coreDataManager: CoreDataManager) -> PracticeLogTableManager {
+    func configureTableManager(_ managedTableView: UITableView) -> PracticeLogTableManager {
         Log.trace()
-        let tableManager = PracticeLogTableManager(managedTableView, coreDataManager, managedVC: self)
+        let tableManager = PracticeLogTableManager(managedTableView, managedVC: self)
         tableManager.noContentLabel = noContentLabel
         tableManager.coordinator = coordinator
         tableManager.currentGroup = currentGroup

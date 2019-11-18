@@ -11,7 +11,6 @@ import UIKit
 
 protocol PickerManager: UIPickerViewDelegate, UIPickerViewDataSource {
     var managedView: ToolbarPickerView { get }
-    var coreDataManager: CoreDataManager { get }
     
     func doneButtonPressed()
 }

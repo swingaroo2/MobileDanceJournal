@@ -12,7 +12,6 @@ import CoreData
 
 class VideoGalleryTableManager: NSObject, TableManager {
     
-    var coreDataManager: CoreDataManager
     var managedTableView: UITableView
     var managedVC: UIViewController
     
@@ -22,16 +21,15 @@ class VideoGalleryTableManager: NSObject, TableManager {
     var coordinator: VideoGalleryCoordinator!
     var videoToMove: PracticeVideo?
     
-    required init(_ managedTableView: UITableView,_ coreDataManager: CoreDataManager, managedVC: UIViewController) {
+    required init(_ managedTableView: UITableView, managedVC: UIViewController) {
         Log.trace()
         self.managedTableView = managedTableView
-        self.coreDataManager = coreDataManager
         self.managedVC = managedVC
         super.init()
         self.managedTableView.tableFooterView = UIView()
         self.managedTableView.delegate = self
         self.managedTableView.dataSource = self
-        self.coreDataManager.practiceVideoDelegate = self
+        Model.coreData.practiceVideoDelegate = self
     }
 }
 
@@ -39,7 +37,7 @@ class VideoGalleryTableManager: NSObject, TableManager {
 extension VideoGalleryTableManager: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let fetchedObjects = coreDataManager.fetchVideos(for: practiceSession)
+        let fetchedObjects = Model.coreData.fetchVideos(for: practiceSession)
         
         if let rightBarButtonItems = managedVC.navigationItem.rightBarButtonItems {
             rightBarButtonItems.forEach { button in
@@ -60,7 +58,7 @@ extension VideoGalleryTableManager: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifiers.videoCell, for: indexPath) as! VideoGalleryTableViewCell
-        let video = coreDataManager.practiceVideoFRC.object(at: indexPath)
+        let video = Model.coreData.practiceVideoFRC.object(at: indexPath)
         configure(cell, with: video)
         return cell
     }
@@ -108,9 +106,7 @@ extension VideoGalleryTableManager: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            if let error = deleteVideo(in: tableView, at: indexPath) {
-                managedVC.presentBasicAlert(title: UserErrors.deleteError, message: error.localizedDescription)
-            }
+            deleteVideo(in: tableView, at: indexPath)
         }
     }
     
@@ -119,11 +115,7 @@ extension VideoGalleryTableManager: UITableViewDelegate {
         let deleteAction = UIContextualAction(style: .destructive, title: Actions.delete) { [unowned self] (action, view, completionHandler) in
             
             let deleteAlertAction: ((UIAlertAction) -> Void) = { action in
-                var deleteSucceeded = true
-                if let error = self.deleteVideo(in: tableView, at: indexPath) {
-                    self.managedVC.presentBasicAlert(title: UserErrors.deleteError, message: error.localizedDescription)
-                    deleteSucceeded = false
-                }
+                let deleteSucceeded = self.deleteVideo(in: tableView, at: indexPath)
                 completionHandler(deleteSucceeded)
             }
             
@@ -173,13 +165,13 @@ extension VideoGalleryTableManager: UITableViewDelegate {
             }
             self.videoToMove = video
             
-            guard let practiceSessions = self.coreDataManager.practiceSessionFRC.fetchedObjects else {
+            guard let practiceSessions = Model.coreData.practiceSessionFRC.fetchedObjects else {
                 Log.error("Failed to fetch Practice Logs")
                 completionHandler(false)
                 return
             }
             
-            self.practiceSessionPicker = PracticeSessionPickerView(video, from: self.practiceSession, to: practiceSessions, self.coreDataManager, managedView: self.managedVC.view)
+            self.practiceSessionPicker = PracticeSessionPickerView(video, from: self.practiceSession, to: practiceSessions, managedView: self.managedVC.view)
             self.practiceSessionPicker.show()
             
             completionHandler(true)
@@ -200,23 +192,20 @@ extension VideoGalleryTableManager: UITableViewDelegate {
     }
 }
 
+// MARK: - Private Methods
 private extension VideoGalleryTableManager {
-    func deleteVideo(in tableView: UITableView, at indexPath: IndexPath) -> NSError? {
+    @discardableResult
+    func deleteVideo(in tableView: UITableView, at indexPath: IndexPath) -> Bool {
         Log.trace()
-        let videoToDelete = coreDataManager.practiceVideoFRC.object(at: indexPath)
-        
-        guard let practiceSession = practiceSession else {
-            Log.error("Failed to get reference to Practice Log")
-            let noPracticeSessionError = NSError(domain: "VideoGallery", code: 0, userInfo: nil)
-            noPracticeSessionError.setValue(UserErrors.noPracticeSession, forKey: NSLocalizedDescriptionKey)
-            return noPracticeSessionError
+        let videoToDelete = Model.coreData.practiceVideoFRC.object(at: indexPath)
+
+        do {
+            try Model.videoStorage.delete(videoToDelete)
+            return true
+        } catch {
+            Log.error("Failed to delete video with error: \(error.localizedDescription)")
+            return false
         }
-        
-        if let error = VideoLocalStorageManager.delete(videoToDelete, from: practiceSession, coreDataManager) {
-            return error
-        }
-        
-        return nil
     }
 }
 

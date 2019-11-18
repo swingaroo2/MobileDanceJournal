@@ -15,17 +15,15 @@ import AVKit
 // MARK: - Initialization
 class VideoGalleryCoordinator: NSObject, Coordinator {
     private let practiceSession: PracticeSession
-    private let coreDataManager: CoreDataManager
 
     var rootVC: SplitViewRootController
     var childCoordinators = [Coordinator]()
     var navigationController = UINavigationController()
     var currentGroup: Group?
     
-    init(_ rootViewController: SplitViewRootController,_ coreDataManager: CoreDataManager,_ group: Group?,_ practiceSession: PracticeSession) {
+    init(_ rootViewController: SplitViewRootController,_ group: Group?,_ practiceSession: PracticeSession) {
         Log.trace("Initializing Video Gallery Coordinator for group \(group?.name ?? "NIL") and Practice Log: \(practiceSession.title)")
         self.rootVC = rootViewController
-        self.coreDataManager = coreDataManager
         self.currentGroup = group
         self.practiceSession = practiceSession
     }
@@ -34,7 +32,6 @@ class VideoGalleryCoordinator: NSObject, Coordinator {
         Log.trace()
         let videoGalleryVC = VideoGalleryVC.instantiate()
         videoGalleryVC.coordinator = self
-        videoGalleryVC.coreDataManager = coreDataManager
         videoGalleryVC.practiceSession = practiceSession
         
         push(videoGalleryVC, rootVCHasTwoNavControllers: rootVC.hasTwoRootNavigationControllers)
@@ -47,7 +44,6 @@ extension VideoGalleryCoordinator {
         Log.trace()
         let videoUploadVC = VideoUploadVC.instantiate()
         videoUploadVC.coordinator = self
-        videoUploadVC.coreDataManager = coreDataManager
         videoUploadVC.modalTransitionStyle = .crossDissolve
         videoUploadVC.modalPresentationStyle = .formSheet
         
@@ -79,9 +75,9 @@ extension VideoGalleryCoordinator {
         let isEditingNewVideo = Services.uploads.video == nil
         
         if isEditingNewVideo {
-            coreDataManager.add(video, to: videoPracticeSession)
+            Model.coreData.add(video, to: videoPracticeSession)
         } else {
-            coreDataManager.save()
+            Model.coreData.save()
         }
         
         videoGalleryVC.prefetchVideos(for: videoPracticeSession)

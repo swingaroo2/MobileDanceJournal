@@ -25,11 +25,6 @@ class UploadsController: NSObject {
         self.url = URLBuilder.getDocumentsFilePathURL(for: filename)
     }
     
-    func set(url: URL) {
-        Log.trace()
-        self.url = url
-    }
-    
     func set(video: PracticeVideo?) {
         Log.trace()
         self.video = video
@@ -80,6 +75,7 @@ class UploadsController: NSObject {
     }
 }
 
+// MARK: - Private Methods
 private extension UploadsController {
     func getThumbnail(_ videoFilePath: URL) -> UIImage? {
         Log.trace()
