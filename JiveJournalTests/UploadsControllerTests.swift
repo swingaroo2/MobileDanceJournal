@@ -16,6 +16,7 @@ class UploadsControllerTests: XCTestCase {
     
     override func setUp() {
         sut = UploadsController()
+        clearLocalStorage()
     }
     
     // MARK: - Setters
@@ -25,15 +26,6 @@ class UploadsControllerTests: XCTestCase {
         
         let sutURL = try XCTUnwrap(sut.url)
         let urlWasSet = sutURL == URLBuilder.getDocumentsFilePathURL(for: testFilename)
-        XCTAssertTrue(urlWasSet)
-    }
-    
-    func testSetURL() throws {
-        let testURL = URL(string: "testfilename")!
-        sut.set(url: testURL)
-        
-        let sutURL = try XCTUnwrap(sut.url)
-        let urlWasSet = sutURL == testURL
         XCTAssertTrue(urlWasSet)
     }
     
@@ -56,17 +48,6 @@ class UploadsControllerTests: XCTestCase {
     }
     
     // MARK: - Thumbnail Retrieval
-    func testGetThumbnail_fromURL() throws {
-        let path = try XCTUnwrap(Bundle.main.path(forResource: "testVideo", ofType: "mov"))
-        let url = try XCTUnwrap(URL(string: path))
-        sut.set(url: url)
-        sut.getThumbnail(from: url) { image in
-            DispatchQueue.main.async {
-                XCTAssertNotNil(image)
-            }
-        }
-    }
-    
     func testGetThumbnail_fromPracticeVideo() throws {
         let path = try XCTUnwrap(Bundle.main.path(forResource: "testVideo", ofType: "mov"))
         let url = try XCTUnwrap(URL(string: path))
@@ -79,7 +60,7 @@ class UploadsControllerTests: XCTestCase {
             try? FileManager.default.removeItem(atPath: documentsFilePath)
         }
         
-        try? Model.videoStorage.saveVideo(url)
+        try Model.videoStorage.saveVideo(url)
         
         let _ = try XCTUnwrap(sut.getThumbnail(video))
     }
@@ -87,5 +68,20 @@ class UploadsControllerTests: XCTestCase {
     func testGetThumbnail_fromPracticeVideo_nilResult() throws {
         let video = PracticeVideo(context: coreDataManager.persistentContainer.viewContext)
         XCTAssertNil(sut.getThumbnail(video))
+    }
+}
+
+private extension UploadsControllerTests {
+    func clearLocalStorage() {
+        do {
+            let path = try XCTUnwrap(Bundle.main.path(forResource: "testVideo", ofType: "mov"))
+            let url = try XCTUnwrap(URL(string: path))
+            let documentsURL = URLBuilder.getDocumentsFilePathURL(for: url.lastPathComponent)
+            if FileManager.default.fileExists(atPath: documentsURL.path) {
+                try FileManager.default.removeItem(at: documentsURL)
+            }
+        } catch {
+            Log.trace("Exception: \(error.localizedDescription)")
+        }
     }
 }

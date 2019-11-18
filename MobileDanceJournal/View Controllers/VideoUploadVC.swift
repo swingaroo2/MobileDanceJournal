@@ -123,7 +123,7 @@ private extension VideoUploadVC {
     func prepopulateTitle() {
         Log.trace()
         guard let video = Services.uploads.video else {
-            Log.error("Failed to get reference to video. Cannot prepopulate video title")
+            Log.error("No existing video to pre-populate title from")
             return
         }
         titleTextField.text = video.title.isEmpty ? "" : video.title
