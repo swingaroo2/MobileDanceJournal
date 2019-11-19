@@ -9,6 +9,9 @@
 import Foundation
 import Logging
 
+/**
+ In case I ever replace my logging library. Because I'm clever like that ;)
+ */
 struct Log {
     private static var logger = Logger(label: Bundle.main.bundleIdentifier!)
     static var logLevel: Logger.Level {

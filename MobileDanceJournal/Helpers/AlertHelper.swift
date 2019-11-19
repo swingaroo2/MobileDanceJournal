@@ -10,6 +10,9 @@ import Foundation
 import UIKit
 
 class AlertHelper {
+    /**
+     Returns a UIAlertController used in the video gallery to lead to one of two video-adding flows
+     */
     class func addVideoActionSheet() -> UIAlertController {
         Log.trace()
         let actionSheet = UIAlertController(title: AlertConstants.addVideo, message: nil, preferredStyle: .actionSheet)

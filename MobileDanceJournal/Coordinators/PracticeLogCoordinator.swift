@@ -41,6 +41,9 @@ extension PracticeLogCoordinator {
         showDetails(for: newPracticeSession)
     }
     
+    /**
+     Displays data for a practice session in the notepad
+     */
     func showDetails(for practiceSession: PracticeSession) {
         Log.trace("Showing details for practice log: \(practiceSession.title)")
         let detailVC = rootVC.isDisplayingBothVCs ? rootVC.detailVC : PracticeNotepadVC.instantiate()
@@ -62,6 +65,9 @@ extension PracticeLogCoordinator {
         rootVC.showDetailViewController(detailNC, sender: self)
     }
     
+    /**
+     Removes practice session content from the notepad
+     */
     func clearDetailVC() {
         Log.trace()
         guard let detailVC = rootVC.detailVC as? PracticeNotepadVC else {
@@ -82,6 +88,9 @@ extension PracticeLogCoordinator {
         detailVC.hideContent()
     }
     
+    /**
+     Opens the video gallery for the given practice session
+     */
     func viewVideos(for practiceSession: PracticeSession) {
         Log.trace("Viewing videos for practice log: \(practiceSession.title)")
         let child = VideoGalleryCoordinator(rootVC, currentGroup, practiceSession)

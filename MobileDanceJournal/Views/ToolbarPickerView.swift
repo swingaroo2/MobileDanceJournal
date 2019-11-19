@@ -9,6 +9,9 @@
 import Foundation
 import UIKit
 
+/**
+ Creates a UIPickerView with a UIToolbar on top of it with Done and Cancel buttons
+ */
 protocol ToolbarPickerView: UIView {
     var picker: UIPickerView { get set }
     var manager: PickerManager! { get set }

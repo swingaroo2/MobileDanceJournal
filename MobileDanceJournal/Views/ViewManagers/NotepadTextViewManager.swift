@@ -49,6 +49,9 @@ extension NotepadTextViewManager: UITextViewDelegate {
 
 // MARK: - Private Methods
 private extension NotepadTextViewManager {
+    /**
+     Determines the state of default text in both UITextViews in the notepad
+     */
     func handleDefaultFieldText(in textView: UITextView) -> String? {
         Log.trace()
         let textViewHasPlaceholderText = textView.text == PlaceholderText.newPracticeSession ||
@@ -57,6 +60,9 @@ private extension NotepadTextViewManager {
         return placeholderText
     }
     
+    /**
+     Determines the state of the save button in the notepad
+     */
     func handleState(of button: UIBarButtonItem, with textView: UITextView) {
         let isSaveButton = button == notepadVC.saveButton
         button.isEnabled = (isSaveButton && !textView.text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
@@ -73,6 +79,9 @@ private extension NotepadTextViewManager {
         }
     }
     
+    /**
+     Updates the model and posts a notification to update the practice log's TableManager
+     */
     func save(_ practiceSession: PracticeSession) {
         Log.trace()
         practiceSession.title = notepadVC.practiceSessionTitleTextView.text

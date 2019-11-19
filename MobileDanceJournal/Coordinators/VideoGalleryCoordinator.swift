@@ -40,6 +40,9 @@ class VideoGalleryCoordinator: NSObject, Coordinator {
 
 // MARK: - Navigation functions
 extension VideoGalleryCoordinator {
+    /**
+     Enters the video upload flow from either the image picker (uploading) or the video gallery (editing)
+     */
     func startEditingVideo(videoPicker: UIImagePickerController? = nil) {
         Log.trace()
         let videoUploadVC = VideoUploadVC.instantiate()
@@ -56,6 +59,9 @@ extension VideoGalleryCoordinator {
         }
     }
     
+    /**
+     Concludes the video upload flow and updates the model accordingly
+     */
     func finishEditing(_ video: PracticeVideo) {
         Log.trace("Done editing video: \(video.title)")
         guard let uploadVC = getVideoUploadVC() else { return }
@@ -100,6 +106,9 @@ extension VideoGalleryCoordinator {
         }
     }
     
+    /**
+     Initiate video-sharing activity flow
+     */
     func share(_ url: URL) {
         Log.trace("Sharing: \(url.lastPathComponent)")
         let activityVC = UIActivityViewController(activityItems: [url], applicationActivities: [])
@@ -125,6 +134,9 @@ extension VideoGalleryCoordinator {
 
 // MARK: - Image picker is a special snowflake
 extension VideoGalleryCoordinator: UINavigationControllerDelegate, UIImagePickerControllerDelegate {
+    /**
+     Start recording a video, or upload one from Photos
+     */
     func initiate(_ service: UIImagePickerController.SourceType) {
         Log.trace()
         DispatchQueue.main.async {
@@ -181,6 +193,9 @@ private extension VideoGalleryCoordinator {
         return nil
     }
     
+    /**
+     Pushes the VideoGalleryVC one of two difference ways, depending on the navigation hierarchy structure
+     */
     func push(_ videoGalleryVC: VideoGalleryVC, rootVCHasTwoNavControllers: Bool) {
         Log.trace()
         if rootVCHasTwoNavControllers {

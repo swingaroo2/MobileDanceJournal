@@ -9,6 +9,9 @@
 import Foundation
 
 class URLBuilder {
+    /**
+     Convenience method used to standardize file-path formats in the documents directory
+     */
     class func getDocumentsFilePathURL(for filename: String) -> URL {
         Log.trace("Creating file path for \(filename) in Documents directory")
         let documentsDirectory = FileManager.default.documentsDirectory

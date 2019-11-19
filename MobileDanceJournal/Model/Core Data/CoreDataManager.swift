@@ -134,6 +134,9 @@ extension CoreDataManager {
         save()
     }
     
+    /**
+     For unit test purposes only!
+     */
     func deleteAllRecords(entityName: String) {
         Log.trace()
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
@@ -239,6 +242,9 @@ extension CoreDataManager {
         }
     }
     
+    /**
+     Called after updating a group in the new group flow
+     */
     func update(group: Group, name: String, practiceSessions: [PracticeSession]?) {
         Log.trace()
         if name != group.name {

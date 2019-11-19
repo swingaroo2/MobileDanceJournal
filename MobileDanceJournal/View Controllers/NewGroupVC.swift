@@ -45,6 +45,9 @@ extension NewGroupVC: UITextFieldDelegate {
 
 // MARK: - Private Methods
 private extension NewGroupVC {
+    /**
+     Reacts to either the Save/Cancel button being pressed
+     */
     @IBAction func buttonPressed(_ sender: UIButton) {
         Log.trace()
         switch sender {

@@ -11,6 +11,9 @@ import UIKit
 import CoreData
 
 extension UILabel {
+    /**
+     Convenience-setter for UILabels configured with NSManagedObject properties
+     */
     func configure(with managedObject: NSManagedObject, for keyPath: String) {
         Log.trace()
         let rawValue: Any? = managedObject.value(forKey: keyPath)

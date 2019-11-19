@@ -21,7 +21,6 @@ class GroupPickerManager: NSObject, PickerManager {
         self.managedView = managedView
         self.coordinator = coordinator
     }
-    
 }
 
 extension GroupPickerManager {

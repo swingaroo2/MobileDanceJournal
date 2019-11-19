@@ -8,6 +8,9 @@
 
 import Foundation
 
+/**
+    A convenience protocol for adding and accessing values in an NSCache
+ */
 protocol Caching where Self: NSCache<AnyObject, AnyObject> {
     func add<T,V>(key: T, value: V)
     func value<T,V>(for key: T) -> V?

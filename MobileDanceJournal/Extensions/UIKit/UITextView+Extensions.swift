@@ -11,6 +11,9 @@ import UIKit
 import CoreData
 
 extension UITextView {
+    /**
+    Convenience-setter for UITextView configured with NSManagedObject properties
+    */
     func configure(with managedObject: NSManagedObject, for keyPath: String) {
         Log.trace()
         let rawValue = managedObject.value(forKey: keyPath)

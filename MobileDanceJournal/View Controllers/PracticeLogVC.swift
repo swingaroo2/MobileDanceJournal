@@ -53,7 +53,6 @@ class PracticeLogVC: UIViewController, Storyboarded {
 
 // MARK: - Private Methods
 private extension PracticeLogVC {
-
     @IBAction func createNewPracticeSession(_ sender: UIBarButtonItem) {
         Log.trace()
         let newIndexPath = IndexPath(row: 0, section: 0)

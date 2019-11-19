@@ -11,6 +11,10 @@ import Foundation
 import UIKit
 
 // MARK: - Initialization
+
+/**
+ Primary coordinator class. Controls navigation in the Group ViewControllers
+ */
 class MainCoordinator: Coordinator {
     var rootVC: SplitViewRootController
     var childCoordinators: [Coordinator] = [Coordinator]()
@@ -32,6 +36,10 @@ class MainCoordinator: Coordinator {
 
 // MARK: - Navigation functions
 extension MainCoordinator {
+    
+    /**
+     Starts a child Coordinator to handle navigation through the practice log
+     */
     func showPracticeLog(group: Group?) {
         Log.trace("Showing practice log for group: \(group?.name ?? "NIL")")
         let child = PracticeLogCoordinator(rootVC, group)
@@ -39,6 +47,9 @@ extension MainCoordinator {
         child.start()
     }
     
+    /**
+     Initiates the New Group flow
+     */
     func startEditing(group: Group?) {
         Log.trace("Starting to edit group: \(group?.name ?? "NIL")")
         let nextVC = NewGroupVC.instantiate()

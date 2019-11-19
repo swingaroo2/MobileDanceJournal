@@ -9,7 +9,6 @@
 import Foundation
 
 class Services: NSObject {
-    
     static var activity: ShareController!
     static var permissions: PermissionsController!
     static var uploads: UploadsController!

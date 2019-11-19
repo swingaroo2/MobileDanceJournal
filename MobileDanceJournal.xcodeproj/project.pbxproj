@@ -56,7 +56,6 @@
 		926BEE1922E1057600BC3DD4 /* VideoStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926BEE1822E1057600BC3DD4 /* VideoStorage.swift */; };
 		926BEE2222E5820E00BC3DD4 /* Caching.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926BEE2122E5820E00BC3DD4 /* Caching.swift */; };
 		926BEE2622E5830800BC3DD4 /* ThumbnailCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926BEE2522E5830800BC3DD4 /* ThumbnailCache.swift */; };
-		926BEE3022E58D5300BC3DD4 /* ThumbnailError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926BEE2F22E58D5300BC3DD4 /* ThumbnailError.swift */; };
 		926BEE3422E5930100BC3DD4 /* UIImageView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926BEE3322E5930100BC3DD4 /* UIImageView+Extensions.swift */; };
 		926BEE3822E63D5100BC3DD4 /* PracticeSessionPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926BEE3722E63D5100BC3DD4 /* PracticeSessionPickerView.swift */; };
 		926E7092231194FD00A3CCD0 /* PracticeSession+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926E7090231194FD00A3CCD0 /* PracticeSession+CoreDataClass.swift */; };
@@ -171,7 +170,6 @@
 		926BEE1822E1057600BC3DD4 /* VideoStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoStorage.swift; sourceTree = "<group>"; wrapsLines = 0; };
 		926BEE2122E5820E00BC3DD4 /* Caching.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Caching.swift; sourceTree = "<group>"; };
 		926BEE2522E5830800BC3DD4 /* ThumbnailCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThumbnailCache.swift; sourceTree = "<group>"; };
-		926BEE2F22E58D5300BC3DD4 /* ThumbnailError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThumbnailError.swift; sourceTree = "<group>"; };
 		926BEE3322E5930100BC3DD4 /* UIImageView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extensions.swift"; sourceTree = "<group>"; wrapsLines = 0; };
 		926BEE3722E63D5100BC3DD4 /* PracticeSessionPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PracticeSessionPickerView.swift; sourceTree = "<group>"; wrapsLines = 0; };
 		926E7090231194FD00A3CCD0 /* PracticeSession+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PracticeSession+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -410,7 +408,6 @@
 		926BEE2E22E58D3700BC3DD4 /* Errors */ = {
 			isa = PBXGroup;
 			children = (
-				926BEE2F22E58D5300BC3DD4 /* ThumbnailError.swift */,
 				923B5B4A2381B9D800644EA6 /* VideoStorageError.swift */,
 			);
 			path = Errors;
@@ -910,7 +907,6 @@
 				926BEE2222E5820E00BC3DD4 /* Caching.swift in Sources */,
 				922C47AF2283F8F600367625 /* VideoGalleryTableViewCell.swift in Sources */,
 				922E20E22283BB2B00295A19 /* VideoGalleryVC.swift in Sources */,
-				926BEE3022E58D5300BC3DD4 /* ThumbnailError.swift in Sources */,
 				928D5998230B4B9D0000945E /* Storyboarded.swift in Sources */,
 				928D599A230B4D050000945E /* PracticeGroupsVC.swift in Sources */,
 				928D59AF230DCBD00000945E /* PracticeVideo+CoreDataProperties copy.swift in Sources */,
@@ -1012,6 +1008,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -1073,6 +1070,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;

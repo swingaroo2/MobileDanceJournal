@@ -9,9 +9,10 @@
 import Foundation
 import UIKit
 
+/**
+ Protocol for implementing the Coordinator pattern in navigation hierarchy with a UISplitViewController at its root
+ */
 protocol SplitViewCoordinator: Coordinator {
     var rootVC: SplitViewRootController { get }
     func start()
 }
-
-extension SplitViewCoordinator where Self: Coordinator {}

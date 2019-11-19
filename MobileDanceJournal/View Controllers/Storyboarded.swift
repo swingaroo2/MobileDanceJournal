@@ -13,6 +13,9 @@ protocol Storyboarded {
 }
 
 extension Storyboarded where Self: UIViewController {
+    /**
+     Creates an instance of the calling class from its Storyboard
+     */
     static func instantiate() -> Self {
         let fullName = NSStringFromClass(self)
         let className = fullName.components(separatedBy: ".")[1]

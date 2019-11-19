@@ -31,7 +31,6 @@ class GroupPickerView: UIView, ToolbarPickerView {
         super.init(coder: aDecoder)
         Log.trace()
     }
-    
 }
 
 // MARK: - Private Methods
