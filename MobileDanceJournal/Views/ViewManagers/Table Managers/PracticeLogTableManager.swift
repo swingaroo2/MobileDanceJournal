@@ -17,7 +17,7 @@ class PracticeLogTableManager: NSObject, SelectionTrackingTableManager {
     var selectedRow = -1
     
     var noContentLabel: UILabel?
-    var groupPickerView: PracticeSessionPickerView!
+    var groupPickerView: GroupPickerView!
     var coordinator: PracticeLogCoordinator!
     var practiceSessions: [PracticeSession]!
     var currentGroup: Group?
