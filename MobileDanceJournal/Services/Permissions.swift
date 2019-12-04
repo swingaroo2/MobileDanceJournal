@@ -57,10 +57,11 @@ class PermissionsController: NSObject {
             var isAuthorized = false
             
             PHPhotoLibrary.requestAuthorization({ newStatus in
-                Log.trace("Photos authorization status: \(newStatus)")
                 if newStatus == PHAuthorizationStatus.authorized {
-                    Log.trace("Photos authorization granted")
+                    Log.trace("Photos authorization request granted")
                     isAuthorized = true
+                } else {
+                    Log.trace("Photos authorization request denied")
                 }
             })
             
