@@ -13,7 +13,6 @@ class VideoGalleryVC: UIViewController, Storyboarded {
     var coordinator: VideoGalleryCoordinator!
     var tableManager: TableManager!
     var practiceSession: PracticeSession!
-    var practiceSessionPicker: PracticeSessionPickerView?
     var videoToMove: PracticeVideo?
     
     @IBOutlet weak var noContentLabel: UILabel!
@@ -94,10 +93,8 @@ private extension VideoGalleryVC {
         Log.trace()
         let tableManager = VideoGalleryTableManager(videosTableView, managedVC: self)
         tableManager.practiceSession = practiceSession
-        tableManager.practiceSessionPicker = practiceSessionPicker
         tableManager.noContentLabel = noContentLabel
         tableManager.coordinator = coordinator
-        tableManager.videoToMove = videoToMove
         return tableManager
     }
     
