@@ -42,13 +42,13 @@ extension VideoGalleryTableManager: UITableViewDataSource {
         if let rightBarButtonItems = managedVC.navigationItem.rightBarButtonItems {
             rightBarButtonItems.forEach { button in
                 if button.title == Actions.edit {
-                   button.isEnabled = fetchedObjects.count > 0
+                    button.isEnabled = fetchedObjects.count > 0
                 }
             }
         }
         
         let numRows = fetchedObjects.count
-
+        
         UIView.transition(with: noContentLabel, duration: 0.4, options: .transitionCrossDissolve, animations: {
             self.noContentLabel.isHidden = numRows > 0
         })
@@ -180,8 +180,9 @@ extension VideoGalleryTableManager: UITableViewDelegate {
         
         var swipeActions = [deleteAction, editAction, shareAction, moveAction]
         
-        if let fetchedPracticeSessions = practiceSession.group?.practiceSessions {
-            if fetchedPracticeSessions.count == 1 {
+        if let practiceSessionsInCurrentGroup = practiceSession.group?.practiceSessions, let fetchedGroups = Model.coreData.groupFRC.fetchedObjects
+        {
+            if practiceSessionsInCurrentGroup.count == 1 && fetchedGroups.isEmpty {
                 swipeActions = [deleteAction, editAction, shareAction]
             }
         }
@@ -198,7 +199,7 @@ private extension VideoGalleryTableManager {
     func deleteVideo(in tableView: UITableView, at indexPath: IndexPath) -> Bool {
         Log.trace()
         let videoToDelete = Model.coreData.practiceVideoFRC.object(at: indexPath)
-
+        
         do {
             try Model.videoStorage.delete(videoToDelete)
             return true

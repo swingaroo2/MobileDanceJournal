@@ -59,7 +59,7 @@ extension PracticeGroupsTableManager {
         
         var canEdit = false
         
-        if fetchedGroups.count == 0 {
+        if fetchedGroups.isEmpty {
             canEdit = false
         } else {
             canEdit = (indexPath.row < fetchedGroups.count)

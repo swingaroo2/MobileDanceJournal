@@ -177,7 +177,7 @@ extension PracticeLogTableManager: UITableViewDelegate {
         var swipeActions = [deleteAction, moveAction]
         
         if let fetchedGroups = Model.coreData.groupFRC.fetchedObjects {
-            if fetchedGroups.count == 0 {
+            if fetchedGroups.isEmpty {
                 swipeActions = [deleteAction]
             }
         }

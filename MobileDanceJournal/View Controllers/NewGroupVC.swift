@@ -84,7 +84,7 @@ private extension NewGroupVC {
             Log.error("Failed to fetch ungrouped Practice Logs")
             return
         }
-        ungroupedPracticeLogsLabel.isHidden = (ungroupedPracticeSessions.count == 0)
+        ungroupedPracticeLogsLabel.isHidden = ungroupedPracticeSessions.isEmpty
     }
     
     @objc func textFieldDidChange(_ textField: UITextField) {
