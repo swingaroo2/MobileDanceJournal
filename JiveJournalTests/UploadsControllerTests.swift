@@ -12,7 +12,6 @@ import XCTest
 class UploadsControllerTests: XCTestCase {
     
     var sut: UploadsController!
-    let coreDataManager = CoreDataManager(modelName: "uploadsControllerTestsModel")
     
     override func setUp() {
         sut = UploadsController()
@@ -31,7 +30,7 @@ class UploadsControllerTests: XCTestCase {
     
     func testSetPracticeVideo() throws {
         let testFilename = "testfilename"
-        let video = PracticeVideo(context: coreDataManager.persistentContainer.viewContext)
+        let video = PracticeVideo(context: Model.coreData.persistentContainer.viewContext)
         video.filename = testFilename
         
         sut.set(video: video)
@@ -52,7 +51,7 @@ class UploadsControllerTests: XCTestCase {
         let path = try XCTUnwrap(Bundle.main.path(forResource: "testVideo", ofType: "mov"))
         let url = try XCTUnwrap(URL(string: path))
         
-        let video = PracticeVideo(context: coreDataManager.persistentContainer.viewContext)
+        let video = PracticeVideo(context: Model.coreData.persistentContainer.viewContext)
         video.filename = url.lastPathComponent
         
         let documentsFilePath = URLBuilder.getDocumentsFilePathURL(for: video.filename).path
@@ -66,7 +65,7 @@ class UploadsControllerTests: XCTestCase {
     }
     
     func testGetThumbnail_fromPracticeVideo_nilResult() throws {
-        let video = PracticeVideo(context: coreDataManager.persistentContainer.viewContext)
+        let video = PracticeVideo(context: Model.coreData.persistentContainer.viewContext)
         XCTAssertNil(sut.getThumbnail(video))
     }
 }

@@ -58,7 +58,7 @@ extension GroupPickerManager {
     }
 }
 
-// MARK: UIPickerViewDelegate
+// MARK: - UIPickerViewDelegate
 extension GroupPickerManager {
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         Log.trace()
@@ -87,7 +87,7 @@ extension GroupPickerManager {
     }
 }
 
-// MARK: UIPickerViewDataSource
+// MARK: - UIPickerViewDataSource
 extension GroupPickerManager {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         Log.trace()

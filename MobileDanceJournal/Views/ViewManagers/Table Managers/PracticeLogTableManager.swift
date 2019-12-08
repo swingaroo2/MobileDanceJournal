@@ -48,7 +48,7 @@ class PracticeLogTableManager: NSObject, SelectionTrackingTableManager {
     }
 }
 
-// MARK: UITableViewDataSource
+// MARK: - UITableViewDataSource
 extension PracticeLogTableManager: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard let practiceSessions = Model.coreData.fetchPracticeSessions(in: currentGroup) else {
@@ -87,7 +87,7 @@ extension PracticeLogTableManager: UITableViewDataSource {
     }
 }
 
-// MARK: UITableViewDelegate
+// MARK: - UITableViewDelegate
 extension PracticeLogTableManager: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         Log.trace()

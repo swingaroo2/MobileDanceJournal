@@ -9,6 +9,10 @@
 import Foundation
 
 // MARK: - String constants
+struct LaunchArguments {
+    static let isTest = "isTest"
+}
+
 struct Storyboards {
     static let main = "Main"
 }
@@ -98,7 +102,7 @@ struct Predicates {
 }
 
 struct ModelConstants {
-    static let modelName = "DataModel"
+    static let modelName = UserDefaults.standard.bool(forKey: LaunchArguments.isTest) ? "TestModel" : "DataModel"
 }
 
 struct GroupConstants {
@@ -133,6 +137,14 @@ enum DateFormats: String {
 enum UserPermissions {
     case camera
     case photos
+}
+
+enum PickerComponents: Int {
+    case groups = 0
+    case practiceSessions = 1
+    
+    private static let allValues = [groups, practiceSessions]
+    static let count = PickerComponents.allValues.count
 }
 
 // MARK: - Notifications

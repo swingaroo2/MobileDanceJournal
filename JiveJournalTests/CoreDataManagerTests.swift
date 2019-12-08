@@ -12,7 +12,7 @@ import CoreData
 
 class CoreDataManagerTests: XCTestCase {
     
-    var sut = CoreDataManager(modelName: "coreDataManagerTests")
+    var sut = CoreDataManager(modelName: ModelConstants.modelName)
     
     override func setUp() {
         sut.wipe()
@@ -143,7 +143,7 @@ class CoreDataManagerTests: XCTestCase {
         let practiceSessionHasOneVideo = practiceSession.videos.count == 1
         XCTAssertTrue(practiceSessionHasOneVideo)
         
-        sut.delete(video, from: practiceSession)
+        sut.delete(video)
         XCTAssertTrue(practiceSessionHasNoVideos)
     }
     
@@ -181,7 +181,7 @@ class CoreDataManagerTests: XCTestCase {
         let oldPracticeSessionHasVideo = oldPracticeSession.videos.count == 1
         XCTAssertTrue(oldPracticeSessionHasVideo)
         
-        sut.move([video], from: oldPracticeSession, to: newPracticeSession)
+        sut.move(video, to: newPracticeSession)
         XCTAssertTrue(oldPracticeSessionIsEmpty)
         
         let newPracticeSessionHasVideo = newPracticeSession.videos.count == 1

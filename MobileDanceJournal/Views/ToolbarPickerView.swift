@@ -17,6 +17,7 @@ protocol ToolbarPickerView: UIView {
     var manager: PickerManager! { get set }
 }
 
+// MARK: - Setup and default functionality
 extension ToolbarPickerView {
     var toolbarHeight: CGFloat { return 44.0 }
     

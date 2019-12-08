@@ -31,9 +31,7 @@ class VideoStorageManager: VideoStorage {
         
         let filename = video.filename
         
-        if let practiceSession = video.practiceSession {
-            Model.coreData.delete(video, from: practiceSession)
-        }
+        Model.coreData.delete(video)
         
         let documentsURL = URLBuilder.getDocumentsFilePathURL(for: filename)
         if FileManager.default.fileExists(atPath: documentsURL.path) {
