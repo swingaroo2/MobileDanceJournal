@@ -233,44 +233,6 @@ class CoreDataManagerTests: XCTestCase {
         XCTAssertTrue(newPracticeSessionHasVideo)
     }
     
-    func testMoveVideosToNewPracticeSession() {
-        let oldPracticeSession = PracticeSession(context: sut.persistentContainer.viewContext)
-        let newPracticeSession = PracticeSession(context: sut.persistentContainer.viewContext)
-        let video = PracticeVideo(context: sut.persistentContainer.viewContext)
-        let video2 = PracticeVideo(context: sut.persistentContainer.viewContext)
-        
-        let oldPracticeSessionIsEmpty = oldPracticeSession.videos.count == 0
-        let newPracticeSessionIsEmpty = newPracticeSession.videos.count == 0
-        
-        XCTAssertTrue(oldPracticeSessionIsEmpty)
-        XCTAssertTrue(newPracticeSessionIsEmpty)
-        
-        oldPracticeSession.addToVideos(video)
-        oldPracticeSession.addToVideos(video2)
-        let oldPracticeSessionHasVideos = oldPracticeSession.videos.count == 2
-        XCTAssertTrue(oldPracticeSessionHasVideos)
-        
-        sut.move([video, video2], from: oldPracticeSession, to: newPracticeSession)
-        XCTAssertTrue(oldPracticeSessionIsEmpty)
-        
-        let newPracticeSessionHasVideos = newPracticeSession.videos.count == 2
-        XCTAssertTrue(newPracticeSessionHasVideos)
-    }
-    
-    func testMoveEmptyArrayOfVideosToNewPracticeSession() {
-        let oldPracticeSession = PracticeSession(context: sut.persistentContainer.viewContext)
-        let newPracticeSession = PracticeSession(context: sut.persistentContainer.viewContext)
-        
-        let oldPracticeSessionHasNoVideos = oldPracticeSession.videos.count == 0
-        let newPracticeSessionHasNoVideos = newPracticeSession.videos.count == 0
-        
-        XCTAssertTrue(oldPracticeSessionHasNoVideos)
-        XCTAssertTrue(newPracticeSessionHasNoVideos)
-        
-        sut.move([], from: oldPracticeSession, to: newPracticeSession)
-        XCTAssertTrue(oldPracticeSessionHasNoVideos)
-    }
-    
     func testMovePracticeSessionToNewGroup() {
         let practiceSession = PracticeSession(context: sut.persistentContainer.viewContext)
         let oldGroup = Group(context: sut.persistentContainer.viewContext)

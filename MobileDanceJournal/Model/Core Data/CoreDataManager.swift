@@ -217,19 +217,6 @@ extension CoreDataManager {
     }
     
     // MARK: Move
-    func move(_ videos: [PracticeVideo], from oldPracticeSession: PracticeSession, to newPracticeSession: PracticeSession) {
-        let displayList = videos.map { $0.title }
-        Log.trace("Moving videos \(displayList) from practice Session \(oldPracticeSession.title) to \(newPracticeSession.title)")
-        guard !videos.isEmpty else {
-            Log.warn("Attempted to move empty array of videos")
-            return
-        }
-        let videoSet = NSSet(array: videos)
-        oldPracticeSession.removeFromVideos(videoSet)
-        newPracticeSession.addToVideos(videoSet)
-        save()
-    }
-    
     func move(_ video: PracticeVideo, to practiceSession: PracticeSession) {
         Log.trace("Moving video \(video.title) to Practice Session \(practiceSession.title)")
         practiceSession.addToVideos(video)
