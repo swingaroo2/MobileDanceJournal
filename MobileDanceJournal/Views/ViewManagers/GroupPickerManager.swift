@@ -51,7 +51,7 @@ extension GroupPickerManager {
         let indexPath = IndexPath(row: rowIndex, section: 0)
         let newGroup = selectedRow >= newGroups.count ? nil : newGroups[selectedRow]
         
-        Model.coreData.move([practiceLogToMove], from: oldGroup, to: newGroup)
+        Model.coreData.move([practiceLogToMove], to: newGroup)
         managedTableView.deleteRows(at: [indexPath], with: .fade)
         NotificationCenter.default.post(name: .practiceLogMoved, object: self, userInfo: nil)
         managedView.hide()

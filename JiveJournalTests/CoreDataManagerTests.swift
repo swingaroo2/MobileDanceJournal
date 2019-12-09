@@ -290,7 +290,7 @@ class CoreDataManagerTests: XCTestCase {
         let oldGroupHasPracticeSession = oldGroup.practiceSessions!.count == 1
         XCTAssertTrue(oldGroupHasPracticeSession)
         
-        sut.move([practiceSession], from: oldGroup, to: newGroup)
+        sut.move([practiceSession], to: newGroup)
         let newGroupHasPracticeSession = newGroup.practiceSessions!.count == 1
         XCTAssertTrue(oldGroupHasNoPracticeSessions)
         XCTAssertTrue(newGroupHasPracticeSession)
@@ -317,7 +317,7 @@ class CoreDataManagerTests: XCTestCase {
         let oldGroupHasPracticeSession = oldGroup.practiceSessions!.count == 2
         XCTAssertTrue(oldGroupHasPracticeSession)
         
-        sut.move([practiceSession, practiceSession2], from: oldGroup, to: newGroup)
+        sut.move([practiceSession, practiceSession2], to: newGroup)
         let newGroupHasPracticeSession = newGroup.practiceSessions!.count == 2
         XCTAssertTrue(oldGroupHasNoPracticeSessions)
         XCTAssertTrue(newGroupHasPracticeSession)
@@ -337,7 +337,7 @@ class CoreDataManagerTests: XCTestCase {
         XCTAssertTrue(oldGroupHasNoPracticeSessions)
         XCTAssertTrue(newGroupHasNoPracticeSessions)
         
-        sut.move([], from: oldGroup, to: newGroup)
+        sut.move([], to: newGroup)
         XCTAssertTrue(oldGroupHasNoPracticeSessions)
         XCTAssertTrue(newGroupHasNoPracticeSessions)
     }

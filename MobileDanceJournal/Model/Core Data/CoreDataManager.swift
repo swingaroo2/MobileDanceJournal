@@ -236,7 +236,7 @@ extension CoreDataManager {
         save()
     }
     
-    func move(_ practiceSessions: [PracticeSession], from oldGroup: Group?, to newGroup: Group?) {
+    func move(_ practiceSessions: [PracticeSession], to newGroup: Group?) {
         Log.trace()
         guard !practiceSessions.isEmpty else {
             Log.warn("Attempted to move empty array of practice sessions")

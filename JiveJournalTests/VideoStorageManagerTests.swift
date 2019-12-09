@@ -116,7 +116,6 @@ private extension VideoStorageManagerTests {
         video.filename = filename
         video.uploadDate = Date()
         video.title = "Test Video!"
-        video.practiceSession = createAndSaveTestPracticeSession(video)
         Model.coreData.save()
         return video
     }
