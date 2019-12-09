@@ -101,7 +101,6 @@ extension PracticeSessionPickerManager: UIPickerViewDataSource {
             return numRows
         } else if isPracticeSessionComponent {
             
-            // Get selected Group
             let selectedGroupRow = pickerView.selectedRow(inComponent: PickerComponents.groups.rawValue)
             
             guard let fetchedGroups = Model.coreData.groupFRC.fetchedObjects else {
