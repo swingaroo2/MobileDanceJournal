@@ -7,6 +7,7 @@
 //
 
 import XCTest
+import CoreData
 @testable import JiveJournal
 
 class VideoStorageManagerTests: XCTestCase {
@@ -14,7 +15,6 @@ class VideoStorageManagerTests: XCTestCase {
     let sut = VideoStorageManager()
     
     override func setUp() {
-        Model.coreData = CoreDataManager(modelName: "VideoStorageManagerTests")
         guard let path = Bundle.main.path(forResource: "testVideo", ofType: "mov") else { return }
         guard let url = URL(string: path) else { return }
         let documentsURL = URLBuilder.getDocumentsFilePathURL(for: url.lastPathComponent)
@@ -79,7 +79,6 @@ class VideoStorageManagerTests: XCTestCase {
             try sut.saveVideo(url)
             XCTAssertTrue(FileManager.default.fileExists(atPath: documentsURL.path))
             let video = createAndSaveTestPracticeVideo(filename: url.lastPathComponent)
-            video.practiceSession = nil
             try sut.delete(video)
             XCTAssertFalse(FileManager.default.fileExists(atPath: documentsURL.path))
         } catch VideoStorageError.videoAlreadyExists {
@@ -117,7 +116,6 @@ private extension VideoStorageManagerTests {
         video.filename = filename
         video.uploadDate = Date()
         video.title = "Test Video!"
-        video.practiceSession = createAndSaveTestPracticeSession(video)
         Model.coreData.save()
         return video
     }
@@ -127,7 +125,6 @@ private extension VideoStorageManagerTests {
         practiceSession.date = Date()
         practiceSession.title = "Test Practice Session!"
         practiceSession.notes = "Notes!"
-        practiceSession.addToVideos(video)
         return practiceSession
     }
 }

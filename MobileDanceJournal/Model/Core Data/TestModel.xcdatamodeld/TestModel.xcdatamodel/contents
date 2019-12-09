@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14490.99" systemVersion="18F132" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="PracticeSession" representedClassName="PracticeSession" syncable="YES">
+        <attribute name="date" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="notes" attributeType="String" defaultValueString="Record notes on your practice session here" syncable="YES"/>
+        <attribute name="title" attributeType="String" defaultValueString="New Practice Session" syncable="YES"/>
+        <relationship name="videos" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="PracticeVideo" inverseName="practiceSession" inverseEntity="PracticeVideo" syncable="YES"/>
+    </entity>
+    <entity name="PracticeVideo" representedClassName="PracticeVideo" syncable="YES">
+        <attribute name="title" attributeType="String" defaultValueString="Title" syncable="YES"/>
+        <attribute name="uploadDate" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="url" optional="YES" attributeType="URI" syncable="YES"/>
+        <relationship name="practiceSession" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="PracticeSession" inverseName="videos" inverseEntity="PracticeSession" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="PracticeSession" positionX="-303.1875" positionY="-248.48828125" width="96.41796875" height="103"/>
+        <element name="PracticeVideo" positionX="-126.57421875" positionY="-64.5" width="128" height="105"/>
+    </elements>
+</model>

@@ -37,6 +37,9 @@
 		923B5B492381AE1800644EA6 /* VideoStorageManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923B5B482381AE1800644EA6 /* VideoStorageManagerTests.swift */; };
 		923B5B4B2381B9D800644EA6 /* VideoStorageError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923B5B4A2381B9D800644EA6 /* VideoStorageError.swift */; };
 		923B5B4D2381F67700644EA6 /* UINavigationController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923B5B4C2381F67700644EA6 /* UINavigationController+Extensions.swift */; };
+		923EBBB9239D82D500B06356 /* TestModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 923EBBB5239D82D500B06356 /* TestModel.xcdatamodeld */; };
+		923EBBBC239D845500B06356 /* PracticeVideo+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923EBBBA239D845500B06356 /* PracticeVideo+CoreDataClass.swift */; };
+		923EBBBD239D845500B06356 /* PracticeVideo+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923EBBBB239D845500B06356 /* PracticeVideo+CoreDataProperties.swift */; };
 		9241F9C222C8375A009C50C1 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9241F9C122C8375A009C50C1 /* Coordinator.swift */; };
 		9241F9CA22C83885009C50C1 /* AlertHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9241F9C922C83885009C50C1 /* AlertHelper.swift */; };
 		9241F9CE22C83AF2009C50C1 /* SplitViewRootController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9241F9CD22C83AF2009C50C1 /* SplitViewRootController.swift */; };
@@ -78,8 +81,6 @@
 		928D599A230B4D050000945E /* PracticeGroupsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928D5999230B4D050000945E /* PracticeGroupsVC.swift */; };
 		928D59A0230B54040000945E /* PracticeGroupsTableManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928D599F230B54040000945E /* PracticeGroupsTableManager.swift */; };
 		928D59A4230D02750000945E /* NewGroupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928D59A3230D02750000945E /* NewGroupVC.swift */; };
-		928D59AF230DCBD00000945E /* PracticeVideo+CoreDataProperties copy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928D59A9230DCBD00000945E /* PracticeVideo+CoreDataProperties copy.swift */; };
-		928D59B2230DCBD00000945E /* PracticeVideo+CoreDataClass copy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928D59AA230DCBD00000945E /* PracticeVideo+CoreDataClass copy.swift */; };
 		928D59CA230DD03C0000945E /* Group+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928D59C8230DD03C0000945E /* Group+CoreDataClass.swift */; };
 		928D59CD230DD03C0000945E /* Group+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928D59C9230DD03C0000945E /* Group+CoreDataProperties.swift */; };
 		92B9D9112378E075003D8A9E /* ThumbnailCacheTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B9D9102378E075003D8A9E /* ThumbnailCacheTests.swift */; };
@@ -151,6 +152,11 @@
 		923B5B482381AE1800644EA6 /* VideoStorageManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoStorageManagerTests.swift; sourceTree = "<group>"; };
 		923B5B4A2381B9D800644EA6 /* VideoStorageError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoStorageError.swift; sourceTree = "<group>"; };
 		923B5B4C2381F67700644EA6 /* UINavigationController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "UINavigationController+Extensions.swift"; path = "/Users/Zach/Developer/iOS/MobileDanceJournal/MobileDanceJournal/Extensions/UIKit/UINavigationController+Extensions.swift"; sourceTree = "<absolute>"; };
+		923EBBB6239D82D500B06356 /* TestModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TestModel.xcdatamodel; sourceTree = "<group>"; };
+		923EBBB7239D82D500B06356 /* TestModel 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "TestModel 2.xcdatamodel"; sourceTree = "<group>"; };
+		923EBBB8239D82D500B06356 /* TestModel 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "TestModel 3.xcdatamodel"; sourceTree = "<group>"; };
+		923EBBBA239D845500B06356 /* PracticeVideo+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PracticeVideo+CoreDataClass.swift"; sourceTree = "<group>"; };
+		923EBBBB239D845500B06356 /* PracticeVideo+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PracticeVideo+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		9241F9C122C8375A009C50C1 /* Coordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; wrapsLines = 0; };
 		9241F9C922C83885009C50C1 /* AlertHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertHelper.swift; sourceTree = "<group>"; wrapsLines = 0; };
 		9241F9CD22C83AF2009C50C1 /* SplitViewRootController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitViewRootController.swift; sourceTree = "<group>"; };
@@ -197,8 +203,6 @@
 		928D599F230B54040000945E /* PracticeGroupsTableManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PracticeGroupsTableManager.swift; sourceTree = "<group>"; wrapsLines = 0; };
 		928D59A3230D02750000945E /* NewGroupVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewGroupVC.swift; sourceTree = "<group>"; };
 		928D59A7230DC9DE0000945E /* DataModel 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "DataModel 3.xcdatamodel"; sourceTree = "<group>"; };
-		928D59A9230DCBD00000945E /* PracticeVideo+CoreDataProperties copy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PracticeVideo+CoreDataProperties copy.swift"; sourceTree = "<group>"; };
-		928D59AA230DCBD00000945E /* PracticeVideo+CoreDataClass copy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PracticeVideo+CoreDataClass copy.swift"; sourceTree = "<group>"; };
 		928D59C8230DD03C0000945E /* Group+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Group+CoreDataClass.swift"; sourceTree = "<group>"; };
 		928D59C9230DD03C0000945E /* Group+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Group+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		92B9D9102378E075003D8A9E /* ThumbnailCacheTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThumbnailCacheTests.swift; sourceTree = "<group>"; };
@@ -267,10 +271,10 @@
 			children = (
 				928D59C8230DD03C0000945E /* Group+CoreDataClass.swift */,
 				928D59C9230DD03C0000945E /* Group+CoreDataProperties.swift */,
-				928D59AA230DCBD00000945E /* PracticeVideo+CoreDataClass copy.swift */,
-				928D59A9230DCBD00000945E /* PracticeVideo+CoreDataProperties copy.swift */,
 				926E7090231194FD00A3CCD0 /* PracticeSession+CoreDataClass.swift */,
 				926E7091231194FD00A3CCD0 /* PracticeSession+CoreDataProperties.swift */,
+				923EBBBA239D845500B06356 /* PracticeVideo+CoreDataClass.swift */,
+				923EBBBB239D845500B06356 /* PracticeVideo+CoreDataProperties.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -488,6 +492,7 @@
 		927FA3F322DD3B2F00F58F58 /* Core Data */ = {
 			isa = PBXGroup;
 			children = (
+				923EBBB5239D82D500B06356 /* TestModel.xcdatamodeld */,
 				920AAD4722D92BD60097643C /* DataModel.xcdatamodeld */,
 				9232ACBD226D4390004DB260 /* CoreDataManager.swift */,
 				9228889822D139310006E6EC /* Entities */,
@@ -878,13 +883,13 @@
 				9227148622CD2D4900C6CFAC /* UITextView+Extensions.swift in Sources */,
 				927B6B06230F116700CC1F9F /* PracticeLogCoordinator.swift in Sources */,
 				927B6B0A230F20AE00CC1F9F /* VideoGalleryCoordinator.swift in Sources */,
+				923EBBBD239D845500B06356 /* PracticeVideo+CoreDataProperties.swift in Sources */,
 				923B5B4B2381B9D800644EA6 /* VideoStorageError.swift in Sources */,
 				926E70A82311FD6E00A3CCD0 /* GroupPickerView.swift in Sources */,
 				9232AC88226D4015004DB260 /* PracticeLogVC.swift in Sources */,
 				923B5B4D2381F67700644EA6 /* UINavigationController+Extensions.swift in Sources */,
 				9232AC86226D4015004DB260 /* AppDelegate.swift in Sources */,
 				92F7FE31236A5D3F0033091D /* Log.swift in Sources */,
-				928D59B2230DCBD00000945E /* PracticeVideo+CoreDataClass copy.swift in Sources */,
 				928D59CA230DD03C0000945E /* Group+CoreDataClass.swift in Sources */,
 				9241F9CE22C83AF2009C50C1 /* SplitViewRootController.swift in Sources */,
 				9227148222CD2C0400C6CFAC /* UILabel+Extensions.swift in Sources */,
@@ -894,6 +899,7 @@
 				927FA3F622DD3C2400F58F58 /* VideoStorageManager.swift in Sources */,
 				923B5B432380D7D900644EA6 /* Model.swift in Sources */,
 				9232ACB8226D4298004DB260 /* Constants.swift in Sources */,
+				923EBBB9239D82D500B06356 /* TestModel.xcdatamodeld in Sources */,
 				926E70A42311FB2300A3CCD0 /* GroupPickerManager.swift in Sources */,
 				9227147622CC819000C6CFAC /* UITextField+Extensions.swift in Sources */,
 				926B0D9F22F58DCF00112743 /* PracticeSessionPickerManager.swift in Sources */,
@@ -908,8 +914,8 @@
 				922C47AF2283F8F600367625 /* VideoGalleryTableViewCell.swift in Sources */,
 				922E20E22283BB2B00295A19 /* VideoGalleryVC.swift in Sources */,
 				928D5998230B4B9D0000945E /* Storyboarded.swift in Sources */,
+				923EBBBC239D845500B06356 /* PracticeVideo+CoreDataClass.swift in Sources */,
 				928D599A230B4D050000945E /* PracticeGroupsVC.swift in Sources */,
-				928D59AF230DCBD00000945E /* PracticeVideo+CoreDataProperties copy.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1274,6 +1280,18 @@
 			);
 			currentVersion = 928D59A7230DC9DE0000945E /* DataModel 3.xcdatamodel */;
 			path = DataModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+		923EBBB5239D82D500B06356 /* TestModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				923EBBB6239D82D500B06356 /* TestModel.xcdatamodel */,
+				923EBBB7239D82D500B06356 /* TestModel 2.xcdatamodel */,
+				923EBBB8239D82D500B06356 /* TestModel 3.xcdatamodel */,
+			);
+			currentVersion = 923EBBB8239D82D500B06356 /* TestModel 3.xcdatamodel */;
+			path = TestModel.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};

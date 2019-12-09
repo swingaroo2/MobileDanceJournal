@@ -51,14 +51,14 @@ extension GroupPickerManager {
         let indexPath = IndexPath(row: rowIndex, section: 0)
         let newGroup = selectedRow >= newGroups.count ? nil : newGroups[selectedRow]
         
-        Model.coreData.move([practiceLogToMove], from: oldGroup, to: newGroup)
+        Model.coreData.move([practiceLogToMove], to: newGroup)
         managedTableView.deleteRows(at: [indexPath], with: .fade)
         NotificationCenter.default.post(name: .practiceLogMoved, object: self, userInfo: nil)
         managedView.hide()
     }
 }
 
-// MARK: UIPickerViewDelegate
+// MARK: - UIPickerViewDelegate
 extension GroupPickerManager {
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         Log.trace()
@@ -87,7 +87,7 @@ extension GroupPickerManager {
     }
 }
 
-// MARK: UIPickerViewDataSource
+// MARK: - UIPickerViewDataSource
 extension GroupPickerManager {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         Log.trace()

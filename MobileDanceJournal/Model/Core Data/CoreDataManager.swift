@@ -27,10 +27,11 @@ public class CoreDataManager : NSObject {
     }
     
     init(modelName: String) {
-        Log.trace()
+        Log.trace("Initializing CoreData model: \(modelName)")
         self.modelName = modelName
     }
     
+    // MARK: FRCs
     lazy var groupFRC: NSFetchedResultsController<Group> = {
         Log.trace()
         let fetchRequest: NSFetchRequest<Group> = Group.fetchRequest()
@@ -72,6 +73,7 @@ public class CoreDataManager : NSObject {
         return fetchedResultsController
     }()
     
+    // MARK: Persistent Container
     lazy var persistentContainer: NSPersistentContainer = {
         Log.trace()
         let container = NSPersistentContainer(name: ModelConstants.modelName)
@@ -88,14 +90,34 @@ public class CoreDataManager : NSObject {
 
 // MARK: - Fetch/Save/Delete
 extension CoreDataManager {
-    func fetchPracticeSessions(in group: Group?) -> [PracticeSession]? {
+    
+    // MARK: Custom Fetching
+    func fetchPracticeSessions(in group: Group?, excluding: PracticeSession? = nil) -> [PracticeSession]? {
+        Log.trace()
         practiceSessionFRC.fetchRequest.predicate = (group != nil) ? NSPredicate(format: Predicates.hasGroup, group!) : NSPredicate(format: Predicates.hasNoGroup)
         
         try? practiceSessionFRC.performFetch()
-        return practiceSessionFRC.fetchedObjects
+        let fetchedPracticeSessions = practiceSessionFRC.fetchedObjects
+        
+        // Ensure excluding is non-nil
+        guard let excludedPracticeSession = excluding, var fetchedObjects = fetchedPracticeSessions else {
+            return fetchedPracticeSessions
+        }
+        
+        // Ensure excluding exists in the array of fetched objects
+        guard let excludeIndex = fetchedObjects.firstIndex(of: excludedPracticeSession) else {
+            return fetchedPracticeSessions
+        }
+        
+        Log.trace("Excluding Practice Session from fetch: \(excludedPracticeSession.title)")
+        
+        let _ = fetchedObjects.remove(at: excludeIndex)
+        
+        return fetchedObjects
     }
     
     func fetchVideos(for practiceSession: PracticeSession, with filename: String? = nil) -> [PracticeVideo] {
+        Log.trace("Fetching videos from Practice Session \(practiceSession.title) with filename: \(filename ?? "nil")")
         let predicate = (filename == nil) ? NSPredicate(format: Predicates.hasPracticeSession, practiceSession) : NSPredicate(format: Predicates.hasPracticeSessionWithFilename, practiceSession, filename!)
         
         practiceVideoFRC.fetchRequest.predicate = predicate
@@ -109,6 +131,7 @@ extension CoreDataManager {
         }
     }
     
+    // MARK: Save
     func save() {
         Log.trace()
         if persistentContainer.viewContext.hasChanges {
@@ -128,6 +151,7 @@ extension CoreDataManager {
         }
     }
     
+    // MARK: Delete
     func delete(_ managedObject: NSManagedObject) {
         Log.trace()
         persistentContainer.viewContext.delete(managedObject)
@@ -138,6 +162,11 @@ extension CoreDataManager {
      For unit test purposes only!
      */
     func deleteAllRecords(entityName: String) {
+        guard UserDefaults.standard.bool(forKey: LaunchArguments.isTest) else {
+            Log.critical("DO NOT USE THIS FUNCTION OUTSIDE THE TEST ENVIRONMENTS")
+            fatalError()
+        }
+        
         Log.trace()
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
         fetchRequest.returnsObjectsAsFaults = false
@@ -154,8 +183,10 @@ extension CoreDataManager {
     }
 }
 
-// MARK: Handling relationships
+// MARK: - Handling Relationships
 extension CoreDataManager {
+    
+    // MARK: Add
     func add(_ video: PracticeVideo, to practiceSession: PracticeSession) {
         Log.trace()
         video.practiceSession = practiceSession
@@ -170,10 +201,11 @@ extension CoreDataManager {
         save()
     }
     
-    func delete(_ video: PracticeVideo, from practiceSession: PracticeSession) {
+    // MARK: Delete
+    func delete(_ video: PracticeVideo) {
         Log.trace()
         persistentContainer.viewContext.delete(video)
-        practiceSession.removeFromVideos(video)
+        video.practiceSession.removeFromVideos(video)
         save()
     }
     
@@ -184,8 +216,10 @@ extension CoreDataManager {
         save()
     }
     
+    // MARK: Move
     func move(_ videos: [PracticeVideo], from oldPracticeSession: PracticeSession, to newPracticeSession: PracticeSession) {
-        Log.trace()
+        let displayList = videos.map { $0.title }
+        Log.trace("Moving videos \(displayList) from practice Session \(oldPracticeSession.title) to \(newPracticeSession.title)")
         guard !videos.isEmpty else {
             Log.warn("Attempted to move empty array of videos")
             return
@@ -196,7 +230,13 @@ extension CoreDataManager {
         save()
     }
     
-    func move(_ practiceSessions: [PracticeSession], from oldGroup: Group?, to newGroup: Group?) {
+    func move(_ video: PracticeVideo, to practiceSession: PracticeSession) {
+        Log.trace("Moving video \(video.title) to Practice Session \(practiceSession.title)")
+        practiceSession.addToVideos(video)
+        save()
+    }
+    
+    func move(_ practiceSessions: [PracticeSession], to newGroup: Group?) {
         Log.trace()
         guard !practiceSessions.isEmpty else {
             Log.warn("Attempted to move empty array of practice sessions")
@@ -208,7 +248,7 @@ extension CoreDataManager {
     
 }
 
-// MARK: - Insert and update new managed objects
+// MARK: - Create
 extension CoreDataManager {
     func createAndReturnNewPracticeSession() -> PracticeSession {
         Log.trace()

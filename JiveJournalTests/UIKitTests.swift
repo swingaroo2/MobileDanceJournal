@@ -12,7 +12,6 @@ import XCTest
 class UIKitTests: XCTestCase {
 
     var practiceSession: PracticeSession!
-    let coreDataManager = CoreDataManager(modelName: "uikitTestsModel")
 
     override func setUp() {
         practiceSession = createTestPracticeSession()
@@ -118,7 +117,7 @@ class UIKitTests: XCTestCase {
 
 private extension UIKitTests {
     func createTestPracticeSession() -> PracticeSession {
-        let practiceSession = PracticeSession(context: coreDataManager.persistentContainer.viewContext)
+        let practiceSession = PracticeSession(context: Model.coreData.persistentContainer.viewContext)
         practiceSession.date = createTestDate(year: 1992, day: 23, month: 2)
         practiceSession.title = "Practice Session"
         practiceSession.notes = "I HAVE NOTED MY NOTES"

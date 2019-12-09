@@ -12,7 +12,7 @@ import CoreData
 
 class CoreDataManagerTests: XCTestCase {
     
-    var sut = CoreDataManager(modelName: "coreDataManagerTests")
+    var sut = CoreDataManager(modelName: ModelConstants.modelName)
     
     override func setUp() {
         sut.wipe()
@@ -33,6 +33,35 @@ class CoreDataManagerTests: XCTestCase {
         XCTAssertTrue(fetchedPracticeSessionExists)
     }
     
+    func testFetchPracticeSessionsInGroup_withValidExclusion() throws {
+        let testPracticeSession = addTestDataWithGroupedPracticeSession()
+        
+        let fetchedGroups = try XCTUnwrap(sut.groupFRC.fetchedObjects)
+        
+        let fetchedObjectsNotEmpty = fetchedGroups.count == 1
+        XCTAssertTrue(fetchedObjectsNotEmpty)
+        
+        let group = fetchedGroups[0]
+        let fetchedPracticeSessions = try XCTUnwrap(sut.fetchPracticeSessions(in: group, excluding: testPracticeSession))
+        let testPracticeSessionIsExcluded = !fetchedPracticeSessions.contains(testPracticeSession)
+        XCTAssertTrue(testPracticeSessionIsExcluded)
+    }
+    
+    func testFetchPracticeSessionsInGroup_withInvalidExclusion() throws {
+        addTestDataWithGroupedPracticeSession()
+        let invalidPracticeSession = addNewPracticeSession(index: 1, shouldSave: false)
+        
+        let fetchedGroups = try XCTUnwrap(sut.groupFRC.fetchedObjects)
+        
+        let fetchedObjectsNotEmpty = fetchedGroups.count == 1
+        XCTAssertTrue(fetchedObjectsNotEmpty)
+        
+        let group = fetchedGroups[0]
+        let fetchedPracticeSessions = try XCTUnwrap(sut.fetchPracticeSessions(in: group, excluding: invalidPracticeSession))
+        let invalidPracticeSessionIsNotExcluded = !fetchedPracticeSessions.contains(invalidPracticeSession) && fetchedPracticeSessions.count == 1
+        XCTAssertTrue(invalidPracticeSessionIsNotExcluded)
+    }
+    
     func testFetchUngroupedPracticeSessions() throws {
         addTestDataWithUngroupedPracticeSession()
         
@@ -40,6 +69,22 @@ class CoreDataManagerTests: XCTestCase {
         
         let fetchedPracticeSessionExists = fetchedPracticeSessions.count == 1
         XCTAssertTrue(fetchedPracticeSessionExists)
+    }
+    
+    func testFetchUngroupedPracticeSessionsInGroup_withValidExclusion() throws {
+        addTestDataWithUngroupedPracticeSession("test1")
+        let testPracticeSession = addTestDataWithUngroupedPracticeSession("test2")
+        let fetchedPracticeSessions = try XCTUnwrap(sut.fetchPracticeSessions(in: nil, excluding: testPracticeSession))
+        let testPracticeSessionIsExcluded = !fetchedPracticeSessions.contains(testPracticeSession) && fetchedPracticeSessions.count == 1
+        XCTAssertTrue(testPracticeSessionIsExcluded)
+    }
+    
+    func testFetchUngroupedPracticeSessionsInGroup_withInvalidExclusion() throws {
+        addTestDataWithUngroupedPracticeSession()
+        let invalidPracticeSession = addNewPracticeSession(index: 1, shouldSave: false)
+        let fetchedPracticeSessions = try XCTUnwrap(sut.fetchPracticeSessions(in: nil, excluding: invalidPracticeSession))
+        let invalidPracticeSessionIsNotExcluded = !fetchedPracticeSessions.contains(invalidPracticeSession) && fetchedPracticeSessions.count == 1
+        XCTAssertTrue(invalidPracticeSessionIsNotExcluded)
     }
     
     func testFetchVideosForPracticeSession_withFilename() throws {
@@ -143,7 +188,7 @@ class CoreDataManagerTests: XCTestCase {
         let practiceSessionHasOneVideo = practiceSession.videos.count == 1
         XCTAssertTrue(practiceSessionHasOneVideo)
         
-        sut.delete(video, from: practiceSession)
+        sut.delete(video)
         XCTAssertTrue(practiceSessionHasNoVideos)
     }
     
@@ -181,7 +226,7 @@ class CoreDataManagerTests: XCTestCase {
         let oldPracticeSessionHasVideo = oldPracticeSession.videos.count == 1
         XCTAssertTrue(oldPracticeSessionHasVideo)
         
-        sut.move([video], from: oldPracticeSession, to: newPracticeSession)
+        sut.move(video, to: newPracticeSession)
         XCTAssertTrue(oldPracticeSessionIsEmpty)
         
         let newPracticeSessionHasVideo = newPracticeSession.videos.count == 1
@@ -245,7 +290,7 @@ class CoreDataManagerTests: XCTestCase {
         let oldGroupHasPracticeSession = oldGroup.practiceSessions!.count == 1
         XCTAssertTrue(oldGroupHasPracticeSession)
         
-        sut.move([practiceSession], from: oldGroup, to: newGroup)
+        sut.move([practiceSession], to: newGroup)
         let newGroupHasPracticeSession = newGroup.practiceSessions!.count == 1
         XCTAssertTrue(oldGroupHasNoPracticeSessions)
         XCTAssertTrue(newGroupHasPracticeSession)
@@ -272,7 +317,7 @@ class CoreDataManagerTests: XCTestCase {
         let oldGroupHasPracticeSession = oldGroup.practiceSessions!.count == 2
         XCTAssertTrue(oldGroupHasPracticeSession)
         
-        sut.move([practiceSession, practiceSession2], from: oldGroup, to: newGroup)
+        sut.move([practiceSession, practiceSession2], to: newGroup)
         let newGroupHasPracticeSession = newGroup.practiceSessions!.count == 2
         XCTAssertTrue(oldGroupHasNoPracticeSessions)
         XCTAssertTrue(newGroupHasPracticeSession)
@@ -292,7 +337,7 @@ class CoreDataManagerTests: XCTestCase {
         XCTAssertTrue(oldGroupHasNoPracticeSessions)
         XCTAssertTrue(newGroupHasNoPracticeSessions)
         
-        sut.move([], from: oldGroup, to: newGroup)
+        sut.move([], to: newGroup)
         XCTAssertTrue(oldGroupHasNoPracticeSessions)
         XCTAssertTrue(newGroupHasNoPracticeSessions)
     }
@@ -422,19 +467,22 @@ class CoreDataManagerTests: XCTestCase {
 
 // MARK: - Private helper functions
 private extension CoreDataManagerTests {
-    func addTestDataWithGroupedPracticeSession() {
+    @discardableResult
+    func addTestDataWithGroupedPracticeSession(_ title: String = "test practice session") -> PracticeSession {
         let video = PracticeVideo(context: sut.persistentContainer.viewContext)
         video.filename = documentsDirectory.path
         video.title = "test video"
         
         let practiceSession = PracticeSession(context: sut.persistentContainer.viewContext)
-        practiceSession.title = "test practice session"
+        practiceSession.title = title
         practiceSession.videos = NSSet(array: [video])
         
         sut.createAndSaveNewGroup(name: "test group", practiceSessions: [practiceSession])
+        return practiceSession
     }
     
-    func addTestDataWithUngroupedPracticeSession() {
+    @discardableResult
+    func addTestDataWithUngroupedPracticeSession(_ title: String = "test practice session") -> PracticeSession {
         let video = PracticeVideo(context: sut.persistentContainer.viewContext)
         video.filename = documentsDirectory.path
         video.title = "test video"
@@ -444,13 +492,19 @@ private extension CoreDataManagerTests {
         practiceSession.videos = NSSet(array: [video])
         
         sut.save()
+        return practiceSession
     }
     
-    func addNewPracticeSession(with index: Int) {
+    @discardableResult
+    func addNewPracticeSession(index: Int, shouldSave: Bool = true) -> PracticeSession {
         let practiceSession = sut.createAndReturnNewPracticeSession()
         practiceSession.title = "testPracticeSession\(index)"
         practiceSession.notes = "Heckin' chonker #\(index)"
-        sut.save()
+        
+        if shouldSave {
+            sut.save()
+        }
+        return practiceSession
     }
 }
 

@@ -63,7 +63,7 @@ extension VideoGalleryTableManager: UITableViewDataSource {
         return cell
     }
     
-    // MARK: UITableViewDataSource Helper Methods
+    // MARK: - UITableViewDataSource Helper Methods
     func configure(_ cell: VideoGalleryTableViewCell, with video: PracticeVideo) {
         Log.trace()
         cell.video = video
